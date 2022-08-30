@@ -12,7 +12,7 @@
         <div class="col-lg-8">
             <!-- Featured blog post-->
             <div class="card mb-4">
-                <a href="index.php?action=post"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                <a href="#"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
                 <div class="card-body">
                     <div class="small text-muted">January 1, 2022</div>
                     <h2 class="card-title">Featured Post Title</h2>
@@ -22,9 +22,27 @@
             </div>
             <!-- Nested row for non-featured blog posts-->
             <div class="row">
-                <div class="col-lg-6">
-                    <!-- Blog post-->
-                    <div class="card mb-4">
+                <?php
+                foreach ($posts as $post) {
+                ?>
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <a href="index.php?action=post&id=<?= urlencode($post['id']) ?>"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <div class="card-body">
+                                <div class="small text-muted"><?= $post['french_creation_date'] ?></div>
+                                <h2 class="card-title h4"><?= $post['title'] ?></h2>
+                                <p class="card-text"><?= $post['chapo'] ?></p>
+                                <a class="btn btn-primary" href="#!">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
+
+                <!-- <div class="col-lg-6"> -->
+                <!-- Blog post-->
+                <!-- <div class="card mb-4">
                         <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                         <div class="card-body">
                             <div class="small text-muted">January 1, 2022</div>
@@ -32,9 +50,9 @@
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
                             <a class="btn btn-primary" href="#!">Read more →</a>
                         </div>
-                    </div>
-                    <!-- Blog post-->
-                    <div class="card mb-4">
+                    </div> -->
+                <!-- Blog post-->
+                <!-- <div class="card mb-4">
                         <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                         <div class="card-body">
                             <div class="small text-muted">January 1, 2022</div>
@@ -42,11 +60,11 @@
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
                             <a class="btn btn-primary" href="#!">Read more →</a>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <!-- Blog post-->
-                    <div class="card mb-4">
+                    </div> -->
+                <!-- </div> -->
+                <!-- <div class="col-lg-6"> -->
+                <!-- Blog post-->
+                <!-- <div class="card mb-4">
                         <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                         <div class="card-body">
                             <div class="small text-muted">January 1, 2022</div>
@@ -54,9 +72,9 @@
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
                             <a class="btn btn-primary" href="#!">Read more →</a>
                         </div>
-                    </div>
-                    <!-- Blog post-->
-                    <div class="card mb-4">
+                    </div> -->
+                <!-- Blog post-->
+                <!-- <div class="card mb-4">
                         <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                         <div class="card-body">
                             <div class="small text-muted">January 1, 2022</div>
@@ -64,8 +82,8 @@
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
                             <a class="btn btn-primary" href="#!">Read more →</a>
                         </div>
-                    </div>
-                </div>
+                    </div> -->
+                <!-- </div> -->
             </div>
             <!-- Pagination-->
             <nav aria-label="Pagination">
