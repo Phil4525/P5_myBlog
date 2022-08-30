@@ -17,10 +17,9 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             post($id);
         } else {
             echo 'Erreur : aucun identifiant de billet envoyé';
-            // var_dump($post);
+
             die;
         }
-        // post();
     } else if ($_GET['action'] === 'admin') {
         admin();
     } else {
