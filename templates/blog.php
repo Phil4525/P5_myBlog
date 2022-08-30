@@ -23,16 +23,16 @@
             <!-- Nested row for non-featured blog posts-->
             <div class="row">
                 <?php
-                foreach ($posts as $olderPost) {
+                foreach ($posts as $post) {
                 ?>
                     <div class="col-lg-6">
                         <div class="card mb-4">
-                            <a href="index.php?action=post&id=<?= urlencode($olderPost['id']) ?>"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <a href="index.php?action=post&id=<?= urlencode($post['id']) ?>"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                             <div class="card-body">
-                                <div class="small text-muted"><?= $olderPost['french_creation_date'] ?></div>
-                                <h2 class="card-title h4"><?= $olderPost['title'] ?></h2>
-                                <p class="card-text"><?= $olderPost['chapo'] ?></p>
-                                <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($olderPost['id']) ?>">Read more →</a>
+                                <div class="small text-muted"><?= $post['french_creation_date'] ?></div>
+                                <h2 class="card-title h4"><?= $post['title'] ?></h2>
+                                <p class="card-text"><?= $post['chapo'] ?></p>
+                                <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($post['id']) ?>">Read more →</a>
                             </div>
                         </div>
                     </div>
