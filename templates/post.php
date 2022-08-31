@@ -24,6 +24,7 @@
                 <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
                 <!-- Post content-->
                 <section class="mb-5">
+                    <p class="fs-5 mb-4"><strong><?= nl2br(htmlspecialchars($post['chapo'])) ?></strong></p>
                     <p class="fs-5 mb-4"><?= nl2br(htmlspecialchars($post['content'])) ?></p>
                 </section>
             </article>
@@ -32,24 +33,30 @@
                 <div class="card bg-light">
                     <div class="card-body">
                         <!-- Comment form-->
-                        <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+                        <form class="mb-4" action="index.php?action=addComment&id=<?= $post['id'] ?>" method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="author" name="author" placeholder="Author" />
+                                <textarea class="form-control" rows="3" id="comment" name="comment" placeholder="leave a comment!"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
                         <!-- Comment with nested comments-->
-                        <div class="d-flex mb-4">
-                            <!-- Parent comment-->
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                        <!-- <div class="d-flex mb-4"> -->
+                        <!-- Parent comment-->
+                        <!-- <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                             <div class="ms-3">
                                 <div class="fw-bold">Commenter Name</div>
-                                If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                                <!-- Child comment 1-->
-                                <div class="d-flex mt-4">
+                                If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks. -->
+                        <!-- Child comment 1-->
+                        <!-- <div class="d-flex mt-4">
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                     <div class="ms-3">
                                         <div class="fw-bold">Commenter Name</div>
                                         And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
                                     </div>
-                                </div>
-                                <!-- Child comment 2-->
-                                <div class="d-flex mt-4">
+                                </div> -->
+                        <!-- Child comment 2-->
+                        <!-- <div class="d-flex mt-4">
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                     <div class="ms-3">
                                         <div class="fw-bold">Commenter Name</div>
@@ -57,15 +64,24 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- Single comment-->
-                        <div class="d-flex">
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">Commenter Name</div>
-                                When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
-                            </div>
-                        </div>
+                        <?php
+                        if (isset($comments) && $comments !== null) {
+                            foreach ($comments as $comment) {
+                        ?>
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold"><?= htmlspecialchars($comment['author']) ?></div>
+                                        <div><small>le <?= $comment['french_creation_date'] ?></small></div>
+                                        <?= nl2br(htmlspecialchars($comment['comment'])) ?>
+                                    </div>
+                                </div>
+                        <?php
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </section>

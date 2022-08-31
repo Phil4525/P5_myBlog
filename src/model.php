@@ -36,7 +36,7 @@ function getPost(string $id)
 
     $row = $statement->fetch();
     $post = [
-        // 'id' => $row['id'],
+        'id' => $row['id'],
         'title' => $row['title'],
         'chapo' => $row['chapo'],
         'content' => $row['content'],
