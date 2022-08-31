@@ -49,11 +49,15 @@ function getPost(string $id)
 
 function dbConnect()
 {
-    try {
-        $database = new PDO('mysql:host=localhost;dbname=P5_myBlog;charset=utf8', 'root', '');
+    // try {
+    //     $database = new PDO('mysql:host=localhost;dbname=P5_myBlog;charset=utf8', 'root', '');
 
-        return $database;
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
+    //     return $database;
+    // } catch (Exception $e) {
+    //     die('Erreur : ' . $e->getMessage());
+    // }
+
+    $database = new PDO('mysql:host=localhost;dbname=P5_myBlog;charset=utf8', 'root', '');
+
+    return $database;
 }

@@ -25,7 +25,7 @@
                 <!-- Post content-->
                 <section class="mb-5">
                     <p class="fs-5 mb-4"><strong><?= nl2br(htmlspecialchars($post['chapo'])) ?></strong></p>
-                    <p class="fs-5 mb-4"><?= nl2br(htmlspecialchars($post['content'])) ?></p>
+                    <p class="fs-6 mb-4"><?= nl2br(htmlspecialchars($post['content'])) ?></p>
                 </section>
             </article>
             <!-- Comments section-->
