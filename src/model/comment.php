@@ -5,7 +5,7 @@ function getComments(string $post)
     $database = commentDbConnect();
 
     $statement = $database->prepare(
-        "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
+        "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
     );
     $statement->execute([$post]);
 

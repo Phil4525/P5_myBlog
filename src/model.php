@@ -7,7 +7,7 @@ function getPosts()
     // We retrieve the 5 last blog posts.
     $statement = $database->query(
         //"SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
-        "SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts ORDER BY creation_date DESC"
+        "SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date FROM posts ORDER BY creation_date DESC"
     );
     // $posts = [];
     // while (($row = $statement->fetch())) {
@@ -33,7 +33,7 @@ function getPost(string $id)
     $database = dbConnect();
 
     $statement = $database->prepare(
-        "SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts WHERE id = ?"
+        "SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date FROM posts WHERE id = ?"
     );
     $statement->execute([$id]);
 
