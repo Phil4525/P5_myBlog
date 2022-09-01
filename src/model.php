@@ -6,21 +6,24 @@ function getPosts()
 
     // We retrieve the 5 last blog posts.
     $statement = $database->query(
-        "SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
+        //"SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
+        "SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts ORDER BY creation_date DESC"
     );
-    $posts = [];
-    while (($row = $statement->fetch())) {
-        $post = [
-            'id' => $row['id'],
-            'title' => $row['title'],
-            'chapo' => $row['chapo'],
-            'content' => $row['content'],
-            'author' => $row['author'],
-            'french_creation_date' => $row['french_creation_date'],
-        ];
+    // $posts = [];
+    // while (($row = $statement->fetch())) {
+    //     $post = [
+    //         'id' => $row['id'],
+    //         'title' => $row['title'],
+    //         'chapo' => $row['chapo'],
+    //         'content' => $row['content'],
+    //         'author' => $row['author'],
+    //         'french_creation_date' => $row['french_creation_date'],
+    //     ];
 
-        $posts[] = $post;
-    }
+    //     $posts[] = $post;
+    // }
+
+    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     return $posts;
 }
@@ -34,15 +37,17 @@ function getPost(string $id)
     );
     $statement->execute([$id]);
 
-    $row = $statement->fetch();
-    $post = [
-        'id' => $row['id'],
-        'title' => $row['title'],
-        'chapo' => $row['chapo'],
-        'content' => $row['content'],
-        'author' => $row['author'],
-        'french_creation_date' => $row['french_creation_date'],
-    ];
+    // $row = $statement->fetch();
+    // $post = [
+    //     'id' => $row['id'],
+    //     'title' => $row['title'],
+    //     'chapo' => $row['chapo'],
+    //     'content' => $row['content'],
+    //     'author' => $row['author'],
+    //     'french_creation_date' => $row['french_creation_date'],
+    // ];
+    $post = $statement->fetch(PDO::FETCH_ASSOC);
+
 
     return $post;
 }

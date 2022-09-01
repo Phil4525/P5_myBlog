@@ -21,7 +21,7 @@
                 </div>
             </div>
             <!-- Nested row for non-featured blog posts-->
-            <div class="row">
+            <div class="row" id="posts">
                 <?php
                 foreach ($posts as $post) {
                 ?>
@@ -44,13 +44,17 @@
             <nav aria-label="Pagination">
                 <hr class="my-0" />
                 <ul class="pagination justify-content-center my-4">
-                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
-                    <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                    <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">Older</a></li>
+                    <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
+                        <a class="page-link" href="index.php?action=blog&page=<?= $currentPage - 1 ?>#posts">Précédente</a>
+                    </li>
+                    <?php for ($page = 1; $page <= $pages; $page++) : ?>
+                        <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
+                            <a class="page-link" href="index.php?action=blog&page=<?= $page ?>#posts"><?= $page ?></a>
+                        </li>
+                    <?php endfor ?>
+                    <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
+                        <a class="page-link" href="index.php?action=blog&page=<?= $currentPage + 1 ?>#posts">Suivante</a>
+                    </li>
                 </ul>
             </nav>
         </div>
