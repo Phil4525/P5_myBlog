@@ -1,7 +1,8 @@
 <?php
 
 require_once('src/model.php');
-require_once('src/model/comment.php');
+require_once('src/models/post.php');
+require_once('src/models/comment.php');
 
 function post(string $id)
 {

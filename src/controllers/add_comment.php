@@ -1,5 +1,5 @@
 <?php
-require_once('src/model/comment.php');
+require_once('src/models/comment.php');
 
 function addComment(string $post, array $input)
 {
