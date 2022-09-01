@@ -2,15 +2,6 @@
 
 require_once('src/model.php');
 
-// function blog()
-// {
-//     $allPosts = getPosts();
-//     $featuredPost = array_shift($allPosts);
-//     $posts = getPostsPaginated($allPosts);
-
-//     require('templates/blog.php');
-// }
-
 function blog()
 {
     $allPosts = getPosts();

@@ -45,7 +45,7 @@
                 <hr class="my-0" />
                 <ul class="pagination justify-content-center my-4">
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=blog&page=<?= $currentPage - 1 ?>#posts">Précédente</a>
+                        <a class="page-link" href="index.php?action=blog&page=<?= $currentPage - 1 ?>#posts">Prev</a>
                     </li>
                     <?php for ($page = 1; $page <= $pages; $page++) : ?>
                         <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
@@ -53,7 +53,7 @@
                         </li>
                     <?php endfor ?>
                     <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=blog&page=<?= $currentPage + 1 ?>#posts">Suivante</a>
+                        <a class="page-link" href="index.php?action=blog&page=<?= $currentPage + 1 ?>#posts">Next</a>
                     </li>
                 </ul>
             </nav>
