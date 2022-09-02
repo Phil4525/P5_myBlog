@@ -6,6 +6,7 @@ require_once('src/controllers/post.php');
 require_once('src/controllers/admin.php');
 require_once('src/controllers/add_comment.php');
 require_once('src/controllers/login.php');
+require_once('src/controllers/logout.php');
 require_once('src/controllers/register.php');
 require_once('src/controllers/password.php');
 require_once('src/controllers/contact.php');
@@ -40,6 +41,9 @@ try {
         } elseif ($_GET['action'] === 'login') {
 
             login($_POST);
+        } elseif ($_GET['action'] === 'logout') {
+
+            logout();
         } elseif ($_GET['action'] === 'register') {
 
             register($_POST);

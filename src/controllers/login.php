@@ -20,9 +20,20 @@ function login($input)
 
             $user = $statement->fetch();
 
-            if (!$user) {
+            if (!$user || !password_verify($input['password'], $user['password'])) {
                 throw new Exception("L'utilisateur et/ou le mot de passe est incorrect.");
             }
+
+            session_start();
+
+            $_SESSION['user'] = [
+                'id' => $user['id'],
+                'username' => $user['username'],
+                'email' => $user['email'],
+                // 'roles'=>$user['roles'],
+            ];
+
+            header('Location:index.php');
         }
     }
     require('templates/login.php');

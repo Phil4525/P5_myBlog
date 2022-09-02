@@ -23,6 +23,18 @@ function register($input)
             if (!$success) {
                 throw new Exception("Impossible de créer le compte !");
             } else {
+                // $id=$database->lastInsertId();
+
+                session_start();
+
+                $_SESSION['user'] = [
+                    // 'id' => $user['id'],
+                    'username' => $username,
+                    'email' => $email,
+                    // 'roles'=>$user['roles'],
+                ];
+
+                header('Location:index.php');
             }
         } else {
             throw new Exception('Les données du formulaire sont invalides.');

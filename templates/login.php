@@ -1,5 +1,4 @@
 <?php $title = "Login"; ?>
-<?php var_dump($_POST); ?>
 <?php ob_start(); ?>
 
 <div id="layoutAuthentication">
