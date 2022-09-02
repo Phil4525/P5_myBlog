@@ -8,6 +8,7 @@ require_once('src/controllers/add_comment.php');
 require_once('src/controllers/login.php');
 require_once('src/controllers/register.php');
 require_once('src/controllers/password.php');
+require_once('src/controllers/contact.php');
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -45,6 +46,9 @@ try {
         } elseif ($_GET['action'] === 'password') {
 
             password();
+        } elseif ($_GET['action'] === 'contact') {
+
+            contact($_POST);
         } else {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }
@@ -52,7 +56,6 @@ try {
         homepage();
     }
 } catch (Exception $e) {
-    // echo 'Erreur : ' . $e->getMessage();
     $errorMessage = $e->getMessage();
     require('templates/error.php');
 }

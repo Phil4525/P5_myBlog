@@ -35,8 +35,8 @@
                         <!-- Comment form-->
                         <form class="mb-4" action="index.php?action=addComment&id=<?= $post['id'] ?>" method="post">
                             <div class="form-group">
-                                <input class="form-control" type="text" id="author" name="author" placeholder="author" />
-                                <textarea class="form-control" rows="3" id="comment" name="comment" placeholder="leave a comment!"></textarea>
+                                <input class="form-control" type="text" name="author" placeholder="author" />
+                                <textarea class="form-control" rows="3" name="comment" placeholder="leave a comment!"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
@@ -47,9 +47,9 @@
                                 <div class="d-flex">
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                     <div class="ms-3">
-                                        <div class="fw-bold"><?= htmlspecialchars($comment['author']) ?></div>
+                                        <div class="fw-bold"><?= $comment['author'] ?></div>
                                         <div><small>le <?= $comment['french_creation_date'] ?></small></div>
-                                        <?= nl2br(htmlspecialchars($comment['comment'])) ?>
+                                        <?= $comment['comment'] ?>
                                     </div>
                                 </div>
                         <?php
