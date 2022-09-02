@@ -20,7 +20,7 @@ function contact($input)
         if (!$success) {
             throw new Exception("Impossible d'envoyer le message !");
         } else {
-            header('Location: index.php');
+            header('Location: index.php#contact-form');
 
             $to = 'admin@myblog.com';
             $subject = 'nouveau message de ' . $fullname;

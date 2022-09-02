@@ -118,7 +118,7 @@
                 <div class="divider-custom-line"></div>
             </div>
             <!-- Contact Section Form-->
-            <div class="row justify-content-center">
+            <div class="row justify-content-center" id="contact-form">
                 <div class="col-lg-8 col-xl-7">
                     <form action="index.php?action=contact" method="post">
                         <!-- Name input-->

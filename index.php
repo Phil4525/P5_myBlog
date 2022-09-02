@@ -39,10 +39,10 @@ try {
             }
         } elseif ($_GET['action'] === 'login') {
 
-            login();
+            login($_POST);
         } elseif ($_GET['action'] === 'register') {
 
-            register();
+            register($_POST);
         } elseif ($_GET['action'] === 'password') {
 
             password();

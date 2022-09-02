@@ -1,5 +1,5 @@
 <?php $title = "Login"; ?>
-
+<?php var_dump($_POST); ?>
 <?php ob_start(); ?>
 
 <div id="layoutAuthentication">
@@ -13,7 +13,7 @@
                                 <h3 class="text-center font-weight-light my-4">Login</h3>
                             </div>
                             <div class="card-body">
-                                <form>
+                                <!-- <form>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
                                         <label for="inputEmail">Email address</label>
@@ -29,6 +29,25 @@
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                         <a class="small" href="index.php?action=password">Forgot Password?</a>
                                         <a class="btn btn-primary" href="index.html">Login</a>
+                                    </div>
+                                </form> -->
+                                <form action="index.php?action=login" method="post">
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" type="email" name="email" placeholder="name@example.com" />
+                                        <label>Email address</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" type="password" name="password" placeholder="Password" />
+                                        <label>Password</label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" value="" />
+                                        <label class="form-check-label">Remember Password</label>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                        <a class="small" href="index.php?action=password">Forgot Password?</a>
+                                        <!-- <a class="btn btn-primary" href="index.html">Login</a> -->
+                                        <button class="btn btn-primary" type="submit">Send</button>
                                     </div>
                                 </form>
                             </div>
