@@ -20,7 +20,7 @@
                                         <label for="inputEmail">Email address</label>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" href="login.html">Return to login</a>
+                                        <a class="small" href="index.php?action=login">Return to login</a>
                                         <a class="btn btn-primary" href="login.html">Reset Password</a>
                                     </div>
                                 </form>
@@ -34,7 +34,7 @@
             </div>
         </main>
     </div>
-    <div id="layoutAuthentication_footer">
+    <!-- <div id="layoutAuthentication_footer">
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">
                 <div class="d-flex align-items-center justify-content-between small">
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </footer>
-    </div>
+    </div> -->
 </div>
 
 <?php $content = ob_get_clean(); ?>
