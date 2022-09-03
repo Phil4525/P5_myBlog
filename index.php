@@ -1,10 +1,12 @@
 <?php
+session_start();
 
 require_once('src/controllers/homepage.php');
 require_once('src/controllers/blog.php');
 require_once('src/controllers/post.php');
 require_once('src/controllers/admin.php');
 require_once('src/controllers/add_comment.php');
+require_once('src/controllers/update_comment.php');
 require_once('src/controllers/login.php');
 require_once('src/controllers/logout.php');
 require_once('src/controllers/register.php');
@@ -31,12 +33,29 @@ try {
 
             admin();
         } elseif ($_GET['action'] === 'addComment') {
+            if (isset($_SESSION['user'])) {
+                if (isset($_GET['id']) && $_GET['id'] > 0) {
+                    $id = $_GET['id'];
+
+                    addComment($id, $_POST);
+                } else {
+                    throw new Exception('Aucun identifiant de billet envoyé');
+                }
+            } else {
+                throw new Exception('Vous devez être connecté pour laisser un commentaire');
+            }
+        } elseif ($_GET['action'] === 'updateComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $id = $_GET['id'];
+                // It sets the input only when the HTTP method is POST (ie. the form is submitted).
+                $input = null;
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $input = $_POST;
+                }
 
-                addComment($id, $_POST);
+                UpdateComment($id, $input);
             } else {
-                throw new Exception('Aucun identifiant de billet envoyé');
+                throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         } elseif ($_GET['action'] === 'login') {
 

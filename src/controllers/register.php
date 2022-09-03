@@ -1,6 +1,7 @@
 <?php
 
-require_once('src/models/user.php');
+require_once('src/model.php');
+// require_once('src/models/user.php');
 
 function register($input)
 {
@@ -16,23 +17,31 @@ function register($input)
             } else {
                 $email = $input['email'];
             }
-
             $password = password_hash($input['password'], PASSWORD_ARGON2ID);
 
-            $success = createUser($username, $email, $password);
+            // $success = createUser($username, $email, $password);
+
+            $database = dbConnect();
+            $statement = $database->prepare(
+                'INSERT INTO users(username, email, `password`) VALUES(?, ?, ?)'
+            );
+            $success = $statement->execute([$username, $email, $password]);
+
             if (!$success) {
                 throw new Exception("Impossible de créer le compte !");
             } else {
-                // $id=$database->lastInsertId();
+                $id = $database->lastInsertId('users'); // not working with createUser(), need same database connexion
 
                 session_start();
 
                 $_SESSION['user'] = [
-                    // 'id' => $user['id'],
+                    'id' => $id,
                     'username' => $username,
                     'email' => $email,
                     // 'roles'=>$user['roles'],
                 ];
+
+                // var_dump($_SESSION);
 
                 header('Location:index.php');
             }

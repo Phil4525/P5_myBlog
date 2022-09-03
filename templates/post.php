@@ -1,3 +1,5 @@
+<?php @session_start(); ?>
+
 <?php $title = "Post"; ?>
 
 <?php ob_start(); ?>
@@ -34,11 +36,12 @@
                     <div class="card-body">
                         <!-- Comment form-->
                         <form class="mb-4" action="index.php?action=addComment&id=<?= $post['id'] ?>" method="post">
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="author" placeholder="author" />
-                                <textarea class="form-control" rows="3" name="comment" placeholder="leave a comment!"></textarea>
+                            <div class="form-group mb-5">
+                                <textarea class="form-control mb-2" rows="3" name="comment" placeholder="leave a comment!"></textarea>
+                                <div class="float-end">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                         <?php
                         if (isset($comments) && $comments !== null) {
@@ -49,7 +52,14 @@
                                     <div class="ms-3">
                                         <div class="fw-bold"><?= $comment['author'] ?></div>
                                         <div><small>le <?= $comment['french_creation_date'] ?></small></div>
-                                        <?= $comment['comment'] ?>
+                                        <p><?= $comment['comment'] ?></p>
+                                        <?php
+                                        if (isset($_SESSION['user']) && $_SESSION['user']['username'] == $comment['author']) {
+                                        ?>
+                                            <a href="index.php?action=updateComment&id=<?= $comment['id'] ?>"><small>(Modifier)</small></a>
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                         <?php

@@ -1,12 +1,16 @@
 <?php
+@session_start();
+
 require_once('src/models/comment.php');
 
 function addComment(string $post, array $input)
 {
-    $author = null;
+    // $author = null;
+    $author = $_SESSION['user']['username'];
     $comment = null;
-    if (!empty($input['author']) && !empty($input['comment'])) {
-        $author = strip_tags($input['author']);
+    // if (!empty($input['author']) && !empty($input['comment'])) {
+    if (!empty($input['comment'])) {
+        // $author = strip_tags($input['author']);
         $comment = nl2br(strip_tags($input['comment']));
     } else {
         throw new Exception('Les données du formulaire sont invalides.');
