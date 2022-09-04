@@ -36,5 +36,5 @@ function login($input)
             header('Location:index.php');
         }
     }
-    require('templates/login.php');
+    // require('templates/login.php');
 }

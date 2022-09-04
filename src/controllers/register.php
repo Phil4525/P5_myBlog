@@ -51,5 +51,5 @@ function register($input)
     }
 
 
-    require('templates/register.php');
+    // require('templates/register.php');
 }
