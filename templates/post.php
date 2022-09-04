@@ -15,7 +15,7 @@
                 <!-- Post header-->
                 <header class="mb-4">
                     <!-- Post title-->
-                    <h1 class="fw-bolder mb-1"><?= htmlspecialchars($post['title']) ?></h1>
+                    <h1 class="fw-bolder mb-1"><?= $post['title'] ?></h1>
                     <!-- Post meta content-->
                     <div class="text-muted fst-italic mb-2">mis à jour le <?= $post['french_creation_date'] ?></div>
                     <!-- Post categories-->
@@ -26,8 +26,8 @@
                 <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
                 <!-- Post content-->
                 <section class="mb-5">
-                    <p class="fs-5 mb-4"><strong><?= nl2br(htmlspecialchars($post['chapo'])) ?></strong></p>
-                    <p class="fs-6 mb-4"><?= nl2br(htmlspecialchars($post['content'])) ?></p>
+                    <p class="fs-5 mb-4"><strong><?= $post['chapo'] ?></strong></p>
+                    <p class="fs-6 mb-4"><?= $post['content'] ?></p>
                 </section>
             </article>
             <!-- Comments section-->
@@ -47,7 +47,7 @@
                         if (isset($comments) && $comments !== null) {
                             foreach ($comments as $comment) {
                         ?>
-                                <div class="d-flex">
+                                <div class="d-flex" id="<?= $comment['id'] ?>">
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                     <div class="ms-3">
                                         <div class="fw-bold"><?= $comment['author'] ?></div>
@@ -56,7 +56,7 @@
                                         <?php
                                         if (isset($_SESSION['user']) && $_SESSION['user']['username'] == $comment['author']) {
                                         ?>
-                                            <a href="index.php?action=updateComment&id=<?= $comment['id'] ?>"><small>(Modifier)</small></a>
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#updateComment"><small>(Modifier)</small></a>
                                         <?php
                                         }
                                         ?>
@@ -113,8 +113,29 @@
     </div>
 </div>
 
+<!-- Modal upadate comment -->
+<div class="modal fade" id="updateComment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="mb-4" action="index.php?action=updateComment&id=<?= $comment['id'] ?>" method="post">
+                    <div class="form-group mb-5">
+                        <textarea class="form-control mb-2" rows="3" name="comment" placeholder="update your comment!"><?= $comment['comment'] ?></textarea>
+                    </div>
+                    <div class="modal-footer form-group">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 <?php require('footer.php'); ?>
-
 <?php $content = ob_get_clean(); ?>
-
 <?php require('layout.php') ?>

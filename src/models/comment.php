@@ -15,6 +15,20 @@ function getComments(string $post)
     return $comments;
 }
 
+function getComment(string $id)
+{
+    $database = dbConnect();
+
+    $statement = $database->prepare(
+        "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date, post_id FROM comments WHERE id = ?"
+    );
+    $statement->execute([$id]);
+
+    $comment = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $comment;
+}
+
 function createComment(string $post, string $author, string $comment)
 {
     $database = dbConnect();
@@ -26,6 +40,20 @@ function createComment(string $post, string $author, string $comment)
 
     return ($affectedLines > 0);
 }
+
+function updateComment(string $id, string $author, string $comment)
+{
+    $database = dbConnect();
+
+    $statement = $database->prepare(
+        'UPDATE comments SET author = ?, comment = ?, comment_date = NOW() WHERE id = ?'
+    );
+    $affectedLines = $statement->execute([$author, $comment, $id]);
+
+    return ($affectedLines > 0);
+}
+
+
 
 // function commentDbConnect()
 // {

@@ -53,7 +53,7 @@ try {
                     $input = $_POST;
                 }
 
-                UpdateComment($id, $input);
+                modifyComment($id, $input);
             } else {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }
