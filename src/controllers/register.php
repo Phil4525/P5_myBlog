@@ -1,7 +1,7 @@
 <?php
 
 require_once('src/model.php');
-// require_once('src/models/user.php');
+require_once('src/models/user.php');
 
 function register($input)
 {
@@ -10,8 +10,15 @@ function register($input)
             isset($input['username'], $input['email'], $input['password'])
             && !empty($input['username']) && !empty($input['email']) && !empty($input['password'])
         ) {
-            $username = strip_tags($input['username']);
+            // $database = dbConnect();
 
+            $username = strip_tags($input['username']);
+            // check if username is already token
+            if (getUserByName($username)) {
+                throw new Exception("Le nom d'utilisateur est déja pris.");
+            }
+
+            // check if email is valid
             if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
                 throw new Exception("L'adresse email est incorrecte.");
             } else {
@@ -19,8 +26,7 @@ function register($input)
             }
             $password = password_hash($input['password'], PASSWORD_ARGON2ID);
 
-            // $success = createUser($username, $email, $password);
-
+            // create new user
             $database = dbConnect();
             $statement = $database->prepare(
                 'INSERT INTO users(username, email, `password`) VALUES(?, ?, ?)'
@@ -41,15 +47,10 @@ function register($input)
                     // 'roles'=>$user['roles'],
                 ];
 
-                // var_dump($_SESSION);
-
                 header('Location:index.php');
             }
         } else {
             throw new Exception('Les données du formulaire sont invalides.');
         }
     }
-
-
-    // require('templates/register.php');
 }
