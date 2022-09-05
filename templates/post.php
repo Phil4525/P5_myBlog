@@ -43,11 +43,11 @@
                                 </div>
                             </div>
                         </form>
+                        <!--parent comment -->
                         <?php
                         if (isset($comments) && $comments !== null) {
                             foreach ($comments as $comment) {
                         ?>
-                                <!-- comment -->
                                 <div class="d-flex" id="<?= $comment['id'] ?>">
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                     <div class="ms-3">
@@ -57,18 +57,45 @@
                                         <?php
                                         if (isset($_SESSION['user']) && $_SESSION['user']['username'] == $comment['author']) {
                                         ?>
-                                            <a href="" data-bs-toggle="modal" data-bs-target="#updateComment-<?= $comment['id'] ?>"><small>(Modifier)</small></a>
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#updateComment-<?= $comment['id'] ?>"><small>(Modify)</small></a>
                                         <?php
                                         }
                                         ?>
+                                        <?php
+                                        if (isset($_SESSION['user']) && $_SESSION['user']['username'] !== $comment['author']) {
+                                        ?>
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#reply-<?= $comment['id'] ?>"><small>(Reply)</small></a>
+                                        <?php
+                                        }
+                                        ?>
+                                        <!-- child comment -->
+                                        <!-- <?php
+                                                if (isset($replies) && $replies !== null) {
+                                                    foreach ($replies as $reply) {
+                                                        if ($reply['comment_id'] == $comment['id']) {
+                                                ?>
+                                                    <div class="d-flex mt-4">
+                                                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                                        <div class="ms-3">
+                                                            <div class="fw-bold"><?= $reply['author'] ?></div>
+                                                            <div><small>le <?= $reply['french_creation_date'] ?></small></div>
+                                                            <p><?= $reply['reply'] ?></p>
+                                                        </div>
+                                                    </div>
+                                        <?php
+                                                        }
+                                                    }
+                                                }
+                                        ?> -->
                                     </div>
                                 </div>
+
                                 <!-- update comment modal -->
                                 <div class="modal fade" id="updateComment-<?= $comment['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Modify comment</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Modify your comment</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -79,6 +106,28 @@
                                                     <div class="modal-footer form-group">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- reply to comment modal -->
+                                <div class="modal fade" id="reply-<?= $comment['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Reply to comment</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="mb-4" action="index.php?action=reply&id=<?= $comment['id'] ?>" method="post">
+                                                    <div class="form-group mb-5">
+                                                        <textarea class="form-control mb-2" rows="3" name="reply" placeholder="reply to comment!"></textarea>
+                                                    </div>
+                                                    <div class="modal-footer form-group">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Send</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -140,4 +189,8 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('layout.php') ?>
+<?php require('layout.php');
+
+// print_r($replies);
+
+?>

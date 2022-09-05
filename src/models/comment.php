@@ -1,14 +1,14 @@
 <?php
 require_once('src/model.php');
 
-function getComments(string $post)
+function getComments(string $postId)
 {
     $database = dbConnect();
 
     $statement = $database->prepare(
         "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
     );
-    $statement->execute([$post]);
+    $statement->execute([$postId]);
 
     $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -29,14 +29,14 @@ function getComment(string $id)
     return $comment;
 }
 
-function createComment(string $post, string $author, string $comment)
+function createComment(string $postId, string $author, string $comment)
 {
     $database = dbConnect();
 
     $statement = $database->prepare(
         'INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())'
     );
-    $affectedLines = $statement->execute([$post, $author, $comment]);
+    $affectedLines = $statement->execute([$postId, $author, $comment]);
 
     return ($affectedLines > 0);
 }
