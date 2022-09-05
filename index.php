@@ -52,7 +52,6 @@ try {
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $input = $_POST;
                 }
-
                 modifyComment($id, $input);
             } else {
                 throw new Exception('Aucun identifiant de commentaire envoyé');

@@ -71,7 +71,7 @@
                     </div>
                 </form>
                 <div class="modal-footer text-center py-3">
-                    <div class="small"><a href="index.php?action=login">Have an account? Go to login</a></div>
+                    <div class="small"><a href="" data-bs-toggle="modal" data-bs-target="#login">Have an account? Go to login</a></div>
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@
                     </div>
                 </form>
                 <div class="modal-footer py-3">
-                    <div class="small"><a href="index.php?action=login">Need an account? Sign up!</a></div>
+                    <div class="small"><a href="" data-bs-toggle="modal" data-bs-target="#register">Need an account? Sign up!</a></div>
                 </div>
             </div>
         </div>

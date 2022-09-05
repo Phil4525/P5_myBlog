@@ -13,19 +13,22 @@ function modifyComment(string $id, ?array $input)
         } else {
             throw new Exception('Les données du formulaire sont invalides.');
         }
-        $success = updateComment($id, $_SESSION['user']['username'], $comment);
+        // die($id);
+        $success = updateComment($id, $comment);
 
         if (!$success) {
             throw new Exception('Impossible de modifier le commentaire !');
         } else {
-            $postId = getComment($id);
-            header('Location: index.php?action=post&id=' . $postId['post_id'] . '#' . $id);
+            $newComment = getComment($id);
+            header('Location: index.php?action=post&id=' . $newComment['post_id'] . '#' . $id);
         }
     }
 
     // Otherwise, it displays the form.
-    $oldComment = getComment($id);
-    if ($oldComment === null) {
+    $comment = getComment($id);
+    if ($comment === null) {
         throw new Exception("Le commentaire $id n'existe pas.");
     }
+
+    // require('templates/post.php');
 }

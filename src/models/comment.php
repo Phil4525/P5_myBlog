@@ -41,14 +41,15 @@ function createComment(string $post, string $author, string $comment)
     return ($affectedLines > 0);
 }
 
-function updateComment(string $id, string $author, string $comment)
+function updateComment(string $id, string $comment)
 {
     $database = dbConnect();
 
     $statement = $database->prepare(
-        'UPDATE comments SET author = ?, comment = ?, comment_date = NOW() WHERE id = ?'
+        // 'UPDATE comments SET comment = ?, comment_date = NOW() WHERE id = ?'
+        'UPDATE comments SET comment = ? WHERE id = ?'
     );
-    $affectedLines = $statement->execute([$author, $comment, $id]);
+    $affectedLines = $statement->execute([$comment, $id]);
 
     return ($affectedLines > 0);
 }
