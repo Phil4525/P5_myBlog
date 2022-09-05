@@ -10,9 +10,8 @@ function register($input)
             isset($input['username'], $input['email'], $input['password'])
             && !empty($input['username']) && !empty($input['email']) && !empty($input['password'])
         ) {
-            // $database = dbConnect();
-
             $username = strip_tags($input['username']);
+
             // check if username is already token
             if (getUserByName($username)) {
                 throw new Exception("Le nom d'utilisateur est déja pris.");
@@ -24,6 +23,7 @@ function register($input)
             } else {
                 $email = $input['email'];
             }
+
             $password = password_hash($input['password'], PASSWORD_ARGON2ID);
 
             // create new user
