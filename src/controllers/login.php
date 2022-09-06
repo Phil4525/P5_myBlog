@@ -24,7 +24,7 @@ function login($input)
                 throw new Exception("L'utilisateur et/ou le mot de passe est incorrect.");
             }
 
-            session_start();
+            @session_start();
 
             $_SESSION['user'] = [
                 'id' => $user['id'],
@@ -36,5 +36,4 @@ function login($input)
             header('Location:index.php');
         }
     }
-    // require('templates/login.php');
 }

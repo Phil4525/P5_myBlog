@@ -26,8 +26,8 @@
                 <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
                 <!-- Post content-->
                 <section class="mb-5">
-                    <p class="fs-5 mb-4"><strong><?= $post['chapo'] ?></strong></p>
-                    <p class="fs-6 mb-4"><?= $post['content'] ?></p>
+                    <p class="fs-5 mb-4"><strong><?= nl2br($post['chapo'])  ?></strong></p>
+                    <p class="fs-6 mb-4"><?= nl2br($post['content']) ?></p>
                 </section>
             </article>
             <!-- Comments section-->
@@ -54,6 +54,7 @@
                                         <div class="fw-bold"><?= $comment['author'] ?></div>
                                         <div><small>le <?= $comment['french_creation_date'] ?></small></div>
                                         <p><?= $comment['comment'] ?></p>
+                                        <!-- modify or reply condition -->
                                         <?php
                                         if (isset($_SESSION['user']) && $_SESSION['user']['username'] == $comment['author']) {
                                         ?>
@@ -72,7 +73,7 @@
                                         <!-- <?php
                                                 if (isset($replies) && $replies !== null) {
                                                     foreach ($replies as $reply) {
-                                                        if ($reply['comment_id'] == $comment['id']) {
+                                                        //if ($reply['comment_id'] == $comment['id']) {
                                                 ?>
                                                     <div class="d-flex mt-4">
                                                         <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
@@ -83,7 +84,7 @@
                                                         </div>
                                                     </div>
                                         <?php
-                                                        }
+                                                        //}
                                                     }
                                                 }
                                         ?> -->

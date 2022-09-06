@@ -4,7 +4,8 @@ session_start();
 require_once('src/controllers/homepage.php');
 require_once('src/controllers/blog.php');
 require_once('src/controllers/post.php');
-require_once('src/controllers/admin.php');
+require_once('src/controllers/admin/homepage.php');
+require_once('src/controllers/admin/post.php');
 require_once('src/controllers/add_comment.php');
 require_once('src/controllers/update_comment.php');
 require_once('src/controllers/reply.php');
@@ -30,9 +31,6 @@ try {
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        } elseif ($_GET['action'] === 'admin') {
-
-            admin();
         } elseif ($_GET['action'] === 'addComment') {
             if (isset($_SESSION['user'])) {
                 if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -84,6 +82,12 @@ try {
         } elseif ($_GET['action'] === 'contact') {
 
             contact($_POST);
+        } elseif ($_GET['action'] === 'adminHomepage') {
+
+            adminHomepage();
+        } elseif ($_GET['action'] === 'adminPost') {
+
+            adminPost();
         } else {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }

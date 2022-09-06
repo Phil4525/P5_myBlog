@@ -1,41 +1,12 @@
-<?php $title = "Admin"; ?>
+<?php
+$title = "Home";
+ob_start();
+require('templates/admin/navbar.php');
+?>
 
-<?php ob_start(); ?>
-
-<?php require('templates/navbar.php') ?>
-
-<div class="container-fluid mt-5 pt-5">
+<div class="container-fluid">
     <div class="row">
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="position-sticky pt-3 sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            <span data-feather="home" class="align-text-bottom"></span>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file" class="align-text-bottom"></span>
-                            Posts
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="shopping-cart" class="align-text-bottom"></span>
-                            Comments
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="users" class="align-text-bottom"></span>
-                            Users
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <?php require('templates/admin/sidebar.php') ?>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -52,9 +23,7 @@
                 </div>
             </div>
 
-            <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
-
-            <h2>Section title</h2>
+            <!-- <h2>Section title</h2>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -183,11 +152,9 @@
                 </table>
             </div>
         </main>
+    </div> -->
     </div>
-</div>
-
-<?php require('templates/footer.php'); ?>
-
-<?php $content = ob_get_clean(); ?>
-
-<?php require('templates/layout.php') ?>
+    <?php
+    $content = ob_get_clean();
+    require('templates/admin/layout.php')
+    ?>
