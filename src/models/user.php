@@ -21,7 +21,18 @@ function getUserByName(string $username)
 
     $statement = $database->prepare("SELECT * FROM users WHERE username=?");
     $statement->execute([$username]);
-    $user = $statement->fetch();
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
 
     return $user;
+}
+
+function getUsers()
+{
+    $database = dbConnect();
+
+    $statement = $database->query("SELECT * FROM users");
+
+    $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $users;
 }

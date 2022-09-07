@@ -6,6 +6,10 @@ require_once('src/controllers/blog.php');
 require_once('src/controllers/post.php');
 require_once('src/controllers/admin/homepage.php');
 require_once('src/controllers/admin/post.php');
+require_once('src/controllers/admin/comment.php');
+require_once('src/controllers/admin/user.php');
+require_once('src/controllers/admin/contact.php');
+require_once('src/controllers/admin/add_post.php');
 require_once('src/controllers/add_comment.php');
 require_once('src/controllers/update_comment.php');
 require_once('src/controllers/reply.php');
@@ -85,9 +89,21 @@ try {
         } elseif ($_GET['action'] === 'adminHomepage') {
 
             adminHomepage();
-        } elseif ($_GET['action'] === 'adminPost') {
+        } elseif ($_GET['action'] === 'adminPosts') {
 
-            adminPost();
+            adminGetPosts();
+        } elseif ($_GET['action'] === 'adminComments') {
+
+            adminGetComments();
+        } elseif ($_GET['action'] === 'adminUsers') {
+
+            adminGetUsers();
+        } elseif ($_GET['action'] === 'adminContacts') {
+
+            adminGetContacts();
+        } elseif ($_GET['action'] === 'newPost') {
+
+            newPost();
         } else {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }

@@ -1,7 +1,7 @@
 <?php
 require_once('src/model.php');
 
-function getComments(string $postId)
+function getCommentsByPostId(string $postId)
 {
     $database = dbConnect();
 
@@ -9,6 +9,19 @@ function getComments(string $postId)
         "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
     );
     $statement->execute([$postId]);
+
+    $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $comments;
+}
+
+function getComments()
+{
+    $database = dbConnect();
+
+    $statement = $database->query(
+        "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date FROM comments ORDER BY comment_date DESC"
+    );
 
     $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
 

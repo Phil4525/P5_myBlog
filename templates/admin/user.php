@@ -1,5 +1,5 @@
 <?php
-$title = "Articles";
+$title = "Users";
 ob_start();
 require('templates/admin/navbar.php');
 ?>
@@ -10,38 +10,42 @@ require('templates/admin/navbar.php');
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Liste des articles</h1>
+                <h1 class="h2">Liste des utilisateurs</h1>
+                <!-- <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        <span data-feather="calendar" class="align-text-bottom"></span>
+                        This week
+                    </button>
+                </div> -->
             </div>
 
             <!-- <h2>Liste des articles</h2> -->
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a class="btn btn-primary" href="index.php?action=newPost" role="button">Créer un nouvel article</a>
-            </div>
+            <!-- <a class="btn btn-primary" href="#" role="button">Créer un nouvel article</a> -->
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Titre</th>
-                            <th scope="col">Auteur</th>
-                            <th scope="col">Date de mise à jour</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
                             <th scope="col"></th>
-                            <th scope="col"></th>
-
-
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($posts as $post) {
+                        foreach ($users as $user) {
                         ?>
                             <tr>
-                                <td><?= $post['id'] ?></td>
-                                <td><?= $post['title'] ?></td>
-                                <td><?= $post['author'] ?></td>
-                                <td><?= $post['french_creation_date'] ?></td>
-                                <td><a href="index.php?action=editPost&id=<?= $post['id'] ?>" class="fa-sharp fa-solid fa-pen"></a></td>
-                                <td><a href="index.php?action=deletePost&id=<?= $post['id'] ?>" class="fa-solid fa-trash-can"></a></td>
+                                <td><?= $user['id'] ?></td>
+                                <td><?= $user['username'] ?></td>
+                                <td><?= $user['email'] ?></td>
+                                <td><?= $user['password'] ?></td>
+                                <td><a href="index.php?action=deleteUser&id=<?= $user['id'] ?>" class="fa-solid fa-trash-can"></a></td>
                             </tr>
                         <?php
                         }
@@ -53,17 +57,17 @@ require('templates/admin/navbar.php');
             <nav aria-label="Pagination">
                 <ul class="pagination justify-content-center my-4">
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=adminPosts&page=<?= $currentPage - 1 ?>" aria-label="Previous">
+                        <a class="page-link" href="index.php?action=adminUsers&page=<?= $currentPage - 1 ?>" aria-label="Previous">
                             <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
                         </a>
                     </li>
                     <?php for ($page = 1; $page <= $pages; $page++) : ?>
                         <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
-                            <a class="page-link" href="index.php?action=adminPosts&page=<?= $page ?>"><?= $page ?></a>
+                            <a class="page-link" href="index.php?action=adminUsers&page=<?= $page ?>"><?= $page ?></a>
                         </li>
                     <?php endfor ?>
                     <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=adminPosts&page=<?= $currentPage + 1 ?>" aria-label="Next">
+                        <a class="page-link" href="index.php?action=adminUsers&page=<?= $currentPage + 1 ?>" aria-label="Next">
                             <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
                         </a>
                     </li>
@@ -74,5 +78,5 @@ require('templates/admin/navbar.php');
 </div>
 <?php
 $content = ob_get_clean();
-require('templates/admin/layout.php')
+require('templates/admin/layout.php');
 ?>

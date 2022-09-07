@@ -3,31 +3,31 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="index.php?action=adminHomepage">
-                    <span data-feather="home" class="align-text-bottom fa-sharp fa-solid fa-home"></span>
+                    <span class="fa-sharp fa-solid fa-home"></span>
                     Dashboard
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php?action=adminPost">
-                    <span data-feather="file" class="align-text-bottom fa-solid fa-newspaper"></span>
+                <a class="nav-link" href="index.php?action=adminPosts">
+                    <span class="fa-solid fa-newspaper"></span>
                     Articles
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                <a class="nav-link" href="index.php?action=adminComments">
+                    <span class="fa-solid fa-comment"></span>
                     Commentaires
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="users" class="align-text-bottom"></span>
+                <a class="nav-link" href="index.php?action=adminUsers">
+                    <span class="fa-solid fa-users"></span>
                     Utilisateurs
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+                <a class="nav-link" href="index.php?action=adminContacts">
+                    <span class="fa-solid fa-envelope"></span>
                     Messages
                 </a>
             </li>

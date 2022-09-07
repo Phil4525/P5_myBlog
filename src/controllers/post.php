@@ -9,7 +9,7 @@ function post(string $id)
 {
     $post = getPost($id);
 
-    $comments = getComments($id);
+    $comments = getCommentsByPostId($id);
 
     // foreach ($comments as $comment) {
     //     $replies[] = getReplies($comment['id']);
