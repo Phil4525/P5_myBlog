@@ -12,6 +12,7 @@ require_once('src/controllers/admin/contact.php');
 require_once('src/controllers/admin/add_post.php');
 require_once('src/controllers/add_comment.php');
 require_once('src/controllers/update_comment.php');
+require_once('src/controllers/delete_comment.php');
 require_once('src/controllers/reply.php');
 require_once('src/controllers/login.php');
 require_once('src/controllers/logout.php');
@@ -56,6 +57,14 @@ try {
                     $input = $_POST;
                 }
                 modifyComment($id, $input);
+            } else {
+                throw new Exception('Aucun identifiant de commentaire envoyé');
+            }
+        } elseif ($_GET['action'] === 'deleteComment') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $id = $_GET['id'];
+
+                commentSuppression($id);
             } else {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }

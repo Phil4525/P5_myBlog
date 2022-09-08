@@ -59,6 +59,7 @@
                                         if (isset($_SESSION['user']) && $_SESSION['user']['username'] == $comment['author']) {
                                         ?>
                                             <a href="" data-bs-toggle="modal" data-bs-target="#updateComment-<?= $comment['id'] ?>"><small>(Modify)</small></a>
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment['id'] ?>"><small>(Delete)</small></a>
                                         <?php
                                         }
                                         ?>
@@ -109,6 +110,23 @@
                                                         <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
                                                     </div>
                                                 </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- delete comment modal -->
+                                <div class="modal fade" id="deleteComment-<?= $comment['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Delete your comment</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Etes-vous sûr de vouloir supprimer ?</p>
+                                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                    <a class="btn btn-primary" href="index.php?action=deleteComment&id=<?= $comment['id'] ?>" role="button">Confirmer</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

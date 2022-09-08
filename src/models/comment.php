@@ -67,10 +67,12 @@ function updateComment(string $id, string $comment)
     return ($affectedLines > 0);
 }
 
+function deleteComment(string $id)
+{
+    $database = dbConnect();
 
+    $statement = $database->prepare('DELETE FROM comments WHERE id = ?');
+    $affectedLines = $statement->execute([$id]);
 
-// function commentDbConnect()
-// {
-//     $database = new PDO('mysql:host=localhost;dbname=P5_myBlog;charset=utf8', 'root', '');
-//     return $database;
-// }
+    return ($affectedLines > 0);
+}
