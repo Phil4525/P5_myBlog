@@ -14,7 +14,7 @@ require('templates/admin/navbar.php');
             </div>
 
             <!-- <h2>Liste des articles</h2> -->
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
                 <a class="btn btn-primary" href="index.php?action=newPost" role="button">Créer un nouvel article</a>
             </div>
             <div class="table-responsive">
@@ -27,8 +27,7 @@ require('templates/admin/navbar.php');
                             <th scope="col">Date de mise à jour</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
-
-
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,8 +39,9 @@ require('templates/admin/navbar.php');
                                 <td><?= $post['title'] ?></td>
                                 <td><?= $post['author'] ?></td>
                                 <td><?= $post['french_creation_date'] ?></td>
-                                <td><a href="index.php?action=editPost&id=<?= $post['id'] ?>" class="fa-sharp fa-solid fa-pen"></a></td>
-                                <td><a href="index.php?action=deletePost&id=<?= $post['id'] ?>" class="fa-solid fa-trash-can"></a></td>
+                                <td><a href="index.php?action=viewPost&id=<?= $post['id'] ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                                <td><a href="index.php?action=editPost&id=<?= $post['id'] ?>" class="text-decoration-none fa-sharp fa-solid fa-pen"></a></td>
+                                <td><a href="index.php?action=deletePost&id=<?= $post['id'] ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                             </tr>
                         <?php
                         }
@@ -51,7 +51,7 @@ require('templates/admin/navbar.php');
             </div>
             <!-- Pagination-->
             <nav aria-label="Pagination">
-                <ul class="pagination justify-content-center my-4">
+                <ul class="pagination justify-content-center my-4 pagination-sm">
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
                         <a class="page-link" href="index.php?action=adminPosts&page=<?= $currentPage - 1 ?>" aria-label="Previous">
                             <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>

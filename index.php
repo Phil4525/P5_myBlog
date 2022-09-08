@@ -9,7 +9,10 @@ require_once('src/controllers/admin/post.php');
 require_once('src/controllers/admin/comment.php');
 require_once('src/controllers/admin/user.php');
 require_once('src/controllers/admin/contact.php');
+require_once('src/controllers/admin/new_post.php');
 require_once('src/controllers/admin/add_post.php');
+require_once('src/controllers/admin/view_post.php');
+require_once('src/controllers/admin/edit_post.php');
 require_once('src/controllers/add_comment.php');
 require_once('src/controllers/update_comment.php');
 require_once('src/controllers/delete_comment.php');
@@ -113,6 +116,29 @@ try {
         } elseif ($_GET['action'] === 'newPost') {
 
             newPost();
+        } elseif ($_GET['action'] === 'addPost') {
+
+            addPost($_POST);
+        } elseif ($_GET['action'] === 'viewPost') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $id = $_GET['id'];
+
+                viewPost($id);
+            } else {
+                throw new Exception("Aucun identifiant d'article envoyé");
+            }
+        } elseif ($_GET['action'] === 'editPost') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $id = $_GET['id'];
+                // It sets the input only when the HTTP method is POST (ie. the form is submitted).
+                $input = null;
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $input = $_POST;
+                }
+                editPost($id, $input);
+            } else {
+                throw new Exception("Aucun identifiant d'article envoyé");
+            }
         } else {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }

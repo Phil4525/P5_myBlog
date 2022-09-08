@@ -33,9 +33,8 @@ require('templates/admin/navbar.php');
                             <th scope="col">Nom</th>
                             <th scope="col">Email</th>
                             <th scope="col">Telephone</th>
-                            <!-- <th scope="col">Auteur</th> -->
                             <th scope="col">Date</th>
-                            <!-- <th scope="col"></th> -->
+                            <th scope="col"></th>
                             <th scope="col"></th>
 
 
@@ -51,8 +50,8 @@ require('templates/admin/navbar.php');
                                 <td><?= $contact['email'] ?></td>
                                 <td><?= $contact['phone'] ?></td>
                                 <td><?= $contact['french_creation_date'] ?></td>
-                                <!-- <td><a href="index.php?action=editContact&id=<?= $contact['id'] ?>" class="fa-sharp fa-solid fa-pen"></a></td> -->
-                                <td><a href="index.php?action=deleteContact&id=<?= $contact['id'] ?>" class="fa-solid fa-trash-can"></a></td>
+                                <td><a href="index.php?action=viewContact&id=<?= $contact['id'] ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                                <td><a href="index.php?action=deleteContact&id=<?= $contact['id'] ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                             </tr>
                         <?php
                         }
@@ -62,11 +61,9 @@ require('templates/admin/navbar.php');
             </div>
             <!-- Pagination-->
             <nav aria-label="Pagination">
-                <!-- <hr class="my-0" /> -->
-                <ul class="pagination justify-content-center my-4">
+                <ul class="pagination justify-content-center my-4 pagination-sm">
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
                         <a class="page-link" href="index.php?action=adminContacts&page=<?= $currentPage - 1 ?>" aria-label="Previous">
-                            <!-- <span aria-hidden="true">&laquo;</span> -->
                             <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
                         </a>
                     </li>
@@ -77,7 +74,6 @@ require('templates/admin/navbar.php');
                     <?php endfor ?>
                     <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
                         <a class="page-link" href="index.php?action=adminContacts&page=<?= $currentPage + 1 ?>" aria-label="Next">
-                            <!-- <span aria-hidden="true">&raquo;</span> -->
                             <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
                         </a>
                     </li>

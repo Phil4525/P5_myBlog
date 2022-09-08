@@ -34,6 +34,7 @@ require('templates/admin/navbar.php');
                             <th scope="col">Email</th>
                             <th scope="col">Password</th>
                             <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,7 +46,8 @@ require('templates/admin/navbar.php');
                                 <td><?= $user['username'] ?></td>
                                 <td><?= $user['email'] ?></td>
                                 <td><?= $user['password'] ?></td>
-                                <td><a href="index.php?action=deleteUser&id=<?= $user['id'] ?>" class="fa-solid fa-trash-can"></a></td>
+                                <td><a href="index.php?action=viewUser&id=<?= $user['id'] ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                                <td><a href="index.php?action=deleteUser&id=<?= $user['id'] ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                             </tr>
                         <?php
                         }
@@ -55,7 +57,7 @@ require('templates/admin/navbar.php');
             </div>
             <!-- Pagination-->
             <nav aria-label="Pagination">
-                <ul class="pagination justify-content-center my-4">
+                <ul class="pagination justify-content-center my-4 pagination-sm">
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
                         <a class="page-link" href="index.php?action=adminUsers&page=<?= $currentPage - 1 ?>" aria-label="Previous">
                             <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>

@@ -31,7 +31,7 @@
                             <div class="card-body">
                                 <div class="small text-muted"><?= $post['french_creation_date'] ?></div>
                                 <h2 class="card-title h4"><?= $post['title'] ?></h2>
-                                <p class="card-text text-truncate"><?= $post['chapo'] ?></p>
+                                <p class="card-text text-truncate"><?= strip_tags($post['chapo'])  ?></p>
                                 <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($post['id']) ?>">Read more →</a>
                             </div>
                         </div>

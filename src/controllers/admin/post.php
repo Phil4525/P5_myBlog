@@ -18,7 +18,7 @@ function adminGetPosts()
     $numberOne = ($currentPage * $perPage) - $perPage;
 
     $database = dbConnect();
-    $statement = $database->prepare("SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date FROM posts WHERE id<= (SELECT max(id) FROM posts) ORDER BY creation_date DESC LIMIT :numberOne, :perpage;");
+    $statement = $database->prepare("SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM posts WHERE id<= (SELECT max(id) FROM posts) ORDER BY creation_date DESC LIMIT :numberOne, :perpage;");
     $statement->bindValue(':numberOne', $numberOne, PDO::PARAM_INT);
     $statement->bindValue(':perpage', $perPage, PDO::PARAM_INT);
     $statement->execute();

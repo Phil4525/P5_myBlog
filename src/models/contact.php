@@ -16,7 +16,7 @@ function getContacts()
 {
     $database = dbConnect();
 
-    $statement = $database->query("SELECT id, fullname, email, phone, message_content, DATE_FORMAT(message_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date FROM contacts ORDER BY message_date DESC");
+    $statement = $database->query("SELECT id, fullname, email, phone, message_content, DATE_FORMAT(message_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM contacts ORDER BY message_date DESC");
 
     $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
 

@@ -18,7 +18,7 @@ function adminGetComments()
     $numberOne = ($currentPage * $perPage) - $perPage;
 
     $database = dbConnect();
-    $statement = $database->prepare("SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date FROM comments WHERE id<= (SELECT max(id) FROM comments) ORDER BY comment_date DESC LIMIT :numberOne, :perpage;");
+    $statement = $database->prepare("SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM comments WHERE id<= (SELECT max(id) FROM comments) ORDER BY comment_date DESC LIMIT :numberOne, :perpage;");
     $statement->bindValue(':numberOne', $numberOne, PDO::PARAM_INT);
     $statement->bindValue(':perpage', $perPage, PDO::PARAM_INT);
     $statement->execute();

@@ -18,7 +18,7 @@ function getReplies(string $commentId)
     $database = dbConnect();
 
     $statement = $database->prepare(
-        "SELECT id, author, reply, DATE_FORMAT(reply_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date FROM replies WHERE comment_id = ? ORDER BY reply_date DESC"
+        "SELECT id, author, reply, DATE_FORMAT(reply_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM replies WHERE comment_id = ? ORDER BY reply_date DESC"
     );
     $statement->execute([$commentId]);
 

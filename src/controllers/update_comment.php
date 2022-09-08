@@ -13,7 +13,7 @@ function modifyComment(string $id, ?array $input)
         } else {
             throw new Exception('Les données du formulaire sont invalides.');
         }
-        // die($id);
+
         $success = updateComment($id, $comment);
 
         if (!$success) {

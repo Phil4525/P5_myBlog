@@ -31,12 +31,10 @@ require('templates/admin/navbar.php');
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Post_Id</th>
-                            <!-- <th scope="col">Chapô</th> -->
-                            <!-- <th scope="col">Contenu</th> -->
                             <th scope="col">Auteur</th>
-                            <th scope="col">Commentaire</th>
+                            <!-- <th scope="col">Commentaire</th> -->
                             <th scope="col">Date</th>
-                            <!-- <th scope="col">Validation</th> -->
+                            <th scope="col"></th>
                             <th scope="col"></th>
 
 
@@ -50,10 +48,11 @@ require('templates/admin/navbar.php');
                                 <td><?= $comment['id'] ?></td>
                                 <td><?= $comment['post_id'] ?></td>
                                 <td><?= $comment['author'] ?></td>
-                                <td><?= $comment['comment'] ?></td>
+                                <!-- <td><?= $comment['comment'] ?></td> -->
                                 <td><?= $comment['french_creation_date'] ?></td>
                                 <!-- <td><a href="index.php?action=editComment&id=<?= $post['id'] ?>" class="fa-sharp fa-solid fa-pen"></a></td> -->
-                                <td><a href="index.php?action=deleteComment&id=<?= $comment['id'] ?>" class="fa-solid fa-trash-can"></a></td>
+                                <td><a href="index.php?action=viewComment&id=<?= $comment['id'] ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                                <td><a href="index.php?action=deleteComment&id=<?= $comment['id'] ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                             </tr>
                         <?php
                         }
@@ -64,7 +63,7 @@ require('templates/admin/navbar.php');
             <!-- Pagination-->
             <nav aria-label="Pagination">
                 <!-- <hr class="my-0" /> -->
-                <ul class="pagination justify-content-center my-4">
+                <ul class="pagination justify-content-center my-4 pagination-sm">
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
                         <a class="page-link" href="index.php?action=adminComments&page=<?= $currentPage - 1 ?>" aria-label="Previous">
                             <!-- <span aria-hidden="true">&laquo;</span> -->

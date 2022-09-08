@@ -13,6 +13,7 @@ function addComment(string $post, array $input)
     } else {
         throw new Exception('Connectez vous pour laisser un commentaire.');
     }
+
     if (!empty($input['comment'])) {
         $comment = nl2br(strip_tags($input['comment']));
     } else {

@@ -18,7 +18,7 @@ function adminGetContacts()
     $numberOne = ($currentPage * $perPage) - $perPage;
 
     $database = dbConnect();
-    $statement = $database->prepare("SELECT id, fullname, email, phone, message_content, DATE_FORMAT(message_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date FROM contacts WHERE id<= (SELECT max(id) FROM contacts) ORDER BY message_date DESC LIMIT :numberOne, :perpage;");
+    $statement = $database->prepare("SELECT id, fullname, email, phone, message_content, DATE_FORMAT(message_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM contacts WHERE id<= (SELECT max(id) FROM contacts) ORDER BY message_date DESC LIMIT :numberOne, :perpage;");
     $statement->bindValue(':numberOne', $numberOne, PDO::PARAM_INT);
     $statement->bindValue(':perpage', $perPage, PDO::PARAM_INT);
     $statement->execute();

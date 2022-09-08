@@ -6,7 +6,7 @@ function getCommentsByPostId(string $postId)
     $database = dbConnect();
 
     $statement = $database->prepare(
-        "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
+        "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
     );
     $statement->execute([$postId]);
 
@@ -20,7 +20,7 @@ function getComments()
     $database = dbConnect();
 
     $statement = $database->query(
-        "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date FROM comments ORDER BY comment_date DESC"
+        "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM comments ORDER BY comment_date DESC"
     );
 
     $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -33,7 +33,7 @@ function getComment(string $id)
     $database = dbConnect();
 
     $statement = $database->prepare(
-        "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin') AS french_creation_date, post_id FROM comments WHERE id = ?"
+        "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, post_id FROM comments WHERE id = ?"
     );
     $statement->execute([$id]);
 
