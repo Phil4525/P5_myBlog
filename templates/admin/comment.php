@@ -50,10 +50,26 @@ require('templates/admin/navbar.php');
                                 <td><?= $comment['author'] ?></td>
                                 <td><?= $comment['comment'] ?></td>
                                 <td><?= $comment['french_creation_date'] ?></td>
-                                <!-- <td><a href="index.php?action=editComment&id=<?= $post['id'] ?>" class="fa-sharp fa-solid fa-pen"></a></td> -->
                                 <td><a href="index.php?action=viewComment&id=<?= $comment['id'] ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
-                                <td><a href="index.php?action=deleteComment&id=<?= $comment['id'] ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
+                                <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment['id'] ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                             </tr>
+                            <!-- delete post modal -->
+                            <div class="modal fade" id="deleteComment-<?= $comment['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete comment</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Etes-vous sûr de vouloir supprimer ?</p>
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <a class="btn btn-primary" href="index.php?action=deleteComment&id=<?= $post['id'] ?>" role="button">Confirmer</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         <?php
                         }
                         ?>

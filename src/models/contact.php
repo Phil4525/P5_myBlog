@@ -22,3 +22,25 @@ function getContacts()
 
     return $contacts;
 }
+
+function getContactById(string $id)
+{
+    $database = dbConnect();
+
+    $statement = $database->prepare("SELECT id, fullname, email, phone, message_content, DATE_FORMAT(message_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM contacts WHERE id = ?");
+    $statement->execute([$id]);
+
+    $contact = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $contact;
+}
+
+function deleteContact(string $id)
+{
+    $database = dbConnect();
+
+    $statement = $database->prepare('DELETE FROM contacts WHERE id = ?');
+    $affectedLines = $statement->execute([$id]);
+
+    return ($affectedLines > 0);
+}

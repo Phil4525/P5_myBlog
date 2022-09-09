@@ -11,20 +11,8 @@ require('templates/admin/navbar.php');
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Utilisateurs</h1>
-                <!-- <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group me-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                        <span data-feather="calendar" class="align-text-bottom"></span>
-                        This week
-                    </button>
-                </div> -->
             </div>
 
-            <!-- <h2>Liste des articles</h2> -->
-            <!-- <a class="btn btn-primary" href="#" role="button">Créer un nouvel article</a> -->
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -47,8 +35,25 @@ require('templates/admin/navbar.php');
                                 <td><?= $user['email'] ?></td>
                                 <td><?= $user['password'] ?></td>
                                 <td><a href="index.php?action=viewUser&id=<?= $user['id'] ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
-                                <td><a href="index.php?action=deleteUser&id=<?= $user['id'] ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
+                                <td><a href="" class="text-decoration-none fa-solid fa-trash-can" data-bs-toggle="modal" data-bs-target="#deleteUser-<?= $user['id'] ?>"></a></td>
                             </tr>
+                            <!-- delete user modal -->
+                            <div class="modal fade" id="deleteUser-<?= $user['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete comment</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Etes-vous sûr de vouloir supprimer ?</p>
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <a class="btn btn-primary" href="index.php?action=deleteUser&id=<?= $user['id'] ?>" role="button">Confirmer</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         <?php
                         }
                         ?>

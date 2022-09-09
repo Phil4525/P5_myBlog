@@ -6,14 +6,19 @@ require_once('src/controllers/blog.php');
 require_once('src/controllers/post.php');
 require_once('src/controllers/admin/homepage.php');
 require_once('src/controllers/admin/post.php');
-require_once('src/controllers/admin/comment.php');
-require_once('src/controllers/admin/user.php');
-require_once('src/controllers/admin/contact.php');
 require_once('src/controllers/admin/new_post.php');
 require_once('src/controllers/admin/add_post.php');
 require_once('src/controllers/admin/view_post.php');
 require_once('src/controllers/admin/update_post.php');
 require_once('src/controllers/admin/delete_post.php');
+require_once('src/controllers/admin/comment.php');
+require_once('src/controllers/admin/view_comment.php');
+require_once('src/controllers/admin/user.php');
+require_once('src/controllers/admin/view_user.php');
+require_once('src/controllers/admin/delete_user.php');
+require_once('src/controllers/admin/contact.php');
+require_once('src/controllers/admin/view_contact.php');
+require_once('src/controllers/admin/delete_contact.php');
 require_once('src/controllers/add_comment.php');
 require_once('src/controllers/update_comment.php');
 require_once('src/controllers/delete_comment.php');
@@ -72,18 +77,18 @@ try {
             } else {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }
-        } elseif ($_GET['action'] === 'reply') {
-            if (isset($_SESSION['user'])) {
-                if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    $id = $_GET['id'];
+            // } elseif ($_GET['action'] === 'reply') {
+            //     if (isset($_SESSION['user'])) {
+            //         if (isset($_GET['id']) && $_GET['id'] > 0) {
+            //             $id = $_GET['id'];
 
-                    reply($id, $_POST);
-                } else {
-                    throw new Exception('Aucun identifiant de commentaire envoyé');
-                }
-            } else {
-                throw new Exception('Vous devez être connecté pour laisser une reponse');
-            }
+            //             reply($id, $_POST);
+            //         } else {
+            //             throw new Exception('Aucun identifiant de commentaire envoyé');
+            //         }
+            //     } else {
+            //         throw new Exception('Vous devez être connecté pour laisser une reponse');
+            //     }
         } elseif ($_GET['action'] === 'login') {
 
             login($_POST);
@@ -105,15 +110,6 @@ try {
         } elseif ($_GET['action'] === 'adminPosts') {
 
             adminGetPosts();
-        } elseif ($_GET['action'] === 'adminComments') {
-
-            adminGetComments();
-        } elseif ($_GET['action'] === 'adminUsers') {
-
-            adminGetUsers();
-        } elseif ($_GET['action'] === 'adminContacts') {
-
-            adminGetContacts();
         } elseif ($_GET['action'] === 'newPost') {
 
             newPost();
@@ -147,6 +143,55 @@ try {
                 postSuppression($id);
             } else {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
+            }
+        } elseif ($_GET['action'] === 'adminComments') {
+
+            adminGetComments();
+        } elseif ($_GET['action'] === 'viewComment') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $id = $_GET['id'];
+
+                viewComment($id);
+            } else {
+                throw new Exception("Aucun identifiant de commentaire envoyé");
+            }
+        } elseif ($_GET['action'] === 'adminUsers') {
+
+            adminGetUsers();
+        } elseif ($_GET['action'] === 'viewUser') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $id = $_GET['id'];
+
+                viewUser($id);
+            } else {
+                throw new Exception("Aucun identifiant d'utilisateur envoyé");
+            }
+        } elseif ($_GET['action'] === 'deleteUser') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $id = $_GET['id'];
+
+                userSuppression($id);
+            } else {
+                throw new Exception("Aucun identifiant d'utilisateur envoyé");
+            }
+        } elseif ($_GET['action'] === 'adminContacts') {
+
+            adminGetContacts();
+        } elseif ($_GET['action'] === 'viewContact') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $id = $_GET['id'];
+
+                viewContact($id);
+            } else {
+                throw new Exception("Aucun identifiant de message envoyé");
+            }
+        } elseif ($_GET['action'] === 'deleteContact') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $id = $_GET['id'];
+
+                contactSuppression($id);
+            } else {
+                throw new Exception("Aucun identifiant d'utilisateur envoyé");
             }
         } else {
             throw new Exception("La page que vous recherchez n'existe pas.");
