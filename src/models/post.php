@@ -47,3 +47,13 @@ function updatePost(string $id, string $title, string $chapo, string $content, s
 
     return ($affectedLines > 0);
 }
+
+function deletePost(string $id)
+{
+    $database = dbConnect();
+
+    $statement = $database->prepare('DELETE FROM posts WHERE id = ?');
+    $affectedLines = $statement->execute([$id]);
+
+    return ($affectedLines > 0);
+}

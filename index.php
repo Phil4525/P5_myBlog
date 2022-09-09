@@ -12,7 +12,8 @@ require_once('src/controllers/admin/contact.php');
 require_once('src/controllers/admin/new_post.php');
 require_once('src/controllers/admin/add_post.php');
 require_once('src/controllers/admin/view_post.php');
-require_once('src/controllers/admin/edit_post.php');
+require_once('src/controllers/admin/update_post.php');
+require_once('src/controllers/admin/delete_post.php');
 require_once('src/controllers/add_comment.php');
 require_once('src/controllers/update_comment.php');
 require_once('src/controllers/delete_comment.php');
@@ -135,9 +136,17 @@ try {
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $input = $_POST;
                 }
-                editPost($id, $input);
+                modifyPost($id, $input);
             } else {
                 throw new Exception("Aucun identifiant d'article envoyé");
+            }
+        } elseif ($_GET['action'] === 'deletePost') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $id = $_GET['id'];
+
+                postSuppression($id);
+            } else {
+                throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         } else {
             throw new Exception("La page que vous recherchez n'existe pas.");

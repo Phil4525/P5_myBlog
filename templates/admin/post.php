@@ -10,12 +10,12 @@ require('templates/admin/navbar.php');
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Liste des articles</h1>
+                <h1 class="h2">Articles</h1>
             </div>
 
             <!-- <h2>Liste des articles</h2> -->
             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
-                <a class="btn btn-primary" href="index.php?action=newPost" role="button">Créer un nouvel article</a>
+                <a class="btn btn-primary" href="index.php?action=newPost" role="button">Nouvel article</a>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
@@ -41,8 +41,26 @@ require('templates/admin/navbar.php');
                                 <td><?= $post['french_creation_date'] ?></td>
                                 <td><a href="index.php?action=viewPost&id=<?= $post['id'] ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
                                 <td><a href="index.php?action=editPost&id=<?= $post['id'] ?>" class="text-decoration-none fa-sharp fa-solid fa-pen"></a></td>
-                                <td><a href="index.php?action=deletePost&id=<?= $post['id'] ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
+                                <td><a href="" data-bs-toggle="modal" data-bs-target="#deletePost-<?= $post['id'] ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                             </tr>
+
+                            <!-- delete post modal -->
+                            <div class="modal fade" id="deletePost-<?= $post['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Etes-vous sûr de vouloir supprimer ?</p>
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <a class="btn btn-primary" href="index.php?action=deletePost&id=<?= $post['id'] ?>" role="button">Confirmer</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         <?php
                         }
                         ?>

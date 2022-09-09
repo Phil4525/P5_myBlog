@@ -10,7 +10,7 @@ require('templates/admin/navbar.php');
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Liste des commentaires</h1>
+                <h1 class="h2">Commentaires</h1>
                 <!-- <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group me-2">
                         <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -32,7 +32,7 @@ require('templates/admin/navbar.php');
                             <th scope="col">Id</th>
                             <th scope="col">Post_Id</th>
                             <th scope="col">Auteur</th>
-                            <!-- <th scope="col">Commentaire</th> -->
+                            <th scope="col">Commentaire</th>
                             <th scope="col">Date</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
@@ -48,7 +48,7 @@ require('templates/admin/navbar.php');
                                 <td><?= $comment['id'] ?></td>
                                 <td><?= $comment['post_id'] ?></td>
                                 <td><?= $comment['author'] ?></td>
-                                <!-- <td><?= $comment['comment'] ?></td> -->
+                                <td><?= $comment['comment'] ?></td>
                                 <td><?= $comment['french_creation_date'] ?></td>
                                 <!-- <td><a href="index.php?action=editComment&id=<?= $post['id'] ?>" class="fa-sharp fa-solid fa-pen"></a></td> -->
                                 <td><a href="index.php?action=viewComment&id=<?= $comment['id'] ?>" class="text-decoration-none fa-solid fa-eye"></a></td>

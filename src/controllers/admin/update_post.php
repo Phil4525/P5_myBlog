@@ -1,7 +1,7 @@
 <?php
 require_once('src/models/post.php');
 
-function editPost(string $id, ?array $input)
+function modifyPost(string $id, ?array $input)
 {
     // It handles the form submission when there is an input.
     if ($input !== null) {
