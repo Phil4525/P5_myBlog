@@ -1,32 +1,7 @@
 <?php
 require_once('src/model.php');
 
-class Comment
-{
-    public string $postId;
-    public string $author;
-    public string $comment;
-    public string $frenchCreationDate;
-}
-
-
-
-//////////////////////////////////////////////////
-// function getCommentsByPostId(string $postId): array
-// {
-//     $database = dbConnect();
-
-//     $statement = $database->prepare(
-//         "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
-//     );
-//     $statement->execute([$postId]);
-
-//     $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-//     return $comments;
-// }
-
-function getCommentsByPostId(string $postId): array
+function getCommentsByPostId(string $postId)
 {
     $database = dbConnect();
 
@@ -35,18 +10,11 @@ function getCommentsByPostId(string $postId): array
     );
     $statement->execute([$postId]);
 
-    $comments = [];
-    while ($row = $statement->fetch()) {
-        $comment = new Comment();
-        $comment->author = $row['author'];
-        $comment->frenchCreationDate = $row['french_creation_date'];
-        $comment->comment = $row['comment'];
-
-        $comments[] = $comment;
-    }
+    $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     return $comments;
 }
+
 
 function getComments()
 {

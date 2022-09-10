@@ -1,8 +1,9 @@
 <?php
 
-function dbConnect()
+function dbConnect(PostRepository $repository)
 {
-    $database = new PDO('mysql:host=localhost;dbname=P5_myBlog;charset=utf8', 'root', '');
+    if ($repository->database === null) {
 
-    return $database;
+        $repository->database = new PDO('mysql:host=localhost;dbname=P5_myBlog;charset=utf8', 'root', '');
+    }
 }

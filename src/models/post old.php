@@ -1,68 +1,29 @@
 <?php
 
-class Post
+function getPosts()
 {
-    public string $id;
-    public string $title;
-    public string $chapo;
-    public string $content;
-    public string $author;
-    public string $frenchCreationDate;
-}
+    $database = dbConnect();
 
-class PostRepository
-{
-    public ?PDO $database = null;
-}
-
-// function getPosts()
-// {
-//     $database = dbConnect();
-
-//     $statement = $database->query(
-//         "SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM posts ORDER BY creation_date DESC"
-//     );
-
-//     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-//     return $posts;
-// }
-
-function getPosts(PostRepository $repository): array
-{
-    dbConnect($repository);
-
-    $statement = $repository->database->query(
+    $statement = $database->query(
         "SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM posts ORDER BY creation_date DESC"
     );
 
-    $posts = [];
-    while ($row = $statement->fetch()) {
-        $post = new Post();
-        $post->id = $row['id'];
-        $post->title = $row['title'];
-        $post->chapo = $row['chapo'];
-        $post->content = $row['content'];
-        $post->author = $row['author'];
-        $post->authorfrenchCreationDate = $row['french_creation_date'];
-
-        $posts[] = $post;
-    }
+    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     return $posts;
 }
 
-function getPost(PostRepository $repository, string $id): Post
+function getPost(string $id)
 {
-    dbConnect($repository);
+    $database = dbConnect();
 
-    $statement = $repository->database->prepare(
+    $statement = $database->prepare(
         "SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM posts WHERE id = ?"
     );
     $statement->execute([$id]);
 
-    $post = new Post;
     $post = $statement->fetch(PDO::FETCH_ASSOC);
+
 
     return $post;
 }
