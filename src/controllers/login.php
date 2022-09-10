@@ -1,8 +1,8 @@
 <?php
+require_once('src/lib/database.php');
+require_once('src/model/user.php');
 
-require_once('src/model.php');
-
-function login($input)
+function login(?array $input)
 {
     if (!empty($input)) {
         if (
@@ -13,24 +13,20 @@ function login($input)
                 throw new Exception("L'email n'est pas valide.");
             }
 
-            $database = dbConnect();
-            $statement = $database->prepare('SELECT * FROM users WHERE email = :email');
-            $statement->bindValue(":email", $input['email'], PDO::PARAM_STR);
-            $statement->execute();
+            $userRepository = new UserRepository();
+            $userRepository->connection = new DatabaseConnection();
+            $user = $userRepository->getUserByEmail($input['email']);
 
-            $user = $statement->fetch();
-
-            if (!$user || !password_verify($input['password'], $user['password'])) {
+            if (!password_verify($input['password'], $user->password)) {
                 throw new Exception("L'utilisateur et/ou le mot de passe est incorrect.");
             }
 
-            @session_start();
+            session_start();
 
             $_SESSION['user'] = [
-                'id' => $user['id'],
-                'username' => $user['username'],
-                'email' => $user['email'],
-                // 'roles'=>$user['roles'],
+                'id' => $user->id,
+                'username' => $user->username,
+                'email' => $user->email,
             ];
 
             header('Location:index.php');

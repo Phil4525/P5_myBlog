@@ -1,5 +1,5 @@
 <?php
-require_once('src/models/post.php');
+require_once('src/model/post.php');
 
 function modifyPost(string $id, ?array $input)
 {

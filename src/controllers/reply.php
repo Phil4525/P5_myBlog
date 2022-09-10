@@ -1,5 +1,5 @@
 <?php
-require_once('src/models/reply.php');
+require_once('src/model/reply.php');
 
 function reply(string $comment, array $input)
 {

@@ -1,5 +1,5 @@
 <?php
-require_once('src/models/comment.php');
+require_once('src/model/comment.php');
 
 function adminGetComments()
 {

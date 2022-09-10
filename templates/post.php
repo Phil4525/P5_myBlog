@@ -1,11 +1,9 @@
 <?php
 @session_start();
-$title = $post['title'];
+$title = $post->title;
 ob_start();
+require('navbar.php');
 ?>
-
-<?php require('navbar.php') ?>
-
 <!-- Page content-->
 <div class="container masthead d-flex flex-column">
     <div class="row">
@@ -15,10 +13,10 @@ ob_start();
                 <!-- Post header-->
                 <header class="mb-4">
                     <!-- Post title-->
-                    <h1 class="fw-bolder mb-1"><?= $post['title'] ?></h1>
+                    <h1 class="fw-bolder mb-1"><?= $post->title ?></h1>
                     <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2">mis à jour le <?= $post['french_creation_date'] ?></div>
-                    <div class="text-muted fst-italic mb-2">par <?= $post['author'] ?></div>
+                    <div class="text-muted fst-italic mb-2">mis à jour le <?= $post->frenchCreationDate ?></div>
+                    <div class="text-muted fst-italic mb-2">par <?= $post->author ?></div>
                     <!-- Post categories-->
                     <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
                     <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
@@ -27,8 +25,8 @@ ob_start();
                 <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
                 <!-- Post content-->
                 <section class="mb-5">
-                    <p class="fs-5 mb-4"><strong><?= $post['chapo'] ?></strong></p>
-                    <p class="fs-6 mb-4"><?= $post['content'] ?></p>
+                    <p class="fs-5 mb-4"><strong><?= $post->chapo ?></strong></p>
+                    <p class="fs-6 mb-4"><?= $post->content ?></p>
                 </section>
             </article>
             <!-- Comments section-->
@@ -36,7 +34,7 @@ ob_start();
                 <div class="card bg-light">
                     <div class="card-body">
                         <!-- Comment form-->
-                        <form class="mb-4" action="index.php?action=addComment&id=<?= $post['id'] ?>" method="post">
+                        <form class="mb-4" action="index.php?action=addComment&id=<?= $post->id ?>" method="post">
                             <div class="form-group mb-5">
                                 <textarea class="form-control mb-2" rows="3" name="comment" placeholder="leave a comment!"></textarea>
                                 <div class="float-end">
@@ -74,7 +72,7 @@ ob_start();
                                     </div>
                                 </div>
                                 <!-- update comment modal -->
-                                <div class="modal fade" id="updateComment-<?= $comment->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="updateComment-<?= $comment->id ?>" tabindex="-1" aria-labelledby="updateCommentModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -162,13 +160,8 @@ ob_start();
         </div>
     </div>
 </div>
-
-<?php require('footer.php'); ?>
-
-<?php $content = ob_get_clean(); ?>
-
-<?php require('layout.php');
-
-// print_r($replies);
-
+<?php
+require('footer.php');
+$content = ob_get_clean();
+require('layout.php');
 ?>

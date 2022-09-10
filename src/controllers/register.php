@@ -1,7 +1,6 @@
 <?php
-
-require_once('src/model.php');
-require_once('src/models/user.php');
+require_once('src/lib/database.php');
+require_once('src/model/user.php');
 
 function register($input)
 {
@@ -10,10 +9,13 @@ function register($input)
             isset($input['username'], $input['email'], $input['password'])
             && !empty($input['username']) && !empty($input['email']) && !empty($input['password'])
         ) {
+            // check if username is already token
             $username = strip_tags($input['username']);
 
-            // check if username is already token
-            if (getUserByName($username)) {
+            $userRepository = new UserRepository();
+            $userRepository->connection = new DatabaseConnection();
+
+            if ($userRepository->getUserByName($username)) {
                 throw new Exception("Le nom d'utilisateur est déja pris.");
             }
 
@@ -27,16 +29,18 @@ function register($input)
             $password = password_hash($input['password'], PASSWORD_ARGON2ID);
 
             // create new user
-            $database = dbConnect();
-            $statement = $database->prepare(
+            // $database = dbConnect();
+            $userRepository->connection = new DatabaseConnection();
+
+            $statement = $userRepository->connection->getConnection->prepare(
                 'INSERT INTO users(username, email, `password`) VALUES(?, ?, ?)'
             );
-            $success = $statement->execute([$username, $email, $password]);
+            $success = $userRepository->createUser($username, $email, $password);
 
             if (!$success) {
                 throw new Exception("Impossible de créer le compte !");
             } else {
-                $id = $database->lastInsertId('users'); // not working with createUser(), need same database connexion
+                $id = $userRepository->connection->getConnection->lastInsertId('users'); // not working with createUser(), need same database connexion
 
                 session_start();
 

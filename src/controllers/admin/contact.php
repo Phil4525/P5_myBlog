@@ -1,5 +1,5 @@
 <?php
-require_once('src/models/contact.php');
+require_once('src/model/contact.php');
 
 function adminGetContacts()
 {

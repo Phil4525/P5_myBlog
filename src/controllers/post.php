@@ -1,19 +1,18 @@
 <?php
 
-require_once('src/model.php');
-require_once('src/models/post.php');
-require_once('src/models/comment.php');
-// require_once('src/models/reply.php');
+require_once('src/lib/database.php');
+require_once('src/model/post.php');
+require_once('src/model/comment.php');
 
 function post(string $id)
 {
-    $post = getPost($id);
+    $postRepository = new PostRepository();
+    $postRepository->connection = new DatabaseConnection();
+    $post = $postRepository->getPost($id);
 
-    $comments = getCommentsByPostId($id);
-
-    // foreach ($comments as $comment) {
-    //     $replies[] = getReplies($comment['id']);
-    // }
+    $commentRepository = new CommentRepository();
+    $commentRepository->connection = new DatabaseConnection();
+    $comments = $commentRepository->getCommentsByPostId($id);
 
     require('templates/post.php');
 }

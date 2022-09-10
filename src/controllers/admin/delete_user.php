@@ -1,5 +1,5 @@
 <?php
-require_once('src/models/user.php');
+require_once('src/model/user.php');
 
 function userSuppression(string $id)
 {
