@@ -15,11 +15,14 @@ class UserRepository
 
     function getUserByEmail(string $email): User
     {
+        // $statement = $this->connection->getConnection()->prepare(
+        //     'SELECT * FROM users WHERE email = :email'
+        // );
         $statement = $this->connection->getConnection()->prepare(
-            'SELECT * FROM users WHERE email = :email'
+            'SELECT * FROM users WHERE email = ?'
         );
-        $statement->bindValue(":email", $email, PDO::PARAM_STR);
-        $statement->execute();
+        // $statement->bindValue(":email", $email, PDO::PARAM_STR);
+        $statement->execute([$email]);
         $row = $statement->fetch();
 
         if (!$row) {
@@ -49,9 +52,11 @@ class UserRepository
 
     function getUserByName(string $username): User
     {
-        $statement = $this->connection->getConnection()->prepare("SELECT * FROM users WHERE username=?");
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM users WHERE username=?"
+        );
         $statement->execute([$username]);
-        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        $row = $statement->fetch();
 
         $user = new User();
         $user->id = $row['id'];
@@ -74,16 +79,16 @@ function getUserById(string $id)
     return $user;
 }
 
-function getUserByName(string $username)
-{
-    $database = dbConnect();
+// function getUserByName(string $username)
+// {
+//     $database = dbConnect();
 
-    $statement = $database->prepare("SELECT * FROM users WHERE username=?");
-    $statement->execute([$username]);
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
+//     $statement = $database->prepare("SELECT * FROM users WHERE username=?");
+//     $statement->execute([$username]);
+//     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-    return $user;
-}
+//     return $user;
+// }
 
 function getUsers()
 {

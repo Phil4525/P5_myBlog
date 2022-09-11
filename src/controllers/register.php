@@ -2,7 +2,7 @@
 require_once('src/lib/database.php');
 require_once('src/model/user.php');
 
-function register($input)
+function register(array $input)
 {
     if (!empty($input)) {
         if (
@@ -14,9 +14,10 @@ function register($input)
 
             $userRepository = new UserRepository();
             $userRepository->connection = new DatabaseConnection();
+            $user = $userRepository->getUserByName($username);
 
-            if ($userRepository->getUserByName($username)) {
-                throw new Exception("Le nom d'utilisateur est déja pris.");
+            if ($user) {
+                throw new Exception("Le nom d'utilisateur est déja utilisé.");
             }
 
             // check if email is valid
@@ -30,17 +31,22 @@ function register($input)
 
             // create new user
             // $database = dbConnect();
-            $userRepository->connection = new DatabaseConnection();
+            // $userRepository->connection = new DatabaseConnection();
 
-            $statement = $userRepository->connection->getConnection->prepare(
-                'INSERT INTO users(username, email, `password`) VALUES(?, ?, ?)'
-            );
+            // $statement = $userRepository->connection->getConnection->prepare(
+            //     'INSERT INTO users(username, email, `password`) VALUES(?, ?, ?)'
+            // );
             $success = $userRepository->createUser($username, $email, $password);
 
             if (!$success) {
                 throw new Exception("Impossible de créer le compte !");
             } else {
-                $id = $userRepository->connection->getConnection->lastInsertId('users'); // not working with createUser(), need same database connexion
+                // $id = $userRepository->connection->getConnection->lastInsertId('users'); // not working with createUser(), need same database connexion
+                $statement = $userRepository->connection->getConnection()->query(
+                    'SELECT MAX(id) FROM users'
+                );
+                $row = $statement->fetch();
+                $id = $row['id'];
 
                 session_start();
 
