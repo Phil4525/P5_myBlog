@@ -3,9 +3,11 @@ require_once('src/model/contact.php');
 
 function adminGetContacts()
 {
-    $contacts  = getContacts();
+    $contactRepository = new ContactRepository();
+    $contactRepository->connection = new DatabaseConnection();
 
-    // On détermine sur quelle page on se trouve
+    $contacts  = $contactRepository->getContacts();
+
     if (isset($_GET['page']) && !empty($_GET['page'])) {
         $currentPage = (int) strip_tags($_GET['page']);
     } else {
@@ -17,12 +19,27 @@ function adminGetContacts()
     $pages = ceil($contactsNb / $perPage);
     $numberOne = ($currentPage * $perPage) - $perPage;
 
-    $database = dbConnect();
-    $statement = $database->prepare("SELECT id, fullname, email, phone, message_content, DATE_FORMAT(message_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM contacts WHERE id<= (SELECT max(id) FROM contacts) ORDER BY message_date DESC LIMIT :numberOne, :perpage;");
+    $statement = $contactRepository->connection->getConnection()->prepare(
+        "SELECT id, fullname, email, phone, message_content, DATE_FORMAT(message_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM contacts WHERE id<= (SELECT max(id) FROM contacts) ORDER BY message_date DESC LIMIT :numberOne, :perpage;"
+    );
     $statement->bindValue(':numberOne', $numberOne, PDO::PARAM_INT);
     $statement->bindValue(':perpage', $perPage, PDO::PARAM_INT);
     $statement->execute();
-    $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    $contacts = [];
+
+    while ($row = $statement->fetch()) {
+        $contact = new Contact;
+
+        $contact->id = $row['id'];
+        $contact->fullname = $row['fullname'];
+        $contact->email = $row['email'];
+        $contact->phone = $row['phone'];
+        $contact->messageContent = $row['message_content'];
+        $contact->frenchCreationDate = $row['french_creation_date'];
+
+        $contacts[] = $contact;
+    }
 
     require('templates/admin/contact.php');
 }

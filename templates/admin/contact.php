@@ -31,16 +31,16 @@ require('templates/admin/navbar.php');
                         foreach ($contacts as $contact) {
                         ?>
                             <tr>
-                                <td><?= $contact['id'] ?></td>
-                                <td><?= $contact['fullname'] ?></td>
-                                <td><?= $contact['email'] ?></td>
-                                <td><?= $contact['phone'] ?></td>
-                                <td><?= $contact['french_creation_date'] ?></td>
-                                <td><a href="index.php?action=viewContact&id=<?= $contact['id'] ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
-                                <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteContact-<?= $contact['id'] ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
+                                <td><?= $contact->id ?></td>
+                                <td><?= $contact->fullname ?></td>
+                                <td><?= $contact->email ?></td>
+                                <td><?= $contact->phone ?></td>
+                                <td><?= $contact->frenchCreationDate ?></td>
+                                <td><a href="index.php?action=viewContact&id=<?= $contact->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                                <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteContact-<?= $contact->id ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                             </tr>
                             <!-- delete user modal -->
-                            <div class="modal fade" id="deleteContact-<?= $contact['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deleteContact-<?= $contact->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -50,7 +50,7 @@ require('templates/admin/navbar.php');
                                         <div class="modal-body">
                                             <p>Etes-vous sûr de vouloir supprimer ?</p>
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <a class="btn btn-primary" href="index.php?action=deleteContact&id=<?= $contact['id'] ?>" role="button">Confirmer</a>
+                                                <a class="btn btn-primary" href="index.php?action=deleteContact&id=<?= $contact->id ?>" role="button">Confirmer</a>
                                             </div>
                                         </div>
                                     </div>
