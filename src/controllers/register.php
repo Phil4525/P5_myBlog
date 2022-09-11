@@ -14,9 +14,8 @@ function register(array $input)
 
             $userRepository = new UserRepository();
             $userRepository->connection = new DatabaseConnection();
-            $user = $userRepository->getUserByName($username);
 
-            if ($user) {
+            if ($userRepository->getUserByName($username)) {
                 throw new Exception("Le nom d'utilisateur est déja utilisé.");
             }
 
@@ -30,23 +29,15 @@ function register(array $input)
             $password = password_hash($input['password'], PASSWORD_ARGON2ID);
 
             // create new user
-            // $database = dbConnect();
-            // $userRepository->connection = new DatabaseConnection();
-
-            // $statement = $userRepository->connection->getConnection->prepare(
-            //     'INSERT INTO users(username, email, `password`) VALUES(?, ?, ?)'
-            // );
             $success = $userRepository->createUser($username, $email, $password);
 
             if (!$success) {
                 throw new Exception("Impossible de créer le compte !");
             } else {
-                // $id = $userRepository->connection->getConnection->lastInsertId('users'); // not working with createUser(), need same database connexion
                 $statement = $userRepository->connection->getConnection()->query(
-                    'SELECT MAX(id) FROM users'
+                    'SELECT id FROM users ORDER BY id DESC LIMIT 1'
                 );
-                $row = $statement->fetch();
-                $id = $row['id'];
+                $id = $statement->fetch();
 
                 session_start();
 
@@ -54,7 +45,6 @@ function register(array $input)
                     'id' => $id,
                     'username' => $username,
                     'email' => $email,
-                    // 'roles'=>$user['roles'],
                 ];
 
                 header('Location:index.php');

@@ -50,19 +50,22 @@ class UserRepository
         return ($affectedLines > 0);
     }
 
-    function getUserByName(string $username): User
+    function getUserByName(string $username): ?User
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT * FROM users WHERE username=?"
         );
         $statement->execute([$username]);
-        $row = $statement->fetch();
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
 
-        $user = new User();
-        $user->id = $row['id'];
-        $user->username = $row['username'];
-        $user->email = $row['email'];
-        $user->password = $row['password'];
+        if ($row) {
+            $user = new User();
+
+            $user->id = $row['id'];
+            $user->username = $row['username'];
+            $user->email = $row['email'];
+            $user->password = $row['password'];
+        }
 
         return $user;
     }
