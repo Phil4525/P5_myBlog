@@ -56,7 +56,7 @@ class UserRepository
             "SELECT * FROM users WHERE username=?"
         );
         $statement->execute([$username]);
-        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        $row = $statement->fetch();
 
         if ($row) {
             $user = new User();
@@ -69,47 +69,48 @@ class UserRepository
 
         return $user;
     }
-}
 
-function getUserById(string $id)
-{
-    $database = dbConnect();
+    function getUsers(): array
+    {
+        $statement = $this->connection->getConnection()->query("SELECT * FROM users");
 
-    $statement = $database->prepare("SELECT * FROM users WHERE id=?");
-    $statement->execute([$id]);
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
+        $users = [];
 
-    return $user;
-}
+        while ($row = $statement->fetch()) {
+            $user = new User;
 
-// function getUserByName(string $username)
-// {
-//     $database = dbConnect();
+            $user->id = $row['id'];
+            $user->username = $row['username'];
+            $user->email = $row['email'];
+            $user->password = $row['password'];
 
-//     $statement = $database->prepare("SELECT * FROM users WHERE username=?");
-//     $statement->execute([$username]);
-//     $user = $statement->fetch(PDO::FETCH_ASSOC);
+            $users[] = $user;
+        }
 
-//     return $user;
-// }
+        return $users;
+    }
 
-function getUsers()
-{
-    $database = dbConnect();
+    function getUserById(string $id): User
+    {
+        $statement = $this->connection->getConnection()->prepare("SELECT * FROM users WHERE id=?");
+        $statement->execute([$id]);
+        $row = $statement->fetch();
 
-    $statement = $database->query("SELECT * FROM users");
+        $user = new User;
 
-    $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $user->id = $row['id'];
+        $user->username = $row['username'];
+        $user->email = $row['email'];
+        $user->password = $row['password'];
 
-    return $users;
-}
+        return $user;
+    }
 
-function deleteUser(string $id)
-{
-    $database = dbConnect();
+    function deleteUser(string $id): bool
+    {
+        $statement = $this->connection->getConnection()->prepare('DELETE FROM users WHERE id = ?');
+        $affectedLines = $statement->execute([$id]);
 
-    $statement = $database->prepare('DELETE FROM users WHERE id = ?');
-    $affectedLines = $statement->execute([$id]);
-
-    return ($affectedLines > 0);
+        return ($affectedLines > 0);
+    }
 }

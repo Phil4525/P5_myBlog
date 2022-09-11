@@ -59,16 +59,17 @@ class PostRepository
         return $posts;
     }
 
-    function createPost(string $title, string $chapo, string $content, string $author)
+    function createPost(string $title, string $chapo, string $content, string $author): bool
     {
         $statement = $this->connection->getConnection()->prepare(
             'INSERT INTO posts(title, chapo, content, author, creation_date) VALUES(?, ?, ?, ?, NOW())'
         );
         $affectedLines = $statement->execute([$title, $chapo, $content, $author]);
+
         return ($affectedLines > 0);
     }
 
-    function updatePost(string $id, string $title, string $chapo, string $content, string $author)
+    function updatePost(string $id, string $title, string $chapo, string $content, string $author): bool
     {
         $statement = $this->connection->getConnection()->prepare(
             'UPDATE posts SET title = ?, chapo = ?, content = ?,author = ?, creation_date = NOW() WHERE id = ?'
@@ -78,7 +79,7 @@ class PostRepository
         return ($affectedLines > 0);
     }
 
-    function deletePost(string $id)
+    function deletePost(string $id): bool
     {
         $statement = $this->connection->getConnection()->prepare('DELETE FROM posts WHERE id = ?');
         $affectedLines = $statement->execute([$id]);

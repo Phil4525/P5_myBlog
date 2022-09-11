@@ -1,9 +1,11 @@
 <?php
+require_once('src/lib/database.php');
 require_once('src/model/post.php');
 
 function addPost($input)
 {
     if ($input !== null) {
+
         if (
             isset($input['title'], $input['chapo'], $input['content'], $input['author']) &&
             !empty($input['title']) && !empty($input['chapo']) && !empty($input['content']) && !empty($input['author'])
@@ -16,7 +18,10 @@ function addPost($input)
             throw new Exception('Les données du formulaire sont invalides.');
         }
 
-        $success = createPost($title, $chapo, $content, $author);
+        $postRepository = new PostRepository();
+        $postRepository->connection = new DatabaseConnection();
+
+        $success = $postRepository->createPost($title, $chapo, $content, $author);
 
         if (!$success) {
             throw new Exception("Impossible d'ajouter l'article' !");
@@ -24,5 +29,6 @@ function addPost($input)
             header('Location: index.php?action=adminPosts');
         }
     }
+
     require('templates/admin/new_post.php');
 }

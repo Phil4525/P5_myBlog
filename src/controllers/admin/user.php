@@ -1,9 +1,13 @@
 <?php
+require_once('src/lib/database.php');
 require_once('src/model/user.php');
 
 function adminGetUsers()
 {
-    $users = getUsers();
+    $userRepository = new UserRepository();
+    $userRepository->connection = new DatabaseConnection();
+
+    $users = $userRepository->getUsers();
 
     if (isset($_GET['page']) && !empty($_GET['page'])) {
         $currentPage = (int) strip_tags($_GET['page']);
@@ -16,12 +20,24 @@ function adminGetUsers()
     $pages = ceil($usersNb / $perPage);
     $numberOne = ($currentPage * $perPage) - $perPage;
 
-    $database = dbConnect();
-    // $statement = $database->prepare("SELECT * FROM users WHERE id<= (SELECT max(id) FROM users) LIMIT :numberOne, :perpage;");
-    $statement = $database->prepare("SELECT * FROM users LIMIT :numberOne, :perpage;");
+    $statement = $userRepository->connection->getConnection()->prepare(
+        "SELECT * FROM users LIMIT :numberOne, :perpage;"
+    );
     $statement->bindValue(':numberOne', $numberOne, PDO::PARAM_INT);
     $statement->bindValue(':perpage', $perPage, PDO::PARAM_INT);
     $statement->execute();
-    $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    $users = [];
+    while ($row = $statement->fetch()) {
+        $user = new User;
+
+        $user->id = $row['id'];
+        $user->username = $row['username'];
+        $user->email = $row['email'];
+        $user->password = $row['password'];
+
+        $users[] = $user;
+    }
+
     require('templates/admin/user.php');
 }

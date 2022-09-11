@@ -35,17 +35,17 @@ require('templates/admin/navbar.php');
                         foreach ($posts as $post) {
                         ?>
                             <tr>
-                                <td><?= $post['id'] ?></td>
-                                <td><?= $post['title'] ?></td>
-                                <td><?= $post['author'] ?></td>
-                                <td><?= $post['french_creation_date'] ?></td>
-                                <td><a href="index.php?action=viewPost&id=<?= $post['id'] ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
-                                <td><a href="index.php?action=editPost&id=<?= $post['id'] ?>" class="text-decoration-none fa-sharp fa-solid fa-pen"></a></td>
-                                <td><a href="" data-bs-toggle="modal" data-bs-target="#deletePost-<?= $post['id'] ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
+                                <td><?= $post->id ?></td>
+                                <td><?= $post->title ?></td>
+                                <td><?= $post->author ?></td>
+                                <td><?= $post->frenchCreationDate ?></td>
+                                <td><a href="index.php?action=viewPost&id=<?= $post->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                                <td><a href="index.php?action=editPost&id=<?= $post->id ?>" class="text-decoration-none fa-sharp fa-solid fa-pen"></a></td>
+                                <td><a href="" data-bs-toggle="modal" data-bs-target="#deletePost-<?= $post->id ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                             </tr>
 
                             <!-- delete post modal -->
-                            <div class="modal fade" id="deletePost-<?= $post['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deletePost-<?= $post->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -55,7 +55,7 @@ require('templates/admin/navbar.php');
                                         <div class="modal-body">
                                             <p>Etes-vous sûr de vouloir supprimer ?</p>
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <a class="btn btn-primary" href="index.php?action=deletePost&id=<?= $post['id'] ?>" role="button">Confirmer</a>
+                                                <a class="btn btn-primary" href="index.php?action=deletePost&id=<?= $post->id ?>" role="button">Confirmer</a>
                                             </div>
                                         </div>
                                     </div>

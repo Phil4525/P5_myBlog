@@ -13,7 +13,9 @@ function commentSuppression($id)
         throw new Exception("Vous n'êtes pas autorisé à faire cette requête");
     } else {
         $postId = $comment->postId;
+
         $commentRepository->deleteComment($id);
+
         header('Location: index.php?action=post&id=' . $postId);
     }
 }
