@@ -1,9 +1,11 @@
 <?php
+require_once('src/lib/database.php');
 require_once('src/model/contact.php');
 
-function contact($input)
+function contact(array $input)
 {
     if (!empty($input)) {
+
         if (
             isset($input['fullname'], $input['email'], $input['message_content'])
             && !empty($input['fullname']) && !empty($input['email']) && !empty($input['message_content'])
@@ -16,7 +18,10 @@ function contact($input)
             throw new Exception('Les données du formulaire sont invalides.');
         }
 
-        $success = createContact($fullname, $email, $phone, $messageContent);
+        $contactRepository = new ContactRepository();
+        $contactRepository->connection = new DatabaseConnection();
+        $success = $contactRepository->createContact($fullname, $email, $phone, $messageContent);
+
         if (!$success) {
             throw new Exception("Impossible d'envoyer le message !");
         } else {
