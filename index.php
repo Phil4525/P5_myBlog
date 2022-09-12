@@ -22,7 +22,6 @@ require_once('src/controllers/admin/delete_contact.php');
 require_once('src/controllers/add_comment.php');
 require_once('src/controllers/update_comment.php');
 require_once('src/controllers/delete_comment.php');
-require_once('src/controllers/reply.php');
 require_once('src/controllers/login.php');
 require_once('src/controllers/logout.php');
 require_once('src/controllers/register.php');
@@ -77,18 +76,6 @@ try {
             } else {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }
-            // } elseif ($_GET['action'] === 'reply') {
-            //     if (isset($_SESSION['user'])) {
-            //         if (isset($_GET['id']) && $_GET['id'] > 0) {
-            //             $id = $_GET['id'];
-
-            //             reply($id, $_POST);
-            //         } else {
-            //             throw new Exception('Aucun identifiant de commentaire envoyé');
-            //         }
-            //     } else {
-            //         throw new Exception('Vous devez être connecté pour laisser une reponse');
-            //     }
         } elseif ($_GET['action'] === 'login') {
 
             login($_POST);

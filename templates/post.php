@@ -37,9 +37,11 @@ require('navbar.php');
                         <form class="mb-4" action="index.php?action=addComment&id=<?= $post->id ?>" method="post">
                             <div class="form-group mb-5">
                                 <textarea class="form-control mb-2" rows="3" name="comment" placeholder="leave a comment!"></textarea>
-                                <div class="float-end">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
+                                <?php if (isset($_SESSION['user'])) { ?>
+                                    <div class="float-end">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </form>
                         <!--parent comment -->
