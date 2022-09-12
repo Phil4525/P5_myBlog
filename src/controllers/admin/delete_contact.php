@@ -3,7 +3,13 @@ require_once('src/model/contact.php');
 
 function contactSuppression(string $id)
 {
-    deleteContact($id);
+    $contactRepository = new ContactRepository();
+    $contactRepository->connection = new DatabaseConnection();
+    $success = $contactRepository->deleteContact($id);
 
-    header('Location: index.php?action=adminContacts');
+    if (!$success) {
+        throw new Exception("Le message n'a pu être supprimé.");
+    } else {
+        header('Location: index.php?action=adminContacts');
+    }
 }

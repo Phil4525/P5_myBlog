@@ -1,5 +1,5 @@
 <?php
-$title = "Articles";
+$title = $post->title;
 ob_start();
 require('templates/admin/navbar.php');
 ?>

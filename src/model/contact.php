@@ -69,16 +69,12 @@ class ContactRepository
 
         return $contact;
     }
-}
 
+    function deleteContact(string $id): bool
+    {
+        $statement = $this->connection->getConnection()->prepare('DELETE FROM contacts WHERE id = ?');
+        $affectedLines = $statement->execute([$id]);
 
-
-function deleteContact(string $id)
-{
-    $database = dbConnect();
-
-    $statement = $database->prepare('DELETE FROM contacts WHERE id = ?');
-    $affectedLines = $statement->execute([$id]);
-
-    return ($affectedLines > 0);
+        return ($affectedLines > 0);
+    }
 }
