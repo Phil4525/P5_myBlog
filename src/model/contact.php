@@ -1,5 +1,10 @@
 <?php
+
+namespace App\Model\Contact;
+
 require_once('src/lib/database.php');
+
+use App\Lib\Database\DatabaseConnection;
 
 class Contact
 {

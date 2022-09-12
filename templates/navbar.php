@@ -18,7 +18,7 @@
                 // sign up button
                 if (!isset($_SESSION['user'])) {
                 ?>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="" data-bs-toggle="modal" data-bs-target="#register">Sign up</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="" data-bs-toggle="modal" data-bs-target="#signup">Sign up</a></li>
                 <?php
                 } else {
                 ?>
@@ -43,7 +43,7 @@
 
 <!-- Modal register -->
 
-<div class="modal fade" id="register" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="signup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -51,7 +51,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="index.php?action=register" method="post">
+                <form action="index.php?action=signup" method="post">
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="username" placeholder="Enter your user name" />
                         <label>User name</label>
@@ -100,13 +100,13 @@
                         <label class="form-check-label">Remember Password</label>
                     </div>
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                        <a class="small" href="index.php?action=password">Forgot Password?</a>
+                        <a class="small" href="index.php?action=passwordRecovery">Forgot Password?</a>
                         <!-- <a class="btn btn-primary" href="index.html">Login</a> -->
                         <button class="btn btn-primary" type="submit">Send</button>
                     </div>
                 </form>
                 <div class="modal-footer py-3">
-                    <div class="small"><a href="" data-bs-toggle="modal" data-bs-target="#register">Need an account? Sign up!</a></div>
+                    <div class="small"><a href="" data-bs-toggle="modal" data-bs-target="#Signup">Need an account? Sign up!</a></div>
                 </div>
             </div>
         </div>

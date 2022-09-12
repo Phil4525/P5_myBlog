@@ -1,5 +1,10 @@
 <?php
+
+namespace App\Model\User;
+
 require_once('src/lib/database.php');
+
+use App\Lib\Database\DatabaseConnection;
 
 class User
 {
@@ -26,7 +31,7 @@ class UserRepository
         $row = $statement->fetch();
 
         if (!$row) {
-            throw new Exception("L'utilisateur et/ou le mot de passe est incorrect.");
+            throw new \Exception("L'utilisateur et/ou le mot de passe est incorrect.");
         } else {
             $user = new User();
 

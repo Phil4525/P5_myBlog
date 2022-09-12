@@ -1,10 +1,24 @@
 <?php
 
-function logout()
+namespace App\Controllers\Logout;
+
+class LogoutController
 {
-    session_start();
+    public function execute()
+    {
+        session_start();
 
-    unset($_SESSION['user']);
+        unset($_SESSION['user']);
 
-    header('Location: index.php');
+        header('Location: index.php');
+    }
 }
+
+// function logout()
+// {
+//     session_start();
+
+//     unset($_SESSION['user']);
+
+//     header('Location: index.php');
+// }

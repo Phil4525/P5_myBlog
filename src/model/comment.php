@@ -1,5 +1,10 @@
 <?php
+
+namespace App\Model\Comment;
+
 require_once('src/lib/database.php');
+
+use App\Lib\Database\DatabaseConnection;
 
 class Comment
 {
@@ -89,7 +94,17 @@ class CommentRepository
             "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM comments ORDER BY comment_date DESC"
         );
 
-        $comments = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $comments = [];
+        while ($row = $statement->fetch()) {
+            $comment = new Comment();
+            $comment->id = $row['id'];
+            $comment->postId = $row['post_id'];
+            $comment->author = $row['author'];
+            $comment->frenchCreationDate = $row['french_creation_date'];
+            $comment->comment = $row['comment'];
+
+            $comments[] = $comment;
+        }
 
         return $comments;
     }

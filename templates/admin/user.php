@@ -60,31 +60,10 @@ require('templates/admin/navbar.php');
                 </table>
             </div>
             <!-- Pagination-->
-            <!-- <nav aria-label="Pagination">
-                <ul class="pagination justify-content-center my-4 pagination-sm">
-                    <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=adminUsers&page=<?= $currentPage - 1 ?>" aria-label="Previous">
-                            <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                    <?php for ($page = 1; $page <= $pages; $page++) : ?>
-                        <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
-                            <a class="page-link" href="index.php?action=adminUsers&page=<?= $page ?>"><?= $page ?></a>
-                        </li>
-                    <?php endfor ?>
-                    <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=adminUsers&page=<?= $currentPage + 1 ?>" aria-label="Next">
-                            <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                </ul>
-            </nav> -->
             <nav aria-label="Pagination">
-                <!-- <hr class="my-0" /> -->
                 <ul class="pagination justify-content-center my-4 pagination-sm">
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
                         <a class="page-link" href="index.php?action=adminUsers&page=<?= $currentPage - 1 ?>" aria-label="Previous">
-                            <!-- <span aria-hidden="true">&laquo;</span> -->
                             <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
                         </a>
                     </li>
@@ -95,7 +74,6 @@ require('templates/admin/navbar.php');
                     <?php endfor ?>
                     <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
                         <a class="page-link" href="index.php?action=adminUsers&page=<?= $currentPage + 1 ?>" aria-label="Next">
-                            <!-- <span aria-hidden="true">&raquo;</span> -->
                             <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
                         </a>
                     </li>

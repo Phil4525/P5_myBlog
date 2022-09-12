@@ -8,25 +8,25 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php?action=adminPosts">
+                <a class="nav-link" href="index.php?action=posts">
                     <span class="fa-solid fa-newspaper"></span>
                     Articles
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php?action=adminComments">
+                <a class="nav-link" href="index.php?action=comments">
                     <span class="fa-solid fa-comment"></span>
                     Commentaires
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php?action=adminUsers">
+                <a class="nav-link" href="index.php?action=users">
                     <span class="fa-solid fa-users"></span>
                     Utilisateurs
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php?action=adminContacts">
+                <a class="nav-link" href="index.php?action=contacts">
                     <span class="fa-solid fa-envelope"></span>
                     Messages
                 </a>
