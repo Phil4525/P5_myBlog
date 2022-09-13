@@ -8,6 +8,7 @@ require_once('src/model/user.php');
 use App\Lib\Database\DatabaseConnection;
 use App\Model\User\UserRepository;
 use App\Model\User\User;
+use App\Model\Comment\CommentRepository;
 
 class UsersController
 {
@@ -30,13 +31,17 @@ class UsersController
         $numberOne = ($currentPage * $perPage) - $perPage;
 
         $statement = $userRepository->connection->getConnection()->prepare(
-            "SELECT * FROM users LIMIT :numberOne, :perpage;"
+            "SELECT id, username, email, 'password', DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users ORDER BY signup_date DESC LIMIT :numberOne, :perpage;"
         );
         $statement->bindValue(':numberOne', $numberOne, \PDO::PARAM_INT);
         $statement->bindValue(':perpage', $perPage, \PDO::PARAM_INT);
         $statement->execute();
 
         $users = [];
+
+        $commentRepository = new CommentRepository();
+        $commentRepository->connection = new DatabaseConnection();
+
         while ($row = $statement->fetch()) {
             $user = new User;
 
@@ -44,50 +49,15 @@ class UsersController
             $user->username = $row['username'];
             $user->email = $row['email'];
             $user->password = $row['password'];
+            $user->frenchCreationDate = $row['french_creation_date'];
 
-            $users[] = $user;
+
+            $comments = $commentRepository->getCommentsByUsername($user->username);
+            $commentsNb = count($comments);
+
+            $users[] = [$user, $commentsNb];
         }
 
         require('templates/admin/user.php');
     }
 }
-
-// function adminGetUsers()
-// {
-//     $userRepository = new UserRepository();
-//     $userRepository->connection = new DatabaseConnection();
-
-//     $users = $userRepository->getUsers();
-
-//     if (isset($_GET['page']) && !empty($_GET['page'])) {
-//         $currentPage = (int) strip_tags($_GET['page']);
-//     } else {
-//         $currentPage = 1;
-//     }
-
-//     $usersNb = count($users);
-//     $perPage = 5;
-//     $pages = ceil($usersNb / $perPage);
-//     $numberOne = ($currentPage * $perPage) - $perPage;
-
-//     $statement = $userRepository->connection->getConnection()->prepare(
-//         "SELECT * FROM users LIMIT :numberOne, :perpage;"
-//     );
-//     $statement->bindValue(':numberOne', $numberOne, PDO::PARAM_INT);
-//     $statement->bindValue(':perpage', $perPage, PDO::PARAM_INT);
-//     $statement->execute();
-
-//     $users = [];
-//     while ($row = $statement->fetch()) {
-//         $user = new User;
-
-//         $user->id = $row['id'];
-//         $user->username = $row['username'];
-//         $user->email = $row['email'];
-//         $user->password = $row['password'];
-
-//         $users[] = $user;
-//     }
-
-//     require('templates/admin/user.php');
-// }

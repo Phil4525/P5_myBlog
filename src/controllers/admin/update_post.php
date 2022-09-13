@@ -36,7 +36,7 @@ class UpdatePostController
             if (!$success) {
                 throw new \Exception('Impossible de modifier le commentaire !');
             } else {
-                header('Location: index.php?action=adminPosts');
+                header('Location: index.php?action=posts');
             }
         }
 

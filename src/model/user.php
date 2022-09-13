@@ -20,13 +20,10 @@ class UserRepository
 
     function getUserByEmail(string $email): User
     {
-        // $statement = $this->connection->getConnection()->prepare(
-        //     'SELECT * FROM users WHERE email = :email'
-        // );
         $statement = $this->connection->getConnection()->prepare(
-            'SELECT * FROM users WHERE email = ?'
+            // 'SELECT * FROM users WHERE email = ?'
+            "SELECT id, username, email, 'password', DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE email = ?"
         );
-        // $statement->bindValue(":email", $email, PDO::PARAM_STR);
         $statement->execute([$email]);
         $row = $statement->fetch();
 
@@ -39,6 +36,7 @@ class UserRepository
             $user->username = $row['username'];
             $user->email = $row['email'];
             $user->password = $row['password'];
+            $user->frenchCreationDate = $row['french_creation_date'];
 
             return $user;
         }
@@ -47,7 +45,7 @@ class UserRepository
     function createUser(string $username, string $email, string $password): bool
     {
         $statement = $this->connection->getConnection()->prepare(
-            'INSERT INTO users(username, email, `password`) VALUES(?, ?, ?)'
+            'INSERT INTO users(username, email, `password`, signup_date) VALUES(?, ?, ?, NOW())'
         );
 
         $affectedLines = $statement->execute([$username, $email, $password]);
@@ -58,7 +56,7 @@ class UserRepository
     function getUserByName(string $username): ?User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT * FROM users WHERE username=?"
+            "SELECT id, username, email, 'password', DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE username=?"
         );
         $statement->execute([$username]);
         $row = $statement->fetch();
@@ -70,6 +68,7 @@ class UserRepository
             $user->username = $row['username'];
             $user->email = $row['email'];
             $user->password = $row['password'];
+            $user->frenchCreationDate = $row['french_creation_date'];
         }
 
         return $user;
@@ -77,7 +76,9 @@ class UserRepository
 
     function getUsers(): array
     {
-        $statement = $this->connection->getConnection()->query("SELECT * FROM users");
+        $statement = $this->connection->getConnection()->query(
+            "SELECT id, username, email, 'password', DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users ORDER BY signup_date DESC"
+        );
 
         $users = [];
 
@@ -88,6 +89,7 @@ class UserRepository
             $user->username = $row['username'];
             $user->email = $row['email'];
             $user->password = $row['password'];
+            $user->frenchCreationDate = $row['french_creation_date'];
 
             $users[] = $user;
         }
@@ -97,7 +99,9 @@ class UserRepository
 
     function getUserById(string $id): User
     {
-        $statement = $this->connection->getConnection()->prepare("SELECT * FROM users WHERE id=?");
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT id, username, email, 'password', DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE id=?"
+        );
         $statement->execute([$id]);
         $row = $statement->fetch();
 
@@ -107,6 +111,7 @@ class UserRepository
         $user->username = $row['username'];
         $user->email = $row['email'];
         $user->password = $row['password'];
+        $user->frenchCreationDate = $row['french_creation_date'];
 
         return $user;
     }

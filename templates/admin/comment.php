@@ -17,9 +17,10 @@ require('templates/admin/navbar.php');
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Post_Id</th>
                             <th scope="col">Auteur</th>
                             <th scope="col">Commentaire</th>
+                            <th scope="col">Titre de l'article</th>
+                            <th scope="col">Id de l'article</th>
                             <th scope="col">Date</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
@@ -32,16 +33,17 @@ require('templates/admin/navbar.php');
                         foreach ($comments as $comment) {
                         ?>
                             <tr>
-                                <td><?= $comment->id ?></td>
-                                <td><?= $comment->postId ?></td>
-                                <td><?= $comment->author ?></td>
-                                <td><?= $comment->comment ?></td>
-                                <td><?= $comment->frenchCreationDate ?></td>
-                                <td><a href="index.php?action=viewComment&id=<?= $comment->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
-                                <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment->id ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
+                                <td><?= $comment[0]->id ?></td>
+                                <td><?= $comment[0]->author ?></td>
+                                <td><?= $comment[0]->comment ?></td>
+                                <td><?= $comment[1] ?></td>
+                                <td><?= $comment[0]->postId ?></td>
+                                <td><?= $comment[0]->frenchCreationDate ?></td>
+                                <td><a href="index.php?action=viewComment&id=<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                                <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                             </tr>
                             <!-- delete post modal -->
-                            <div class="modal fade" id="deleteComment-<?= $comment->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deleteComment-<?= $comment[0]->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -51,7 +53,7 @@ require('templates/admin/navbar.php');
                                         <div class="modal-body">
                                             <p>Etes-vous sûr de vouloir supprimer ?</p>
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <a class="btn btn-primary" href="index.php?action=deleteComment&id=<?= $comment->id ?>" role="button">Confirmer</a>
+                                                <a class="btn btn-primary" href="index.php?action=deleteComment&id=<?= $comment[0]->id ?>" role="button">Confirmer</a>
                                             </div>
                                         </div>
                                     </div>
@@ -68,18 +70,18 @@ require('templates/admin/navbar.php');
                 <!-- <hr class="my-0" /> -->
                 <ul class="pagination justify-content-center my-4 pagination-sm">
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=adminComments&page=<?= $currentPage - 1 ?>" aria-label="Previous">
+                        <a class="page-link" href="index.php?action=comments&page=<?= $currentPage - 1 ?>" aria-label="Previous">
                             <!-- <span aria-hidden="true">&laquo;</span> -->
                             <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
                         </a>
                     </li>
                     <?php for ($page = 1; $page <= $pages; $page++) : ?>
                         <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
-                            <a class="page-link" href="index.php?action=adminComments&page=<?= $page ?>"><?= $page ?></a>
+                            <a class="page-link" href="index.php?action=comments&page=<?= $page ?>"><?= $page ?></a>
                         </li>
                     <?php endfor ?>
                     <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=adminComments&page=<?= $currentPage + 1 ?>" aria-label="Next">
+                        <a class="page-link" href="index.php?action=comments&page=<?= $currentPage + 1 ?>" aria-label="Next">
                             <!-- <span aria-hidden="true">&raquo;</span> -->
                             <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
                         </a>

@@ -108,4 +108,26 @@ class CommentRepository
 
         return $comments;
     }
+
+    function getCommentsByUsername(string $username): array
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM comments WHERE author = ? ORDER BY comment_date DESC"
+        );
+        $statement->execute([$username]);
+
+        $comments = [];
+        while ($row = $statement->fetch()) {
+            $comment = new Comment();
+            $comment->id = $row['id'];
+            $comment->postId = $row['post_id'];
+            $comment->author = $row['author'];
+            $comment->frenchCreationDate = $row['french_creation_date'];
+            $comment->comment = $row['comment'];
+
+            $comments[] = $comment;
+        }
+
+        return $comments;
+    }
 }

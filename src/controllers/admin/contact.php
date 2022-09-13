@@ -30,7 +30,7 @@ class ContactsController
         $numberOne = ($currentPage * $perPage) - $perPage;
 
         $statement = $contactRepository->connection->getConnection()->prepare(
-            "SELECT id, fullname, email, phone, message_content, DATE_FORMAT(message_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM contacts WHERE id<= (SELECT max(id) FROM contacts) ORDER BY message_date DESC LIMIT :numberOne, :perpage;"
+            "SELECT id, fullname, email, phone, message_content, DATE_FORMAT(contact_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM contacts WHERE id<= (SELECT max(id) FROM contacts) ORDER BY contact_date DESC LIMIT :numberOne, :perpage;"
         );
         $statement->bindValue(':numberOne', $numberOne, \PDO::PARAM_INT);
         $statement->bindValue(':perpage', $perPage, \PDO::PARAM_INT);

@@ -15,7 +15,10 @@ require('navbar.php');
                     <!-- Post title-->
                     <h1 class="fw-bolder mb-1"><?= $post->title ?></h1>
                     <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2">mis à jour le <?= $post->frenchCreationDate ?></div>
+                    <div class="text-muted fst-italic mb-2">publié le <?= $post->frenchCreationDate ?></div>
+                    <?php if (isset($post->frenchModificationDate)) { ?>
+                        <div class="text-muted fst-italic mb-2">mis à jour le <?= $post->frenchModificationDate ?></div>
+                    <?php } ?>
                     <div class="text-muted fst-italic mb-2">par <?= $post->author ?></div>
                     <!-- Post categories-->
                     <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>

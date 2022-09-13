@@ -33,7 +33,8 @@ class PostsController
 
         // select posts of the current page
         $statement = $postRepository->connection->getConnection()->prepare(
-            "SELECT id, title, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM posts WHERE id<= (SELECT max(id) FROM posts) ORDER BY creation_date DESC LIMIT :numberOne, :perpage;"
+            "SELECT id, title, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
+            DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date FROM posts WHERE id<= (SELECT max(id) FROM posts) ORDER BY creation_date DESC LIMIT :numberOne, :perpage;"
         );
         $statement->bindValue(':numberOne', $numberOne, \PDO::PARAM_INT);
         $statement->bindValue(':perpage', $perPage, \PDO::PARAM_INT);
@@ -47,6 +48,7 @@ class PostsController
             $post->title = $row['title'];
             $post->author = $row['author'];
             $post->frenchCreationDate = $row['french_creation_date'];
+            $post->frenchModificationDate = $row['french_modification_date'];
 
             $posts[] = $post;
         }
