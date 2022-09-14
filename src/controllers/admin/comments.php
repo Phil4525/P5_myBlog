@@ -40,8 +40,8 @@ class CommentsController
 
         $comments = [];
 
-        // $postRepository = new PostRepository();
-        // $postRepository->connection = new DatabaseConnection();
+        $postRepository = new PostRepository();
+        $postRepository->connection = new DatabaseConnection();
 
         while ($row = $statement->fetch()) {
             $comment = new Comment();
@@ -52,20 +52,17 @@ class CommentsController
             $comment->comment = $row['comment'];
             $comment->frenchCreationDate = $row['french_creation_date'];
 
-            // $posts = $postRepository->getPosts();
-            // foreach ($posts as $post) {
-            //     if ($post->id == $comment->postId) {
-            //         $postTitle = $post->title;
-            //     } else {
-            //         $postTitle = "l'article a été supprimé";
-            //     }
-            // }
+            $postTitle = "L'article a été supprimé.";
 
-            // $post = $postRepository->getPost($comment->postId);
-            // $postTitle = $post->title;
+            $posts = $postRepository->getPosts();
 
-            // $comments[] = [$comment, $postTitle];
-            $comments[] = [$comment, 'ceci est un bug'];
+            foreach ($posts as $post) {
+                if ($comment->postId == $post->id) {
+                    $postTitle = $post->title;
+                }
+            }
+
+            $comments[] = [$comment, $postTitle];
         }
 
         require('templates/admin/comment.php');

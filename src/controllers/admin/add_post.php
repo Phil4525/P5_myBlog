@@ -16,7 +16,7 @@ class AddPostController
 
             if (
                 isset($input['title'], $input['chapo'], $input['content'], $input['author']) &&
-                !empty($input['title']) && !empty($input['chapo']) && !empty($input['content']) && !empty($input['author'])
+                !empty(trim($input['title'])) && !empty(trim($input['title'])) && !empty(trim($input['title'])) && !empty(trim($input['title']))
             ) {
                 $title = $input['title'];
                 $chapo = $input['chapo'];

@@ -21,6 +21,15 @@ class DashboardController
         $postRepository = new PostRepository();
         $postRepository->connection = new DatabaseConnection();
 
+        $commentRepository = new CommentRepository();
+        $commentRepository->connection = new DatabaseConnection();
+
+        $userRepository = new UserRepository();
+        $userRepository->connection = new DatabaseConnection();
+
+        $contactRepository = new ContactRepository();
+        $contactRepository->connection = new DatabaseConnection();
+
         $posts = $postRepository->getPosts();
 
         $postsNb = count($posts);
@@ -28,8 +37,7 @@ class DashboardController
         $lastPost = new Post;
         $lastPost = $posts[0];
 
-        $commentRepository = new CommentRepository();
-        $commentRepository->connection = new DatabaseConnection();
+        $mostCommentedPost = $postRepository->getPostByCommentsNumber();
 
         $comments = $commentRepository->getComments();
 
@@ -38,8 +46,6 @@ class DashboardController
         $lastComment = new Comment;
         $lastComment = $comments[0];
 
-        $userRepository = new UserRepository();
-        $userRepository->connection = new DatabaseConnection();
 
         $users = $userRepository->getUsers();
 
@@ -48,8 +54,7 @@ class DashboardController
         $lastUser = new User;
         $lastUser = $users[0];
 
-        $contactRepository = new ContactRepository();
-        $contactRepository->connection = new DatabaseConnection();
+        $mostActiveUser = $userRepository->getUserByCommentsNumber();
 
         $contacts  = $contactRepository->getContacts();
 

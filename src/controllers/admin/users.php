@@ -51,7 +51,6 @@ class UsersController
             $user->password = $row['password'];
             $user->frenchCreationDate = $row['french_creation_date'];
 
-
             $comments = $commentRepository->getCommentsByUsername($user->username);
             $commentsNb = count($comments);
 

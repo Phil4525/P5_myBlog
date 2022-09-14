@@ -123,4 +123,21 @@ class UserRepository
 
         return ($affectedLines > 0);
     }
+
+    function getUserByCommentsNumber(): array
+    {
+        $statement = $this->connection->getConnection()->query(
+            'SELECT users.id, COUNT(comments.id) AS number, users.username FROM users 
+            INNER JOIN comments ON comments.author = users.username GROUP BY users.id ORDER BY number DESC LIMIT 0,1'
+        );
+        $row = $statement->fetch();
+
+        $mostActiveUser = [
+            'user_id' => $row['id'],
+            'comments_number' => $row['number'],
+            'user_name' => $row['username'],
+        ];
+
+        return $mostActiveUser;
+    }
 }

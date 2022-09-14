@@ -18,7 +18,7 @@ require('templates/admin/navbar.php');
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Auteur</th>
-                            <th scope="col">Commentaire</th>
+                            <!-- <th scope="col">Commentaire</th> -->
                             <th scope="col">Titre de l'article</th>
                             <th scope="col">Id de l'article</th>
                             <th scope="col">Date</th>
@@ -35,7 +35,7 @@ require('templates/admin/navbar.php');
                             <tr>
                                 <td><?= $comment[0]->id ?></td>
                                 <td><?= $comment[0]->author ?></td>
-                                <td><?= $comment[0]->comment ?></td>
+                                <!-- <td><?= $comment[0]->comment ?></td> -->
                                 <td><?= $comment[1] ?></td>
                                 <td><?= $comment[0]->postId ?></td>
                                 <td><?= $comment[0]->frenchCreationDate ?></td>

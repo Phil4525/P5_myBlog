@@ -47,7 +47,7 @@ class SignupController
                     );
                     $id = $statement->fetch();
 
-                    session_start();
+                    // session_start();
 
                     $_SESSION['user'] = [
                         'id' => $id,

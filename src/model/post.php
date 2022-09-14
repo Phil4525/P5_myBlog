@@ -96,4 +96,27 @@ class PostRepository
 
         return ($affectedLines > 0);
     }
+
+    function getPostByCommentsNumber(): array
+    {
+        $statement = $this->connection->getConnection()->query(
+            'SELECT posts.id, COUNT(comments.id) AS number, posts.title FROM posts 
+            INNER JOIN comments ON comments.post_id = posts.id GROUP BY posts.id ORDER BY number DESC LIMIT 0,1'
+        );
+        $row = $statement->fetch();
+
+        $mostCommentedPost = [
+            'post_id' => $row['id'],
+            'comments_number' => $row['number'],
+            'post_title' => $row['title']
+        ];
+
+        return $mostCommentedPost;
+    }
 }
+
+// SELECT posts.id, COUNT(comments.id) AS number, MAX(posts.title) FROM `posts` 
+// INNER JOIN comments ON comments.post_id = posts.id
+// GROUP BY posts.id
+// ORDER BY number DESC
+// LIMIT 0,1

@@ -24,7 +24,7 @@ require('templates/admin/navbar.php');
                             <ul>
                                 <li>Nombre d'articles publiés : <?= $postsNb ?></li>
                                 <li>Date du dernier article publié : <?= $lastPost->frenchCreationDate ?></li>
-                                <li>Article le plus commenté :</li>
+                                <li>Article le plus commenté : <?= $mostCommentedPost['post_title'] ?> (<?= $mostCommentedPost['comments_number'] ?> comm.)</li>
                             </ul>
                         </div>
                     </div>
@@ -57,7 +57,7 @@ require('templates/admin/navbar.php');
                             <ul>
                                 <li>Nombre d'utilisateurs inscrits : <?= $usersNb ?></li>
                                 <li>Dernière inscription : <?= $lastUser->username ?> le <?= $lastUser->frenchCreationDate ?></li>
-                                <li>Utilisateur le plus actif :</li>
+                                <li>Utilisateur le plus actif : <?= $mostActiveUser['user_name'] ?> (<?= $mostActiveUser['comments_number'] ?> comm.).</li>
                             </ul>
                         </div>
                     </div>
@@ -81,5 +81,5 @@ require('templates/admin/navbar.php');
     </div>
     <?php
     $content = ob_get_clean();
-    require('templates/admin/layout.php')
+    require('templates/admin/layout.php');
     ?>
