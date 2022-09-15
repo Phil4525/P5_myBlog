@@ -19,7 +19,7 @@ class UpdatePostController
         if ($input !== null) {
             if (
                 isset($input['title'], $input['chapo'], $input['content'], $input['author']) &&
-                !empty(trim($input['title'])) && !empty(trim($input['title'])) && !empty(trim($input['title'])) && !empty(trim($input['title']))
+                !empty(trim($input['title'])) && !empty(trim($input['chapo'])) && !empty(trim($input['content'])) && !empty(trim($input['author']))
             ) {
                 $post = [
                     'title' => $input['title'],
