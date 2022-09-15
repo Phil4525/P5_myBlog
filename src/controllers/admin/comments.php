@@ -42,6 +42,7 @@ class CommentsController
 
         $postRepository = new PostRepository();
         $postRepository->connection = new DatabaseConnection();
+        $posts = $postRepository->getPosts();
 
         while ($row = $statement->fetch()) {
             $comment = new Comment();
@@ -53,8 +54,6 @@ class CommentsController
             $comment->frenchCreationDate = $row['french_creation_date'];
 
             $postTitle = "L'article a été supprimé.";
-
-            $posts = $postRepository->getPosts();
 
             foreach ($posts as $post) {
                 if ($comment->postId == $post->id) {

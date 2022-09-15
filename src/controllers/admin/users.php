@@ -41,9 +41,11 @@ class UsersController
 
         $commentRepository = new CommentRepository();
         $commentRepository->connection = new DatabaseConnection();
+        $comments = $commentRepository->getComments();
 
         while ($row = $statement->fetch()) {
             $user = new User;
+            $commentsNb = 0;
 
             $user->id = $row['id'];
             $user->username = $row['username'];
@@ -51,8 +53,11 @@ class UsersController
             $user->password = $row['password'];
             $user->frenchCreationDate = $row['french_creation_date'];
 
-            $comments = $commentRepository->getCommentsByUsername($user->username);
-            $commentsNb = count($comments);
+            foreach ($comments as $comment) {
+                if ($user->username == $comment->author) {
+                    $commentsNb++;
+                }
+            }
 
             $users[] = [$user, $commentsNb];
         }
