@@ -21,7 +21,7 @@ class UserRepository
     function getUserByEmail(string $email): ?User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username, email, password, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE email = ?"
+            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE email = ?"
         );
         $statement->execute([$email]);
         $row = $statement->fetch();
@@ -35,6 +35,7 @@ class UserRepository
             $user->username = $row['username'];
             $user->email = $row['email'];
             $user->password = $row['password'];
+            $user->role = $row['role'];
             $user->frenchCreationDate = $row['french_creation_date'];
         }
 
@@ -55,7 +56,7 @@ class UserRepository
     function getUserByName(string $username): ?User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username, email, password, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE username=?"
+            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE username=?"
         );
         $statement->execute([$username]);
         $row = $statement->fetch();
@@ -69,6 +70,7 @@ class UserRepository
             $user->username = $row['username'];
             $user->email = $row['email'];
             $user->password = $row['password'];
+            $user->role = $row['role'];
             $user->frenchCreationDate = $row['french_creation_date'];
         }
 
@@ -78,7 +80,7 @@ class UserRepository
     function getUsers(): array
     {
         $statement = $this->connection->getConnection()->query(
-            "SELECT id, username, email, password, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users ORDER BY signup_date DESC"
+            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users ORDER BY signup_date DESC"
         );
 
         $users = [];
@@ -90,6 +92,7 @@ class UserRepository
             $user->username = $row['username'];
             $user->email = $row['email'];
             $user->password = $row['password'];
+            $user->role = $row['role'];
             $user->frenchCreationDate = $row['french_creation_date'];
 
             $users[] = $user;
@@ -101,7 +104,7 @@ class UserRepository
     function getUserById(string $id): User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username, email, password, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE id=?"
+            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE id=?"
         );
         $statement->execute([$id]);
         $row = $statement->fetch();
@@ -112,6 +115,7 @@ class UserRepository
         $user->username = $row['username'];
         $user->email = $row['email'];
         $user->password = $row['password'];
+        $user->role = $row['role'];
         $user->frenchCreationDate = $row['french_creation_date'];
 
         return $user;

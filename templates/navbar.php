@@ -1,5 +1,3 @@
-<?php @session_start(); ?>
-
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
     <div class="container">
@@ -14,28 +12,19 @@
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="index.php#about">About</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="index.php#contact">Contact</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="index.php?action=blog">Blog</a></li>
-                <?php
-                // sign up button
-                if (!isset($_SESSION['user'])) {
-                ?>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="" data-bs-toggle="modal" data-bs-target="#signup">Sign up</a></li>
-                <?php
-                } else {
-                ?>
+
+                <!-- sign up button -->
+                <?php if (isset($_SESSION['user'])) { ?>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded">Sign up</a></li>
-                <?php
-                }
-                // login/out button
-                if (isset($_SESSION['user'])) {
-                ?>
+                <?php } else { ?>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="" data-bs-toggle="modal" data-bs-target="#signup">Sign up</a></li>
+                <?php } ?>
+                <!-- login/out button -->
+                <?php if (isset($_SESSION['user'])) { ?>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="index.php?action=logout">Log out</a></li>
-                <?php
-                } else {
-                ?>
+                <?php } else { ?>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="" data-bs-toggle="modal" data-bs-target="#login">Log in</a></li>
-                <?php
-                }
-                ?>
+                <?php } ?>
             </ul>
         </div>
     </div>

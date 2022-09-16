@@ -25,22 +25,15 @@ class LoginController
                 $userRepository->connection = new DatabaseConnection();
                 $user = $userRepository->getUserByEmail($input['email']);
 
-                if (!$user) {
-                    // throw new \Exception("L'utilisateur et/ou le mot de passe est incorrect.");
-                    throw new \Exception("L'email est incorrect.");
-                }
-
-                if (!password_verify($input['password'], $user->password)) {
-                    // throw new \Exception("Le mot de passe est incorrect.");
-                    echo ($input['password']);
-                    echo ($user->password);
-                    die;
+                if (!$user || !password_verify($input['password'], $user->password)) {
+                    throw new \Exception("L'utilisateur ou le mot de passe est incorrect.");
                 }
 
                 $_SESSION['user'] = [
                     'id' => $user->id,
                     'username' => $user->username,
                     'email' => $user->email,
+                    'role' => $user->role,
                 ];
 
                 header('Location:index.php');

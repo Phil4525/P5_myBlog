@@ -12,6 +12,7 @@ require_once('src/controllers/logout.php');
 require_once('src/controllers/signup.php');
 require_once('src/controllers/password_recovery.php');
 require_once('src/controllers/contact.php');
+require_once('src/controllers/admin/admin_login.php');
 require_once('src/controllers/admin/dashboard.php');
 require_once('src/controllers/admin/posts.php');
 require_once('src/controllers/admin/new_post.php');
@@ -39,6 +40,7 @@ use App\Controllers\Logout\LogoutController;
 use App\Controllers\Signup\SignupController;
 use App\Controllers\ResetPassword\PasswordRecoveryController;
 use App\Controllers\Contact\ContactController;
+use App\Controllers\Admin\AdminLogin\AdminLoginController;
 use App\Controllers\Admin\Dashboard\DashboardController;
 use App\Controllers\Admin\Posts\PostsController;
 use App\Controllers\Admin\AddPost\AddPostController;
@@ -117,6 +119,9 @@ try {
         } elseif ($_GET['action'] === 'contact') {
 
             (new ContactController())->execute($_POST);
+        } elseif ($_GET['action'] === 'adminLogin') {
+
+            (new AdminLoginController())->execute($_POST);
         } elseif ($_GET['action'] === 'dashboard') {
 
             (new DashboardController())->execute();
