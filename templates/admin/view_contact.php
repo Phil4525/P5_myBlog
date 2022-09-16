@@ -17,7 +17,8 @@ require('templates/admin/navbar.php');
                 <header class="mb-4">
                     <!-- contact meta content-->
                     <div class="text-muted fst-italic mb-2">le <?= $contact->frenchCreationDate ?></div>
-                    <div class="text-muted fst-italic mb-2"><?= $contact->email ?></div>
+                    <!-- <div class="text-muted fst-italic mb-2"><?= $contact->email ?></div> -->
+                    <a class="text-muted fst-italic mb-2" href="mailto:<?= $contact->email ?>"><?= $contact->email ?></a>
                     <div class="text-muted fst-italic mb-2">tel : <?= $contact->phone ?></div>
                     <div class="text-muted fst-italic mb-2"><?= $contact->fullname ?> a écrit: </div>
                 </header>

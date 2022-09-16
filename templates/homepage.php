@@ -148,5 +148,5 @@
     <?php
     require('templates/footer.php');
     $content = ob_get_clean();
-    require('templates/layout.php')
+    require('templates/layout.php');
     ?>

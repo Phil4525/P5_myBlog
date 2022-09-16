@@ -19,20 +19,7 @@ class DeletePostController
         if (!$success) {
             throw new \Exception("L'article n'a pu être supprimé.");
         } else {
-            header('Location: index.php?action=adminPosts');
+            header('Location: index.php?action=posts');
         }
     }
 }
-
-// function postSuppression(string $id)
-// {
-//     $postRepository = new PostRepository();
-//     $postRepository->connection = new DatabaseConnection();
-//     $success = $postRepository->deletePost($id);
-
-//     if (!$success) {
-//         throw new Exception("L'article n'a pu être supprimé.");
-//     } else {
-//         header('Location: index.php?action=adminPosts');
-//     }
-// }

@@ -24,9 +24,9 @@ require('templates/admin/navbar.php');
                             <th scope="col">Id</th>
                             <th scope="col">Titre</th>
                             <th scope="col">Auteur</th>
+                            <th scope="col">Nombre de commentaires</th>
                             <th scope="col">Date de création</th>
                             <th scope="col">Date de mise à jour</th>
-                            <th scope="col">Nombre de commentaires</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                             <th scope="col"></th>
@@ -40,9 +40,9 @@ require('templates/admin/navbar.php');
                                 <td><?= $post[0]->id ?></td>
                                 <td><?= $post[0]->title ?></td>
                                 <td><?= $post[0]->author ?></td>
+                                <td><?= $post[1] ?></td>
                                 <td><?= $post[0]->frenchCreationDate ?></td>
                                 <td><?= $post[0]->frenchModificationDate ?></td>
-                                <td><?= $post[1] ?></td>
                                 <td><a href="index.php?action=viewPost&id=<?= $post[0]->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
                                 <td><a href="index.php?action=editPost&id=<?= $post[0]->id ?>" class="text-decoration-none fa-sharp fa-solid fa-pen"></a></td>
                                 <td><a href="" data-bs-toggle="modal" data-bs-target="#deletePost-<?= $post[0]->id ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>

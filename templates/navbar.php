@@ -100,7 +100,7 @@
                         <label class="form-check-label">Remember Password</label>
                     </div>
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                        <a class="small" href="index.php?action=passwordRecovery">Forgot Password?</a>
+                        <a class="small" href="" data-bs-toggle="modal" data-bs-target="#passwordRecovery">Forgot Password?</a>
                         <!-- <a class="btn btn-primary" href="index.html">Login</a> -->
                         <button class="btn btn-primary" type="submit">Send</button>
                     </div>
@@ -108,6 +108,35 @@
                 <div class="modal-footer py-3">
                     <div class="small"><a href="" data-bs-toggle="modal" data-bs-target="#Signup">Need an account? Sign up!</a></div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal password recovery -->
+
+<div class="modal fade" id="passwordRecovery" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title " id="exampleModalLabel">Password recovery</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="small mb-3 text-muted">Enter your email address and we will send you a link to reset your password.</div>
+                <form>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="inputEmail" name="email" type="email" placeholder="name@example.com" />
+                        <label for="inputEmail">Email address</label>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                        <a class="small" href="index.php?action=login">Return to login</a>
+                        <a class="btn btn-primary" href="index.php?action=passwordRecovery">Reset Password</a>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer text-center py-3">
+                <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
             </div>
         </div>
     </div>

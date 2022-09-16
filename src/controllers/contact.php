@@ -19,8 +19,15 @@ class ContactController
                 && !empty(trim($input['fullname'])) && !empty(trim($input['email'])) && !empty(trim($input['message_content']))
             ) {
                 $fullname = strip_tags($input['fullname']);
-                $email = strip_tags($input['email']);
+
+                if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
+                    throw new \Exception("L'adresse email est incorrecte.");
+                } else {
+                    $email = $input['email'];
+                }
+
                 $phone = strip_tags($input['phone']);
+
                 $messageContent = nl2br(htmlspecialchars($input['message_content']));
             } else {
                 throw new \Exception('Les données du formulaire sont invalides.');

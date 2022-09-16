@@ -18,18 +18,17 @@ class UserRepository
 {
     public DatabaseConnection $connection;
 
-    function getUserByEmail(string $email): User
+    function getUserByEmail(string $email): ?User
     {
         $statement = $this->connection->getConnection()->prepare(
-            // 'SELECT * FROM users WHERE email = ?'
-            "SELECT id, username, email, 'password', DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE email = ?"
+            "SELECT id, username, email, password, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE email = ?"
         );
         $statement->execute([$email]);
         $row = $statement->fetch();
 
-        if (!$row) {
-            throw new \Exception("L'utilisateur et/ou le mot de passe est incorrect.");
-        } else {
+        $user = null;
+
+        if ($row) {
             $user = new User();
 
             $user->id = $row['id'];
@@ -37,15 +36,15 @@ class UserRepository
             $user->email = $row['email'];
             $user->password = $row['password'];
             $user->frenchCreationDate = $row['french_creation_date'];
-
-            return $user;
         }
+
+        return $user;
     }
 
     function createUser(string $username, string $email, string $password): bool
     {
         $statement = $this->connection->getConnection()->prepare(
-            'INSERT INTO users(username, email, `password`, signup_date) VALUES(?, ?, ?, NOW())'
+            'INSERT INTO users(username, email, password, signup_date) VALUES(?, ?, ?, NOW())'
         );
 
         $affectedLines = $statement->execute([$username, $email, $password]);
@@ -56,10 +55,12 @@ class UserRepository
     function getUserByName(string $username): ?User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username, email, 'password', DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE username=?"
+            "SELECT id, username, email, password, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE username=?"
         );
         $statement->execute([$username]);
         $row = $statement->fetch();
+
+        $user = null;
 
         if ($row) {
             $user = new User();
@@ -77,7 +78,7 @@ class UserRepository
     function getUsers(): array
     {
         $statement = $this->connection->getConnection()->query(
-            "SELECT id, username, email, 'password', DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users ORDER BY signup_date DESC"
+            "SELECT id, username, email, password, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users ORDER BY signup_date DESC"
         );
 
         $users = [];
@@ -100,7 +101,7 @@ class UserRepository
     function getUserById(string $id): User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username, email, 'password', DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE id=?"
+            "SELECT id, username, email, password, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE id=?"
         );
         $statement->execute([$id]);
         $row = $statement->fetch();
@@ -124,7 +125,7 @@ class UserRepository
         return ($affectedLines > 0);
     }
 
-    function getUserByCommentsNumber(): array
+    function getMostActiveUser(): array
     {
         $statement = $this->connection->getConnection()->query(
             'SELECT users.id, COUNT(comments.id) AS number, users.username FROM users 

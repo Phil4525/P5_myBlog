@@ -9,7 +9,7 @@ require_once('src/controllers/update_comment.php');
 require_once('src/controllers/delete_comment.php');
 require_once('src/controllers/login.php');
 require_once('src/controllers/logout.php');
-require_once('src/controllers/Signup.php');
+require_once('src/controllers/signup.php');
 require_once('src/controllers/password_recovery.php');
 require_once('src/controllers/contact.php');
 require_once('src/controllers/admin/dashboard.php');
@@ -37,6 +37,7 @@ use App\Controllers\DeleteComment\DeleteCommentController;
 use App\Controllers\Login\LoginController;
 use App\Controllers\Logout\LogoutController;
 use App\Controllers\Signup\SignupController;
+use App\Controllers\ResetPassword\PasswordRecoveryController;
 use App\Controllers\Contact\ContactController;
 use App\Controllers\Admin\Dashboard\DashboardController;
 use App\Controllers\Admin\Posts\PostsController;
@@ -112,7 +113,7 @@ try {
             (new SignupController())->execute($_POST);
         } elseif ($_GET['action'] === 'passwordRecovery') {
 
-            passwordRecovery();
+            (new PasswordRecoveryController())->execute($_POST);
         } elseif ($_GET['action'] === 'contact') {
 
             (new ContactController())->execute($_POST);
