@@ -59,21 +59,13 @@ require('navbar.php');
                                         <div><small>le <?= $comment->frenchCreationDate ?></small></div>
                                         <p><?= $comment->comment ?></p>
                                         <!-- modify or reply condition -->
-                                        <?php
-                                        if (isset($_SESSION['user']) && $_SESSION['user']['username'] == $comment->author) {
-                                        ?>
+                                        <?php if (isset($_SESSION['user']) && $_SESSION['user']['username'] == $comment->author) { ?>
                                             <a href="" data-bs-toggle="modal" data-bs-target="#updateComment-<?= $comment->id ?>"><small>(Modify)</small></a>
                                             <a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment->id ?>"><small>(Delete)</small></a>
-                                        <?php
-                                        }
-                                        ?>
-                                        <?php
-                                        if (isset($_SESSION['user']) && $_SESSION['user']['username'] !== $comment->author) {
-                                        ?>
+                                        <?php } ?>
+                                        <?php if (isset($_SESSION['user']) && $_SESSION['user']['username'] !== $comment->author) { ?>
                                             <a href="" data-bs-toggle="modal" data-bs-target="#reply-<?= $comment->id ?>"><small>(Reply)</small></a>
-                                        <?php
-                                        }
-                                        ?>
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <!-- update comment modal -->

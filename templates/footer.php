@@ -24,25 +24,25 @@
                 <h4 class="text-uppercase mb-4">About Freelancer</h4>
                 <p class="lead mb-0">
                     Freelance is a free to use, MIT licensed Bootstrap theme created by
-                    <a href="http://startbootstrap.com">Start Bootstrap</a>
-                    .
+                    <a href="http://startbootstrap.com">Start Bootstrap</a>.
                 </p>
             </div>
         </div>
     </div>
 </footer>
 <!-- Copyright Section-->
-<div class="copyright py-4 text-center text-white">
+<div class="copyright py-4 text-center text-white" id="copyright">
     <div class="container"><small>Copyright &copy; Your Website 2022</small></div>
-    <?php if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') { ?>
+    <?php if (!isset($_SESSION['user'])) { ?>
         <a href="" data-bs-toggle="modal" data-bs-target="#adminLogin"><small>Admin Zone</small></a>
-    <?php } else { ?>
+    <?php } elseif ($_SESSION['user']['role'] == 'admin') { ?>
         <a href="index.php?action=dashboard"><small>Admin Zone</small></a>
+    <?php } else { ?>
+        <a href="index.php#copyright"><small>Admin Zone</small></a>
     <?php } ?>
 </div>
 
 <!-- Modal login -->
-
 <div class="modal fade" id="adminLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

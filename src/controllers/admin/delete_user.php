@@ -12,15 +12,20 @@ class DeleteUserController
 {
     public function execute(string $id)
     {
-        $userRepository = new UserRepository();
-        $userRepository->connection = new DatabaseConnection();
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
-        $success = $userRepository->deleteUser($id);
+            $userRepository = new UserRepository();
+            $userRepository->connection = new DatabaseConnection();
 
-        if (!$success) {
-            throw new \Exception("L'utilisateur n'a pu être supprimé.");
+            $success = $userRepository->deleteUser($id);
+
+            if (!$success) {
+                throw new \Exception("L'utilisateur n'a pu être supprimé.");
+            } else {
+                header('Location: index.php?action=users');
+            }
         } else {
-            header('Location: index.php?action=users');
+            throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }
     }
 }

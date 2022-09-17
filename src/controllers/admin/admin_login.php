@@ -28,7 +28,7 @@ class AdminLoginController
                 }
 
                 if ($user->role !== 'admin') {
-                    throw new Exception("Vous n'avez pas l'authorisation d'accéder à cette page.");
+                    throw new Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
                 }
 
                 $_SESSION['user'] = [

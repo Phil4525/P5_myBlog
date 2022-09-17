@@ -24,14 +24,10 @@ require('templates/admin/navbar.php');
                             <th scope="col">Date</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
-
-
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        foreach ($comments as $comment) {
-                        ?>
+                        <?php foreach ($comments as $comment) { ?>
                             <tr>
                                 <td><?= $comment[0]->id ?></td>
                                 <td><?= $comment[0]->author ?></td>
@@ -53,25 +49,21 @@ require('templates/admin/navbar.php');
                                         <div class="modal-body">
                                             <p>Etes-vous sûr de vouloir supprimer ?</p>
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <a class="btn btn-primary" href="index.php?action=deleteComment&id=<?= $comment[0]->id ?>" role="button">Confirmer</a>
+                                                <a class="btn btn-primary" href="index.php?action=deleteComment&id=<?= $comment[0]->id ?>&page=<?= $currentPage ?>" role="button">Confirmer</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        <?php
-                        }
-                        ?>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
             <!-- Pagination-->
             <nav aria-label="Pagination">
-                <!-- <hr class="my-0" /> -->
                 <ul class="pagination justify-content-center my-4 pagination-sm">
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
                         <a class="page-link" href="index.php?action=comments&page=<?= $currentPage - 1 ?>" aria-label="Previous">
-                            <!-- <span aria-hidden="true">&laquo;</span> -->
                             <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
                         </a>
                     </li>
@@ -82,7 +74,6 @@ require('templates/admin/navbar.php');
                     <?php endfor ?>
                     <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
                         <a class="page-link" href="index.php?action=comments&page=<?= $currentPage + 1 ?>" aria-label="Next">
-                            <!-- <span aria-hidden="true">&raquo;</span> -->
                             <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
                         </a>
                     </li>

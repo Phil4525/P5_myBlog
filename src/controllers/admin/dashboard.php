@@ -18,58 +18,63 @@ class DashboardController
 {
     public function execute()
     {
-        $postRepository = new PostRepository();
-        $postRepository->connection = new DatabaseConnection();
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
-        $commentRepository = new CommentRepository();
-        $commentRepository->connection = new DatabaseConnection();
+            $postRepository = new PostRepository();
+            $postRepository->connection = new DatabaseConnection();
 
-        $userRepository = new UserRepository();
-        $userRepository->connection = new DatabaseConnection();
+            $commentRepository = new CommentRepository();
+            $commentRepository->connection = new DatabaseConnection();
 
-        $contactRepository = new ContactRepository();
-        $contactRepository->connection = new DatabaseConnection();
+            $userRepository = new UserRepository();
+            $userRepository->connection = new DatabaseConnection();
 
-        // posts section
+            $contactRepository = new ContactRepository();
+            $contactRepository->connection = new DatabaseConnection();
 
-        $posts = $postRepository->getPosts();
+            // posts section
 
-        $postsNb = count($posts);
+            $posts = $postRepository->getPosts();
 
-        $lastPost = new Post;
-        $lastPost = $posts[0];
+            $postsNb = count($posts);
 
-        $mostCommentedPost = $postRepository->getPostByCommentsNumber();
+            $lastPost = new Post;
+            $lastPost = $posts[0];
 
-        // comments section
+            $mostCommentedPost = $postRepository->getPostByCommentsNumber();
 
-        $comments = $commentRepository->getComments();
+            // comments section
 
-        $commentsNb = count($comments);
+            $comments = $commentRepository->getComments();
 
-        $lastComment = new Comment;
-        $lastComment = $comments[0];
+            $commentsNb = count($comments);
 
-        // users section
+            $lastComment = new Comment;
+            $lastComment = $comments[0];
 
-        $users = $userRepository->getUsers();
+            // users section
 
-        $usersNb = count($users);
+            $users = $userRepository->getUsers();
 
-        $lastUser = new User;
-        $lastUser = $users[0];
+            $usersNb = count($users);
 
-        $mostActiveUser = $userRepository->getMostActiveUser();
+            $lastUser = new User;
+            $lastUser = $users[0];
 
-        // contacts section
+            $mostActiveUser = $userRepository->getMostActiveUser();
 
-        $contacts  = $contactRepository->getContacts();
+            // contacts section
 
-        $contactsNb = count($contacts);
+            $contacts  = $contactRepository->getContacts();
 
-        $lastContact = new Contact;
-        $lastContact = $contacts[0];
+            $contactsNb = count($contacts);
 
-        require('templates/admin/dashboard.php');
+            $lastContact = new Contact;
+            $lastContact = $contacts[0];
+
+            require('templates/admin/dashboard.php');
+        } else {
+            throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
+        }
     }
 }

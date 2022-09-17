@@ -43,6 +43,7 @@ use App\Controllers\Contact\ContactController;
 use App\Controllers\Admin\AdminLogin\AdminLoginController;
 use App\Controllers\Admin\Dashboard\DashboardController;
 use App\Controllers\Admin\Posts\PostsController;
+use App\Controllers\Admin\NewPost\NewPostController;
 use App\Controllers\Admin\AddPost\AddPostController;
 use App\Controllers\Admin\ViewPost\ViewPostController;
 use App\Controllers\Admin\UpdatePost\UpdatePostController;
@@ -73,16 +74,12 @@ try {
                 throw new Exception('Aucun identifiant de billet envoyé.');
             }
         } elseif ($_GET['action'] === 'addComment') {
-            if (isset($_SESSION['user'])) {
-                if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    $id = $_GET['id'];
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $id = $_GET['id'];
 
-                    (new AddCommentController())->execute($id, $_POST);
-                } else {
-                    throw new Exception('Aucun identifiant de billet envoyé.');
-                }
+                (new AddCommentController())->execute($id, $_POST);
             } else {
-                throw new Exception('Vous devez être connecté pour laisser un commentaire.');
+                throw new Exception('Aucun identifiant de billet envoyé.');
             }
         } elseif ($_GET['action'] === 'updateComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -130,7 +127,7 @@ try {
             (new PostsController())->execute();
         } elseif ($_GET['action'] === 'newPost') {
 
-            newPost();
+            (new NewPostController())->execute();
         } elseif ($_GET['action'] === 'addPost') {
 
             (new AddPostController())->execute($_POST);

@@ -15,11 +15,11 @@ class SignupController
         if (!empty($input)) {
             if (
                 isset($input['username'], $input['email'], $input['password'])
-                && !empty($input['username']) && !empty($input['email']) && !empty($input['password'])
+                && !empty(trim($input['username'])) && !empty($input['email']) && !empty(trim($input['password']))
             ) {
-                // check if username is already token
                 $username = strip_tags($input['username']);
 
+                // check if username is already token
                 $userRepository = new UserRepository();
                 $userRepository->connection = new DatabaseConnection();
 
@@ -34,6 +34,7 @@ class SignupController
                     $email = $input['email'];
                 }
 
+                // handle password
                 $password = password_hash($input['password'], PASSWORD_ARGON2ID);
 
                 // create new user
@@ -42,17 +43,17 @@ class SignupController
                 if (!$success) {
                     throw new \Exception("Impossible de créer le compte !");
                 } else {
+                    // get last created user id
                     $statement = $userRepository->connection->getConnection()->query(
                         'SELECT id FROM users ORDER BY id DESC LIMIT 1'
                     );
                     $id = $statement->fetch();
 
-                    // session_start();
-
                     $_SESSION['user'] = [
                         'id' => $id,
                         'username' => $username,
                         'email' => $email,
+                        'role' => 'user',
                     ];
 
                     header('Location:index.php');

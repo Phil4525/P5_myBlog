@@ -12,21 +12,16 @@ class ViewUserController
 {
     public function execute(string $id)
     {
-        $userRepository = new UserRepository();
-        $userRepository->connection = new DatabaseConnection();
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
-        $user = $userRepository->getUserById($id);
+            $userRepository = new UserRepository();
+            $userRepository->connection = new DatabaseConnection();
 
-        require('templates/admin/view_user.php');
+            $user = $userRepository->getUserById($id);
+
+            require('templates/admin/view_user.php');
+        } else {
+            throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
+        }
     }
 }
-
-// function viewUser(string $id)
-// {
-//     $userRepository = new UserRepository();
-//     $userRepository->connection = new DatabaseConnection();
-
-//     $user = $userRepository->getUserById($id);
-
-//     require('templates/admin/view_user.php');
-// }

@@ -12,14 +12,19 @@ class DeletePostController
 {
     public function execute(string $id)
     {
-        $postRepository = new PostRepository();
-        $postRepository->connection = new DatabaseConnection();
-        $success = $postRepository->deletePost($id);
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
-        if (!$success) {
-            throw new \Exception("L'article n'a pu être supprimé.");
+            $postRepository = new PostRepository();
+            $postRepository->connection = new DatabaseConnection();
+            $success = $postRepository->deletePost($id);
+
+            if (!$success) {
+                throw new \Exception("L'article n'a pu être supprimé.");
+            } else {
+                header('Location: index.php?action=posts');
+            }
         } else {
-            header('Location: index.php?action=posts');
+            throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }
     }
 }

@@ -12,14 +12,18 @@ class DeleteContactController
 {
     public function execute(string $id)
     {
-        $contactRepository = new ContactRepository();
-        $contactRepository->connection = new DatabaseConnection();
-        $success = $contactRepository->deleteContact($id);
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
+            $contactRepository = new ContactRepository();
+            $contactRepository->connection = new DatabaseConnection();
+            $success = $contactRepository->deleteContact($id);
 
-        if (!$success) {
-            throw new \Exception("Le message n'a pu être supprimé.");
+            if (!$success) {
+                throw new \Exception("Le message n'a pu être supprimé.");
+            } else {
+                header('Location: index.php?action=contacts');
+            }
         } else {
-            header('Location: index.php?action=contacts');
+            throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }
     }
 }

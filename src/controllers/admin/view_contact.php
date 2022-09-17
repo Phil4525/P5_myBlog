@@ -12,19 +12,15 @@ class viewContactController
 {
     public function execute(string $id)
     {
-        $contactRepository = new ContactRepository();
-        $contactRepository->connection = new DatabaseConnection();
-        $contact = $contactRepository->getContactById($id);
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
-        require('templates/admin/view_contact.php');
+            $contactRepository = new ContactRepository();
+            $contactRepository->connection = new DatabaseConnection();
+            $contact = $contactRepository->getContactById($id);
+
+            require('templates/admin/view_contact.php');
+        } else {
+            throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
+        }
     }
 }
-
-// function viewContact(string $id)
-// {
-//     $contactRepository = new ContactRepository();
-//     $contactRepository->connection = new DatabaseConnection();
-//     $contact = $contactRepository->getContactById($id);
-
-//     require('templates/admin/view_contact.php');
-// }

@@ -12,81 +12,46 @@ class UpdatePostController
 {
     public function execute(string $id, ?array $input)
     {
-        $postRepository = new PostRepository();
-        $postRepository->connection = new DatabaseConnection();
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
-        // It handles the form submission when there is an input.
-        if ($input !== null) {
-            if (
-                isset($input['title'], $input['chapo'], $input['content'], $input['author']) &&
-                !empty(trim($input['title'])) && !empty(trim($input['chapo'])) && !empty(trim($input['content'])) && !empty(trim($input['author']))
-            ) {
-                $post = [
-                    'title' => $input['title'],
-                    'chapo' => $input['chapo'],
-                    'content' => $input['content'],
-                    'author' => $input['author'],
-                ];
-            } else {
-                throw new \Exception('Les données du formulaire sont invalides.');
+            $postRepository = new PostRepository();
+            $postRepository->connection = new DatabaseConnection();
+
+            // It handles the form submission when there is an input.
+            if ($input !== null) {
+                if (
+                    isset($input['title'], $input['chapo'], $input['content'], $input['author']) &&
+                    !empty(trim($input['title'])) && !empty(trim($input['chapo'])) && !empty(trim($input['content'])) && !empty(trim($input['author']))
+                ) {
+                    $post = [
+                        'title' => $input['title'],
+                        'chapo' => $input['chapo'],
+                        'content' => $input['content'],
+                        'author' => $input['author'],
+                    ];
+                } else {
+                    throw new \Exception('Les données du formulaire sont invalides.');
+                }
+
+                $success = $postRepository->updatePost($id, $post['title'], $post['chapo'], $post['content'], $post['author']);
+
+                if (!$success) {
+                    throw new \Exception('Impossible de modifier le commentaire !');
+                } else {
+                    header('Location: index.php?action=posts');
+                }
             }
 
-            $success = $postRepository->updatePost($id, $post['title'], $post['chapo'], $post['content'], $post['author']);
+            // Otherwise, it displays the form.
+            $post = $postRepository->getPost($id);
 
-            if (!$success) {
-                throw new \Exception('Impossible de modifier le commentaire !');
-            } else {
-                header('Location: index.php?action=posts');
+            if ($post === null) {
+                throw new \Exception("Le commentaire $id n'existe pas.");
             }
+
+            require('templates/admin/update_post.php');
+        } else {
+            throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }
-
-        // Otherwise, it displays the form.
-        $post = $postRepository->getPost($id);
-
-        if ($post === null) {
-            throw new \Exception("Le commentaire $id n'existe pas.");
-        }
-
-        require('templates/admin/update_post.php');
     }
 }
-
-// function modifyPost(string $id, ?array $input)
-// {
-//     $postRepository = new PostRepository();
-//     $postRepository->connection = new DatabaseConnection();
-
-//     // It handles the form submission when there is an input.
-//     if ($input !== null) {
-//         if (
-//             isset($input['title'], $input['chapo'], $input['content'], $input['author']) &&
-//             !empty($input['title']) && !empty($input['chapo']) && !empty($input['content']) && !empty($input['author'])
-//         ) {
-//             $post = [
-//                 'title' => $input['title'],
-//                 'chapo' => $input['chapo'],
-//                 'content' => $input['content'],
-//                 'author' => $input['author'],
-//             ];
-//         } else {
-//             throw new Exception('Les données du formulaire sont invalides.');
-//         }
-
-//         $success = $postRepository->updatePost($id, $post['title'], $post['chapo'], $post['content'], $post['author']);
-
-//         if (!$success) {
-//             throw new Exception('Impossible de modifier le commentaire !');
-//         } else {
-//             header('Location: index.php?action=adminPosts');
-//         }
-//     }
-
-//     // Otherwise, it displays the form.
-//     $post = $postRepository->getPost($id);
-
-//     if ($post === null) {
-//         throw new Exception("Le commentaire $id n'existe pas.");
-//     }
-
-//     require('templates/admin/update_post.php');
-// }

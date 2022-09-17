@@ -12,19 +12,15 @@ class ViewPostController
 {
     public function execute(string $id)
     {
-        $postRepository = new PostRepository();
-        $postRepository->connection = new DatabaseConnection();
-        $post = $postRepository->getPost($id);
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
-        require('templates/admin/view_post.php');
+            $postRepository = new PostRepository();
+            $postRepository->connection = new DatabaseConnection();
+            $post = $postRepository->getPost($id);
+
+            require('templates/admin/view_post.php');
+        } else {
+            throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
+        }
     }
 }
-
-// function viewPost($id)
-// {
-//     $postRepository = new PostRepository();
-//     $postRepository->connection = new DatabaseConnection();
-//     $post = $postRepository->getPost($id);
-
-//     require('templates/admin/view_post.php');
-// }

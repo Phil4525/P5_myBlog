@@ -12,21 +12,16 @@ class ViewCommentController
 {
     public function execute(string $id)
     {
-        $commentRepository = new CommentRepository();
-        $commentRepository->connection = new DatabaseConnection();
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
-        $comment = $commentRepository->getComment($id);
+            $commentRepository = new CommentRepository();
+            $commentRepository->connection = new DatabaseConnection();
 
-        require('templates/admin/view_comment.php');
+            $comment = $commentRepository->getComment($id);
+
+            require('templates/admin/view_comment.php');
+        } else {
+            throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
+        }
     }
-}
-
-function viewComment(string $id)
-{
-    $commentRepository = new CommentRepository();
-    $commentRepository->connection = new DatabaseConnection();
-
-    $comment = $commentRepository->getComment($id);
-
-    require('templates/admin/view_comment.php');
 }

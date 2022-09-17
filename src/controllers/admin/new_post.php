@@ -1,6 +1,11 @@
 <?php
 
-function newPost()
+namespace App\Controllers\Admin\NewPost;
+
+class NewPostController
 {
-    require('templates/admin/new_post.php');
+    public function execute()
+    {
+        require('templates/admin/new_post.php');
+    }
 }

@@ -14,58 +14,63 @@ class PostsController
 {
     public function execute()
     {
-        $postRepository = new PostRepository();
-        $postRepository->connection = new DatabaseConnection();
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
-        $posts = $postRepository->getPosts();
+            $postRepository = new PostRepository();
+            $postRepository->connection = new DatabaseConnection();
 
-        // find current page
-        if (isset($_GET['page']) && !empty($_GET['page'])) {
-            $currentPage = (int) strip_tags($_GET['page']);
-        } else {
-            $currentPage = 1;
-        }
+            $posts = $postRepository->getPosts();
 
-        // first post of the page
-        $postsNb = count($posts);
-        $perPage = 5;
-        $pages = ceil($postsNb / $perPage);
-        $numberOne = ($currentPage * $perPage) - $perPage;
-
-        // select posts of the current page
-        $statement = $postRepository->connection->getConnection()->prepare(
-            "SELECT id, title, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
-            DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date FROM posts WHERE id<= (SELECT max(id) FROM posts) ORDER BY creation_date DESC LIMIT :numberOne, :perpage;"
-        );
-        $statement->bindValue(':numberOne', $numberOne, \PDO::PARAM_INT);
-        $statement->bindValue(':perpage', $perPage, \PDO::PARAM_INT);
-        $statement->execute();
-
-        $posts = [];
-
-        $commentRepository = new CommentRepository();
-        $commentRepository->connection = new DatabaseConnection();
-        $comments = $commentRepository->getComments();
-
-        while ($row = $statement->fetch()) {
-            $post = new Post();
-            $commentsNb = 0;
-
-            $post->id = $row['id'];
-            $post->title = $row['title'];
-            $post->author = $row['author'];
-            $post->frenchCreationDate = $row['french_creation_date'];
-            $post->frenchModificationDate = $row['french_modification_date'];
-
-            foreach ($comments as $comment) {
-                if ($post->id == $comment->postId) {
-                    $commentsNb++;
-                }
+            // find current page
+            if (isset($_GET['page']) && !empty($_GET['page'])) {
+                $currentPage = (int) strip_tags($_GET['page']);
+            } else {
+                $currentPage = 1;
             }
 
-            $posts[] = [$post, $commentsNb];
-        }
+            // first post of the page
+            $postsNb = count($posts);
+            $perPage = 5;
+            $pages = ceil($postsNb / $perPage);
+            $numberOne = ($currentPage * $perPage) - $perPage;
 
-        require('templates/admin/post.php');
+            // select posts of the current page
+            $statement = $postRepository->connection->getConnection()->prepare(
+                "SELECT id, title, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
+            DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date FROM posts WHERE id<= (SELECT max(id) FROM posts) ORDER BY creation_date DESC LIMIT :numberOne, :perpage;"
+            );
+            $statement->bindValue(':numberOne', $numberOne, \PDO::PARAM_INT);
+            $statement->bindValue(':perpage', $perPage, \PDO::PARAM_INT);
+            $statement->execute();
+
+            $posts = [];
+
+            $commentRepository = new CommentRepository();
+            $commentRepository->connection = new DatabaseConnection();
+            $comments = $commentRepository->getComments();
+
+            while ($row = $statement->fetch()) {
+                $post = new Post();
+                $commentsNb = 0;
+
+                $post->id = $row['id'];
+                $post->title = $row['title'];
+                $post->author = $row['author'];
+                $post->frenchCreationDate = $row['french_creation_date'];
+                $post->frenchModificationDate = $row['french_modification_date'];
+
+                foreach ($comments as $comment) {
+                    if ($post->id == $comment->postId) {
+                        $commentsNb++;
+                    }
+                }
+
+                $posts[] = [$post, $commentsNb];
+            }
+
+            require('templates/admin/post.php');
+        } else {
+            throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
+        }
     }
 }
