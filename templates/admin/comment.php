@@ -22,6 +22,7 @@ require('templates/admin/navbar.php');
                             <th scope="col">Titre de l'article</th>
                             <th scope="col">Id de l'article</th>
                             <th scope="col">Date</th>
+                            <th scope="col">Validation</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
@@ -31,10 +32,10 @@ require('templates/admin/navbar.php');
                             <tr>
                                 <td><?= $comment[0]->id ?></td>
                                 <td><?= $comment[0]->author ?></td>
-                                <!-- <td><?= $comment[0]->comment ?></td> -->
                                 <td><?= $comment[1] ?></td>
                                 <td><?= $comment[0]->postId ?></td>
                                 <td><?= $comment[0]->frenchCreationDate ?></td>
+                                <td><?= $comment[0]->status ?></td>
                                 <td><a href="index.php?action=viewComment&id=<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
                                 <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                             </tr>

@@ -20,7 +20,7 @@ class PostController
 
         $commentRepository = new CommentRepository();
         $commentRepository->connection = new DatabaseConnection();
-        $comments = $commentRepository->getCommentsByPostId($id);
+        $comments = $commentRepository->getValidatedCommentsByPostId($id);
 
         require('templates/post.php');
     }

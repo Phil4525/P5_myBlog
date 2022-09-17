@@ -23,9 +23,19 @@ require('templates/admin/navbar.php');
                     <p class="fs-6 mb-4"><?= $comment->comment ?></p>
                 </section>
             </article>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
-                <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment->id ?>" role="button">Supprimer</a>
-            </div>
+            <form action="index.php?action=setCommentStatus&id=<?= $comment->id ?>" method="post">
+                <select class="form-select" name="status" aria-label="Default select example">
+                    <option selected>Sélectionez le status du commentaire</option>
+                    <option value="1">Validé</option>
+                    <option value="2">En attente de validation</option>
+                    <option value="3">Non validé</option>
+                </select>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
+                    <button class="btn btn-primary" type="submit">Sauvegarder</button>
+                    <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment->id ?>" role="button">Supprimer</a>
+                </div>
+            </form>
+
         </main>
     </div>
 </div>

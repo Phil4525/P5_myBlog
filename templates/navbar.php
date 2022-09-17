@@ -31,7 +31,6 @@
 </nav>
 
 <!-- Modal register -->
-
 <div class="modal fade" id="signup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -66,7 +65,6 @@
 </div>
 
 <!-- Modal login -->
-
 <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -90,8 +88,7 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                         <a class="small" href="" data-bs-toggle="modal" data-bs-target="#passwordRecovery">Forgot Password?</a>
-                        <!-- <a class="btn btn-primary" href="index.html">Login</a> -->
-                        <button class="btn btn-primary" type="submit">Send</button>
+                        <button class="btn btn-primary" type="submit">Login</button>
                     </div>
                 </form>
                 <div class="modal-footer py-3">
@@ -103,7 +100,6 @@
 </div>
 
 <!-- Modal password recovery -->
-
 <div class="modal fade" id="passwordRecovery" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

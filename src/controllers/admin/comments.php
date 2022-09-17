@@ -34,7 +34,12 @@ class CommentsController
             $numberOne = ($currentPage * $perPage) - $perPage;
 
             $statement = $commentRepository->connection->getConnection()->prepare(
-                "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM comments WHERE id<= (SELECT max(id) FROM comments) ORDER BY comment_date DESC LIMIT :numberOne, :perpage;"
+                "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status 
+                FROM comments 
+                WHERE id<= (SELECT max(id) 
+                FROM comments) 
+                ORDER BY comment_date DESC 
+                LIMIT :numberOne, :perpage;"
             );
             $statement->bindValue(':numberOne', $numberOne, \PDO::PARAM_INT);
             $statement->bindValue(':perpage', $perPage, \PDO::PARAM_INT);
@@ -54,6 +59,7 @@ class CommentsController
                 $comment->author = $row['author'];
                 $comment->comment = $row['comment'];
                 $comment->frenchCreationDate = $row['french_creation_date'];
+                $comment->status = $row['status'];
 
                 $postTitle = "L'article a été supprimé.";
 

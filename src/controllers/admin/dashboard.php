@@ -52,6 +52,8 @@ class DashboardController
             $lastComment = new Comment;
             $lastComment = $comments[0];
 
+            $waitingComments = count($commentRepository->getCommentsWaitingForValidation());
+
             // users section
 
             $users = $userRepository->getUsers();
