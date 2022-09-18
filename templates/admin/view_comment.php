@@ -23,12 +23,12 @@ require('templates/admin/navbar.php');
                     <p class="fs-6 mb-4"><?= $comment->comment ?></p>
                 </section>
             </article>
-            <form action="index.php?action=setCommentStatus&id=<?= $comment->id ?>" method="post">
-                <select class="form-select" name="status" aria-label="Default select example">
-                    <option selected>Sélectionez le status du commentaire</option>
-                    <option value="1">Validé</option>
-                    <option value="2">En attente de validation</option>
-                    <option value="3">Non validé</option>
+            <form action="index.php?action=viewComment&id=<?= $comment->id ?>" method="post">
+                <label class="mb-3">Status du commentaire</label>
+                <select class="form-select mb-4" name="status" aria-label="Default select example">
+                    <option value="1" <?php if ($comment->status == 'validated') echo 'selected' ?>>Validé</option>
+                    <option value="2" <?php if ($comment->status == 'not_validated') echo 'selected' ?>>Non validé</option>
+                    <option value="3" <?php if ($comment->status == 'waiting_for_validation') echo 'selected' ?>>En attente de validation</option>
                 </select>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
                     <button class="btn btn-primary" type="submit">Sauvegarder</button>

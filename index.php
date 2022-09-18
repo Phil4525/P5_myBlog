@@ -22,7 +22,6 @@ require_once('src/controllers/admin/update_post.php');
 require_once('src/controllers/admin/delete_post.php');
 require_once('src/controllers/admin/comments.php');
 require_once('src/controllers/admin/view_comment.php');
-require_once('src/controllers/admin/set_comment_status.php');
 require_once('src/controllers/admin/users.php');
 require_once('src/controllers/admin/view_user.php');
 require_once('src/controllers/admin/delete_user.php');
@@ -51,7 +50,6 @@ use App\Controllers\Admin\UpdatePost\UpdatePostController;
 use App\Controllers\Admin\DeletePost\DeletePostController;
 use App\Controllers\Admin\Comments\CommentsController;
 use App\Controllers\Admin\ViewComment\ViewCommentController;
-use App\Controllers\Admin\SetCommentStatus\SetCommentStatusController;
 use App\Controllers\Admin\Users\UsersController;
 use App\Controllers\Admin\ViewUser\ViewUserController;
 use App\Controllers\Admin\DeleteUser\DeleteUserController;
@@ -168,15 +166,12 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $id = $_GET['id'];
 
-                (new ViewCommentController())->execute($id);
-            } else {
-                throw new Exception("Aucun identifiant de commentaire envoyé.");
-            }
-        } elseif ($_GET['action'] === 'setCommentStatus') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $id = $_GET['id'];
+                $input = null;
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $input = $_POST;
+                }
 
-                (new SetCommentStatusController())->execute($id, $_POST);
+                (new ViewCommentController())->execute($id, $input);
             } else {
                 throw new Exception("Aucun identifiant de commentaire envoyé.");
             }

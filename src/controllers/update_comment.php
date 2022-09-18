@@ -15,6 +15,7 @@ class UpdateCommentController
     public function execute(string $id, ?array $input)
     {
         $commentRepository = new CommentRepository();
+        $commentRepository->connection = new DatabaseConnection();
 
         // It handles the form submission when there is an input.
         if ($input !== null) {
@@ -25,7 +26,6 @@ class UpdateCommentController
                 throw new \Exception('Les données du formulaire sont invalides.');
             }
 
-            $commentRepository->connection = new DatabaseConnection();
             $success = $commentRepository->updateComment($id, $comment);
 
             if (!$success) {

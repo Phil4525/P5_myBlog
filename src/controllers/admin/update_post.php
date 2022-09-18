@@ -36,7 +36,7 @@ class UpdatePostController
                 $success = $postRepository->updatePost($id, $post['title'], $post['chapo'], $post['content'], $post['author']);
 
                 if (!$success) {
-                    throw new \Exception('Impossible de modifier le commentaire !');
+                    throw new \Exception("Impossible de modifier l'article' !");
                 } else {
                     header('Location: index.php?action=posts');
                 }
@@ -46,7 +46,7 @@ class UpdatePostController
             $post = $postRepository->getPost($id);
 
             if ($post === null) {
-                throw new \Exception("Le commentaire $id n'existe pas.");
+                throw new \Exception("L'article $id n'existe pas.");
             }
 
             require('templates/admin/update_post.php');

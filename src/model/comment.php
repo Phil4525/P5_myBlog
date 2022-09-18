@@ -202,4 +202,14 @@ class CommentRepository
 
         return $comments;
     }
+
+    function updateCommentStatus(string $id, string $status): bool
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            'UPDATE comments SET status = ? WHERE id = ?'
+        );
+        $affectedLines = $statement->execute([$status, $id]);
+
+        return ($affectedLines > 0);
+    }
 }
