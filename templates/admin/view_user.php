@@ -18,12 +18,21 @@ require('templates/admin/navbar.php');
                     <p class="fs-6 mb-4">Mot de passe: <?= $user->password ?></p>
                 </section>
             </article>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
-                <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#deleteUser-<?= $user->id ?>" role="button">Supprimer</a>
-            </div>
+            <form action="index.php?action=viewUser&id=<?= $user->id ?>" method="post">
+                <label class="mb-3">Role</label>
+                <select class="form-select mb-4" name="role" aria-label="Default select example">
+                    <option value="1" <?php if ($user->role == 'user') echo 'selected' ?>>Utilisateur</option>
+                    <option value="2" <?php if ($user->role == 'admin') echo 'selected' ?>>Administrateur</option>
+                </select>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
+                    <button class="btn btn-primary" type="submit">Sauvegarder</button>
+                    <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#deleteUser-<?= $user->id ?>" role="button">Supprimer</a>
+                </div>
+            </form>
         </main>
     </div>
 </div>
+
 <!-- delete user modal -->
 <div class="modal fade" id="deleteUser-<?= $user->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

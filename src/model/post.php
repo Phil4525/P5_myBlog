@@ -24,8 +24,11 @@ class PostRepository
     function getPost(string $id): Post
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
-            DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date FROM posts WHERE id = ?"
+            "SELECT id, title, chapo, content, author,
+            DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
+            DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date 
+            FROM posts 
+            WHERE id = ?"
         );
         $statement->execute([$id]);
         $row = $statement->fetch();
@@ -46,8 +49,11 @@ class PostRepository
     function getPosts(): array
     {
         $statement = $this->connection->getConnection()->query(
-            "SELECT id, title, chapo, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
-            DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date FROM posts ORDER BY creation_date DESC"
+            "SELECT id, title, chapo, content, author, 
+            DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
+            DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date 
+            FROM posts 
+            ORDER BY creation_date DESC"
         );
 
         $posts = [];
@@ -72,7 +78,8 @@ class PostRepository
     function createPost(string $title, string $chapo, string $content, string $author): bool
     {
         $statement = $this->connection->getConnection()->prepare(
-            'INSERT INTO posts(title, chapo, content, author, creation_date) VALUES(?, ?, ?, ?, NOW())'
+            'INSERT INTO posts(title, chapo, content, author, creation_date) 
+            VALUES(?, ?, ?, ?, NOW())'
         );
         $affectedLines = $statement->execute([$title, $chapo, $content, $author]);
 
@@ -82,7 +89,9 @@ class PostRepository
     function updatePost(string $id, string $title, string $chapo, string $content, string $author): bool
     {
         $statement = $this->connection->getConnection()->prepare(
-            'UPDATE posts SET title = ?, chapo = ?, content = ?,author = ?, modification_date = NOW() WHERE id = ?'
+            'UPDATE posts 
+            SET title = ?, chapo = ?, content = ?,author = ?, modification_date = NOW() 
+            WHERE id = ?'
         );
         $affectedLines = $statement->execute([$title, $chapo, $content, $author, $id]);
 
@@ -100,8 +109,11 @@ class PostRepository
     function getPostByCommentsNumber(): array
     {
         $statement = $this->connection->getConnection()->query(
-            'SELECT posts.id, COUNT(comments.id) AS number, posts.title FROM posts 
-            INNER JOIN comments ON comments.post_id = posts.id GROUP BY posts.id ORDER BY number DESC LIMIT 0,1'
+            'SELECT posts.id, COUNT(comments.id) AS number, posts.title 
+            FROM posts 
+            INNER JOIN comments ON comments.post_id = posts.id 
+            GROUP BY posts.id 
+            ORDER BY number DESC LIMIT 0,1'
         );
         $row = $statement->fetch();
 

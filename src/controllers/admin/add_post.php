@@ -36,7 +36,7 @@ class AddPostController
                 if (!$success) {
                     throw new \Exception("Impossible d'ajouter l'article' !");
                 } else {
-                    header('Location: index.php?action=adminPosts');
+                    header('Location: index.php?action=posts');
                 }
             }
 

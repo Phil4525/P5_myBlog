@@ -20,6 +20,10 @@
 
     <script>
         tinymce.init({
+            force_br_newlines: false,
+            force_p_newlines: false,
+            remove_linebreaks: false,
+            content_style: "p { margin: 0; !important }",
             selector: 'textarea.tiny',
             plugins: [
                 'a11ychecker', 'advlist', 'advcode', 'advtable', 'autolink', 'checklist', 'export',

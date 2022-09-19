@@ -35,10 +35,10 @@ require('templates/admin/navbar.php');
                     <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment->id ?>" role="button">Supprimer</a>
                 </div>
             </form>
-
         </main>
     </div>
 </div>
+
 <!-- delete comment modal -->
 <div class="modal fade" id="deleteComment-<?= $comment->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

@@ -182,7 +182,12 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $id = $_GET['id'];
 
-                (new ViewUserController())->execute($id);
+                $input = null;
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $input = $_POST;
+                }
+
+                (new ViewUserController())->execute($id, $input);
             } else {
                 throw new Exception("Aucun identifiant d'utilisateur envoyé.");
             }

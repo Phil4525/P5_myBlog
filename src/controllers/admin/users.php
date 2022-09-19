@@ -33,7 +33,10 @@ class UsersController
             $numberOne = ($currentPage * $perPage) - $perPage;
 
             $statement = $userRepository->connection->getConnection()->prepare(
-                "SELECT id, username, email, 'password', DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users ORDER BY signup_date DESC LIMIT :numberOne, :perpage;"
+                "SELECT id, username, email, 'password', DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, role
+                FROM users 
+                ORDER BY signup_date DESC 
+                LIMIT :numberOne, :perpage;"
             );
             $statement->bindValue(':numberOne', $numberOne, \PDO::PARAM_INT);
             $statement->bindValue(':perpage', $perPage, \PDO::PARAM_INT);
@@ -54,6 +57,7 @@ class UsersController
                 $user->email = $row['email'];
                 $user->password = $row['password'];
                 $user->frenchCreationDate = $row['french_creation_date'];
+                $user->role = $row['role'];
 
                 foreach ($comments as $comment) {
                     if ($user->username == $comment->author) {

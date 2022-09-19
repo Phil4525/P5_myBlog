@@ -132,8 +132,11 @@ class UserRepository
     function getMostActiveUser(): array
     {
         $statement = $this->connection->getConnection()->query(
-            'SELECT users.id, COUNT(comments.id) AS number, users.username FROM users 
-            INNER JOIN comments ON comments.author = users.username GROUP BY users.id ORDER BY number DESC LIMIT 0,1'
+            'SELECT users.id, COUNT(comments.id) AS number, users.username 
+            FROM users 
+            INNER JOIN comments ON comments.author = users.username 
+            GROUP BY users.id 
+            ORDER BY number DESC LIMIT 0,1'
         );
         $row = $statement->fetch();
 
@@ -144,5 +147,15 @@ class UserRepository
         ];
 
         return $mostActiveUser;
+    }
+
+    function updateUserRole(string $id, string $role): bool
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            'UPDATE users SET role = ? WHERE id = ?'
+        );
+        $affectedLines = $statement->execute([$role, $id]);
+
+        return ($affectedLines > 0);
     }
 }

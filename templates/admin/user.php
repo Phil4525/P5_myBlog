@@ -20,6 +20,7 @@ require('templates/admin/navbar.php');
                             <th scope="col">Nom</th>
                             <th scope="col">Email</th>
                             <th scope="col">Nombre de commentaires</th>
+                            <th scope="col">Role</th>
                             <th scope="col">date d'inscription</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
@@ -34,6 +35,7 @@ require('templates/admin/navbar.php');
                                 <td><?= $user[0]->username ?></td>
                                 <td><?= $user[0]->email ?></td>
                                 <td><?= $user[1] ?></td>
+                                <td><?= $user[0]->role ?></td>
                                 <td><?= $user[0]->frenchCreationDate ?></td>
                                 <td><a href="index.php?action=viewUser&id=<?= $user[0]->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
                                 <td><a href="" class="text-decoration-none fa-solid fa-trash-can" data-bs-toggle="modal" data-bs-target="#deleteUser-<?= $user[0]->id ?>"></a></td>
