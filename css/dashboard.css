@@ -144,3 +144,9 @@ body {
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 }
+
+/* my style */
+
+th {
+  cursor: pointer;
+}

@@ -85,6 +85,7 @@ require('templates/admin/navbar.php');
         </main>
     </div>
 </div>
+<script src="js/sorting.js"></script>
 <?php
 $content = ob_get_clean();
 require('templates/admin/layout.php')
