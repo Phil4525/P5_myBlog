@@ -158,4 +158,30 @@ class UserRepository
 
         return ($affectedLines > 0);
     }
+
+    function getUserByHashedPasswordAndEmail(string $emailHash, string $passwordHash): User
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT email,password FROM users WHERE md5(email)= ? and md5(password)= ?"
+        );
+        $statement->execute([$emailHash, $passwordHash]);
+        $row = $statement->fetch();
+
+        $user = new User;
+
+        $user->email = $row['email'];
+        $user->password = $row['password'];
+
+        return $user;
+    }
+
+    function updatePassword(string $email, string $newPassword): bool
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            'UPDATE users SET password= ? where email= ?'
+        );
+        $affectedLines = $statement->execute([$newPassword, $email]);
+
+        return ($affectedLines > 0);
+    }
 }

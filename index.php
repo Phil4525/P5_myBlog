@@ -11,6 +11,7 @@ require_once('src/controllers/login.php');
 require_once('src/controllers/logout.php');
 require_once('src/controllers/signup.php');
 require_once('src/controllers/password_recovery.php');
+require_once('src/controllers/reset_password.php');
 require_once('src/controllers/contact.php');
 require_once('src/controllers/admin/admin_login.php');
 require_once('src/controllers/admin/dashboard.php');
@@ -38,7 +39,8 @@ use App\Controllers\DeleteComment\DeleteCommentController;
 use App\Controllers\Login\LoginController;
 use App\Controllers\Logout\LogoutController;
 use App\Controllers\Signup\SignupController;
-use App\Controllers\ResetPassword\PasswordRecoveryController;
+use App\Controllers\PasswordRecovery\PasswordRecoveryController;
+use App\Controllers\ResetPassword\ResetPasswordController;
 use App\Controllers\Contact\ContactController;
 use App\Controllers\Admin\AdminLogin\AdminLoginController;
 use App\Controllers\Admin\Dashboard\DashboardController;
@@ -113,6 +115,21 @@ try {
         } elseif ($_GET['action'] === 'passwordRecovery') {
 
             (new PasswordRecoveryController())->execute($_POST);
+        } elseif ($_GET['action'] === 'resetPassword') {
+            if (isset($_GET['key']) && isset($_GET['reset'])) {
+                $email = $_GET['key'];
+                $password = $_GET['reset'];
+                // It sets the input only when the HTTP method is POST (ie. the form is submitted).
+                $input = null;
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $input = $_POST;
+                }
+                (new ResetPasswordController())->execute($email, $password, $input);
+            } else {
+                throw new Exception("Aucune information d'utilisateur envoyé.");
+            }
+
+            // (new ResetPasswordController())->execute();
         } elseif ($_GET['action'] === 'contact') {
 
             (new ContactController())->execute($_POST);

@@ -16,6 +16,7 @@ require('templates/admin/navbar.php');
                     <p class="fs-6 mb-4">Nom: <?= $user->username ?></p>
                     <p class="fs-6 mb-4">Email: <?= $user->email ?></p>
                     <p class="fs-6 mb-4">Mot de passe: <?= $user->password ?></p>
+                    <p class="fs-6 mb-4">Date d'inscription: <?= $user->frenchCreationDate ?></p>
                 </section>
             </article>
             <form action="index.php?action=viewUser&id=<?= $user->id ?>" method="post">

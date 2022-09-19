@@ -109,14 +109,15 @@
             </div>
             <div class="modal-body">
                 <div class="small mb-3 text-muted">Enter your email address and we will send you a link to reset your password.</div>
-                <form>
+                <form action="index.php?action=passwordRecovery" method="post">
                     <div class="form-floating mb-3">
-                        <input class="form-control" id="inputEmail" name="email" type="email" placeholder="name@example.com" />
+                        <input class="form-control" name="email" type="email" placeholder="name@example.com" />
                         <label for="inputEmail">Email address</label>
                     </div>
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                         <a class="small" href="index.php?action=login">Return to login</a>
-                        <a class="btn btn-primary" href="index.php?action=passwordRecovery">Reset Password</a>
+                        <!-- <a class="btn btn-primary" href="index.php?action=passwordRecovery">Reset Password</a> -->
+                        <button class="btn btn-primary" type="submit">Reset Password</button>
                     </div>
                 </form>
             </div>
