@@ -10,6 +10,7 @@ class Comment
 {
     public string $id;
     public string $postId;
+    public ?string $parentCommentId;
     public string $author;
     public string $comment;
     public string $frenchCreationDate;
@@ -47,12 +48,12 @@ class CommentRepository
         return $comments;
     }
 
-    function createComment(string $postId, string $author, string $comment): bool
+    function createComment(string $postId, ?string $parentCommentId, string $author, string $comment): bool
     {
         $statement = $this->connection->getConnection()->prepare(
-            'INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())'
+            'INSERT INTO comments(post_id, parent_comment_id, author, comment, comment_date) VALUES(?, ?, ?, ?, NOW())'
         );
-        $affectedLines = $statement->execute([$postId, $author, $comment]);
+        $affectedLines = $statement->execute([$postId, $parentCommentId, $author, $comment]);
 
         return ($affectedLines > 0);
     }
@@ -196,6 +197,68 @@ class CommentRepository
             $comment->comment = $row['comment'];
             $comment->frenchCreationDate = $row['french_creation_date'];
             $comment->status = $row['status'];
+
+            $comments[] = $comment;
+        }
+
+        return $comments;
+    }
+
+    function getValidatedCommentsWithChildrenByPostId(string $postId): array
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
+            FROM comments 
+            WHERE post_id = ? AND status = 'validated' AND parent_comment_id IS NULL
+            ORDER BY comment_date DESC"
+        );
+        $statement->execute([$postId]);
+
+        $comments = [];
+
+        while ($row = $statement->fetch()) {
+            $comment = new Comment();
+
+            $comment->id = $row['id'];
+            $comment->postId = $row['post_id'];
+            $comment->parentCommentId = $row['parent_comment_id'];
+            $comment->author = $row['author'];
+            $comment->comment = $row['comment'];
+            $comment->frenchCreationDate = $row['french_creation_date'];
+            $comment->status = $row['status'];
+
+            $comment->children[] = $this->getChildComments($comment->id);
+
+            $comments[] = $comment;
+        }
+
+        return $comments;
+    }
+
+    function getChildComments(string $commentId): array
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
+            FROM comments 
+            WHERE parent_comment_id = ? AND status = 'validated'
+            ORDER BY comment_date DESC"
+        );
+        $statement->execute([$commentId]);
+
+        $comments = [];
+
+        while ($row = $statement->fetch()) {
+            $comment = new Comment();
+
+            $comment->id = $row['id'];
+            $comment->postId = $row['post_id'];
+            $comment->parentCommentId = $row['parent_comment_id'];
+            $comment->author = $row['author'];
+            $comment->comment = $row['comment'];
+            $comment->frenchCreationDate = $row['french_creation_date'];
+            $comment->status = $row['status'];
+
+            $comment->children[] = $this->getChildComments($comment->id);
 
             $comments[] = $comment;
         }

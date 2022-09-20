@@ -78,8 +78,12 @@ try {
         } elseif ($_GET['action'] === 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $id = $_GET['id'];
-
-                (new AddCommentController())->execute($id, $_POST);
+                if (isset($_GET['parentCommentId']) && $_GET['parentCommentId'] > 0) {
+                    $parentCommentId = $_GET['parentCommentId'];
+                } else {
+                    $parentCommentId = null;
+                }
+                (new AddCommentController())->execute($id, $parentCommentId, $_POST);
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé.');
             }
