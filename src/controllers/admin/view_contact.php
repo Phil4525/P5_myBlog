@@ -1,9 +1,26 @@
 <?php
-require_once('src/models/contact.php');
 
-function viewContact(string $id)
+namespace App\Controllers\Admin\ViewContact;
+
+require_once('src/lib/database.php');
+require_once('src/model/contact.php');
+
+use App\Lib\Database\DatabaseConnection;
+use App\Model\Contact\ContactRepository;
+
+class viewContactController
 {
-    $contact = getContactById($id);
+    public function execute(string $id)
+    {
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
-    require('templates/admin/view_contact.php');
+            $contactRepository = new ContactRepository();
+            $contactRepository->connection = new DatabaseConnection();
+            $contact = $contactRepository->getContactById($id);
+
+            require('templates/admin/view_contact.php');
+        } else {
+            throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
+        }
+    }
 }

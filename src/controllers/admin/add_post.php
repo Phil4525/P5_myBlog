@@ -1,28 +1,48 @@
 <?php
-require_once('src/models/post.php');
 
-function addPost($input)
+namespace App\Controllers\Admin\AddPost;
+
+require_once('src/lib/database.php');
+require_once('src/model/post.php');
+
+use App\Lib\Database\DatabaseConnection;
+use App\Model\Post\PostRepository;
+
+class AddPostController
 {
-    if ($input !== null) {
-        if (
-            isset($input['title'], $input['chapo'], $input['content'], $input['author']) &&
-            !empty($input['title']) && !empty($input['chapo']) && !empty($input['content']) && !empty($input['author'])
-        ) {
-            $title = $input['title'];
-            $chapo = $input['chapo'];
-            $content = $input['content'];
-            $author = $input['author'];
-        } else {
-            throw new Exception('Les données du formulaire sont invalides.');
-        }
+    public function execute(array $input)
+    {
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
-        $success = createPost($title, $chapo, $content, $author);
+            if ($input !== null) {
 
-        if (!$success) {
-            throw new Exception("Impossible d'ajouter l'article' !");
+                if (
+                    isset($input['title'], $input['chapo'], $input['content'], $input['author']) &&
+                    !empty(trim($input['title'])) && !empty(trim($input['chapo'])) && !empty(trim($input['content'])) && !empty(trim($input['author']))
+                ) {
+                    $title = $input['title'];
+                    $chapo = $input['chapo'];
+                    $content = $input['content'];
+                    $author = $input['author'];
+                } else {
+                    throw new \Exception('Les données du formulaire sont invalides.');
+                }
+
+                $postRepository = new PostRepository();
+                $postRepository->connection = new DatabaseConnection();
+
+                $success = $postRepository->createPost($title, $chapo, $content, $author);
+
+                if (!$success) {
+                    throw new \Exception("Impossible d'ajouter l'article' !");
+                } else {
+                    header('Location: index.php?action=posts');
+                }
+            }
+
+            require('templates/admin/new_post.php');
         } else {
-            header('Location: index.php?action=adminPosts');
+            throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }
     }
-    require('templates/admin/new_post.php');
 }

@@ -1,10 +1,8 @@
-<?php $title = "myBlog"; ?>
-
-<?php ob_start(); ?>
-
-<?php require('navbar.php') ?>
-<?php require('headers/blog.php') ?>
-
+<?php $title = "myBlog";
+ob_start();
+require('navbar.php');
+require('headers/blog.php');
+?>
 <!-- Page content-->
 <div class="container">
     <div class="row">
@@ -12,12 +10,12 @@
         <div class="col-lg-8">
             <!-- Featured blog post-->
             <div class="card mb-4">
-                <a href="index.php?action=post&id=<?= urlencode($featuredPost['id']) ?>"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                <a href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
                 <div class="card-body">
-                    <div class="small text-muted"><?= $featuredPost['french_creation_date'] ?></div>
-                    <h2 class="card-title"><?= $featuredPost['title'] ?></h2>
-                    <p class="card-text"><?= $featuredPost['chapo'] ?></p>
-                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($featuredPost['id']) ?>">Read more →</a>
+                    <div class="small text-muted"><?= $featuredPost->frenchCreationDate ?></div>
+                    <h2 class="card-title"><?= $featuredPost->title ?></h2>
+                    <p class="card-text"><?= $featuredPost->chapo ?></p>
+                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>">Read more →</a>
                 </div>
             </div>
             <!-- Nested row for non-featured blog posts-->
@@ -27,12 +25,12 @@
                 ?>
                     <div class="col-lg-6">
                         <div class="card mb-4">
-                            <a href="index.php?action=post&id=<?= urlencode($post['id']) ?>"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <a href="index.php?action=post&id=<?= urlencode($post->id) ?>"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                             <div class="card-body">
-                                <div class="small text-muted"><?= $post['french_creation_date'] ?></div>
-                                <h2 class="card-title h4"><?= $post['title'] ?></h2>
-                                <p class="card-text text-truncate"><?= strip_tags($post['chapo'])  ?></p>
-                                <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($post['id']) ?>">Read more →</a>
+                                <div class="small text-muted"><?= $post->frenchCreationDate ?></div>
+                                <h2 class="card-title h4"><?= $post->title ?></h2>
+                                <p class="card-text text-truncate"><?= strip_tags($post->chapo)  ?></p>
+                                <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($post->id) ?>">Read more →</a>
                             </div>
                         </div>
                     </div>
@@ -46,7 +44,6 @@
                 <ul class="pagination justify-content-center my-4">
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
                         <a class="page-link" href="index.php?action=blog&page=<?= $currentPage - 1 ?>#posts" aria-label="Previous">
-                            <!-- <span aria-hidden="true">&laquo;</span> -->
                             <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
                         </a>
                     </li>
@@ -57,7 +54,6 @@
                     <?php endfor ?>
                     <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
                         <a class="page-link" href="index.php?action=blog&page=<?= $currentPage + 1 ?>#posts" aria-label="Next">
-                            <!-- <span aria-hidden="true">&raquo;</span> -->
                             <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
                         </a>
                     </li>
@@ -106,9 +102,8 @@
         </div>
     </div>
 </div>
-
-<?php require('footer.php'); ?>
-
-<?php $content = ob_get_clean(); ?>
-
-<?php require('layout.php') ?>
+<?php
+require('footer.php');
+$content = ob_get_clean();
+require('layout.php');
+?>

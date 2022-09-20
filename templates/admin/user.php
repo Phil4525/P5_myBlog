@@ -3,7 +3,6 @@ $title = "Users";
 ob_start();
 require('templates/admin/navbar.php');
 ?>
-
 <div class="container-fluid">
     <div class="row">
         <?php require('templates/admin/sidebar.php') ?>
@@ -20,7 +19,9 @@ require('templates/admin/navbar.php');
                             <th scope="col">Id</th>
                             <th scope="col">Nom</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Password</th>
+                            <th scope="col">Nombre de commentaires</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">date d'inscription</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
@@ -30,15 +31,17 @@ require('templates/admin/navbar.php');
                         foreach ($users as $user) {
                         ?>
                             <tr>
-                                <td><?= $user['id'] ?></td>
-                                <td><?= $user['username'] ?></td>
-                                <td><?= $user['email'] ?></td>
-                                <td><?= $user['password'] ?></td>
-                                <td><a href="index.php?action=viewUser&id=<?= $user['id'] ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
-                                <td><a href="" class="text-decoration-none fa-solid fa-trash-can" data-bs-toggle="modal" data-bs-target="#deleteUser-<?= $user['id'] ?>"></a></td>
+                                <td><?= $user[0]->id ?></td>
+                                <td><?= $user[0]->username ?></td>
+                                <td><?= $user[0]->email ?></td>
+                                <td><?= $user[1] ?></td>
+                                <td><?= $user[0]->role ?></td>
+                                <td><?= $user[0]->frenchCreationDate ?></td>
+                                <td><a href="index.php?action=viewUser&id=<?= $user[0]->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                                <td><a href="" class="text-decoration-none fa-solid fa-trash-can" data-bs-toggle="modal" data-bs-target="#deleteUser-<?= $user[0]->id ?>"></a></td>
                             </tr>
                             <!-- delete user modal -->
-                            <div class="modal fade" id="deleteUser-<?= $user['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deleteUser-<?= $user[0]->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -48,7 +51,7 @@ require('templates/admin/navbar.php');
                                         <div class="modal-body">
                                             <p>Etes-vous sûr de vouloir supprimer ?</p>
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <a class="btn btn-primary" href="index.php?action=deleteUser&id=<?= $user['id'] ?>" role="button">Confirmer</a>
+                                                <a class="btn btn-primary" href="index.php?action=deleteUser&id=<?= $user[0]->id ?>" role="button">Confirmer</a>
                                             </div>
                                         </div>
                                     </div>
@@ -64,17 +67,17 @@ require('templates/admin/navbar.php');
             <nav aria-label="Pagination">
                 <ul class="pagination justify-content-center my-4 pagination-sm">
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=adminUsers&page=<?= $currentPage - 1 ?>" aria-label="Previous">
+                        <a class="page-link" href="index.php?action=users&page=<?= $currentPage - 1 ?>" aria-label="Previous">
                             <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
                         </a>
                     </li>
                     <?php for ($page = 1; $page <= $pages; $page++) : ?>
                         <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
-                            <a class="page-link" href="index.php?action=adminUsers&page=<?= $page ?>"><?= $page ?></a>
+                            <a class="page-link" href="index.php?action=users&page=<?= $page ?>"><?= $page ?></a>
                         </li>
                     <?php endfor ?>
                     <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=adminUsers&page=<?= $currentPage + 1 ?>" aria-label="Next">
+                        <a class="page-link" href="index.php?action=users&page=<?= $currentPage + 1 ?>" aria-label="Next">
                             <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
                         </a>
                     </li>
@@ -83,6 +86,7 @@ require('templates/admin/navbar.php');
         </main>
     </div>
 </div>
+<script src="js/sorting.js"></script>
 <?php
 $content = ob_get_clean();
 require('templates/admin/layout.php');

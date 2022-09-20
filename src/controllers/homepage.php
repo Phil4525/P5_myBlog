@@ -1,6 +1,16 @@
 <?php
 
-function homepage()
+namespace App\Controllers\Homepage;
+
+class HomepageController
 {
-    require('templates/homepage.php');
+    public function execute()
+    {
+        require('templates/homepage.php');
+    }
 }
+
+// function homepage()
+// {
+//     require('templates/homepage.php');
+// }

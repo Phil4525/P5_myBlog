@@ -1,19 +1,27 @@
 <?php
 
-require_once('src/model.php');
-require_once('src/models/post.php');
-require_once('src/models/comment.php');
-// require_once('src/models/reply.php');
+namespace App\Controllers\Post;
 
-function post(string $id)
+require_once('src/lib/database.php');
+require_once('src/model/post.php');
+require_once('src/model/comment.php');
+
+use App\Lib\Database\DatabaseConnection;
+use App\Model\Post\PostRepository;
+use App\Model\Comment\CommentRepository;
+
+class PostController
 {
-    $post = getPost($id);
+    public function execute(string $id)
+    {
+        $postRepository = new PostRepository();
+        $postRepository->connection = new DatabaseConnection();
+        $post = $postRepository->getPost($id);
 
-    $comments = getCommentsByPostId($id);
+        $commentRepository = new CommentRepository();
+        $commentRepository->connection = new DatabaseConnection();
+        $comments = $commentRepository->getValidatedCommentsByPostId($id);
 
-    // foreach ($comments as $comment) {
-    //     $replies[] = getReplies($comment['id']);
-    // }
-
-    require('templates/post.php');
+        require('templates/post.php');
+    }
 }

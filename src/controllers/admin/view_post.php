@@ -1,10 +1,26 @@
 <?php
 
-require_once('src/models/post.php');
+namespace App\Controllers\Admin\ViewPost;
 
-function viewPost($id)
+require_once('src/lib/database.php');
+require_once('src/model/post.php');
+
+use App\Lib\Database\DatabaseConnection;
+use App\Model\Post\PostRepository;
+
+class ViewPostController
 {
-    $post = getPost($id);
+    public function execute(string $id)
+    {
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
-    require('templates/admin/view_post.php');
+            $postRepository = new PostRepository();
+            $postRepository->connection = new DatabaseConnection();
+            $post = $postRepository->getPost($id);
+
+            require('templates/admin/view_post.php');
+        } else {
+            throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
+        }
+    }
 }

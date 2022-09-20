@@ -15,11 +15,13 @@
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
     <!-- TinyMCE -->
-
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
     <script>
         tinymce.init({
+            force_br_newlines: false,
+            force_p_newlines: false,
+            remove_linebreaks: false,
+            content_style: "p { margin: 0; !important }",
             selector: 'textarea.tiny',
             plugins: [
                 'a11ychecker', 'advlist', 'advcode', 'advtable', 'autolink', 'checklist', 'export',

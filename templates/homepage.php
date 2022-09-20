@@ -1,12 +1,9 @@
     <?php
     $title = "Home";
     ob_start();
-
     require('templates/navbar.php');
     require('templates/headers/homepage.php');
     ?>
-
-
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
@@ -148,11 +145,8 @@
             </div>
         </div>
     </section>
-
     <?php
     require('templates/footer.php');
-
     $content = ob_get_clean();
-
-    require('templates/layout.php')
+    require('templates/layout.php');
     ?>
