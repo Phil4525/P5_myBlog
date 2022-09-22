@@ -14,17 +14,6 @@
         <?php } ?>
     </div>
 </div>
-<div style="margin-left: 50px;">
-    <?php if (isset($comment->children)) {
-        foreach ($comment->children as $replies) {
-            foreach ($replies as $comment) {
-                // var_dump($comment);
-                // die;
-                require('templates/comment.php');
-            }
-        }
-    } ?>
-</div>
 <!-- update comment modal -->
 <div class="modal fade" id="updateComment-<?= $comment->id ?>" tabindex="-1" aria-labelledby="updateCommentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -85,4 +74,15 @@
             </div>
         </div>
     </div>
+</div>
+<div style="margin-left: 50px;">
+    <?php if (isset($comment->children)) {
+        foreach ($comment->children as $replies) {
+            foreach ($replies as $comment) {
+                // var_dump($comment);
+                // die;
+                require('templates/comment.php');
+            }
+        }
+    } ?>
 </div>

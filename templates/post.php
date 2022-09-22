@@ -105,7 +105,5 @@ require('navbar.php');
 require('footer.php');
 $content = ob_get_clean();
 require('layout.php');
-foreach ($comments as $comment) {
-    print_r($comment->children);
-}
+
 ?>

@@ -8,38 +8,9 @@ require('headers/blog.php');
     <div class="row">
         <!-- Blog entries-->
         <div class="col-lg-8">
-            <!-- Featured blog post-->
-            <div class="card mb-4">
-                <a href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                <div class="card-body">
-                    <div class="small text-muted"><?= $featuredPost->frenchCreationDate ?></div>
-                    <h2 class="card-title"><?= $featuredPost->title ?></h2>
-                    <p class="card-text"><?= $featuredPost->chapo ?></p>
-                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>">Read more →</a>
-                </div>
-            </div>
-            <!-- Nested row for non-featured blog posts-->
-            <div class="row" id="posts">
-                <?php
-                foreach ($posts as $post) {
-                ?>
-                    <div class="col-lg-6">
-                        <div class="card mb-4">
-                            <a href="index.php?action=post&id=<?= urlencode($post->id) ?>"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted"><?= $post->frenchCreationDate ?></div>
-                                <h2 class="card-title h4"><?= $post->title ?></h2>
-                                <p class="card-text text-truncate"><?= strip_tags($post->chapo)  ?></p>
-                                <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($post->id) ?>">Read more →</a>
-                            </div>
-                        </div>
-                    </div>
-                <?php
-                }
-                ?>
-            </div>
+            <?php var_dump($results) ?>
             <!-- Pagination-->
-            <nav aria-label="Pagination">
+            <!-- <nav aria-label="Pagination">
                 <hr class="my-0" />
                 <ul class="pagination justify-content-center my-4">
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
@@ -58,7 +29,7 @@ require('headers/blog.php');
                         </a>
                     </li>
                 </ul>
-            </nav>
+            </nav> -->
         </div>
         <!-- Side widgets-->
         <div class="col-lg-4">
@@ -66,7 +37,7 @@ require('headers/blog.php');
             <div class="card mb-4">
                 <div class="card-header">Search</div>
                 <div class="card-body">
-                    <form action="index.php?action=search" method="post">
+                    <form action="index.php?action=search" method="get">
                         <div class="input-group">
                             <input class="form-control" name="keyword" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
                             <button class="btn btn-primary" id="button-search" type="submit">Go!</button>

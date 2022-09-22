@@ -125,10 +125,35 @@ class PostRepository
 
         return $mostCommentedPost;
     }
-}
 
-// SELECT posts.id, COUNT(comments.id) AS number, MAX(posts.title) FROM `posts` 
-// INNER JOIN comments ON comments.post_id = posts.id
-// GROUP BY posts.id
-// ORDER BY number DESC
-// LIMIT 0,1
+    function searchPosts(string $keyword): array
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT id, title, chapo, content, author, 
+            DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
+            DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date 
+            FROM posts 
+            WHERE title LIKE :keyword OR chapo LIKE :keyword OR content LIKE :keyword OR author LIKE :keyword"
+        );
+        $statement->bindValue(':keyword', '%' . $keyword . '%', \PDO::PARAM_STR);
+        $statement->execute();
+
+        $posts = [];
+
+        while ($row = $statement->fetch()) {
+            $post = new Post();
+
+            $post->id = $row['id'];
+            $post->title = $row['title'];
+            $post->chapo = $row['chapo'];
+            // $post->content = $row['content'];
+            $post->author = $row['author'];
+            $post->frenchCreationDate = $row['french_creation_date'];
+            $post->frenchModificationDate = $row['french_modification_date'];
+
+            $posts[] = $post;
+        }
+
+        return $posts;
+    }
+}

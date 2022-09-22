@@ -13,12 +13,3 @@ class LogoutController
         header('Location: index.php');
     }
 }
-
-// function logout()
-// {
-//     session_start();
-
-//     unset($_SESSION['user']);
-
-//     header('Location: index.php');
-// }

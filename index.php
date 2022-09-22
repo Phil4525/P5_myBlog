@@ -13,6 +13,7 @@ require_once('src/controllers/signup.php');
 require_once('src/controllers/password_recovery.php');
 require_once('src/controllers/reset_password.php');
 require_once('src/controllers/contact.php');
+require_once('src/controllers/search.php');
 require_once('src/controllers/admin/admin_login.php');
 require_once('src/controllers/admin/dashboard.php');
 require_once('src/controllers/admin/posts.php');
@@ -42,6 +43,7 @@ use App\Controllers\Signup\SignupController;
 use App\Controllers\PasswordRecovery\PasswordRecoveryController;
 use App\Controllers\ResetPassword\ResetPasswordController;
 use App\Controllers\Contact\ContactController;
+use App\Controllers\Search\SearchController;
 use App\Controllers\Admin\AdminLogin\AdminLoginController;
 use App\Controllers\Admin\Dashboard\DashboardController;
 use App\Controllers\Admin\Posts\PostsController;
@@ -78,11 +80,12 @@ try {
         } elseif ($_GET['action'] === 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $id = $_GET['id'];
+
+                $parentCommentId = null;
                 if (isset($_GET['parentCommentId']) && $_GET['parentCommentId'] > 0) {
                     $parentCommentId = $_GET['parentCommentId'];
-                } else {
-                    $parentCommentId = null;
                 }
+
                 (new AddCommentController())->execute($id, $parentCommentId, $_POST);
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé.');
@@ -128,15 +131,21 @@ try {
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $input = $_POST;
                 }
+
                 (new ResetPasswordController())->execute($email, $password, $input);
             } else {
                 throw new Exception("Aucune information d'utilisateur envoyé.");
             }
-
-            // (new ResetPasswordController())->execute();
         } elseif ($_GET['action'] === 'contact') {
 
             (new ContactController())->execute($_POST);
+        } elseif ($_GET['action'] === 'search') {
+            // if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
+            //     $keyword = $_GET['keyword'];
+
+            // (new SearchController())->execute($keyword);
+            (new SearchController())->execute($_POST);
+            //}
         } elseif ($_GET['action'] === 'adminLogin') {
 
             (new AdminLoginController())->execute($_POST);

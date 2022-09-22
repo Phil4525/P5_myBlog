@@ -204,7 +204,7 @@ class CommentRepository
         return $comments;
     }
 
-    function getValidatedCommentsWithChildrenByPostId(string $postId): array
+    function getCommentsWithChildrenByPostId(string $postId): array
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
@@ -227,9 +227,11 @@ class CommentRepository
             $comment->frenchCreationDate = $row['french_creation_date'];
             $comment->status = $row['status'];
 
-            $comment->children[] = $this->getChildComments($comment->id);
-
             $comments[] = $comment;
+        }
+
+        foreach ($comments as $comment) {
+            $comment->children[] = $this->getChildComments($comment->id);
         }
 
         return $comments;
@@ -257,7 +259,6 @@ class CommentRepository
             $comment->comment = $row['comment'];
             $comment->frenchCreationDate = $row['french_creation_date'];
             $comment->status = $row['status'];
-
             $comment->children[] = $this->getChildComments($comment->id);
 
             $comments[] = $comment;

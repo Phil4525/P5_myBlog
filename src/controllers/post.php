@@ -20,19 +20,7 @@ class PostController
 
         $commentRepository = new CommentRepository();
         $commentRepository->connection = new DatabaseConnection();
-        $comments = $commentRepository->getValidatedCommentsWithChildrenByPostId($id);
-
-        // foreach ($parentComments as $comment) {
-        //     $childComments[] = $commentRepository->getChildComments($comment->id);
-        // }
-        // $comments = $commentsById = $commentRepository->getValidatedCommentsById($id);;
-        // foreach ($comments as $id => $comment) {
-        //     if ($comment->parentCommentId !== null) {
-        //         $commentsById[$comment->parentCommentId]->children[] = $comment;
-        //     }
-        //     $comments[] = $comment;
-        // }
-
+        $comments = $commentRepository->getCommentsWithChildrenByPostId($id);
 
         require('templates/post.php');
     }
