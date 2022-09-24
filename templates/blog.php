@@ -15,7 +15,9 @@ require('headers/blog.php');
                     <div class="small text-muted"><?= $featuredPost->frenchCreationDate ?></div>
                     <h2 class="card-title"><?= $featuredPost->title ?></h2>
                     <p class="card-text"><?= $featuredPost->chapo ?></p>
-                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>">Read more →</a>
+                    <div class="d-flex justify-content-end">
+                        <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>">Read more →</a>
+                    </div>
                 </div>
             </div>
             <!-- Nested row for non-featured blog posts-->
@@ -30,7 +32,9 @@ require('headers/blog.php');
                                 <div class="small text-muted"><?= $post->frenchCreationDate ?></div>
                                 <h2 class="card-title h4"><?= $post->title ?></h2>
                                 <p class="card-text text-truncate"><?= strip_tags($post->chapo)  ?></p>
-                                <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($post->id) ?>">Read more →</a>
+                                <div class="d-flex justify-content-end">
+                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($post->id) ?>">Read more →</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -63,17 +67,7 @@ require('headers/blog.php');
         <!-- Side widgets-->
         <div class="col-lg-4">
             <!-- Search widget-->
-            <div class="card mb-4">
-                <div class="card-header">Search</div>
-                <div class="card-body">
-                    <form action="index.php?action=search" method="post">
-                        <div class="input-group">
-                            <input class="form-control" name="keyword" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                            <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <?php require('templates/search_widget.php') ?>
             <!-- Categories widget-->
             <div class="card mb-4">
                 <div class="card-header">Categories</div>

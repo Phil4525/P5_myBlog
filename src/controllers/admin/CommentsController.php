@@ -2,14 +2,15 @@
 
 namespace App\Controllers\Admin\Comments;
 
-require_once('src/lib/database.php');
-require_once('src/model/comment.php');
+require_once('src/lib/DatabaseConnection.php');
+require_once('src/model/Comment.php');
+require_once('src/repository/CommentRepository.php');
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\Comment\CommentRepository;
+use App\Repository\Comment\CommentRepository;
 use App\Model\Comment\Comment;
-use App\Model\Post\PostRepository;
-use App\Model\Post\Post;
+use App\Repository\Post\PostRepository;
+// use App\Model\Post\Post;
 
 class CommentsController
 {

@@ -2,11 +2,11 @@
 
 namespace App\Controllers\Contact;
 
-require_once('src/lib/database.php');
+require_once('src/lib/DatabaseConnection.php');
 require_once('src/model/contact.php');
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\Contact\ContactRepository;
+use App\Repository\Contact\ContactRepository;
 
 class ContactController
 {

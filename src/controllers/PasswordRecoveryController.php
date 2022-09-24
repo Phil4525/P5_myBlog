@@ -3,7 +3,7 @@
 namespace App\Controllers\PasswordRecovery;
 
 use App\lib\Database\DatabaseConnection;
-use App\Model\User\UserRepository;
+use App\Repository\User\UserRepository;
 
 class PasswordRecoveryController
 {

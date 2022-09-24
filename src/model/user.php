@@ -2,9 +2,9 @@
 
 namespace App\Model\User;
 
-require_once('src/lib/database.php');
+// require_once('src/lib/DatabaseConnection.php');
 
-use App\Lib\Database\DatabaseConnection;
+// use App\Lib\Database\DatabaseConnection;
 
 class User
 {
@@ -14,174 +14,174 @@ class User
     public string $password;
 }
 
-class UserRepository
-{
-    public DatabaseConnection $connection;
+// class UserRepository
+// {
+//     public DatabaseConnection $connection;
 
-    function getUserByEmail(string $email): ?User
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE email = ?"
-        );
-        $statement->execute([$email]);
-        $row = $statement->fetch();
+//     function getUserByEmail(string $email): ?User
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE email = ?"
+//         );
+//         $statement->execute([$email]);
+//         $row = $statement->fetch();
 
-        $user = null;
+//         $user = null;
 
-        if ($row) {
-            $user = new User();
+//         if ($row) {
+//             $user = new User();
 
-            $user->id = $row['id'];
-            $user->username = $row['username'];
-            $user->email = $row['email'];
-            $user->password = $row['password'];
-            $user->role = $row['role'];
-            $user->frenchCreationDate = $row['french_creation_date'];
-        }
+//             $user->id = $row['id'];
+//             $user->username = $row['username'];
+//             $user->email = $row['email'];
+//             $user->password = $row['password'];
+//             $user->role = $row['role'];
+//             $user->frenchCreationDate = $row['french_creation_date'];
+//         }
 
-        return $user;
-    }
+//         return $user;
+//     }
 
-    function createUser(string $username, string $email, string $password): bool
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            'INSERT INTO users(username, email, password, signup_date) VALUES(?, ?, ?, NOW())'
-        );
+//     function createUser(string $username, string $email, string $password): bool
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             'INSERT INTO users(username, email, password, signup_date) VALUES(?, ?, ?, NOW())'
+//         );
 
-        $affectedLines = $statement->execute([$username, $email, $password]);
+//         $affectedLines = $statement->execute([$username, $email, $password]);
 
-        return ($affectedLines > 0);
-    }
+//         return ($affectedLines > 0);
+//     }
 
-    function getUserByName(string $username): ?User
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE username=?"
-        );
-        $statement->execute([$username]);
-        $row = $statement->fetch();
+//     function getUserByName(string $username): ?User
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE username=?"
+//         );
+//         $statement->execute([$username]);
+//         $row = $statement->fetch();
 
-        $user = null;
+//         $user = null;
 
-        if ($row) {
-            $user = new User();
+//         if ($row) {
+//             $user = new User();
 
-            $user->id = $row['id'];
-            $user->username = $row['username'];
-            $user->email = $row['email'];
-            $user->password = $row['password'];
-            $user->role = $row['role'];
-            $user->frenchCreationDate = $row['french_creation_date'];
-        }
+//             $user->id = $row['id'];
+//             $user->username = $row['username'];
+//             $user->email = $row['email'];
+//             $user->password = $row['password'];
+//             $user->role = $row['role'];
+//             $user->frenchCreationDate = $row['french_creation_date'];
+//         }
 
-        return $user;
-    }
+//         return $user;
+//     }
 
-    function getUsers(): array
-    {
-        $statement = $this->connection->getConnection()->query(
-            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users ORDER BY signup_date DESC"
-        );
+//     function getUsers(): array
+//     {
+//         $statement = $this->connection->getConnection()->query(
+//             "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users ORDER BY signup_date DESC"
+//         );
 
-        $users = [];
+//         $users = [];
 
-        while ($row = $statement->fetch()) {
-            $user = new User;
+//         while ($row = $statement->fetch()) {
+//             $user = new User;
 
-            $user->id = $row['id'];
-            $user->username = $row['username'];
-            $user->email = $row['email'];
-            $user->password = $row['password'];
-            $user->role = $row['role'];
-            $user->frenchCreationDate = $row['french_creation_date'];
+//             $user->id = $row['id'];
+//             $user->username = $row['username'];
+//             $user->email = $row['email'];
+//             $user->password = $row['password'];
+//             $user->role = $row['role'];
+//             $user->frenchCreationDate = $row['french_creation_date'];
 
-            $users[] = $user;
-        }
+//             $users[] = $user;
+//         }
 
-        return $users;
-    }
+//         return $users;
+//     }
 
-    function getUserById(string $id): User
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE id=?"
-        );
-        $statement->execute([$id]);
-        $row = $statement->fetch();
+//     function getUserById(string $id): User
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE id=?"
+//         );
+//         $statement->execute([$id]);
+//         $row = $statement->fetch();
 
-        $user = new User;
+//         $user = new User;
 
-        $user->id = $row['id'];
-        $user->username = $row['username'];
-        $user->email = $row['email'];
-        $user->password = $row['password'];
-        $user->role = $row['role'];
-        $user->frenchCreationDate = $row['french_creation_date'];
+//         $user->id = $row['id'];
+//         $user->username = $row['username'];
+//         $user->email = $row['email'];
+//         $user->password = $row['password'];
+//         $user->role = $row['role'];
+//         $user->frenchCreationDate = $row['french_creation_date'];
 
-        return $user;
-    }
+//         return $user;
+//     }
 
-    function deleteUser(string $id): bool
-    {
-        $statement = $this->connection->getConnection()->prepare('DELETE FROM users WHERE id = ?');
-        $affectedLines = $statement->execute([$id]);
+//     function deleteUser(string $id): bool
+//     {
+//         $statement = $this->connection->getConnection()->prepare('DELETE FROM users WHERE id = ?');
+//         $affectedLines = $statement->execute([$id]);
 
-        return ($affectedLines > 0);
-    }
+//         return ($affectedLines > 0);
+//     }
 
-    function getMostActiveUser(): array
-    {
-        $statement = $this->connection->getConnection()->query(
-            'SELECT users.id, COUNT(comments.id) AS number, users.username 
-            FROM users 
-            INNER JOIN comments ON comments.author = users.username 
-            GROUP BY users.id 
-            ORDER BY number DESC LIMIT 0,1'
-        );
-        $row = $statement->fetch();
+//     function getMostActiveUser(): array
+//     {
+//         $statement = $this->connection->getConnection()->query(
+//             'SELECT users.id, COUNT(comments.id) AS number, users.username 
+//             FROM users 
+//             INNER JOIN comments ON comments.author = users.username 
+//             GROUP BY users.id 
+//             ORDER BY number DESC LIMIT 0,1'
+//         );
+//         $row = $statement->fetch();
 
-        $mostActiveUser = [
-            'user_id' => $row['id'],
-            'comments_number' => $row['number'],
-            'user_name' => $row['username'],
-        ];
+//         $mostActiveUser = [
+//             'user_id' => $row['id'],
+//             'comments_number' => $row['number'],
+//             'user_name' => $row['username'],
+//         ];
 
-        return $mostActiveUser;
-    }
+//         return $mostActiveUser;
+//     }
 
-    function updateUserRole(string $id, string $role): bool
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            'UPDATE users SET role = ? WHERE id = ?'
-        );
-        $affectedLines = $statement->execute([$role, $id]);
+//     function updateUserRole(string $id, string $role): bool
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             'UPDATE users SET role = ? WHERE id = ?'
+//         );
+//         $affectedLines = $statement->execute([$role, $id]);
 
-        return ($affectedLines > 0);
-    }
+//         return ($affectedLines > 0);
+//     }
 
-    function getUserByHashedPasswordAndEmail(string $emailHash, string $passwordHash): User
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            "SELECT email,password FROM users WHERE md5(email)= ? and md5(password)= ?"
-        );
-        $statement->execute([$emailHash, $passwordHash]);
-        $row = $statement->fetch();
+//     function getUserByHashedPasswordAndEmail(string $emailHash, string $passwordHash): User
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             "SELECT email,password FROM users WHERE md5(email)= ? and md5(password)= ?"
+//         );
+//         $statement->execute([$emailHash, $passwordHash]);
+//         $row = $statement->fetch();
 
-        $user = new User;
+//         $user = new User;
 
-        $user->email = $row['email'];
-        $user->password = $row['password'];
+//         $user->email = $row['email'];
+//         $user->password = $row['password'];
 
-        return $user;
-    }
+//         return $user;
+//     }
 
-    function updatePassword(string $email, string $newPassword): bool
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            'UPDATE users SET password= ? where email= ?'
-        );
-        $affectedLines = $statement->execute([$newPassword, $email]);
+//     function updatePassword(string $email, string $newPassword): bool
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             'UPDATE users SET password= ? where email= ?'
+//         );
+//         $affectedLines = $statement->execute([$newPassword, $email]);
 
-        return ($affectedLines > 0);
-    }
-}
+//         return ($affectedLines > 0);
+//     }
+// }

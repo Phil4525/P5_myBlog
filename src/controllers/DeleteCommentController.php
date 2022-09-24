@@ -2,11 +2,11 @@
 
 namespace App\Controllers\DeleteComment;
 
-require_once('src/lib/database.php');
+require_once('src/lib/DatabaseConnection.php');
 require_once('src/model/comment.php');
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\Comment\CommentRepository;
+use App\Repository\Comment\CommentRepository;
 
 class DeleteCommentController
 {

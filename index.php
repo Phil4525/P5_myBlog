@@ -1,35 +1,35 @@
 <?php
 session_start();
 
-require_once('src/controllers/homepage.php');
-require_once('src/controllers/blog.php');
-require_once('src/controllers/post.php');
-require_once('src/controllers/add_comment.php');
-require_once('src/controllers/update_comment.php');
-require_once('src/controllers/delete_comment.php');
-require_once('src/controllers/login.php');
-require_once('src/controllers/logout.php');
-require_once('src/controllers/signup.php');
-require_once('src/controllers/password_recovery.php');
-require_once('src/controllers/reset_password.php');
-require_once('src/controllers/contact.php');
-require_once('src/controllers/search.php');
-require_once('src/controllers/admin/admin_login.php');
-require_once('src/controllers/admin/dashboard.php');
-require_once('src/controllers/admin/posts.php');
-require_once('src/controllers/admin/new_post.php');
-require_once('src/controllers/admin/add_post.php');
-require_once('src/controllers/admin/view_post.php');
-require_once('src/controllers/admin/update_post.php');
-require_once('src/controllers/admin/delete_post.php');
-require_once('src/controllers/admin/comments.php');
-require_once('src/controllers/admin/view_comment.php');
-require_once('src/controllers/admin/users.php');
-require_once('src/controllers/admin/view_user.php');
-require_once('src/controllers/admin/delete_user.php');
-require_once('src/controllers/admin/contact.php');
-require_once('src/controllers/admin/view_contact.php');
-require_once('src/controllers/admin/delete_contact.php');
+require_once('src/controllers/HomepageController.php');
+require_once('src/controllers/BlogController.php');
+require_once('src/controllers/PostController.php');
+require_once('src/controllers/AddCommentController.php');
+require_once('src/controllers/UpdateCommentController.php');
+require_once('src/controllers/DeleteCommentController.php');
+require_once('src/controllers/LoginController.php');
+require_once('src/controllers/LogoutController.php');
+require_once('src/controllers/SignupController.php');
+require_once('src/controllers/PasswordRecoveryController.php');
+require_once('src/controllers/ResetPasswordController.php');
+require_once('src/controllers/ContactController.php');
+require_once('src/controllers/SearchController.php');
+require_once('src/controllers/admin/AdminLoginController.php');
+require_once('src/controllers/admin/DashboardController.php');
+require_once('src/controllers/admin/PostsController.php');
+require_once('src/controllers/admin/NewPostController.php');
+require_once('src/controllers/admin/AddPostController.php');
+require_once('src/controllers/admin/ViewPostController.php');
+require_once('src/controllers/admin/UpdatePostController.php');
+require_once('src/controllers/admin/DeletePostController.php');
+require_once('src/controllers/admin/CommentsController.php');
+require_once('src/controllers/admin/ViewCommentController.php');
+require_once('src/controllers/admin/UsersController.php');
+require_once('src/controllers/admin/ViewUserController.php');
+require_once('src/controllers/admin/DeleteUserController.php');
+require_once('src/controllers/admin/ContactsController.php');
+require_once('src/controllers/admin/ViewContactController.php');
+require_once('src/controllers/admin/DeleteContactController.php');
 
 use App\Controllers\Homepage\HomepageController;
 use App\Controllers\Blog\BlogController;
@@ -140,12 +140,8 @@ try {
 
             (new ContactController())->execute($_POST);
         } elseif ($_GET['action'] === 'search') {
-            // if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
-            //     $keyword = $_GET['keyword'];
 
-            // (new SearchController())->execute($keyword);
             (new SearchController())->execute($_POST);
-            //}
         } elseif ($_GET['action'] === 'adminLogin') {
 
             (new AdminLoginController())->execute($_POST);

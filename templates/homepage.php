@@ -1,5 +1,5 @@
     <?php
-    $title = "Home";
+    $title = "Accueil";
     ob_start();
     require('templates/navbar.php');
     require('templates/headers/homepage.php');
@@ -139,7 +139,9 @@
                             <label>Message</label>
                         </div>
                         <!-- Submit Button-->
-                        <button class="btn btn-primary btn-xl" type="submit">Send</button>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-primary btn-xl" type="submit">Send</button>
+                        </div>
                     </form>
                 </div>
             </div>

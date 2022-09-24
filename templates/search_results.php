@@ -1,50 +1,63 @@
 <?php $title = "myBlog";
 ob_start();
 require('navbar.php');
-require('headers/blog.php');
 ?>
 <!-- Page content-->
-<div class="container">
+<div class="container masthead">
     <div class="row">
-        <!-- Blog entries-->
-        <div class="col-lg-8">
-            <?php var_dump($results) ?>
-            <!-- Pagination-->
-            <!-- <nav aria-label="Pagination">
-                <hr class="my-0" />
-                <ul class="pagination justify-content-center my-4">
-                    <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=blog&page=<?= $currentPage - 1 ?>#posts" aria-label="Previous">
-                            <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                    <?php for ($page = 1; $page <= $pages; $page++) : ?>
-                        <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
-                            <a class="page-link" href="index.php?action=blog&page=<?= $page ?>#posts"><?= $page ?></a>
+        <!-- Results -->
+        <div class="col-lg-8" id="results">
+            <?php if ($resultsNb > 0) { ?>
+                <?php if ($resultsNb > 1) { ?>
+                    <p><?= $resultsNb ?> résultats trouvés pour le terme "<?= $keyword ?>"</p>
+                <?php } else { ?>
+                    <p><?= $resultsNb ?> résultat trouvé pour le terme "<?= $keyword ?>"</p>
+                <?php } ?>
+                <?php foreach ($results as $result) { ?>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title h4"><?= $result->title ?></h2>
+                            <div class="small text-muted">publié le <?= $result->frenchCreationDate ?></div>
+                            <div class="small text-muted">auteur : <?= $result->author ?></div>
+                            <p class="card-text text-truncate"><?= $result->chapo  ?></p>
+                            <div class="d-flex justify-content-end">
+                                <a class="btn btn-primary" href="index.php?action=post&id=<?= $result->id ?>">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                <!-- Pagination-->
+                <nav aria-label="Pagination">
+                    <hr class="my-0" />
+                    <ul class="pagination justify-content-center my-4">
+                        <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
+                            <a class="page-link" href="index.php?action=search&keyword=<?= $keyword ?>&page=<?= $currentPage - 1 ?>#results" aria-label="Previous">
+                                <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
+                            </a>
                         </li>
-                    <?php endfor ?>
-                    <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=blog&page=<?= $currentPage + 1 ?>#posts" aria-label="Next">
-                            <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                </ul>
-            </nav> -->
+                        <?php for ($page = 1; $page <= $pages; $page++) : ?>
+                            <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
+                                <a class="page-link" href="index.php?action=search&keyword=<?= $keyword ?>&page=<?= $page ?>#results"><?= $page ?></a>
+                            </li>
+                        <?php endfor ?>
+                        <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
+                            <a class="page-link" href="index.php?action=search&keyword=<?= $keyword ?>&page=<?= $currentPage + 1 ?>#results" aria-label="Next">
+                                <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            <?php } elseif ($resultsNb == 0) { ?>
+                <p>Aucun résultat trouvé pour le terme "<?= $keyword ?>".</p>
+            <?php } else { ?>
+                <p> <?= $message ?></p>
+            <?php } ?>
         </div>
+
         <!-- Side widgets-->
         <div class="col-lg-4">
             <!-- Search widget-->
-            <div class="card mb-4">
-                <div class="card-header">Search</div>
-                <div class="card-body">
-                    <form action="index.php?action=search" method="get">
-                        <div class="input-group">
-                            <input class="form-control" name="keyword" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                            <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <?php require('templates/search_widget.php') ?>
             <!-- Categories widget-->
             <div class="card mb-4">
                 <div class="card-header">Categories</div>

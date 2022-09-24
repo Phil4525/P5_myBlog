@@ -2,9 +2,9 @@
 
 namespace App\Model\Comment;
 
-require_once('src/lib/database.php');
+// require_once('src/lib/DatabaseConnection.php');
 
-use App\Lib\Database\DatabaseConnection;
+// use App\Lib\Database\DatabaseConnection;
 
 class Comment
 {
@@ -16,264 +16,264 @@ class Comment
     public string $frenchCreationDate;
 }
 
-class CommentRepository
-{
-    public DatabaseConnection $connection;
+// class CommentRepository
+// {
+//     public DatabaseConnection $connection;
 
-    function getCommentsByPostId(string $postId): array
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
-            FROM comments 
-            WHERE post_id = ? 
-            ORDER BY comment_date DESC"
-        );
-        $statement->execute([$postId]);
+//     function getCommentsByPostId(string $postId): array
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
+//             FROM comments 
+//             WHERE post_id = ? 
+//             ORDER BY comment_date DESC"
+//         );
+//         $statement->execute([$postId]);
 
-        $comments = [];
+//         $comments = [];
 
-        while ($row = $statement->fetch()) {
-            $comment = new Comment();
+//         while ($row = $statement->fetch()) {
+//             $comment = new Comment();
 
-            $comment->id = $row['id'];
-            $comment->postId = $row['post_id'];
-            $comment->author = $row['author'];
-            $comment->comment = $row['comment'];
-            $comment->frenchCreationDate = $row['french_creation_date'];
-            $comment->status = $row['status'];
+//             $comment->id = $row['id'];
+//             $comment->postId = $row['post_id'];
+//             $comment->author = $row['author'];
+//             $comment->comment = $row['comment'];
+//             $comment->frenchCreationDate = $row['french_creation_date'];
+//             $comment->status = $row['status'];
 
-            $comments[] = $comment;
-        }
+//             $comments[] = $comment;
+//         }
 
-        return $comments;
-    }
+//         return $comments;
+//     }
 
-    function createComment(string $postId, ?string $parentCommentId, string $author, string $comment): bool
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            'INSERT INTO comments(post_id, parent_comment_id, author, comment, comment_date) VALUES(?, ?, ?, ?, NOW())'
-        );
-        $affectedLines = $statement->execute([$postId, $parentCommentId, $author, $comment]);
+//     function createComment(string $postId, ?string $parentCommentId, string $author, string $comment): bool
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             'INSERT INTO comments(post_id, parent_comment_id, author, comment, comment_date) VALUES(?, ?, ?, ?, NOW())'
+//         );
+//         $affectedLines = $statement->execute([$postId, $parentCommentId, $author, $comment]);
 
-        return ($affectedLines > 0);
-    }
+//         return ($affectedLines > 0);
+//     }
 
-    function updateComment(string $id, string $comment): bool
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            'UPDATE comments SET comment = ? WHERE id = ?'
-        );
-        $affectedLines = $statement->execute([$comment, $id]);
+//     function updateComment(string $id, string $comment): bool
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             'UPDATE comments SET comment = ? WHERE id = ?'
+//         );
+//         $affectedLines = $statement->execute([$comment, $id]);
 
-        return ($affectedLines > 0);
-    }
+//         return ($affectedLines > 0);
+//     }
 
-    function getComment(string $id): Comment
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
-            FROM comments 
-            WHERE id = ?"
-        );
-        $statement->execute([$id]);
-        $row = $statement->fetch();
+//     function getComment(string $id): Comment
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
+//             FROM comments 
+//             WHERE id = ?"
+//         );
+//         $statement->execute([$id]);
+//         $row = $statement->fetch();
 
-        $comment = new Comment();
+//         $comment = new Comment();
 
-        $comment->id = $row['id'];
-        $comment->postId = $row['post_id'];
-        $comment->author = $row['author'];
-        $comment->comment = $row['comment'];
-        $comment->frenchCreationDate = $row['french_creation_date'];
-        $comment->status = $row['status'];
+//         $comment->id = $row['id'];
+//         $comment->postId = $row['post_id'];
+//         $comment->author = $row['author'];
+//         $comment->comment = $row['comment'];
+//         $comment->frenchCreationDate = $row['french_creation_date'];
+//         $comment->status = $row['status'];
 
-        return $comment;
-    }
+//         return $comment;
+//     }
 
-    function deleteComment(string $id): bool
-    {
-        $statement = $this->connection->getConnection()->prepare('DELETE FROM comments WHERE id = ?');
-        $affectedLines = $statement->execute([$id]);
+//     function deleteComment(string $id): bool
+//     {
+//         $statement = $this->connection->getConnection()->prepare('DELETE FROM comments WHERE id = ?');
+//         $affectedLines = $statement->execute([$id]);
 
-        return ($affectedLines > 0);
-    }
+//         return ($affectedLines > 0);
+//     }
 
-    function getComments(): array
-    {
-        $statement = $this->connection->getConnection()->query(
-            "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
-            FROM comments 
-            ORDER BY comment_date DESC"
-        );
+//     function getComments(): array
+//     {
+//         $statement = $this->connection->getConnection()->query(
+//             "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
+//             FROM comments 
+//             ORDER BY comment_date DESC"
+//         );
 
-        $comments = [];
-        while ($row = $statement->fetch()) {
-            $comment = new Comment();
+//         $comments = [];
+//         while ($row = $statement->fetch()) {
+//             $comment = new Comment();
 
-            $comment->id = $row['id'];
-            $comment->postId = $row['post_id'];
-            $comment->author = $row['author'];
-            $comment->comment = $row['comment'];
-            $comment->frenchCreationDate = $row['french_creation_date'];
-            $comment->status = $row['status'];
+//             $comment->id = $row['id'];
+//             $comment->postId = $row['post_id'];
+//             $comment->author = $row['author'];
+//             $comment->comment = $row['comment'];
+//             $comment->frenchCreationDate = $row['french_creation_date'];
+//             $comment->status = $row['status'];
 
-            $comments[] = $comment;
-        }
+//             $comments[] = $comment;
+//         }
 
-        return $comments;
-    }
+//         return $comments;
+//     }
 
-    function getCommentsByUsername(string $username): array
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status 
-            FROM comments 
-            WHERE author = ? 
-            ORDER BY comment_date DESC"
-        );
-        $statement->execute([$username]);
+//     function getCommentsByUsername(string $username): array
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status 
+//             FROM comments 
+//             WHERE author = ? 
+//             ORDER BY comment_date DESC"
+//         );
+//         $statement->execute([$username]);
 
-        $comments = [];
+//         $comments = [];
 
-        while ($row = $statement->fetch()) {
-            $comment = new Comment();
+//         while ($row = $statement->fetch()) {
+//             $comment = new Comment();
 
-            $comment->id = $row['id'];
-            $comment->postId = $row['post_id'];
-            $comment->author = $row['author'];
-            $comment->frenchCreationDate = $row['french_creation_date'];
-            $comment->comment = $row['comment'];
-            $comment->status = $row['status'];
+//             $comment->id = $row['id'];
+//             $comment->postId = $row['post_id'];
+//             $comment->author = $row['author'];
+//             $comment->frenchCreationDate = $row['french_creation_date'];
+//             $comment->comment = $row['comment'];
+//             $comment->status = $row['status'];
 
-            $comments[] = $comment;
-        }
+//             $comments[] = $comment;
+//         }
 
-        return $comments;
-    }
+//         return $comments;
+//     }
 
-    function getCommentsWaitingForValidation(): array
-    {
-        $statement = $this->connection->getConnection()->query(
-            "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status 
-            FROM comments
-            WHERE status = 'waiting_for_validation'"
-        );
+//     function getCommentsWaitingForValidation(): array
+//     {
+//         $statement = $this->connection->getConnection()->query(
+//             "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status 
+//             FROM comments
+//             WHERE status = 'waiting_for_validation'"
+//         );
 
-        $comments = [];
-        while ($row = $statement->fetch()) {
-            $comment = new Comment();
+//         $comments = [];
+//         while ($row = $statement->fetch()) {
+//             $comment = new Comment();
 
-            $comment->id = $row['id'];
-            $comment->postId = $row['post_id'];
-            $comment->author = $row['author'];
-            $comment->comment = $row['comment'];
-            $comment->frenchCreationDate = $row['french_creation_date'];
-            $comment->status = $row['status'];
+//             $comment->id = $row['id'];
+//             $comment->postId = $row['post_id'];
+//             $comment->author = $row['author'];
+//             $comment->comment = $row['comment'];
+//             $comment->frenchCreationDate = $row['french_creation_date'];
+//             $comment->status = $row['status'];
 
-            $comments[] = $comment;
-        }
+//             $comments[] = $comment;
+//         }
 
-        return $comments;
-    }
+//         return $comments;
+//     }
 
-    function getValidatedCommentsByPostId(string $postId): array
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
-            FROM comments 
-            WHERE post_id = ? AND status = 'validated'
-            ORDER BY comment_date DESC"
-        );
-        $statement->execute([$postId]);
+//     function getValidatedCommentsByPostId(string $postId): array
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
+//             FROM comments 
+//             WHERE post_id = ? AND status = 'validated'
+//             ORDER BY comment_date DESC"
+//         );
+//         $statement->execute([$postId]);
 
-        $comments = [];
+//         $comments = [];
 
-        while ($row = $statement->fetch()) {
-            $comment = new Comment();
+//         while ($row = $statement->fetch()) {
+//             $comment = new Comment();
 
-            $comment->id = $row['id'];
-            $comment->postId = $row['post_id'];
-            $comment->author = $row['author'];
-            $comment->comment = $row['comment'];
-            $comment->frenchCreationDate = $row['french_creation_date'];
-            $comment->status = $row['status'];
+//             $comment->id = $row['id'];
+//             $comment->postId = $row['post_id'];
+//             $comment->author = $row['author'];
+//             $comment->comment = $row['comment'];
+//             $comment->frenchCreationDate = $row['french_creation_date'];
+//             $comment->status = $row['status'];
 
-            $comments[] = $comment;
-        }
+//             $comments[] = $comment;
+//         }
 
-        return $comments;
-    }
+//         return $comments;
+//     }
 
-    function getCommentsWithChildrenByPostId(string $postId): array
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
-            FROM comments 
-            WHERE post_id = ? AND status = 'validated' AND parent_comment_id IS NULL
-            ORDER BY comment_date DESC"
-        );
-        $statement->execute([$postId]);
+//     function getCommentsWithChildrenByPostId(string $postId): array
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
+//             FROM comments 
+//             WHERE post_id = ? AND status = 'validated' AND parent_comment_id IS NULL
+//             ORDER BY comment_date DESC"
+//         );
+//         $statement->execute([$postId]);
 
-        $comments = [];
+//         $comments = [];
 
-        while ($row = $statement->fetch()) {
-            $comment = new Comment();
+//         while ($row = $statement->fetch()) {
+//             $comment = new Comment();
 
-            $comment->id = $row['id'];
-            $comment->postId = $row['post_id'];
-            $comment->parentCommentId = $row['parent_comment_id'];
-            $comment->author = $row['author'];
-            $comment->comment = $row['comment'];
-            $comment->frenchCreationDate = $row['french_creation_date'];
-            $comment->status = $row['status'];
+//             $comment->id = $row['id'];
+//             $comment->postId = $row['post_id'];
+//             $comment->parentCommentId = $row['parent_comment_id'];
+//             $comment->author = $row['author'];
+//             $comment->comment = $row['comment'];
+//             $comment->frenchCreationDate = $row['french_creation_date'];
+//             $comment->status = $row['status'];
 
-            $comments[] = $comment;
-        }
+//             $comments[] = $comment;
+//         }
 
-        foreach ($comments as $comment) {
-            $comment->children[] = $this->getChildComments($comment->id);
-        }
+//         foreach ($comments as $comment) {
+//             $comment->children[] = $this->getChildComments($comment->id);
+//         }
 
-        return $comments;
-    }
+//         return $comments;
+//     }
 
-    function getChildComments(string $commentId): array
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
-            FROM comments 
-            WHERE parent_comment_id = ? AND status = 'validated'
-            ORDER BY comment_date DESC"
-        );
-        $statement->execute([$commentId]);
+//     function getChildComments(string $commentId): array
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
+//             FROM comments 
+//             WHERE parent_comment_id = ? AND status = 'validated'
+//             ORDER BY comment_date DESC"
+//         );
+//         $statement->execute([$commentId]);
 
-        $comments = [];
+//         $comments = [];
 
-        while ($row = $statement->fetch()) {
-            $comment = new Comment();
+//         while ($row = $statement->fetch()) {
+//             $comment = new Comment();
 
-            $comment->id = $row['id'];
-            $comment->postId = $row['post_id'];
-            $comment->parentCommentId = $row['parent_comment_id'];
-            $comment->author = $row['author'];
-            $comment->comment = $row['comment'];
-            $comment->frenchCreationDate = $row['french_creation_date'];
-            $comment->status = $row['status'];
-            $comment->children[] = $this->getChildComments($comment->id);
+//             $comment->id = $row['id'];
+//             $comment->postId = $row['post_id'];
+//             $comment->parentCommentId = $row['parent_comment_id'];
+//             $comment->author = $row['author'];
+//             $comment->comment = $row['comment'];
+//             $comment->frenchCreationDate = $row['french_creation_date'];
+//             $comment->status = $row['status'];
+//             $comment->children[] = $this->getChildComments($comment->id);
 
-            $comments[] = $comment;
-        }
+//             $comments[] = $comment;
+//         }
 
-        return $comments;
-    }
+//         return $comments;
+//     }
 
-    function updateCommentStatus(string $id, string $status): bool
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            'UPDATE comments SET status = ? WHERE id = ?'
-        );
-        $affectedLines = $statement->execute([$status, $id]);
+//     function updateCommentStatus(string $id, string $status): bool
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             'UPDATE comments SET status = ? WHERE id = ?'
+//         );
+//         $affectedLines = $statement->execute([$status, $id]);
 
-        return ($affectedLines > 0);
-    }
-}
+//         return ($affectedLines > 0);
+//     }
+// }

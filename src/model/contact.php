@@ -2,9 +2,9 @@
 
 namespace App\Model\Contact;
 
-require_once('src/lib/database.php');
+// require_once('src/lib/DatabaseConnection.php');
 
-use App\Lib\Database\DatabaseConnection;
+// use App\Lib\Database\DatabaseConnection;
 
 class Contact
 {
@@ -16,70 +16,70 @@ class Contact
     public string $frenchCreationDate;
 }
 
-class ContactRepository
-{
+// class ContactRepository
+// {
 
-    public DatabaseConnection $connection;
+//     public DatabaseConnection $connection;
 
-    function createContact(string $fullname, string $email, string $phone, string $messageContent): bool
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            'INSERT INTO contacts(fullname, email, phone, message_content, contact_date) VALUES(?, ?, ?, ?, NOW())'
-        );
-        $affectedLines = $statement->execute([$fullname, $email, $phone, $messageContent]);
+//     function createContact(string $fullname, string $email, string $phone, string $messageContent): bool
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             'INSERT INTO contacts(fullname, email, phone, message_content, contact_date) VALUES(?, ?, ?, ?, NOW())'
+//         );
+//         $affectedLines = $statement->execute([$fullname, $email, $phone, $messageContent]);
 
-        return ($affectedLines > 0);
-    }
+//         return ($affectedLines > 0);
+//     }
 
-    function getContacts(): array
-    {
-        $statement = $this->connection->getConnection()->query(
-            "SELECT id, fullname, email, phone, message_content, DATE_FORMAT(contact_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM contacts ORDER BY contact_date DESC"
-        );
+//     function getContacts(): array
+//     {
+//         $statement = $this->connection->getConnection()->query(
+//             "SELECT id, fullname, email, phone, message_content, DATE_FORMAT(contact_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM contacts ORDER BY contact_date DESC"
+//         );
 
-        $contacts = [];
+//         $contacts = [];
 
-        while ($row = $statement->fetch()) {
-            $contact = new Contact;
+//         while ($row = $statement->fetch()) {
+//             $contact = new Contact;
 
-            $contact->id = $row['id'];
-            $contact->fullname = $row['fullname'];
-            $contact->email = $row['email'];
-            $contact->phone = $row['phone'];
-            $contact->messageContent = $row['message_content'];
-            $contact->frenchCreationDate = $row['french_creation_date'];
+//             $contact->id = $row['id'];
+//             $contact->fullname = $row['fullname'];
+//             $contact->email = $row['email'];
+//             $contact->phone = $row['phone'];
+//             $contact->messageContent = $row['message_content'];
+//             $contact->frenchCreationDate = $row['french_creation_date'];
 
-            $contacts[] = $contact;
-        }
+//             $contacts[] = $contact;
+//         }
 
-        return $contacts;
-    }
+//         return $contacts;
+//     }
 
-    function getContactById(string $id): Contact
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, fullname, email, phone, message_content, DATE_FORMAT(contact_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM contacts WHERE id = ?"
-        );
-        $statement->execute([$id]);
-        $row = $statement->fetch();
+//     function getContactById(string $id): Contact
+//     {
+//         $statement = $this->connection->getConnection()->prepare(
+//             "SELECT id, fullname, email, phone, message_content, DATE_FORMAT(contact_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM contacts WHERE id = ?"
+//         );
+//         $statement->execute([$id]);
+//         $row = $statement->fetch();
 
-        $contact = new Contact;
+//         $contact = new Contact;
 
-        $contact->id = $row['id'];
-        $contact->fullname = $row['fullname'];
-        $contact->email = $row['email'];
-        $contact->phone = $row['phone'];
-        $contact->messageContent = $row['message_content'];
-        $contact->frenchCreationDate = $row['french_creation_date'];
+//         $contact->id = $row['id'];
+//         $contact->fullname = $row['fullname'];
+//         $contact->email = $row['email'];
+//         $contact->phone = $row['phone'];
+//         $contact->messageContent = $row['message_content'];
+//         $contact->frenchCreationDate = $row['french_creation_date'];
 
-        return $contact;
-    }
+//         return $contact;
+//     }
 
-    function deleteContact(string $id): bool
-    {
-        $statement = $this->connection->getConnection()->prepare('DELETE FROM contacts WHERE id = ?');
-        $affectedLines = $statement->execute([$id]);
+//     function deleteContact(string $id): bool
+//     {
+//         $statement = $this->connection->getConnection()->prepare('DELETE FROM contacts WHERE id = ?');
+//         $affectedLines = $statement->execute([$id]);
 
-        return ($affectedLines > 0);
-    }
-}
+//         return ($affectedLines > 0);
+//     }
+// }

@@ -3,7 +3,7 @@
 namespace App\Controllers\ResetPassword;
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\User\UserRepository;
+use App\Repository\User\UserRepository;
 
 class ResetPasswordController
 {
