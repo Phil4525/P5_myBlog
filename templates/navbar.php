@@ -41,19 +41,22 @@
             <div class="modal-body">
                 <form action="index.php?action=signup" method="post">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="username" placeholder="Enter your user name" />
+                        <input class="form-control" type="text" name="username" placeholder="Enter your user name" required />
                         <label>User name</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="email" name="email" placeholder="name@example.com" />
+                        <input class="form-control" type="email" name="email" placeholder="name@example.com" required />
                         <label>Email address</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="password" name="password" placeholder="Create a password" />
+                        <input class="form-control" type="password" name="password" placeholder="Create a password" required />
                         <label>Password</label>
                     </div>
-                    <div class="mt-4 mb-0 d-grid">
-                        <button class="btn btn-primary btn-block" type="submit">Send</button>
+                    <!-- <div class="mt-4 mb-0 d-grid">
+                        <button class="btn btn-primary" type="submit">Send</button>
+                    </div> -->
+                    <div class="d-md-flex justify-content-md-end mt-4 mb-4">
+                        <button class="btn btn-primary" type="submit">Send</button>
                     </div>
                 </form>
                 <div class="modal-footer text-center py-3">
@@ -63,7 +66,6 @@
         </div>
     </div>
 </div>
-
 <!-- Modal login -->
 <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -75,18 +77,18 @@
             <div class="modal-body">
                 <form action="index.php?action=login" method="post">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="email" name="email" placeholder="name@example.com" />
+                        <input class="form-control" type="email" name="email" placeholder="name@example.com" required />
                         <label>Email address</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="password" name="password" placeholder="Password" />
+                        <input class="form-control" type="password" name="password" placeholder="Password" required />
                         <label>Password</label>
                     </div>
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" value="" />
                         <label class="form-check-label">Remember Password</label>
                     </div>
-                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                    <div class="d-flex align-items-center justify-content-between mt-4 mb-4">
                         <a class="small" href="" data-bs-toggle="modal" data-bs-target="#passwordRecovery">Forgot Password?</a>
                         <button class="btn btn-primary" type="submit">Login</button>
                     </div>
@@ -98,7 +100,6 @@
         </div>
     </div>
 </div>
-
 <!-- Modal password recovery -->
 <div class="modal fade" id="passwordRecovery" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -111,7 +112,7 @@
                 <div class="small mb-3 text-muted">Enter your email address and we will send you a link to reset your password.</div>
                 <form action="index.php?action=passwordRecovery" method="post">
                     <div class="form-floating mb-3">
-                        <input class="form-control" name="email" type="email" placeholder="name@example.com" />
+                        <input class="form-control" name="email" type="email" placeholder="name@example.com" required />
                         <label for="inputEmail">Email address</label>
                     </div>
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">

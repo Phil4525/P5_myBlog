@@ -30,18 +30,18 @@ class SearchController
         }
 
         $resultsNb = count($allResults);
-        $perPage = 4;
+        $perPage = 5;
         $pages = ceil($resultsNb / $perPage);
         $numberOne = ($currentPage * $perPage) - $perPage;
 
         $statement = $postRepository->connection->getConnection()->prepare(
             "SELECT id, title, chapo, content, author, 
-                    DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
-                    DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date  
-                    FROM posts 
-                    WHERE id< (SELECT max(id) FROM posts) 
-                    AND title LIKE :keyword OR chapo LIKE :keyword OR content LIKE :keyword OR author LIKE :keyword
-                    ORDER BY creation_date DESC LIMIT :numberOne, :perpage;"
+            DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
+            DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date  
+            FROM posts 
+            WHERE id< (SELECT max(id) FROM posts) 
+            AND title LIKE :keyword OR chapo LIKE :keyword OR content LIKE :keyword OR author LIKE :keyword
+            ORDER BY creation_date DESC LIMIT :numberOne, :perpage;"
         );
         $statement->bindValue(':keyword', '%' . $keyword . '%', \PDO::PARAM_STR);
         $statement->bindValue(':numberOne', $numberOne, \PDO::PARAM_INT);
@@ -64,6 +64,10 @@ class SearchController
             $results[] = $post;
         }
 
-        require('templates/search_results.php');
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] == 'admin') {
+            require('templates/admin/search_results.php');
+        } else {
+            require('templates/search_results.php');
+        }
     }
 }

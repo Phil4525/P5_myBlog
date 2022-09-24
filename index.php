@@ -244,6 +244,9 @@ try {
             } else {
                 throw new Exception("Aucun identifiant d'utilisateur envoyé.");
             }
+        } elseif ($_GET['action'] === 'adminSearch') {
+
+            (new SearchController())->execute($_POST);
         } else {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }

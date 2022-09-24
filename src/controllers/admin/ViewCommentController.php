@@ -7,6 +7,7 @@ require_once('src/model/comment.php');
 
 use App\Lib\Database\DatabaseConnection;
 use App\Repository\Comment\CommentRepository;
+use App\Repository\Post\PostRepository;
 
 class ViewCommentController
 {
@@ -38,6 +39,15 @@ class ViewCommentController
 
             if ($comment == null) {
                 throw new \Exception("Le commentaire $id n'existe pas.");
+            }
+
+            $parentComment = null;
+            if ($comment->parentCommentId) {
+                $parentComment = $commentRepository->getComment($comment->parentCommentId);
+            } else {
+                $postRepository = new PostRepository();
+                $postRepository->connection = new DatabaseConnection();
+                $post = $postRepository->getPost($comment->postId);
             }
 
             require('templates/admin/view_comment.php');

@@ -120,12 +120,12 @@
                     <form action="index.php?action=contact" method="post">
                         <!-- Name input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" type="text" name="fullname" placeholder="Enter your name..." />
+                            <input class="form-control" type="text" name="fullname" placeholder="Enter your name..." required />
                             <label>Full name</label>
                         </div>
                         <!-- Email address input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" type="email" name="email" placeholder="name@example.com" />
+                            <input class="form-control" type="email" name="email" placeholder="name@example.com" required />
                             <label>Email address</label>
                         </div>
                         <!-- Phone number input-->
@@ -135,7 +135,7 @@
                         </div>
                         <!-- Message input-->
                         <div class="form-floating mb-3">
-                            <textarea class="form-control" type="text" name="message_content" placeholder="Enter your message here..." style="height: 10rem"></textarea>
+                            <textarea class="form-control" type="text" name="message_content" placeholder="Enter your message here..." style="height: 10rem" required></textarea>
                             <label>Message</label>
                         </div>
                         <!-- Submit Button-->

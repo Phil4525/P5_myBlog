@@ -150,3 +150,7 @@ body {
 th {
   cursor: pointer;
 }
+
+.fa-trash-can:hover {
+  color: red;
+}

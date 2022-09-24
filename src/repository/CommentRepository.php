@@ -12,7 +12,7 @@ class CommentRepository
     function getCommentsByPostId(string $postId): array
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
+            "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
             FROM comments 
             WHERE post_id = ? 
             ORDER BY comment_date DESC"
@@ -26,6 +26,7 @@ class CommentRepository
 
             $comment->id = $row['id'];
             $comment->postId = $row['post_id'];
+            $comment->parentCommentId = $row['parent_comment_id'];
             $comment->author = $row['author'];
             $comment->comment = $row['comment'];
             $comment->frenchCreationDate = $row['french_creation_date'];
@@ -60,7 +61,7 @@ class CommentRepository
     function getComment(string $id): Comment
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
+            "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
             FROM comments 
             WHERE id = ?"
         );
@@ -71,6 +72,7 @@ class CommentRepository
 
         $comment->id = $row['id'];
         $comment->postId = $row['post_id'];
+        $comment->parentCommentId = $row['parent_comment_id'];
         $comment->author = $row['author'];
         $comment->comment = $row['comment'];
         $comment->frenchCreationDate = $row['french_creation_date'];

@@ -7,6 +7,7 @@ require_once('src/model/user.php');
 
 use App\Lib\Database\DatabaseConnection;
 use App\Repository\User\UserRepository;
+use App\Repository\Comment\CommentRepository;
 
 class ViewUserController
 {
@@ -39,6 +40,14 @@ class ViewUserController
             if ($user == null) {
                 throw new \Exception("L'utilisateur' $id n'existe pas.");
             }
+
+            $commentRepository = new CommentRepository();
+            $commentRepository->connection = new DatabaseConnection();
+            $userComments = $commentRepository->getCommentsByUsername($user->username);
+            $userCommentsNb = count($userComments);
+            $lastUserComment = null;
+            if ($userComments) $lastUserComment = array_shift($userComments);
+
 
             require('templates/admin/view_user.php');
         } else {

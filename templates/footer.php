@@ -53,11 +53,11 @@
             <div class="modal-body">
                 <form action="index.php?action=adminLogin" method="post">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="email" name="email" placeholder="name@example.com" />
+                        <input class="form-control" type="email" name="email" placeholder="name@example.com" required />
                         <label>Email address</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="password" name="password" placeholder="Password" />
+                        <input class="form-control" type="password" name="password" placeholder="Password" required />
                         <label>Password</label>
                     </div>
                     <div class="form-check mb-3">
@@ -66,7 +66,6 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                         <a class="small" href="" data-bs-toggle="modal" data-bs-target="#passwordRecovery">Forgot Password?</a>
-                        <!-- <a class="btn btn-primary" href="index.html">Login</a> -->
                         <button class="btn btn-primary" type="submit">Send</button>
                     </div>
                 </form>
