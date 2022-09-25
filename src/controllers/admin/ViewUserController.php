@@ -29,6 +29,7 @@ class ViewUserController
                         throw new \Exception("Le role de l'utilisateur n'a pu être sauvegarder");
                     } else {
                         header('Location: index.php?action=users');
+                        exit;
                     }
                 } else {
                     throw new \Exception('Les données du formulaire sont invalides.');

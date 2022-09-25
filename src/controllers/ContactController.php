@@ -40,8 +40,6 @@ class ContactController
             if (!$success) {
                 throw new \Exception("Impossible d'envoyer le message !");
             } else {
-                header('Location: index.php#contact-form');
-
                 $to = 'admin@myblog.com';
                 $subject = 'nouveau message de ' . $fullname;
                 $mailContent = wordwrap($messageContent, 70, "\r\n");
@@ -52,6 +50,9 @@ class ContactController
                 ];
 
                 mail($to, $subject, $mailContent, $headers);
+
+                header('Location: index.php#contact-form');
+                exit;
             }
         }
     }

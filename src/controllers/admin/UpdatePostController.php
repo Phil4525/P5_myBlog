@@ -39,7 +39,7 @@ class UpdatePostController
                     throw new \Exception("Impossible de modifier l'article' !");
                 } else {
                     header('Location: index.php?action=posts');
-                    die;
+                    exit;
                 }
             }
 

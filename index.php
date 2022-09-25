@@ -83,7 +83,7 @@ try {
 
                 $parentCommentId = null;
                 if (isset($_GET['parentCommentId']) && $_GET['parentCommentId'] > 0) {
-                    $parentCommentId = $_GET['parentCommentId'];
+                    $parentCommentId = strip_tags($_GET['parentCommentId']);
                 }
 
                 (new AddCommentController())->execute($id, $parentCommentId, $_POST);

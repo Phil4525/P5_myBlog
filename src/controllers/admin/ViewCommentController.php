@@ -29,6 +29,7 @@ class ViewCommentController
                         throw new \Exception("Le commentaire n'a pu être sauvegarder");
                     } else {
                         header('Location: index.php?action=comments');
+                        exit;
                     }
                 } else {
                     throw new \Exception('Les données du formulaire sont invalides.');

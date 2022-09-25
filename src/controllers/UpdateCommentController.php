@@ -31,6 +31,7 @@ class UpdateCommentController
             } else {
                 $newComment = $commentRepository->getComment($id);
                 header('Location: index.php?action=post&id=' . $newComment->postId . '#' . $id);
+                exit;
             }
         }
 

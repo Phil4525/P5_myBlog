@@ -37,7 +37,7 @@ class AddPostController
                     throw new \Exception("Impossible d'ajouter l'article' !");
                 } else {
                     header('Location: index.php?action=posts');
-                    die;
+                    exit;
                 }
             }
 

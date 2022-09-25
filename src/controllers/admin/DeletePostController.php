@@ -22,7 +22,7 @@ class DeletePostController
                 throw new \Exception("L'article n'a pu être supprimé.");
             } else {
                 header('Location: index.php?action=posts');
-                die;
+                exit;
             }
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");

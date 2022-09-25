@@ -21,7 +21,7 @@ class DeleteContactController
                 throw new \Exception("Le message n'a pu être supprimé.");
             } else {
                 header('Location: index.php?action=contacts');
-                die;
+                exit;
             }
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
