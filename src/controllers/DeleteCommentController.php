@@ -26,6 +26,7 @@ class DeleteCommentController
                 throw new \Exception("le commentaire n'a pu être supprimer");
             } else {
                 header('Location: index.php?action=post&id=' . $postId);
+                die;
             }
         } elseif ($_SESSION['user']['role'] === 'admin') {
 
@@ -37,6 +38,7 @@ class DeleteCommentController
                 throw new \Exception("le commentaire n'a pu être supprimer");
             } else {
                 header('Location: index.php?action=comments&page=' . $page);
+                die;
             }
         } else {
             throw new \Exception("Vous n'êtes pas autorisé à faire cette requête");

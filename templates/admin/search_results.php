@@ -20,7 +20,7 @@ require('templates/admin/navbar.php');
                                 <h2 class="card-title h4"><?= $result->title ?></h2>
                                 <div class="text-muted">publié le <?= $result->frenchCreationDate ?></div>
                                 <div class="text-muted">auteur : <?= $result->author ?></div>
-                                <p class="card-text text-truncate"><?= $result->chapo  ?></p>
+                                <p class="card-text text-truncate"><?= strip_tags($result->chapo)  ?></p>
                                 <div class="d-flex justify-content-end">
                                     <a class="btn btn-primary" href="index.php?action=viewPost&id=<?= $result->id ?>">Voir l'article →</a>
                                 </div>
@@ -54,10 +54,8 @@ require('templates/admin/navbar.php');
                     <p> <?= $message ?></p>
                 <?php } ?>
             </div>
-
         </main>
     </div>
-
     <?php
     $content = ob_get_clean();
     require('templates/admin/layout.php');

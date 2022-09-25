@@ -23,6 +23,7 @@ class DeleteUserController
                 throw new \Exception("L'utilisateur n'a pu être supprimé.");
             } else {
                 header('Location: index.php?action=users');
+                die;
             }
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");

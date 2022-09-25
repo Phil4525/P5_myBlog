@@ -94,7 +94,7 @@ class PostRepository
         return ($affectedLines > 0);
     }
 
-    function getPostByCommentsNumber(): array
+    function getMostCommentedPost(): Post
     {
         $statement = $this->connection->getConnection()->query(
             'SELECT posts.id, COUNT(comments.id) AS number, posts.title 
@@ -105,11 +105,11 @@ class PostRepository
         );
         $row = $statement->fetch();
 
-        $mostCommentedPost = [
-            'post_id' => $row['id'],
-            'comments_number' => $row['number'],
-            'post_title' => $row['title']
-        ];
+        $mostCommentedPost = new Post();
+
+        $mostCommentedPost->id = $row['id'];
+        $mostCommentedPost->post_title = $row['title'];
+        $mostCommentedPost->comments_number = $row['number'];
 
         return $mostCommentedPost;
     }
@@ -121,7 +121,8 @@ class PostRepository
             DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
             DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date 
             FROM posts 
-            WHERE title LIKE :keyword OR chapo LIKE :keyword OR content LIKE :keyword OR author LIKE :keyword"
+            WHERE title LIKE :keyword OR chapo LIKE :keyword OR content LIKE :keyword OR author LIKE :keyword
+            ORDER BY creation_date DESC"
         );
         $statement->bindValue(':keyword', '%' . $keyword . '%', \PDO::PARAM_STR);
         $statement->execute();

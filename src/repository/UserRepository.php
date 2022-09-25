@@ -120,7 +120,7 @@ class UserRepository
         return ($affectedLines > 0);
     }
 
-    function getMostActiveUser(): array
+    function getMostActiveUser(): User
     {
         $statement = $this->connection->getConnection()->query(
             'SELECT users.id, COUNT(comments.id) AS number, users.username 
@@ -131,11 +131,11 @@ class UserRepository
         );
         $row = $statement->fetch();
 
-        $mostActiveUser = [
-            'user_id' => $row['id'],
-            'comments_number' => $row['number'],
-            'user_name' => $row['username'],
-        ];
+        $mostActiveUser = new User;
+
+        $mostActiveUser->id = $row['id'];
+        $mostActiveUser->username = $row['username'];
+        $mostActiveUser->comments_number = $row['number'];
 
         return $mostActiveUser;
     }

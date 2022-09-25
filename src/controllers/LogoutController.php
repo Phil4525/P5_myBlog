@@ -11,5 +11,6 @@ class LogoutController
         unset($_SESSION['user']);
 
         header('Location: index.php');
+        die;
     }
 }

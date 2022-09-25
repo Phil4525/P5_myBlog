@@ -43,7 +43,7 @@ class DashboardController
             $lastPost = new Post;
             $lastPost = $posts[0];
 
-            $mostCommentedPost = $postRepository->getPostByCommentsNumber();
+            $mostCommentedPost = $postRepository->getMostCommentedPost();
 
             // comments section
 

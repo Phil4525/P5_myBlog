@@ -38,6 +38,7 @@ class AdminLoginController
                 ];
 
                 header('Location:index.php?action=dashboard');
+                die;
             }
         }
     }

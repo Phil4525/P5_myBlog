@@ -29,7 +29,8 @@ class ResetPasswordController
                 if (!$success) {
                     throw new \Exception("Le mot de passe n'a pu être modifié.");
                 } else {
-                    header('Location: index.php');
+                    header('Location: ' . $_SERVER['HTTP_REFERER']);
+                    die;
                 }
             } else {
                 throw new \Exception("Les données du formulaire sont invalides.");

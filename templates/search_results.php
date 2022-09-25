@@ -19,7 +19,7 @@ require('navbar.php');
                             <h2 class="card-title h4"><?= $result->title ?></h2>
                             <div class="small text-muted">publié le <?= $result->frenchCreationDate ?></div>
                             <div class="small text-muted">auteur : <?= $result->author ?></div>
-                            <p class="card-text text-truncate"><?= $result->chapo  ?></p>
+                            <p class="card-text text-truncate"><?= strip_tags($result->chapo) ?></p>
                             <div class="d-flex justify-content-end">
                                 <a class="btn btn-primary" href="index.php?action=post&id=<?= $result->id ?>">Read more →</a>
                             </div>
@@ -49,8 +49,6 @@ require('navbar.php');
                 </nav>
             <?php } elseif ($resultsNb == 0) { ?>
                 <p>Aucun résultat trouvé pour le terme "<?= $keyword ?>".</p>
-            <?php } else { ?>
-                <p> <?= $message ?></p>
             <?php } ?>
         </div>
 
