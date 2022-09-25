@@ -7,7 +7,6 @@ require_once('src/lib/DatabaseConnection.php');
 
 use App\Lib\Database\DatabaseConnection;
 use App\Repository\Post\PostRepository;
-use App\Model\Post\Post;
 use App\Repository\Comment\CommentRepository;
 
 class PostsController
@@ -32,40 +31,22 @@ class PostsController
             $postsNb = count($posts);
             $perPage = 5;
             $pages = ceil($postsNb / $perPage);
-            $numberOne = ($currentPage * $perPage) - $perPage;
+            $offset = ($currentPage * $perPage) - $perPage;
 
-            // select posts of the current page
-            $statement = $postRepository->connection->getConnection()->prepare(
-                "SELECT id, title, author, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
-            DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date FROM posts WHERE id<= (SELECT max(id) FROM posts) ORDER BY creation_date DESC LIMIT :numberOne, :perpage;"
-            );
-            $statement->bindValue(':numberOne', $numberOne, \PDO::PARAM_INT);
-            $statement->bindValue(':perpage', $perPage, \PDO::PARAM_INT);
-            $statement->execute();
-
-            $posts = [];
+            $posts = array_slice($posts, $offset, $perPage);
 
             $commentRepository = new CommentRepository();
             $commentRepository->connection = new DatabaseConnection();
             $comments = $commentRepository->getComments();
 
-            while ($row = $statement->fetch()) {
-                $post = new Post();
+            foreach ($posts as $post) {
                 $commentsNb = 0;
-
-                $post->id = $row['id'];
-                $post->title = $row['title'];
-                $post->author = $row['author'];
-                $post->frenchCreationDate = $row['french_creation_date'];
-                $post->frenchModificationDate = $row['french_modification_date'];
-
                 foreach ($comments as $comment) {
                     if ($post->id == $comment->postId) {
                         $commentsNb++;
                     }
                 }
-
-                $posts[] = [$post, $commentsNb];
+                $postsWithCommentsNb[] = [$post, $commentsNb];
             }
 
             require('templates/admin/post.php');

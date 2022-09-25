@@ -32,7 +32,7 @@ require('templates/admin/navbar.php');
                     <?php } else { ?>
                         <section class="mb-5">
                             <div class="fs-6 mb-2">
-                                <p><strong>Article id : </strong><?= $post->id ?></p>
+                                <p>En reponse à l'<strong>Article id : </strong><?= $post->id ?></p>
                                 <p><strong>Titre : </strong><?= $post->title ?></p>
                                 <p><strong>publié le : </strong><?= $post->frenchCreationDate ?></p>
                                 <p><strong>auteur : </strong><?= $post->author ?></p>

@@ -26,7 +26,7 @@ require('templates/admin/navbar.php');
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($users as $user) {
+                        foreach ($usersWithCommentsNb as $user) {
                         ?>
                             <tr>
                                 <td><?= $user[0]->id ?></td>

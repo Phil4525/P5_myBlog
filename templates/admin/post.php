@@ -34,7 +34,7 @@ require('templates/admin/navbar.php');
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($posts as $post) {
+                        foreach ($postsWithCommentsNb as $post) {
                         ?>
                             <tr>
                                 <td><?= $post[0]->id ?></td>

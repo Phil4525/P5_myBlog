@@ -28,7 +28,7 @@ require('templates/admin/navbar.php');
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($comments as $comment) { ?>
+                        <?php foreach ($commentsWithPostTitle as $comment) { ?>
                             <tr>
                                 <td><?= $comment[0]->id ?></td>
                                 <td><?= $comment[0]->author ?></td>
