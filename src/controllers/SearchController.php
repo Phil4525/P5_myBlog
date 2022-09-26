@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controllers\Search;
+namespace App\Controllers;
 
-use App\Lib\Database\DatabaseConnection;
-use App\Repository\Post\PostRepository;
+use App\Lib\DatabaseConnection;
+use App\Repository\PostRepository;
 
 class SearchController
 {

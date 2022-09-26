@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controllers\ResetPassword;
+namespace App\Controllers;
 
-use App\Lib\Database\DatabaseConnection;
-use App\Repository\User\UserRepository;
+use App\Lib\DatabaseConnection;
+use App\Repository\UserRepository;
 
 class ResetPasswordController
 {

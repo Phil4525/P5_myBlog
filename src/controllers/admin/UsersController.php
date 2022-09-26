@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Controllers\Admin\Users;
+namespace App\Controllers\Admin;
 
-require_once('src/lib/DatabaseConnection.php');
-require_once('src/model/user.php');
-
-use App\Lib\Database\DatabaseConnection;
-use App\Repository\User\UserRepository;
-use App\Repository\Comment\CommentRepository;
+use App\Lib\DatabaseConnection;
+use App\Repository\UserRepository;
+use App\Repository\CommentRepository;
 
 class UsersController
 {

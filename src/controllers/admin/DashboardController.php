@@ -1,20 +1,16 @@
 <?php
 
-namespace App\Controllers\Admin\Dashboard;
+namespace App\Controllers\Admin;
 
-require_once('src/lib/DatabaseConnection.php');
-require_once('src/repository/UserRepository.php');
-require_once('src/repository/ContactRepository.php');
-
-use App\Lib\Database\DatabaseConnection;
-use App\Repository\Post\PostRepository;
-use App\Model\Post\Post;
-use App\Repository\Comment\CommentRepository;
-use App\Model\Comment\Comment;
-use App\Repository\User\UserRepository;
-use App\Model\User\User;
-use App\Repository\Contact\ContactRepository;
-use App\Model\Contact\Contact;
+use App\Lib\DatabaseConnection;
+use App\Repository\PostRepository;
+use App\Model\Post;
+use App\Repository\CommentRepository;
+use App\Model\Comment;
+use App\Repository\UserRepository;
+use App\Model\User;
+use App\Repository\ContactRepository;
+use App\Model\Contact;
 
 class DashboardController
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repository\Post;
+namespace App\Repository;
 
-use App\lib\Database\DatabaseConnection;
-use App\Model\Post\Post;
+use App\lib\DatabaseConnection;
+use App\Model\Post;
 
 class PostRepository
 {

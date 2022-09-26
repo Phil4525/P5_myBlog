@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model\Contact;
+namespace App\Model;
 
 // require_once('src/lib/DatabaseConnection.php');
 

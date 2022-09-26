@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model\Post;
+namespace App\Model;
 
 // require_once('src/lib/DatabaseConnection.php');
 

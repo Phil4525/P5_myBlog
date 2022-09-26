@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model\User;
+namespace App\Model;
 
 // require_once('src/lib/DatabaseConnection.php');
 

@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Controllers\AddComment;
+namespace App\Controllers;
 
-require_once('src/lib/DatabaseConnection.php');
-require_once('src/model/comment.php');
-
-use App\Lib\Database\DatabaseConnection;
-use App\Repository\Comment\CommentRepository;
+use App\Lib\DatabaseConnection;
+use App\Repository\CommentRepository;
 
 class AddCommentController
 {

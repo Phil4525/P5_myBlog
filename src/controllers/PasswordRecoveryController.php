@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controllers\PasswordRecovery;
+namespace App\Controllers;
 
-use App\lib\Database\DatabaseConnection;
-use App\Repository\User\UserRepository;
+use App\lib\DatabaseConnection;
+use App\Repository\UserRepository;
 
 class PasswordRecoveryController
 {

@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Controllers\Admin\UpdatePost;
+namespace App\Controllers\Admin;
 
-require_once('src/lib/DatabaseConnection.php');
-// require_once('src/model/post.php');
-
-use App\Lib\Database\DatabaseConnection;
-use App\Repository\Post\PostRepository;
-use App\Model\Post\Post;
+use App\Lib\DatabaseConnection;
+use App\Repository\PostRepository;
+use App\Model\Post;
 
 class UpdatePostController
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repository\Comment;
+namespace App\Repository;
 
-use App\Lib\Database\DatabaseConnection;
-use App\Model\Comment\Comment;
+use App\Lib\DatabaseConnection;
+use App\Model\Comment;
 
 class CommentRepository
 {

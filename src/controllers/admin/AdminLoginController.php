@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controllers\Admin\AdminLogin;
+namespace App\Controllers\Admin;
 
-use App\Lib\Database\DatabaseConnection;
-use App\Repository\User\UserRepository;
+use App\Lib\DatabaseConnection;
+use App\Repository\UserRepository;
 
 class AdminLoginController
 {

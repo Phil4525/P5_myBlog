@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Controllers\Admin\DeleteContact;
+namespace App\Controllers\Admin;
 
-require_once('src/lib/DatabaseConnection.php');
-require_once('src/model/contact.php');
-
-use App\Lib\Database\DatabaseConnection;
-use App\Repository\Contact\ContactRepository;
+use App\Lib\DatabaseConnection;
+use App\Repository\ContactRepository;
 
 class DeleteContactController
 {

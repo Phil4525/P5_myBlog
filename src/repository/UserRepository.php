@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repository\User;
+namespace App\Repository;
 
-use App\Lib\Database\DatabaseConnection;
-use App\Model\User\User;
+use App\Lib\DatabaseConnection;
+use App\Model\User;
 
 class UserRepository
 {

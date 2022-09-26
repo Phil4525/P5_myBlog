@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Controllers\Admin\ViewComment;
+namespace App\Controllers\Admin;
 
-require_once('src/lib/DatabaseConnection.php');
-require_once('src/model/comment.php');
-
-use App\Lib\Database\DatabaseConnection;
-use App\Repository\Comment\CommentRepository;
-use App\Repository\Post\PostRepository;
+use App\Lib\DatabaseConnection;
+use App\Repository\CommentRepository;
+use App\Repository\PostRepository;
 
 class ViewCommentController
 {

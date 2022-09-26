@@ -1,13 +1,9 @@
 <?php
 
-namespace App\Controllers\Blog;
+namespace App\Controllers;
 
-require_once('src/lib/DatabaseConnection.php');
-// require_once('src/repository/PostRepository.php');
-
-use App\Lib\Database\DatabaseConnection;
-use App\Repository\Post\PostRepository;
-use App\Model\Post\Post;
+use App\Lib\DatabaseConnection;
+use App\Repository\PostRepository;
 
 class BlogController
 {

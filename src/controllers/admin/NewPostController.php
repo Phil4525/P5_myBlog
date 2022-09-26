@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Admin\NewPost;
+namespace App\Controllers\Admin;
 
 class NewPostController
 {

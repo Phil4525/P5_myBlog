@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repository\Contact;
+namespace App\Repository;
 
-use App\Lib\Database\DatabaseConnection;
-use App\Model\Contact\Contact;
+use App\Lib\DatabaseConnection;
+use App\Model\Contact;
 
 class ContactRepository
 {

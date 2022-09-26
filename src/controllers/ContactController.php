@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Controllers\Contact;
+namespace App\Controllers;
 
-require_once('src/lib/DatabaseConnection.php');
-require_once('src/model/contact.php');
-
-use App\Lib\Database\DatabaseConnection;
-use App\Repository\Contact\ContactRepository;
+use App\Lib\DatabaseConnection;
+use App\Repository\ContactRepository;
 
 class ContactController
 {
