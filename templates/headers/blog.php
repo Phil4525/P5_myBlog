@@ -1,5 +1,4 @@
 <!-- Page header with logo and tagline-->
-<?php @session_start() ?>
 <header class="masthead bg-light border-bottom mb-4">
     <div class="container">
         <div class="text-center my-5">

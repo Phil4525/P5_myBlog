@@ -79,9 +79,7 @@
     <?php if (isset($comment->children)) {
         foreach ($comment->children as $replies) {
             foreach ($replies as $comment) {
-                // var_dump($comment);
-                // die;
-                require('templates/comment.php');
+                require 'templates/comment.php';
             }
         }
     } ?>

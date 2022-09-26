@@ -29,6 +29,6 @@ class BlogController
 
         $posts = array_slice($posts, $offset, $perPage);
 
-        require('templates/blog.php');
+        require 'templates/blog.php';
     }
 }

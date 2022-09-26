@@ -1,7 +1,5 @@
 <?php $title = "Reset password"; ?>
-
 <?php ob_start(); ?>
-
 <div id="layoutAuthentication">
     <div id="layoutAuthentication_content">
         <main>
@@ -36,7 +34,5 @@
         </main>
     </div>
 </div>
-
 <?php $content = ob_get_clean(); ?>
-
-<?php require('templates/layout.php') ?>
+<?php require 'templates/layout.php' ?>

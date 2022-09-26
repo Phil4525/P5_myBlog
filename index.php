@@ -227,5 +227,5 @@ try {
     }
 } catch (Exception $e) {
     $errorMessage = $e->getMessage();
-    require('templates/error.php');
+    require 'templates/error.php';
 }

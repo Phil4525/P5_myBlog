@@ -6,6 +6,6 @@ class HomepageController
 {
     public function execute()
     {
-        require('templates/homepage.php');
+        require 'templates/homepage.php';
     }
 }

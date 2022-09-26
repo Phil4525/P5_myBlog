@@ -1,7 +1,7 @@
 <?php $title = "myBlog";
 ob_start();
-require('navbar.php');
-require('headers/blog.php');
+require 'navbar.php';
+require 'headers/blog.php';
 ?>
 <!-- Page content-->
 <div class="container">
@@ -99,7 +99,7 @@ require('headers/blog.php');
     </div>
 </div>
 <?php
-require('footer.php');
+require 'footer.php';
 $content = ob_get_clean();
-require('layout.php');
+require 'layout.php';
 ?>

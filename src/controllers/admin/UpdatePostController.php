@@ -47,7 +47,7 @@ class UpdatePostController
                 throw new \Exception("L'article $id n'existe pas.");
             }
 
-            require('templates/admin/update_post.php');
+            require 'templates/admin/update_post.php';
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }

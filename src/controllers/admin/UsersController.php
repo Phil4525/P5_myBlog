@@ -44,7 +44,7 @@ class UsersController
                 $usersWithCommentsNb[] = [$user, $commentsNb];
             }
 
-            require('templates/admin/user.php');
+            require 'templates/admin/user.php';
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }

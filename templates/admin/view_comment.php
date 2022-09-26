@@ -1,11 +1,11 @@
 <?php
 $title = "Commentaire id : $comment->id";
 ob_start();
-require('templates/admin/navbar.php');
+require 'templates/admin/navbar.php';
 ?>
 <div class="container-fluid">
     <div class="row">
-        <?php require('templates/admin/sidebar.php') ?>
+        <?php require 'templates/admin/sidebar.php' ?>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="col-lg-10">
                 <div class="pt-3 pb-2 mb-3 border-bottom">
@@ -45,9 +45,9 @@ require('templates/admin/navbar.php');
                 <form action="index.php?action=viewComment&id=<?= $comment->id ?>" method="post">
                     <label class="fs-6 mb-3"><strong>Status du commentaire :</strong></label>
                     <select class="form-select mb-4" name="status" aria-label="Default select example">
-                        <option value="1" <?php if ($comment->status == 'validated') echo 'selected' ?>>Validé</option>
-                        <option value="2" <?php if ($comment->status == 'not_validated') echo 'selected' ?>>Non validé</option>
-                        <option value="3" <?php if ($comment->status == 'waiting_for_validation') echo 'selected' ?>>En attente de validation</option>
+                        <option value="1" <?= $comment->status == 'validated' ? 'selected' : '' ?>>Validé</option>
+                        <option value="2" <?= $comment->status == 'not_validated' ? 'selected' : '' ?>>Non validé</option>
+                        <option value="3" <?= $comment->status == 'waiting_for_validation' ? 'selected' : '' ?>>En attente de validation</option>
                     </select>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
                         <button class="btn btn-primary" type="submit">Sauvegarder</button>
@@ -77,5 +77,5 @@ require('templates/admin/navbar.php');
 </div>
 <?php
 $content = ob_get_clean();
-require('templates/admin/layout.php')
+require 'templates/admin/layout.php'
 ?>

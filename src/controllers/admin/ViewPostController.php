@@ -15,7 +15,7 @@ class ViewPostController
             $postRepository->connection = new DatabaseConnection();
             $post = $postRepository->getPost($id);
 
-            require('templates/admin/view_post.php');
+            require 'templates/admin/view_post.php';
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }

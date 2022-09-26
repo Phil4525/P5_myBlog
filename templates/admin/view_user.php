@@ -1,11 +1,11 @@
 <?php
 $title = "Utilisateur id: $user->id";
 ob_start();
-require('templates/admin/navbar.php');
+require 'templates/admin/navbar.php';
 ?>
 <div class="container-fluid">
     <div class="row">
-        <?php require('templates/admin/sidebar.php') ?>
+        <?php require 'templates/admin/sidebar.php' ?>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="col-lg-10">
                 <div class="pt-3 pb-2 mb-3 border-bottom">
@@ -26,8 +26,8 @@ require('templates/admin/navbar.php');
                 <form action="index.php?action=viewUser&id=<?= $user->id ?>" method="post">
                     <label class="mb-3 fs-6"><strong>Rôle :</strong></label>
                     <select class="form-select mb-4" name="role" aria-label="Default select example">
-                        <option value="1" <?php if ($user->role == 'user') echo 'selected' ?>>Utilisateur</option>
-                        <option value="2" <?php if ($user->role == 'admin') echo 'selected' ?>>Administrateur</option>
+                        <option value="1" <?= $user->role == 'user' ? 'selected' : '' ?>>Utilisateur</option>
+                        <option value="2" <?= $user->role == 'admin' ? 'selected' : '' ?>>Administrateur</option>
                     </select>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
                         <button class="btn btn-primary" type="submit">Sauvegarder</button>
@@ -57,5 +57,5 @@ require('templates/admin/navbar.php');
 </div>
 <?php
 $content = ob_get_clean();
-require('templates/admin/layout.php')
+require 'templates/admin/layout.php'
 ?>

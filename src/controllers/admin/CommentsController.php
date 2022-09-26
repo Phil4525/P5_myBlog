@@ -44,7 +44,7 @@ class CommentsController
                 $commentsWithPostTitle[] = [$comment, $postTitle];
             }
 
-            require('templates/admin/comment.php');
+            require 'templates/admin/comment.php';
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }

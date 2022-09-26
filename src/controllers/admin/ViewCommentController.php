@@ -48,7 +48,7 @@ class ViewCommentController
                 $post = $postRepository->getPost($comment->postId);
             }
 
-            require('templates/admin/view_comment.php');
+            require 'templates/admin/view_comment.php';
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }

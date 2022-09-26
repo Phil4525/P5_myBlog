@@ -72,7 +72,7 @@ class DashboardController
             $lastContact = new Contact;
             $lastContact = $contacts[0];
 
-            require('templates/admin/dashboard.php');
+            require 'templates/admin/dashboard.php';
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }

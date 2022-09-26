@@ -18,6 +18,6 @@ class PostController
         $commentRepository->connection = new DatabaseConnection();
         $comments = $commentRepository->getCommentsWithChildrenByPostId($id);
 
-        require('templates/post.php');
+        require 'templates/post.php';
     }
 }

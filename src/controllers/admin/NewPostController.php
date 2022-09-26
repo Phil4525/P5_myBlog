@@ -6,6 +6,6 @@ class NewPostController
 {
     public function execute()
     {
-        require('templates/admin/new_post.php');
+        require 'templates/admin/new_post.php';
     }
 }

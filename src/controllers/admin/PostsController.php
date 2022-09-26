@@ -46,7 +46,7 @@ class PostsController
                 $postsWithCommentsNb[] = [$post, $commentsNb];
             }
 
-            require('templates/admin/post.php');
+            require 'templates/admin/post.php';
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }

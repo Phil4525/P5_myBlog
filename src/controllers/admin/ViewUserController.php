@@ -47,7 +47,7 @@ class ViewUserController
             if ($userComments) $lastUserComment = array_shift($userComments);
 
 
-            require('templates/admin/view_user.php');
+            require 'templates/admin/view_user.php';
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }

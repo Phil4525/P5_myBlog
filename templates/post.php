@@ -1,8 +1,7 @@
 <?php
-@session_start();
 $title = $post->title;
 ob_start();
-require('navbar.php');
+require 'navbar.php';
 ?>
 <!-- Page content-->
 <div class="container masthead d-flex flex-column">
@@ -51,7 +50,7 @@ require('navbar.php');
                         <?php
                         if (isset($comments) && $comments !== null) {
                             foreach ($comments as $comment) {
-                                require('templates/comment.php');
+                                require 'templates/comment.php';
                             }
                         }
                         ?>
@@ -94,8 +93,8 @@ require('navbar.php');
     </div>
 </div>
 <?php
-require('footer.php');
+require 'footer.php';
 $content = ob_get_clean();
-require('layout.php');
+require 'layout.php';
 
 ?>

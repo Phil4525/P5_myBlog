@@ -52,9 +52,6 @@
                         <input class="form-control" type="password" name="password" placeholder="Create a password" required />
                         <label>Password</label>
                     </div>
-                    <!-- <div class="mt-4 mb-0 d-grid">
-                        <button class="btn btn-primary" type="submit">Send</button>
-                    </div> -->
                     <div class="d-md-flex justify-content-md-end mt-4 mb-4">
                         <button class="btn btn-primary" type="submit">Send</button>
                     </div>
@@ -117,7 +114,6 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                         <a class="small" href="index.php?action=login">Return to login</a>
-                        <!-- <a class="btn btn-primary" href="index.php?action=passwordRecovery">Reset Password</a> -->
                         <button class="btn btn-primary" type="submit">Reset Password</button>
                     </div>
                 </form>

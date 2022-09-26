@@ -29,7 +29,7 @@ class ContactsController
 
             $contacts = array_slice($contacts, $offset, $perPage);
 
-            require('templates/admin/contact.php');
+            require 'templates/admin/contact.php';
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }

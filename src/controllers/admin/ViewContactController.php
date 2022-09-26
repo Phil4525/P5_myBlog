@@ -15,7 +15,7 @@ class viewContactController
             $contactRepository->connection = new DatabaseConnection();
             $contact = $contactRepository->getContactById($id);
 
-            require('templates/admin/view_contact.php');
+            require 'templates/admin/view_contact.php';
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }
