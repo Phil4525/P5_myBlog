@@ -30,12 +30,12 @@ require 'templates/admin/navbar.php';
                     <tbody>
                         <?php foreach ($commentsWithPostTitle as $comment) { ?>
                             <tr>
-                                <td><?= $comment[0]->id ?></td>
-                                <td><?= $comment[0]->author ?></td>
-                                <td><?= $comment[1] ?></td>
-                                <td><?= $comment[0]->postId ?></td>
-                                <td><?= $comment[0]->frenchCreationDate ?></td>
-                                <td><?= $comment[0]->status ?></td>
+                                <td><?= htmlspecialchars($comment[0]->id) ?></td>
+                                <td><?= htmlspecialchars($comment[0]->author) ?></td>
+                                <td><?= htmlspecialchars($comment[1]) ?></td>
+                                <td><?= htmlspecialchars($comment[0]->postId) ?></td>
+                                <td><?= htmlspecialchars($comment[0]->frenchCreationDate) ?></td>
+                                <td><?= htmlspecialchars($comment[0]->status) ?></td>
                                 <td><a href="index.php?action=viewComment&id=<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
                                 <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                             </tr>
