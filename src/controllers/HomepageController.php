@@ -9,8 +9,3 @@ class HomepageController
         require('templates/homepage.php');
     }
 }
-
-// function homepage()
-// {
-//     require('templates/homepage.php');
-// }

@@ -2,11 +2,11 @@
 
 namespace App\Controllers\DeleteComment;
 
-require_once('src/lib/database.php');
+require_once('src/lib/DatabaseConnection.php');
 require_once('src/model/comment.php');
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\Comment\CommentRepository;
+use App\Repository\Comment\CommentRepository;
 
 class DeleteCommentController
 {
@@ -26,6 +26,7 @@ class DeleteCommentController
                 throw new \Exception("le commentaire n'a pu être supprimer");
             } else {
                 header('Location: index.php?action=post&id=' . $postId);
+                exit;
             }
         } elseif ($_SESSION['user']['role'] === 'admin') {
 
@@ -37,6 +38,7 @@ class DeleteCommentController
                 throw new \Exception("le commentaire n'a pu être supprimer");
             } else {
                 header('Location: index.php?action=comments&page=' . $page);
+                exit;
             }
         } else {
             throw new \Exception("Vous n'êtes pas autorisé à faire cette requête");

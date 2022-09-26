@@ -2,11 +2,11 @@
 
 namespace App\Controllers\Admin\DeletePost;
 
-require_once('src/lib/database.php');
-require_once('src/model/post.php');
+require_once('src/lib/DatabaseConnection.php');
+// require_once('src/model/post.php');
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\Post\PostRepository;
+use App\Repository\Post\PostRepository;
 
 class DeletePostController
 {
@@ -22,6 +22,7 @@ class DeletePostController
                 throw new \Exception("L'article n'a pu être supprimé.");
             } else {
                 header('Location: index.php?action=posts');
+                exit;
             }
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");

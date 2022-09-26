@@ -3,7 +3,7 @@
 namespace App\Controllers\ResetPassword;
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\User\UserRepository;
+use App\Repository\User\UserRepository;
 
 class ResetPasswordController
 {
@@ -29,7 +29,8 @@ class ResetPasswordController
                 if (!$success) {
                     throw new \Exception("Le mot de passe n'a pu être modifié.");
                 } else {
-                    header('Location: index.php');
+                    header('Location: ' . $_SERVER['HTTP_REFERER']);
+                    exit;
                 }
             } else {
                 throw new \Exception("Les données du formulaire sont invalides.");

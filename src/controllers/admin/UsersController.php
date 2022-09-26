@@ -2,13 +2,12 @@
 
 namespace App\Controllers\Admin\Users;
 
-require_once('src/lib/database.php');
+require_once('src/lib/DatabaseConnection.php');
 require_once('src/model/user.php');
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\User\UserRepository;
-use App\Model\User\User;
-use App\Model\Comment\CommentRepository;
+use App\Repository\User\UserRepository;
+use App\Repository\Comment\CommentRepository;
 
 class UsersController
 {
@@ -28,44 +27,24 @@ class UsersController
             }
 
             $usersNb = count($users);
-            $perPage = 5;
+            $perPage = 10;
             $pages = ceil($usersNb / $perPage);
-            $numberOne = ($currentPage * $perPage) - $perPage;
+            $offset = ($currentPage * $perPage) - $perPage;
 
-            $statement = $userRepository->connection->getConnection()->prepare(
-                "SELECT id, username, email, 'password', DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, role
-                FROM users 
-                ORDER BY signup_date DESC 
-                LIMIT :numberOne, :perpage;"
-            );
-            $statement->bindValue(':numberOne', $numberOne, \PDO::PARAM_INT);
-            $statement->bindValue(':perpage', $perPage, \PDO::PARAM_INT);
-            $statement->execute();
-
-            $users = [];
+            $users = array_slice($users, $offset, $perPage);
 
             $commentRepository = new CommentRepository();
             $commentRepository->connection = new DatabaseConnection();
             $comments = $commentRepository->getComments();
 
-            while ($row = $statement->fetch()) {
-                $user = new User;
+            foreach ($users as $user) {
                 $commentsNb = 0;
-
-                $user->id = $row['id'];
-                $user->username = $row['username'];
-                $user->email = $row['email'];
-                $user->password = $row['password'];
-                $user->frenchCreationDate = $row['french_creation_date'];
-                $user->role = $row['role'];
-
                 foreach ($comments as $comment) {
                     if ($user->username == $comment->author) {
                         $commentsNb++;
                     }
                 }
-
-                $users[] = [$user, $commentsNb];
+                $usersWithCommentsNb[] = [$user, $commentsNb];
             }
 
             require('templates/admin/user.php');

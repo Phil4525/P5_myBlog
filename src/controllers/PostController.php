@@ -2,13 +2,13 @@
 
 namespace App\Controllers\Post;
 
-require_once('src/lib/database.php');
-require_once('src/model/post.php');
+require_once('src/lib/DatabaseConnection.php');
+require_once('src/repository/PostRepository.php');
 require_once('src/model/comment.php');
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\Post\PostRepository;
-use App\Model\Comment\CommentRepository;
+use App\Repository\Post\PostRepository;
+use App\Repository\Comment\CommentRepository;
 
 class PostController
 {
@@ -20,7 +20,7 @@ class PostController
 
         $commentRepository = new CommentRepository();
         $commentRepository->connection = new DatabaseConnection();
-        $comments = $commentRepository->getValidatedCommentsByPostId($id);
+        $comments = $commentRepository->getCommentsWithChildrenByPostId($id);
 
         require('templates/post.php');
     }

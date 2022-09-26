@@ -8,7 +8,7 @@ require('templates/admin/navbar.php');
         <?php require('templates/admin/sidebar.php') ?>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Commentaires</h1>
             </div>
 
@@ -19,7 +19,7 @@ require('templates/admin/navbar.php');
                             <th scope="col">Id</th>
                             <th scope="col">Auteur</th>
                             <!-- <th scope="col">Commentaire</th> -->
-                            <th scope="col">Titre de l'article</th>
+                            <th scope="col">Article</th>
                             <th scope="col">Id de l'article</th>
                             <th scope="col">Date</th>
                             <th scope="col">Status</th>
@@ -28,7 +28,7 @@ require('templates/admin/navbar.php');
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($comments as $comment) { ?>
+                        <?php foreach ($commentsWithPostTitle as $comment) { ?>
                             <tr>
                                 <td><?= $comment[0]->id ?></td>
                                 <td><?= $comment[0]->author ?></td>
@@ -44,13 +44,13 @@ require('templates/admin/navbar.php');
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Delete comment</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Suppression de commentaire</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <p>Etes-vous sûr de vouloir supprimer ?</p>
-                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <a class="btn btn-primary" href="index.php?action=deleteComment&id=<?= $comment[0]->id ?>&page=<?= $currentPage ?>" role="button">Confirmer</a>
+                                            <div class="d-md-flex justify-content-md-end">
+                                                <a type="button" class="btn btn-danger" href="index.php?action=deleteComment&id=<?= $comment[0]->id ?>&page=<?= $currentPage ?>" role="button">Confirmer</a>
                                             </div>
                                         </div>
                                     </div>

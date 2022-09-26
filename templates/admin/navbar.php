@@ -3,7 +3,9 @@
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
+    <form class="w-100" action="index.php?action=adminSearch" method="post">
+        <input class="form-control form-control-dark rounded-0 border-0" name="keyword" type="text" placeholder="Search" aria-label="Search">
+    </form>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
             <a class="nav-link px-3" href="index.php?action=logout">Sign out</a>

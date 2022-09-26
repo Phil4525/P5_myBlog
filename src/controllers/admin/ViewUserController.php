@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Admin\ViewUser;
 
-require_once('src/lib/database.php');
+require_once('src/lib/DatabaseConnection.php');
 require_once('src/model/user.php');
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\User\UserRepository;
+use App\Repository\User\UserRepository;
+use App\Repository\Comment\CommentRepository;
 
 class ViewUserController
 {
@@ -28,6 +29,7 @@ class ViewUserController
                         throw new \Exception("Le role de l'utilisateur n'a pu être sauvegarder");
                     } else {
                         header('Location: index.php?action=users');
+                        exit;
                     }
                 } else {
                     throw new \Exception('Les données du formulaire sont invalides.');
@@ -39,6 +41,14 @@ class ViewUserController
             if ($user == null) {
                 throw new \Exception("L'utilisateur' $id n'existe pas.");
             }
+
+            $commentRepository = new CommentRepository();
+            $commentRepository->connection = new DatabaseConnection();
+            $userComments = $commentRepository->getCommentsByUsername($user->username);
+            $userCommentsNb = count($userComments);
+            $lastUserComment = null;
+            if ($userComments) $lastUserComment = array_shift($userComments);
+
 
             require('templates/admin/view_user.php');
         } else {

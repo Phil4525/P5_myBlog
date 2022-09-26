@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Admin\UpdatePost;
 
-require_once('src/lib/database.php');
-require_once('src/model/post.php');
+require_once('src/lib/DatabaseConnection.php');
+// require_once('src/model/post.php');
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\Post\PostRepository;
+use App\Repository\Post\PostRepository;
+use App\Model\Post\Post;
 
 class UpdatePostController
 {
@@ -23,22 +24,22 @@ class UpdatePostController
                     isset($input['title'], $input['chapo'], $input['content'], $input['author']) &&
                     !empty(trim($input['title'])) && !empty(trim($input['chapo'])) && !empty(trim($input['content'])) && !empty(trim($input['author']))
                 ) {
-                    $post = [
-                        'title' => $input['title'],
-                        'chapo' => $input['chapo'],
-                        'content' => $input['content'],
-                        'author' => $input['author'],
-                    ];
+                    $post = new Post();
+                    $post->title = $input['title'];
+                    $post->chapo = $input['chapo'];
+                    $post->content = $input['content'];
+                    $post->author = $input['author'];
                 } else {
                     throw new \Exception('Les données du formulaire sont invalides.');
                 }
 
-                $success = $postRepository->updatePost($id, $post['title'], $post['chapo'], $post['content'], $post['author']);
+                $success = $postRepository->updatePost($id, $post->title, $post->chapo, $post->content, $post->author);
 
                 if (!$success) {
                     throw new \Exception("Impossible de modifier l'article' !");
                 } else {
                     header('Location: index.php?action=posts');
+                    exit;
                 }
             }
 

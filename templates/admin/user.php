@@ -6,12 +6,10 @@ require('templates/admin/navbar.php');
 <div class="container-fluid">
     <div class="row">
         <?php require('templates/admin/sidebar.php') ?>
-
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Utilisateurs</h1>
             </div>
-
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -20,15 +18,15 @@ require('templates/admin/navbar.php');
                             <th scope="col">Nom</th>
                             <th scope="col">Email</th>
                             <th scope="col">Nombre de commentaires</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">date d'inscription</th>
+                            <th scope="col">Rôle</th>
+                            <th scope="col">Date d'inscription</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($users as $user) {
+                        foreach ($usersWithCommentsNb as $user) {
                         ?>
                             <tr>
                                 <td><?= $user[0]->id ?></td>
@@ -45,7 +43,7 @@ require('templates/admin/navbar.php');
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Delete comment</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Suppresssion d'utilisateur</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">

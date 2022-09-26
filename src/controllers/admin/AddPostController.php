@@ -2,11 +2,11 @@
 
 namespace App\Controllers\Admin\AddPost;
 
-require_once('src/lib/database.php');
+require_once('src/lib/DatabaseConnection.php');
 require_once('src/model/post.php');
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\Post\PostRepository;
+use App\Repository\Post\PostRepository;
 
 class AddPostController
 {
@@ -37,6 +37,7 @@ class AddPostController
                     throw new \Exception("Impossible d'ajouter l'article' !");
                 } else {
                     header('Location: index.php?action=posts');
+                    exit;
                 }
             }
 

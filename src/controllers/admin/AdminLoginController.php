@@ -3,8 +3,7 @@
 namespace App\Controllers\Admin\AdminLogin;
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\User\UserRepository;
-use Exception;
+use App\Repository\User\UserRepository;
 
 class AdminLoginController
 {
@@ -28,7 +27,7 @@ class AdminLoginController
                 }
 
                 if ($user->role !== 'admin') {
-                    throw new Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
+                    throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
                 }
 
                 $_SESSION['user'] = [
@@ -39,6 +38,7 @@ class AdminLoginController
                 ];
 
                 header('Location:index.php?action=dashboard');
+                exit;
             }
         }
     }

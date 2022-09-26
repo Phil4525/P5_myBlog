@@ -2,17 +2,15 @@
 
 namespace App\Controllers\AddComment;
 
-@session_start();
-
-require_once('src/lib/database.php');
+require_once('src/lib/DatabaseConnection.php');
 require_once('src/model/comment.php');
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\Comment\CommentRepository;
+use App\Repository\Comment\CommentRepository;
 
 class AddCommentController
 {
-    public function execute(string $postId, array $input)
+    public function execute(string $postId, ?string $parentCommentId, array $input)
     {
         $author = null;
         $comment = null;
@@ -31,12 +29,13 @@ class AddCommentController
 
         $commentRepository = new CommentRepository();
         $commentRepository->connection = new DatabaseConnection();
-        $success = $commentRepository->createComment($postId, $author, $comment);
+        $success = $commentRepository->createComment($postId, $parentCommentId, $author, $comment);
 
         if (!$success) {
             throw new \Exception("Impossible d'ajouter le commentaire !");
         } else {
             header('Location: index.php?action=post&id=' . $postId);
+            exit;
         }
     }
 }

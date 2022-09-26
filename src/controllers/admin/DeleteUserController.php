@@ -2,11 +2,11 @@
 
 namespace App\Controllers\Admin\DeleteUser;
 
-require_once('src/lib/database.php');
+require_once('src/lib/DatabaseConnection.php');
 require_once('src/model/user.php');
 
 use App\Lib\Database\DatabaseConnection;
-use App\Model\User\UserRepository;
+use App\Repository\User\UserRepository;
 
 class DeleteUserController
 {
@@ -23,6 +23,7 @@ class DeleteUserController
                 throw new \Exception("L'utilisateur n'a pu être supprimé.");
             } else {
                 header('Location: index.php?action=users');
+                exit;
             }
         } else {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");

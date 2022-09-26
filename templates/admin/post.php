@@ -9,7 +9,7 @@ require('templates/admin/navbar.php');
         <?php require('templates/admin/sidebar.php') ?>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Articles</h1>
             </div>
 
@@ -34,7 +34,7 @@ require('templates/admin/navbar.php');
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($posts as $post) {
+                        foreach ($postsWithCommentsNb as $post) {
                         ?>
                             <tr>
                                 <td><?= $post[0]->id ?></td>
@@ -53,13 +53,13 @@ require('templates/admin/navbar.php');
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Suppression de l'article</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <p>Etes-vous sûr de vouloir supprimer ?</p>
-                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <a class="btn btn-primary" href="index.php?action=deletePost&id=<?= $post[0]->id ?>" role="button">Confirmer</a>
+                                            <div class="d-md-flex justify-content-md-end">
+                                                <a type="button" class="btn btn-danger" href="index.php?action=deletePost&id=<?= $post[0]->id ?>" role="button">Confirmer</a>
                                             </div>
                                         </div>
                                     </div>
