@@ -1,7 +1,6 @@
 <?php
 $title = $post->title;
 ob_start();
-require 'navbar.php';
 ?>
 <!-- Page content-->
 <div class="container masthead d-flex flex-column">
@@ -93,8 +92,6 @@ require 'navbar.php';
     </div>
 </div>
 <?php
-require 'footer.php';
 $content = ob_get_clean();
 require 'layout.php';
-
 ?>

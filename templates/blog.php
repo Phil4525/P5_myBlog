@@ -1,6 +1,5 @@
 <?php $title = "myBlog";
 ob_start();
-require 'navbar.php';
 require 'headers/blog.php';
 ?>
 <!-- Page content-->
@@ -99,7 +98,6 @@ require 'headers/blog.php';
     </div>
 </div>
 <?php
-require 'footer.php';
 $content = ob_get_clean();
 require 'layout.php';
 ?>

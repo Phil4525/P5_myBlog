@@ -33,6 +33,8 @@ class BlogController
 
         $posts = array_slice($posts, $offset, $perPage);
 
+        $session = $globals->getSESSION('user');
+
         require 'templates/blog.php';
     }
 }

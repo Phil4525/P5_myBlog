@@ -1,10 +1,3 @@
-<?php
-
-use App\Globals\Globals;
-
-$globals = new Globals();
-$session = $globals->getSESSION('user');
-?>
 <header class="masthead bg-light border-bottom mb-4">
     <div class="container">
         <div class="text-center my-5">
