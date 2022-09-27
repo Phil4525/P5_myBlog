@@ -19,9 +19,10 @@ class ContactController
 
                 if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
                     throw new \Exception("L'adresse email est incorrecte.");
-                } else {
-                    $email = $input['email'];
+                    // } else {
+                    //     $email = $input['email'];
                 }
+                $email = $input['email'];
 
                 $phone = strip_tags($input['phone']);
 

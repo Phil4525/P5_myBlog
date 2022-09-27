@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use App\Globals\Globals;
 use App\Repository\UserRepository;
 use App\Repository\CommentRepository;
 
@@ -10,6 +11,9 @@ class UsersController
 {
     public function execute()
     {
+        $globals = new Globals();
+        $get = $globals->getGET();
+
         if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
             $userRepository = new UserRepository();
@@ -17,8 +21,8 @@ class UsersController
 
             $users = $userRepository->getUsers();
 
-            if (isset($_GET['page']) && !empty($_GET['page'])) {
-                $currentPage = (int) strip_tags($_GET['page']);
+            if (isset($get['page']) && !empty($get['page'])) {
+                $currentPage = (int) strip_tags($get['page']);
             } else {
                 $currentPage = 1;
             }

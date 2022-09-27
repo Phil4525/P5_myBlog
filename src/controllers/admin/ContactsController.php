@@ -3,12 +3,16 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use App\Globals\Globals;
 use App\Repository\ContactRepository;
 
 class ContactsController
 {
     public function execute()
     {
+        $globals = new Globals();
+        $get = $globals->getGET();
+
         if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
             $contactRepository = new ContactRepository();
@@ -16,8 +20,8 @@ class ContactsController
 
             $contacts  = $contactRepository->getContacts();
 
-            if (isset($_GET['page']) && !empty($_GET['page'])) {
-                $currentPage = (int) strip_tags($_GET['page']);
+            if (isset($get['page']) && !empty($get['page'])) {
+                $currentPage = (int) strip_tags($get['page']);
             } else {
                 $currentPage = 1;
             }

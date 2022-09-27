@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use App\Globals\Globals;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 
@@ -10,6 +11,9 @@ class CommentsController
 {
     public function execute()
     {
+        $globals = new Globals();
+        $get = $globals->getGET();
+
         if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
 
             $commentRepository = new CommentRepository();
@@ -17,8 +21,8 @@ class CommentsController
 
             $comments = $commentRepository->getComments();
 
-            if (isset($_GET['page']) && !empty($_GET['page'])) {
-                $currentPage = (int) strip_tags($_GET['page']);
+            if (isset($get['page']) && !empty($get['page'])) {
+                $currentPage = (int) strip_tags($get['page']);
             } else {
                 $currentPage = 1;
             }
