@@ -3,6 +3,7 @@ session_start();
 
 require __DIR__ . '/vendor/autoload.php';
 
+use App\Globals\Globals;
 use App\Controllers\HomepageController;
 use App\Controllers\BlogController;
 use App\Controllers\PostController;
@@ -33,192 +34,197 @@ use App\Controllers\Admin\ContactsController;
 use App\Controllers\Admin\viewContactController;
 use App\Controllers\Admin\DeleteContactController;
 
+$globals = new Globals();
+$get = $globals->getGET();
+$post = $globals->getPOST();
+
 try {
-    if (isset($_GET['action']) && $_GET['action'] !== '') {
-        if ($_GET['action'] === 'homepage') {
+    if (isset($get['action']) && $get['action'] !== '') {
+        if ($get['action'] === 'homepage') {
 
             (new HomepageController())->execute();
-        } elseif ($_GET['action'] === 'blog') {
+        } elseif ($get['action'] === 'blog') {
 
             (new BlogController())->execute();
-        } elseif ($_GET['action'] === 'post') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $id = $_GET['id'];
+        } elseif ($get['action'] === 'post') {
+            if (isset($get['id']) && $get['id'] > 0) {
+                $id = $get['id'];
 
                 (new PostController())->execute($id);
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé.');
             }
-        } elseif ($_GET['action'] === 'addComment') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $id = $_GET['id'];
+        } elseif ($get['action'] === 'addComment') {
+            if (isset($get['id']) && $get['id'] > 0) {
+                $id = $get['id'];
 
                 $parentCommentId = null;
-                if (isset($_GET['parentCommentId']) && $_GET['parentCommentId'] > 0) {
-                    $parentCommentId = strip_tags($_GET['parentCommentId']);
+                if (isset($get['parentCommentId']) && $get['parentCommentId'] > 0) {
+                    $parentCommentId = strip_tags($get['parentCommentId']);
                 }
 
-                (new AddCommentController())->execute($id, $parentCommentId, $_POST);
+                (new AddCommentController())->execute($id, $parentCommentId, $post);
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé.');
             }
-        } elseif ($_GET['action'] === 'updateComment') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $id = $_GET['id'];
+        } elseif ($get['action'] === 'updateComment') {
+            if (isset($get['id']) && $get['id'] > 0) {
+                $id = $get['id'];
                 // It sets the input only when the HTTP method is POST (ie. the form is submitted).
                 $input = null;
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $input = $_POST;
+                // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if ($globals->getSERVER('REQUEST_METHOD') === 'POST') {
+                    $input = $post;
                 }
                 (new UpdateCommentController())->execute($id, $input);
             } else {
                 throw new Exception('Aucun identifiant de commentaire envoyé.');
             }
-        } elseif ($_GET['action'] === 'deleteComment') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $id = $_GET['id'];
+        } elseif ($get['action'] === 'deleteComment') {
+            if (isset($get['id']) && $get['id'] > 0) {
+                $id = $get['id'];
 
                 (new DeleteCommentController())->execute($id);
             } else {
                 throw new Exception('Aucun identifiant de commentaire envoyé.');
             }
-        } elseif ($_GET['action'] === 'login') {
+        } elseif ($get['action'] === 'login') {
 
-            (new LoginController())->execute($_POST);
-        } elseif ($_GET['action'] === 'logout') {
+            (new LoginController())->execute($post);
+        } elseif ($get['action'] === 'logout') {
 
             (new LogoutController())->execute();
-        } elseif ($_GET['action'] === 'signup') {
+        } elseif ($get['action'] === 'signup') {
 
-            (new SignupController())->execute($_POST);
-        } elseif ($_GET['action'] === 'passwordRecovery') {
+            (new SignupController())->execute($post);
+        } elseif ($get['action'] === 'passwordRecovery') {
 
-            (new PasswordRecoveryController())->execute($_POST);
-        } elseif ($_GET['action'] === 'resetPassword') {
-            if (isset($_GET['key']) && isset($_GET['reset'])) {
-                $email = $_GET['key'];
-                $password = $_GET['reset'];
+            (new PasswordRecoveryController())->execute($post);
+        } elseif ($get['action'] === 'resetPassword') {
+            if (isset($get['key']) && isset($get['reset'])) {
+                $email = $get['key'];
+                $password = $get['reset'];
                 // It sets the input only when the HTTP method is POST (ie. the form is submitted).
                 $input = null;
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $input = $_POST;
+                if ($globals->getSERVER('REQUEST_METHOD') === 'POST') {
+                    $input = $post;
                 }
 
                 (new ResetPasswordController())->execute($email, $password, $input);
             } else {
                 throw new Exception("Aucune information d'utilisateur envoyé.");
             }
-        } elseif ($_GET['action'] === 'contact') {
+        } elseif ($get['action'] === 'contact') {
 
-            (new ContactController())->execute($_POST);
-        } elseif ($_GET['action'] === 'search') {
+            (new ContactController())->execute($post);
+        } elseif ($get['action'] === 'search') {
 
-            (new SearchController())->execute($_POST);
-        } elseif ($_GET['action'] === 'adminLogin') {
+            (new SearchController())->execute($post);
+        } elseif ($get['action'] === 'adminLogin') {
 
-            (new AdminLoginController())->execute($_POST);
-        } elseif ($_GET['action'] === 'dashboard') {
+            (new AdminLoginController())->execute($post);
+        } elseif ($get['action'] === 'dashboard') {
 
             (new DashboardController())->execute();
-        } elseif ($_GET['action'] === 'posts') {
+        } elseif ($get['action'] === 'posts') {
 
             (new PostsController())->execute();
-        } elseif ($_GET['action'] === 'newPost') {
+        } elseif ($get['action'] === 'newPost') {
 
             (new NewPostController())->execute();
-        } elseif ($_GET['action'] === 'addPost') {
+        } elseif ($get['action'] === 'addPost') {
 
-            (new AddPostController())->execute($_POST);
-        } elseif ($_GET['action'] === 'viewPost') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $id = $_GET['id'];
+            (new AddPostController())->execute($post);
+        } elseif ($get['action'] === 'viewPost') {
+            if (isset($get['id']) && $get['id'] > 0) {
+                $id = $get['id'];
 
                 (new ViewPostController())->execute($id);
             } else {
                 throw new Exception("Aucun identifiant d'article envoyé.");
             }
-        } elseif ($_GET['action'] === 'editPost') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $id = $_GET['id'];
+        } elseif ($get['action'] === 'editPost') {
+            if (isset($get['id']) && $get['id'] > 0) {
+                $id = $get['id'];
                 // It sets the input only when the HTTP method is POST (ie. the form is submitted).
                 $input = null;
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $input = $_POST;
+                if ($globals->getSERVER('REQUEST_METHOD') === 'POST') {
+                    $input = $post;
                 }
                 (new UpdatePostController())->execute($id, $input);
             } else {
                 throw new Exception("Aucun identifiant d'article envoyé.");
             }
-        } elseif ($_GET['action'] === 'deletePost') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $id = $_GET['id'];
+        } elseif ($get['action'] === 'deletePost') {
+            if (isset($get['id']) && $get['id'] > 0) {
+                $id = $get['id'];
 
                 (new DeletePostController())->execute($id);
             } else {
                 throw new Exception('Aucun identifiant de commentaire envoyé.');
             }
-        } elseif ($_GET['action'] === 'comments') {
+        } elseif ($get['action'] === 'comments') {
 
             (new CommentsController())->execute();
-        } elseif ($_GET['action'] === 'viewComment') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $id = $_GET['id'];
+        } elseif ($get['action'] === 'viewComment') {
+            if (isset($get['id']) && $get['id'] > 0) {
+                $id = $get['id'];
 
                 $input = null;
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $input = $_POST;
+                if ($globals->getSERVER('REQUEST_METHOD') === 'POST') {
+                    $input = $post;
                 }
 
                 (new ViewCommentController())->execute($id, $input);
             } else {
                 throw new Exception("Aucun identifiant de commentaire envoyé.");
             }
-        } elseif ($_GET['action'] === 'users') {
+        } elseif ($get['action'] === 'users') {
 
             (new UsersController())->execute();
-        } elseif ($_GET['action'] === 'viewUser') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $id = $_GET['id'];
+        } elseif ($get['action'] === 'viewUser') {
+            if (isset($get['id']) && $get['id'] > 0) {
+                $id = $get['id'];
 
                 $input = null;
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $input = $_POST;
+                if ($globals->getSERVER('REQUEST_METHOD') === 'POST') {
+                    $input = $post;
                 }
 
                 (new ViewUserController())->execute($id, $input);
             } else {
                 throw new Exception("Aucun identifiant d'utilisateur envoyé.");
             }
-        } elseif ($_GET['action'] === 'deleteUser') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $id = $_GET['id'];
+        } elseif ($get['action'] === 'deleteUser') {
+            if (isset($get['id']) && $get['id'] > 0) {
+                $id = $get['id'];
 
                 (new DeleteUserController())->execute($id);
             } else {
                 throw new Exception("Aucun identifiant d'utilisateur envoyé.");
             }
-        } elseif ($_GET['action'] === 'contacts') {
+        } elseif ($get['action'] === 'contacts') {
 
             (new ContactsController())->execute();
-        } elseif ($_GET['action'] === 'viewContact') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $id = $_GET['id'];
+        } elseif ($get['action'] === 'viewContact') {
+            if (isset($get['id']) && $get['id'] > 0) {
+                $id = $get['id'];
 
                 (new viewContactController())->execute($id);
             } else {
                 throw new Exception("Aucun identifiant de message envoyé.");
             }
-        } elseif ($_GET['action'] === 'deleteContact') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $id = $_GET['id'];
+        } elseif ($get['action'] === 'deleteContact') {
+            if (isset($get['id']) && $get['id'] > 0) {
+                $id = $get['id'];
 
                 (new DeleteContactController())->execute($id);
             } else {
                 throw new Exception("Aucun identifiant d'utilisateur envoyé.");
             }
-        } elseif ($_GET['action'] === 'adminSearch') {
+        } elseif ($get['action'] === 'adminSearch') {
 
-            (new SearchController())->execute($_POST);
+            (new SearchController())->execute($post);
         } else {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }
