@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Lib\DatabaseConnection;
+use App\Globals\Globals;
 use App\Repository\UserRepository;
 
 class LoginController
@@ -26,12 +27,22 @@ class LoginController
                     throw new \Exception("L'utilisateur ou le mot de passe est incorrect.");
                 }
 
-                $_SESSION['user'] = [
+                $userData = [
                     'id' => $user->id,
                     'username' => $user->username,
                     'email' => $user->email,
                     'role' => $user->role,
                 ];
+
+                $globals = new Globals();
+                $globals->setSESSION('user', $userData);
+
+                // $_SESSION['user'] = [
+                //     'id' => $user->id,
+                //     'username' => $user->username,
+                //     'email' => $user->email,
+                //     'role' => $user->role,
+                // ];
 
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 exit;

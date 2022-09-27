@@ -39,7 +39,9 @@ class SearchController
 
         $results = array_slice($results, $offset, $perPage);
 
-        if (isset($_SESSION['user']) && $_SESSION['user']['role'] == 'admin') {
+        $session = $globals->getSESSION('user');
+
+        if (isset($session) && $session['role'] == 'admin') {
             require 'templates/admin/search_results.php';
         } else {
             require 'templates/search_results.php';

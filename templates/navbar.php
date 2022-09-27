@@ -1,4 +1,10 @@
-<!-- Navigation-->
+<?php
+
+use App\Globals\Globals;
+
+$globals = new Globals();
+$session = $globals->getSESSION('user');
+?>
 <nav class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="#page-top">myBlog()</a>
@@ -14,13 +20,13 @@
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="index.php?action=blog">Blog</a></li>
 
                 <!-- sign up button -->
-                <?php if (isset($_SESSION['user'])) { ?>
+                <?php if (isset($session)) { ?>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded">Sign up</a></li>
                 <?php } else { ?>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="" data-bs-toggle="modal" data-bs-target="#signup">Sign up</a></li>
                 <?php } ?>
                 <!-- login/out button -->
-                <?php if (isset($_SESSION['user'])) { ?>
+                <?php if (isset($session)) { ?>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="index.php?action=logout">Log out</a></li>
                 <?php } else { ?>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="" data-bs-toggle="modal" data-bs-target="#login">Log in</a></li>

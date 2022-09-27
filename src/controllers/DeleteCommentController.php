@@ -10,11 +10,15 @@ class DeleteCommentController
 {
     public function execute(string $id)
     {
+        $globals = new Globals();
+
         $commentRepository = new CommentRepository();
         $commentRepository->connection = new DatabaseConnection();
         $comment = $commentRepository->getComment($id);
 
-        if ($comment->author === $_SESSION['user']['username']) {
+        $session = $globals->getSESSION('user');
+
+        if ($comment->author === $session['username']) {
 
             $postId = $comment->postId;
 
@@ -30,7 +34,6 @@ class DeleteCommentController
             exit;
         } elseif ($_SESSION['user']['role'] === 'admin') {
 
-            $globals = new Globals();
             $get = $globals->getGET();
             $page = $get['page'];
 

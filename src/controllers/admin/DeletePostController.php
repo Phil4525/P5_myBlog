@@ -3,13 +3,17 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use aPP\Globals\Globals;
 use App\Repository\PostRepository;
 
 class DeletePostController
 {
     public function execute(string $id)
     {
-        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
+        $globals = new Globals();
+        $session = $globals->getSESSION('user');
+
+        if (isset($session) && $session['role'] == 'admin') {
 
             $postRepository = new PostRepository();
             $postRepository->connection = new DatabaseConnection();

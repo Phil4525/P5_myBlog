@@ -12,8 +12,9 @@ class ContactsController
     {
         $globals = new Globals();
         $get = $globals->getGET();
+        $session = $globals->getSESSION('user');
 
-        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
+        if (isset($session) && $session['role'] == 'admin') {
 
             $contactRepository = new ContactRepository();
             $contactRepository->connection = new DatabaseConnection();

@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use App\Globals\Globals;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 
@@ -10,7 +11,10 @@ class ViewCommentController
 {
     public function execute(string $id, ?array $input)
     {
-        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
+        $globals = new Globals();
+        $session = $globals->getSESSION('user');
+
+        if (isset($session) && $session['role'] == 'admin') {
 
             $commentRepository = new CommentRepository();
             $commentRepository->connection = new DatabaseConnection();

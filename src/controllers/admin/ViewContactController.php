@@ -3,13 +3,17 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use App\Globals\Globals;
 use App\Repository\ContactRepository;
 
 class viewContactController
 {
     public function execute(string $id)
     {
-        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
+        $globals = new Globals();
+        $session = $globals->getSESSION('user');
+
+        if (isset($session) && $session['role'] == 'admin') {
 
             $contactRepository = new ContactRepository();
             $contactRepository->connection = new DatabaseConnection();

@@ -39,7 +39,7 @@ require 'navbar.php';
                         <form class="mb-4" action="index.php?action=addComment&id=<?= $post->id ?>" method="post">
                             <div class="form-group mb-5">
                                 <textarea class="form-control mb-2" rows="3" name="comment" placeholder="leave a comment!"></textarea>
-                                <?php if (isset($_SESSION['user'])) { ?>
+                                <?php if (isset($session)) { ?>
                                     <div class="float-end">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
@@ -61,7 +61,7 @@ require 'navbar.php';
         <!-- Side widgets-->
         <div class="col-lg-4">
             <!-- Search widget-->
-            <?php require('templates/search_widget.php') ?>
+            <?php require 'templates/search_widget.php' ?>
             <!-- Categories widget-->
             <div class="card mb-4">
                 <div class="card-header">Categories</div>

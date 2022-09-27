@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Lib\DatabaseConnection;
+use App\Globals\Globals;
 use App\Repository\CommentRepository;
 
 class AddCommentController
@@ -12,8 +13,11 @@ class AddCommentController
         $author = null;
         $comment = null;
 
-        if (!empty($_SESSION['user'])) {
-            $author = $_SESSION['user']['username'];
+        $globals = new Globals();
+        $session = $globals->getSESSION('user');
+
+        if (!empty($session)) {
+            $author = $session['username'];
         } else {
             throw new \Exception('Vous devez être connecté pour laisser un commentaire.');
         }

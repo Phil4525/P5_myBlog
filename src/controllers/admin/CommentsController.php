@@ -13,8 +13,9 @@ class CommentsController
     {
         $globals = new Globals();
         $get = $globals->getGET();
+        $session = $globals->getSESSION('user');
 
-        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
+        if (isset($session) && $session['role'] == 'admin') {
 
             $commentRepository = new CommentRepository();
             $commentRepository->connection = new DatabaseConnection();

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Lib\DatabaseConnection;
+use App\Globals\Globals;
 use App\Repository\UserRepository;
 
 class SignupController
@@ -46,12 +47,22 @@ class SignupController
                     );
                     $id = $statement->fetch();
 
-                    $_SESSION['user'] = [
+                    $userData = [
                         'id' => $id,
                         'username' => $username,
                         'email' => $email,
                         'role' => 'user',
                     ];
+
+                    $globals = new Globals();
+                    $globals->setSESSION('user', $userData);
+
+                    // $_SESSION['user'] = [
+                    //     'id' => $id,
+                    //     'username' => $username,
+                    //     'email' => $email,
+                    //     'role' => 'user',
+                    // ];
 
                     header('Location: ' . $_SERVER['HTTP_REFERER']);
                     exit;

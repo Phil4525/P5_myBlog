@@ -51,7 +51,6 @@ require 'navbar.php';
                 <p>Aucun résultat trouvé pour le terme "<?= $keyword ?>".</p>
             <?php } ?>
         </div>
-
         <!-- Side widgets-->
         <div class="col-lg-4">
             <!-- Search widget-->

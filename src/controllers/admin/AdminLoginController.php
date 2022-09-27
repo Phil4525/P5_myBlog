@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use App\Globals\Globals;
 use App\Repository\UserRepository;
 
 class AdminLoginController
@@ -30,12 +31,25 @@ class AdminLoginController
                     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
                 }
 
-                $_SESSION['user'] = [
+                $userData = [
                     'id' => $user->id,
                     'username' => $user->username,
                     'email' => $user->email,
                     'role' => $user->role,
                 ];
+
+                $globals = new Globals();
+                $globals->setSESSION('user', $userData);
+
+                // $_SESSION['user'] = [
+                //     'id' => $user->id,
+                //     'username' => $user->username,
+                //     'email' => $user->email,
+                //     'role' => $user->role,
+                // ];
+
+                // var_dump($globals->getSESSION('user'));
+                // die;
 
                 header('Location:index.php?action=dashboard');
                 exit;

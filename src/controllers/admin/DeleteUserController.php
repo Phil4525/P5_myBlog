@@ -3,13 +3,17 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use App\Globals\Globals;
 use App\Repository\UserRepository;
 
 class DeleteUserController
 {
     public function execute(string $id)
     {
-        if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
+        $globals = new Globals();
+        $session = $globals->getSESSION('user');
+
+        if (isset($session) && $session['role'] == 'admin') {
 
             $userRepository = new UserRepository();
             $userRepository->connection = new DatabaseConnection();
