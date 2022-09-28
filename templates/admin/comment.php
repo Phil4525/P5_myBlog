@@ -1,9 +1,5 @@
 <?php
-$title = "Posts";
-
-use App\Lib\HtmlCleaner;
-
-$htmlcleaner = new HtmlCleaner();
+$title = "Commentaires";
 ob_start();
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -16,7 +12,6 @@ ob_start();
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Auteur</th>
-                    <!-- <th scope="col">Commentaire</th> -->
                     <th scope="col">Article</th>
                     <th scope="col">Id de l'article</th>
                     <th scope="col">Date</th>
@@ -28,14 +23,14 @@ ob_start();
             <tbody>
                 <?php foreach ($commentsWithPostTitle as $comment) { ?>
                     <tr>
-                        <td><?= $htmlcleaner->clean($comment[0]->id) ?></td>
-                        <td><?= $htmlcleaner->clean($comment[0]->author) ?></td>
-                        <td><?= $htmlcleaner->clean($comment[1]) ?></td>
-                        <td><?= $htmlcleaner->clean($comment[0]->postId) ?></td>
-                        <td><?= $htmlcleaner->clean($comment[0]->frenchCreationDate) ?></td>
-                        <td><?= $htmlcleaner->clean($comment[0]->status) ?></td>
-                        <td><a href="index.php?action=viewComment&id=<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
-                        <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
+                        <td><?= htmlspecialchars($comment[0]->id) ?></td>
+                        <td><?= htmlspecialchars($comment[0]->author) ?></td>
+                        <td><?= htmlspecialchars($comment[1]) ?></td>
+                        <td><?= htmlspecialchars($comment[0]->postId) ?></td>
+                        <td><?= htmlspecialchars($comment[0]->frenchCreationDate) ?></td>
+                        <td><?= htmlspecialchars($comment[0]->status) ?></td>
+                        <td><a href="index.php?action=viewComment&id=<?= htmlspecialchars($comment[0]->id) ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                        <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= htmlspecialchars($comment[0]->id) ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                     </tr>
                     <!-- delete post modal -->
                     <div class="modal fade" id="deleteComment-<?= $comment[0]->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -48,7 +43,7 @@ ob_start();
                                 <div class="modal-body">
                                     <p>Etes-vous sûr de vouloir supprimer ?</p>
                                     <div class="d-md-flex justify-content-md-end">
-                                        <a type="button" class="btn btn-danger" href="index.php?action=deleteComment&id=<?= $comment[0]->id ?>&page=<?= $currentPage ?>" role="button">Confirmer</a>
+                                        <a type="button" class="btn btn-danger" href="index.php?action=deleteComment&id=<?= htmlspecialchars($comment[0]->id) ?>&page=<?= $currentPage ?>" role="button">Confirmer</a>
                                     </div>
                                 </div>
                             </div>
