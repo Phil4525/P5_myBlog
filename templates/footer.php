@@ -1,4 +1,10 @@
-<!-- Footer-->
+<?php
+
+use App\Globals\Globals;
+
+$globals = new Globals();
+$session = $globals->getSESSION('user');
+?>
 <footer class="footer text-center">
     <div class="container">
         <div class="row">
@@ -33,9 +39,9 @@
 <!-- Copyright Section-->
 <div class="copyright py-4 text-center text-white" id="copyright">
     <div class="container"><small>Copyright &copy; Your Website 2022</small></div>
-    <?php if (!isset($_SESSION['user'])) { ?>
+    <?php if (!isset($session)) { ?>
         <a href="" data-bs-toggle="modal" data-bs-target="#adminLogin"><small>Admin Zone</small></a>
-    <?php } elseif ($_SESSION['user']['role'] == 'admin') { ?>
+    <?php } elseif ($session['role'] == 'admin') { ?>
         <a href="index.php?action=dashboard"><small>Admin Zone</small></a>
     <?php } else { ?>
         <a href="index.php#copyright"><small>Admin Zone</small></a>

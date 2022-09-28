@@ -41,16 +41,6 @@ class AdminLoginController
                 $globals = new Globals();
                 $globals->setSESSION('user', $userData);
 
-                // $_SESSION['user'] = [
-                //     'id' => $user->id,
-                //     'username' => $user->username,
-                //     'email' => $user->email,
-                //     'role' => $user->role,
-                // ];
-
-                // var_dump($globals->getSESSION('user'));
-                // die;
-
                 header('Location:index.php?action=dashboard');
                 exit;
             }

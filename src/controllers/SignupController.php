@@ -15,7 +15,7 @@ class SignupController
                 isset($input['username'], $input['email'], $input['password'])
                 && !empty(trim($input['username'])) && !empty($input['email']) && !empty(trim($input['password']))
             ) {
-                $username = strip_tags($input['username']);
+                $username = htmlspecialchars(strip_tags($input['username']));
 
                 // check if username is already token
                 $userRepository = new UserRepository();

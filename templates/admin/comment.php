@@ -24,7 +24,7 @@ ob_start();
             <tbody>
                 <?php foreach ($commentsWithPostTitle as $comment) { ?>
                     <tr>
-                        <td><?= htmlspecialchars($comment[0]->id) ?></td>
+                        <td><?= htmlspecialchars(strip_tags($comment[0]->id)) ?></td>
                         <td><?= htmlspecialchars($comment[0]->author) ?></td>
                         <td><?= htmlspecialchars($comment[1]) ?></td>
                         <td><?= htmlspecialchars($comment[0]->postId) ?></td>
