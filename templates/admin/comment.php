@@ -1,5 +1,9 @@
 <?php
 $title = "Posts";
+
+use App\Lib\HtmlCleaner;
+
+$htmlcleaner = new HtmlCleaner();
 ob_start();
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -24,12 +28,12 @@ ob_start();
             <tbody>
                 <?php foreach ($commentsWithPostTitle as $comment) { ?>
                     <tr>
-                        <td><?= htmlspecialchars(strip_tags($comment[0]->id)) ?></td>
-                        <td><?= htmlspecialchars($comment[0]->author) ?></td>
-                        <td><?= htmlspecialchars($comment[1]) ?></td>
-                        <td><?= htmlspecialchars($comment[0]->postId) ?></td>
-                        <td><?= htmlspecialchars($comment[0]->frenchCreationDate) ?></td>
-                        <td><?= htmlspecialchars($comment[0]->status) ?></td>
+                        <td><?= $htmlcleaner->clean($comment[0]->id) ?></td>
+                        <td><?= $htmlcleaner->clean($comment[0]->author) ?></td>
+                        <td><?= $htmlcleaner->clean($comment[1]) ?></td>
+                        <td><?= $htmlcleaner->clean($comment[0]->postId) ?></td>
+                        <td><?= $htmlcleaner->clean($comment[0]->frenchCreationDate) ?></td>
+                        <td><?= $htmlcleaner->clean($comment[0]->status) ?></td>
                         <td><a href="index.php?action=viewComment&id=<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
                         <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                     </tr>

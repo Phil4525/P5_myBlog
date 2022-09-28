@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\lib\DatabaseConnection;
+use App\Globals\Globals;
 use App\Repository\UserRepository;
 
 class PasswordRecoveryController
@@ -42,7 +43,8 @@ class PasswordRecoveryController
                 throw new \Exception("L'email n'a pu être envoyé.");
             }
             //} else {
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            $globals = new Globals();
+            header('Location: ' . $globals->getSERVER('HTTP_REFERER'));
             exit;
             //}
             // } else {
