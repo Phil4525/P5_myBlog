@@ -40,33 +40,35 @@ class SignupController
 
                 if (!$success) {
                     throw new \Exception("Impossible de créer le compte !");
-                } else {
-                    // get last created user id
-                    $statement = $userRepository->connection->getConnection()->query(
-                        'SELECT id FROM users ORDER BY id DESC LIMIT 1'
-                    );
-                    $id = $statement->fetch();
-
-                    $userData = [
-                        'id' => $id,
-                        'username' => $username,
-                        'email' => $email,
-                        'role' => 'user',
-                    ];
-
-                    $globals = new Globals();
-                    $globals->setSESSION('user', $userData);
-
-                    // $_SESSION['user'] = [
-                    //     'id' => $id,
-                    //     'username' => $username,
-                    //     'email' => $email,
-                    //     'role' => 'user',
-                    // ];
-
-                    header('Location: ' . $_SERVER['HTTP_REFERER']);
-                    exit;
                 }
+                // } else {
+                // get last created user id
+                $statement = $userRepository->connection->getConnection()->query(
+                    'SELECT id FROM users ORDER BY id DESC LIMIT 1'
+                );
+                $id = $statement->fetch();
+
+                $userData = [
+                    'id' => $id,
+                    'username' => $username,
+                    'email' => $email,
+                    'role' => 'user',
+                ];
+
+                $globals = new Globals();
+                $globals->setSESSION('user', $userData);
+
+                // $_SESSION['user'] = [
+                //     'id' => $id,
+                //     'username' => $username,
+                //     'email' => $email,
+                //     'role' => 'user',
+                // ];
+
+                // header('Location: ' . $_SERVER['HTTP_REFERER']);
+                header('Location: ' . $globals->getSERVER('HTTP_REFERER'));
+                exit;
+                //}
             } else {
                 throw new \Exception('Les données du formulaire sont invalides.');
             }

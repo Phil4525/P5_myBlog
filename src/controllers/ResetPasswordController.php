@@ -14,32 +14,26 @@ class ResetPasswordController
 
         $user = $userRepository->getUserByHashedPasswordAndEmail($email, $password);
 
-        // if ($user) {
-        //     require 'templates/reset_password.php';
-        // } else {
-        //     throw new \Exception("Il n'y a pas d'utilisateur avec ces identifiants");
-        // }
-        if (!$user) {
+        if ($user) {
+            if ($input !== null) {
+                if (isset($input['new_password']) && !empty(trim($input['new_password']))) {
+
+                    $newPassword = password_hash($input['new_password'], PASSWORD_ARGON2ID);
+                    $success = $userRepository->updatePassword($user->email, $newPassword);
+
+                    if (!$success) {
+                        throw new \Exception("Le mot de passe n'a pu être modifié.");
+                    } else {
+                        echo "<script>window.close();</script>";
+                    }
+                } else {
+                    throw new \Exception("Les données du formulaire sont invalides.");
+                }
+            }
+        } else {
             throw new \Exception("Il n'y a pas d'utilisateur avec ces identifiants");
         }
 
         require 'templates/reset_password.php';
-
-        if ($input !== null) {
-            if (isset($input['new_password']) && !empty(trim($input['new_password']))) {
-
-                $newPassword = password_hash($input['new_password'], PASSWORD_ARGON2ID);
-                $success = $userRepository->updatePassword($user->email, $newPassword);
-
-                if (!$success) {
-                    throw new \Exception("Le mot de passe n'a pu être modifié.");
-                } else {
-                    header('Location: ' . $_SERVER['HTTP_REFERER']);
-                    exit;
-                }
-            } else {
-                throw new \Exception("Les données du formulaire sont invalides.");
-            }
-        }
     }
 }

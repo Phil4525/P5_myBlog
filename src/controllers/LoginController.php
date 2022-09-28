@@ -44,7 +44,8 @@ class LoginController
                 //     'role' => $user->role,
                 // ];
 
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                // header('Location: ' . $_SERVER['HTTP_REFERER']);
+                header('Location: ' . $globals->getSERVER('HTTP_REFERER'));
                 exit;
             }
         }

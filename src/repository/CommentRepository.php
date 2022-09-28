@@ -102,11 +102,11 @@ class CommentRepository
             $comment = new Comment();
 
             $comment->id = $row['id'];
-            $comment->postId = htmlentities($row['post_id']);
-            $comment->author = htmlentities($row['author']);
-            $comment->comment = htmlentities($row['comment']);
-            $comment->frenchCreationDate = htmlentities($row['french_creation_date']);
-            $comment->status = htmlentities($row['status']);
+            $comment->postId = $row['post_id'];
+            $comment->author = $row['author'];
+            $comment->comment = $row['comment'];
+            $comment->frenchCreationDate = $row['french_creation_date'];
+            $comment->status = $row['status'];
 
             $comments[] = $comment;
         }
