@@ -13,20 +13,22 @@ class DeleteContactController
         $globals = new Globals();
         $session = $globals->getSESSION('user');
 
-        if (isset($session) && $session['role'] == 'admin') {
-
-            $contactRepository = new ContactRepository();
-            $contactRepository->connection = new DatabaseConnection();
-            $success = $contactRepository->deleteContact($id);
-
-            if (!$success) {
-                throw new \Exception("Le message n'a pu être supprimé.");
-            } else {
-                header('Location: index.php?action=contacts');
-                exit;
-            }
-        } else {
+        if (!isset($session) || $session['role'] != 'admin') {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }
+
+        $contactRepository = new ContactRepository();
+        $contactRepository->connection = new DatabaseConnection();
+        $success = $contactRepository->deleteContact($id);
+
+        if (!$success) {
+            throw new \Exception("Le message n'a pu être supprimé.");
+        } else {
+            header('Location: index.php?action=contacts');
+            exit;
+        }
+        // } else {
+        //     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
+        // }
     }
 }

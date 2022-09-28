@@ -27,7 +27,7 @@ class SignupController
 
                 // check if email is valid
                 if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
-                    throw new \Exception("L'adresse email est incorrecte.");
+                    throw new \Exception("L'adresse email n'est pas correcte.");
                 } else {
                     $email = $input['email'];
                 }

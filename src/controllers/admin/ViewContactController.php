@@ -13,15 +13,17 @@ class viewContactController
         $globals = new Globals();
         $session = $globals->getSESSION('user');
 
-        if (isset($session) && $session['role'] == 'admin') {
-
-            $contactRepository = new ContactRepository();
-            $contactRepository->connection = new DatabaseConnection();
-            $contact = $contactRepository->getContactById($id);
-
-            require 'templates/admin/view_contact.php';
-        } else {
+        if (!isset($session) || $session['role'] != 'admin') {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }
+
+        $contactRepository = new ContactRepository();
+        $contactRepository->connection = new DatabaseConnection();
+        $contact = $contactRepository->getContactById($id);
+
+        require 'templates/admin/view_contact.php';
+        // } else {
+        //     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
+        // }
     }
 }

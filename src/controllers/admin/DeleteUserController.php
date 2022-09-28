@@ -13,21 +13,23 @@ class DeleteUserController
         $globals = new Globals();
         $session = $globals->getSESSION('user');
 
-        if (isset($session) && $session['role'] == 'admin') {
-
-            $userRepository = new UserRepository();
-            $userRepository->connection = new DatabaseConnection();
-
-            $success = $userRepository->deleteUser($id);
-
-            if (!$success) {
-                throw new \Exception("L'utilisateur n'a pu être supprimé.");
-            } else {
-                header('Location: index.php?action=users');
-                exit;
-            }
-        } else {
+        if (!isset($session) || $session['role'] != 'admin') {
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }
+
+        $userRepository = new UserRepository();
+        $userRepository->connection = new DatabaseConnection();
+
+        $success = $userRepository->deleteUser($id);
+
+        if (!$success) {
+            throw new \Exception("L'utilisateur n'a pu être supprimé.");
+        } else {
+            header('Location: index.php?action=users');
+            exit;
+        }
+        // } else {
+        //     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
+        // }
     }
 }

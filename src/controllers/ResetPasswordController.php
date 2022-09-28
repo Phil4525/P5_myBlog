@@ -14,11 +14,16 @@ class ResetPasswordController
 
         $user = $userRepository->getUserByHashedPasswordAndEmail($email, $password);
 
-        if ($user) {
-            require 'templates/reset_password.php';
-        } else {
+        // if ($user) {
+        //     require 'templates/reset_password.php';
+        // } else {
+        //     throw new \Exception("Il n'y a pas d'utilisateur avec ces identifiants");
+        // }
+        if (!$user) {
             throw new \Exception("Il n'y a pas d'utilisateur avec ces identifiants");
         }
+
+        require 'templates/reset_password.php';
 
         if ($input !== null) {
             if (isset($input['new_password']) && !empty(trim($input['new_password']))) {

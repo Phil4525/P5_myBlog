@@ -37,21 +37,22 @@ class ContactController
 
             if (!$success) {
                 throw new \Exception("Impossible d'envoyer le message !");
-            } else {
-                $to = 'admin@myblog.com';
-                $subject = 'nouveau message de ' . $fullname;
-                $mailContent = wordwrap($messageContent, 70, "\r\n");
-                $headers = [
-                    'From' => $email,
-                    'Reply-To' => 'admin@myblog.com',
-                    'Content-Type' => 'text/html; charset=utf-8',
-                ];
-
-                mail($to, $subject, $mailContent, $headers);
-
-                header('Location: index.php#contact-form');
-                exit;
             }
+            //} else {
+            $to = 'admin@myblog.com';
+            $subject = 'nouveau message de ' . $fullname;
+            $mailContent = wordwrap($messageContent, 70, "\r\n");
+            $headers = [
+                'From' => $email,
+                'Reply-To' => 'admin@myblog.com',
+                'Content-Type' => 'text/html; charset=utf-8',
+            ];
+
+            mail($to, $subject, $mailContent, $headers);
+
+            header('Location: index.php#contact-form');
+            exit;
+            //}
         }
     }
 }

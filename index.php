@@ -133,7 +133,6 @@ try {
 
             (new NewPostController())->execute();
         } elseif ($get['action'] === 'addPost') {
-
             (new AddPostController())->execute($post);
         } elseif ($get['action'] === 'viewPost') {
             if (isset($get['id']) && $get['id'] > 0) {
