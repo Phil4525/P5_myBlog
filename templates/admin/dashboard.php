@@ -15,9 +15,9 @@ ob_start();
                 </div>
                 <div class="card-body">
                     <ul>
-                        <li>Nombre d'articles publiés : <?= $postsNb ?></li>
-                        <li>Date du dernier article publié : le <?= $lastPost->frenchCreationDate ?></li>
-                        <li>Article le plus commenté : <?= $mostCommentedPost->post_title ?> (<?= $mostCommentedPost->comments_number ?> comm.)</li>
+                        <li>Nombre d'articles publiés : <?= strip_tags($postsNb) ?></li>
+                        <li>Date du dernier article publié : le <?= strip_tags($lastPost->frenchCreationDate) ?></li>
+                        <li>Article le plus commenté : <?= strip_tags($mostCommentedPost->post_title) ?> (<?= strip_tags($mostCommentedPost->comments_number) ?> comm.)</li>
                     </ul>
                 </div>
             </div>
@@ -30,9 +30,9 @@ ob_start();
                 </div>
                 <div class="card-body">
                     <ul>
-                        <li>Nombre de commentaires : <?= $commentsNb ?></li>
-                        <li>Dernier commentaire : <?= $lastComment->author ?> le <?= $lastComment->frenchCreationDate ?></li>
-                        <li>Nombre de commentaires en attente de validation : <?= $waitingComments ?></li>
+                        <li>Nombre de commentaires : <?= strip_tags($commentsNb) ?></li>
+                        <li>Dernier commentaire : <?= strip_tags($lastComment->author) ?> le <?= strip_tags($lastComment->frenchCreationDate) ?></li>
+                        <li>Nombre de commentaires en attente de validation : <?= strip_tags($waitingComments) ?></li>
                     </ul>
                 </div>
             </div>
@@ -47,9 +47,9 @@ ob_start();
                 </div>
                 <div class="card-body">
                     <ul>
-                        <li>Nombre d'utilisateurs inscrits : <?= $usersNb ?></li>
-                        <li>Dernière inscription : <?= $lastUser->username ?> le <?= $lastUser->frenchCreationDate ?></li>
-                        <li>Utilisateur le plus actif : <?= $mostActiveUser->username ?> (<?= $mostActiveUser->comments_number ?> comm.).</li>
+                        <li>Nombre d'utilisateurs inscrits : <?= strip_tags($usersNb) ?></li>
+                        <li>Dernière inscription : <?= strip_tags($lastUser->username) ?> le <?= strip_tags($lastUser->frenchCreationDate) ?></li>
+                        <li>Utilisateur le plus actif : <?= strip_tags($mostActiveUser->username) ?> (<?= strip_tags($mostActiveUser->comments_number) ?> comm.).</li>
                     </ul>
                 </div>
             </div>
@@ -62,8 +62,8 @@ ob_start();
                 </div>
                 <div class="card-body">
                     <ul>
-                        <li>Nombre de demandes de contact : <?= $contactsNb ?></li>
-                        <li>Dernière demande de contact : <?= $lastContact->fullname ?> le <?= $lastContact->frenchCreationDate ?></li>
+                        <li>Nombre de demandes de contact : <?= strip_tags($contactsNb) ?></li>
+                        <li>Dernière demande de contact : <?= strip_tags($lastContact->fullname) ?> le <?= strip_tags($lastContact->frenchCreationDate) ?></li>
                     </ul>
                 </div>
             </div>

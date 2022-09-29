@@ -25,16 +25,16 @@ ob_start();
                 foreach ($contacts as $contact) {
                 ?>
                     <tr>
-                        <td><?= htmlentities($contact->id) ?></td>
-                        <td><?= htmlentities($contact->fullname) ?></td>
-                        <td><?= htmlentities($contact->email) ?></td>
-                        <td><?= htmlentities($contact->phone) ?></td>
-                        <td><?= htmlentities($contact->frenchCreationDate) ?></td>
-                        <td><a href="index.php?action=viewContact&id=<?= $contact->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                        <td><?= strip_tags($contact->id) ?></td>
+                        <td><?= strip_tags($contact->fullname) ?></td>
+                        <td><?= strip_tags($contact->email) ?></td>
+                        <td><?= strip_tags($contact->phone) ?></td>
+                        <td><?= strip_tags($contact->frenchCreationDate) ?></td>
+                        <td><a href="index.php?action=viewContact&id=<?= strip_tags($contact->id) ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
                         <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteContact-<?= $contact->id ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                     </tr>
                     <!-- delete user modal -->
-                    <div class="modal fade" id="deleteContact-<?= $contact->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="deleteContact-<?= strip_tags($contact->id) ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -44,7 +44,7 @@ ob_start();
                                 <div class="modal-body">
                                     <p>Etes-vous sûr de vouloir supprimer ?</p>
                                     <div class="d-md-flex justify-content-md-end">
-                                        <a type="button" class="btn btn-danger" href="index.php?action=deleteContact&id=<?= $contact->id ?>" role="button">Confirmer</a>
+                                        <a type="button" class="btn btn-danger" href="index.php?action=deleteContact&id=<?= strip_tags($contact->id) ?>" role="button">Confirmer</a>
                                     </div>
                                 </div>
                             </div>

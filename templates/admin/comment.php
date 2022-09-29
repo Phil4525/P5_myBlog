@@ -23,17 +23,17 @@ ob_start();
             <tbody>
                 <?php foreach ($commentsWithPostTitle as $comment) { ?>
                     <tr>
-                        <td><?= htmlspecialchars($comment[0]->id) ?></td>
-                        <td><?= htmlspecialchars($comment[0]->author) ?></td>
-                        <td><?= htmlspecialchars($comment[1]) ?></td>
-                        <td><?= htmlspecialchars($comment[0]->postId) ?></td>
-                        <td><?= htmlspecialchars($comment[0]->frenchCreationDate) ?></td>
-                        <td><?= htmlspecialchars($comment[0]->status) ?></td>
-                        <td><a href="index.php?action=viewComment&id=<?= htmlspecialchars($comment[0]->id) ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
-                        <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= htmlspecialchars($comment[0]->id) ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
+                        <td><?= strip_tags($comment[0]->id) ?></td>
+                        <td><?= strip_tags($comment[0]->author) ?></td>
+                        <td><?= strip_tags($comment[1]) ?></td>
+                        <td><?= strip_tags($comment[0]->postId) ?></td>
+                        <td><?= strip_tags($comment[0]->frenchCreationDate) ?></td>
+                        <td><?= strip_tags($comment[0]->status) ?></td>
+                        <td><a href="index.php?action=viewComment&id=<?= strip_tags($comment[0]->id) ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                        <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= strip_tags($comment[0]->id) ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                     </tr>
                     <!-- delete post modal -->
-                    <div class="modal fade" id="deleteComment-<?= $comment[0]->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="deleteComment-<?= strip_tags($comment[0]->id) ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -43,7 +43,7 @@ ob_start();
                                 <div class="modal-body">
                                     <p>Etes-vous sûr de vouloir supprimer ?</p>
                                     <div class="d-md-flex justify-content-md-end">
-                                        <a type="button" class="btn btn-danger" href="index.php?action=deleteComment&id=<?= htmlspecialchars($comment[0]->id) ?>&page=<?= $currentPage ?>" role="button">Confirmer</a>
+                                        <a type="button" class="btn btn-danger" href="index.php?action=deleteComment&id=<?= strip_tags($comment[0]->id) ?>&page=<?= $currentPage ?>" role="button">Confirmer</a>
                                     </div>
                                 </div>
                             </div>
