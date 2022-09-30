@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Lib\DatabaseConnection;
+use App\Lib\Redirect;
 use App\Globals\Globals;
 use App\Repository\UserRepository;
 
@@ -45,8 +46,10 @@ class LoginController
                 // ];
 
                 // header('Location: ' . $_SERVER['HTTP_REFERER']);
-                header('Location: ' . $globals->getSERVER('HTTP_REFERER'));
-                exit;
+                $redirect = new Redirect($globals->getSERVER('HTTP_REFERER'));
+                $redirect->execute();
+                // header('Location: ' . $globals->getSERVER('HTTP_REFERER'));
+                // exit;
             }
         }
     }
