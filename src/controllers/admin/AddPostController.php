@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use App\Lib\Redirect;
 use App\Globals\Globals;
 use App\Repository\PostRepository;
 
@@ -41,8 +42,10 @@ class AddPostController
                 throw new \Exception("Impossible d'ajouter l'article' !");
             }
             // } else {
-            header('Location: index.php?action=posts');
-            exit;
+            // header('Location: index.php?action=posts');
+            // exit;
+            $redirect = new Redirect('index.php?action=posts');
+            $redirect->execute();
             // }
         }
 

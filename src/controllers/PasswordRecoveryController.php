@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\lib\DatabaseConnection;
+use App\Lib\Redirect;
 use App\Globals\Globals;
 use App\Repository\UserRepository;
 
@@ -44,8 +45,10 @@ class PasswordRecoveryController
             }
             //} else {
             $globals = new Globals();
-            header('Location: ' . $globals->getSERVER('HTTP_REFERER'));
-            exit;
+            // header('Location: ' . $globals->getSERVER('HTTP_REFERER'));
+            // exit;
+            $redirect = new Redirect($globals->getSERVER('HTTP_REFERER'));
+            $redirect->execute();
             //}
             // } else {
             //     throw new \Exception("Il n'y a pas d'utilisateur avec cette adresse mail.");

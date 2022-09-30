@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Lib\DatabaseConnection;
+use App\Lib\Redirect;
 use App\Globals\Globals;
 use App\Repository\CommentRepository;
 
@@ -30,8 +31,11 @@ class DeleteCommentController
                 //     header('Location: index.php?action=post&id=' . $postId);
                 //     exit;
             }
-            header('Location: index.php?action=post&id=' . $postId);
-            exit;
+
+            // header('Location: index.php?action=post&id=' . $postId);
+            // exit;
+            $redirect = new Redirect('index.php?action=post&id=' . $postId);
+            $redirect->execute();
         } elseif ($session['role'] === 'admin') {
 
             $page = $globals->getGET('page');
@@ -44,8 +48,10 @@ class DeleteCommentController
                 //     header('Location: index.php?action=comments&page=' . $page);
                 //     exit;
             }
-            header('Location: index.php?action=comments&page=' . $page);
-            exit;
+            // header('Location: index.php?action=comments&page=' . $page);
+            // exit;
+            $redirect = new Redirect('index.php?action=comments&page=' . $page);
+            $redirect->execute();
         } else {
             throw new \Exception("Vous n'êtes pas autorisé à faire cette requête");
         }

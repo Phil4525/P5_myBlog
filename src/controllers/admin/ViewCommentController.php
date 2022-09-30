@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use App\Lib\Redirect;
 use App\Globals\Globals;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
@@ -31,8 +32,10 @@ class ViewCommentController
                 if (!$success) {
                     throw new \Exception("Le commentaire n'a pu être sauvegarder");
                 } else {
-                    header('Location: index.php?action=comments');
-                    exit;
+                    // header('Location: index.php?action=comments');
+                    // exit;
+                    $redirect = new Redirect('index.php?action=comments');
+                    $redirect->execute();
                 }
             } else {
                 throw new \Exception('Les données du formulaire sont invalides.');

@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use App\Lib\Redirect;
 use App\Globals\Globals;
 use App\Repository\UserRepository;
 
@@ -25,8 +26,10 @@ class DeleteUserController
         if (!$success) {
             throw new \Exception("L'utilisateur n'a pu être supprimé.");
         } else {
-            header('Location: index.php?action=users');
-            exit;
+            // header('Location: index.php?action=users');
+            // exit;
+            $redirect = new Redirect('index.php?action=users');
+            $redirect->execute();
         }
         // } else {
         //     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
