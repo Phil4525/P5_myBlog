@@ -17,7 +17,7 @@ ob_start();
                     <ul>
                         <li>Nombre d'articles publiés : <?= strip_tags($postsNb) ?></li>
                         <li>Date du dernier article publié : le <?= strip_tags($lastPost->frenchCreationDate) ?></li>
-                        <li>Article le plus commenté : <?= strip_tags($mostCommentedPost->post_title) ?> (<?= strip_tags($mostCommentedPost->comments_number) ?> comm.)</li>
+                        <li>Article le plus commenté : <?= strip_tags($mostCommentedPost['title']) ?> (<?= strip_tags($mostCommentedPost['comments_number']) ?> comm.)</li>
                     </ul>
                 </div>
             </div>
@@ -49,7 +49,7 @@ ob_start();
                     <ul>
                         <li>Nombre d'utilisateurs inscrits : <?= strip_tags($usersNb) ?></li>
                         <li>Dernière inscription : <?= strip_tags($lastUser->username) ?> le <?= strip_tags($lastUser->frenchCreationDate) ?></li>
-                        <li>Utilisateur le plus actif : <?= strip_tags($mostActiveUser->username) ?> (<?= strip_tags($mostActiveUser->comments_number) ?> comm.).</li>
+                        <li>Utilisateur le plus actif : <?= strip_tags($mostActiveUser['username']) ?> (<?= strip_tags($mostActiveUser['comments_number']) ?> comm.).</li>
                     </ul>
                 </div>
             </div>

@@ -20,14 +20,22 @@ class UserRepository
         $user = null;
 
         if ($row) {
-            $user = new User();
+            // $user = new User();
+            $user = new User(
+                $row['id'],
+                $row['username'],
+                $row['email'],
+                $row['password'],
+                $row['role'],
+                $row['french_creation_date']
+            );
 
-            $user->id = $row['id'];
-            $user->username = $row['username'];
-            $user->email = $row['email'];
-            $user->password = $row['password'];
-            $user->role = $row['role'];
-            $user->frenchCreationDate = $row['french_creation_date'];
+            // $user->id = $row['id'];
+            // $user->username = $row['username'];
+            // $user->email = $row['email'];
+            // $user->password = $row['password'];
+            // $user->role = $row['role'];
+            // $user->frenchCreationDate = $row['french_creation_date'];
         }
 
         return $user;
@@ -55,14 +63,21 @@ class UserRepository
         $user = null;
 
         if ($row) {
-            $user = new User();
+            $user = new User(
+                $row['id'],
+                $row['username'],
+                $row['email'],
+                $row['password'],
+                $row['role'],
+                $row['french_creation_date']
+            );
 
-            $user->id = $row['id'];
-            $user->username = $row['username'];
-            $user->email = $row['email'];
-            $user->password = $row['password'];
-            $user->role = $row['role'];
-            $user->frenchCreationDate = $row['french_creation_date'];
+            // $user->id = $row['id'];
+            // $user->username = $row['username'];
+            // $user->email = $row['email'];
+            // $user->password = $row['password'];
+            // $user->role = $row['role'];
+            // $user->frenchCreationDate = $row['french_creation_date'];
         }
 
         return $user;
@@ -71,20 +86,29 @@ class UserRepository
     function getUsers(): array
     {
         $statement = $this->connection->getConnection()->query(
-            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users ORDER BY signup_date DESC"
+            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date 
+            FROM users 
+            ORDER BY signup_date DESC"
         );
 
         $users = [];
 
         while ($row = $statement->fetch()) {
-            $user = new User;
+            $user = new User(
+                $row['id'],
+                $row['username'],
+                $row['email'],
+                $row['password'],
+                $row['role'],
+                $row['french_creation_date']
+            );
 
-            $user->id = $row['id'];
-            $user->username = $row['username'];
-            $user->email = $row['email'];
-            $user->password = $row['password'];
-            $user->role = $row['role'];
-            $user->frenchCreationDate = $row['french_creation_date'];
+            // $user->id = $row['id'];
+            // $user->username = $row['username'];
+            // $user->email = $row['email'];
+            // $user->password = $row['password'];
+            // $user->role = $row['role'];
+            // $user->frenchCreationDate = $row['french_creation_date'];
 
             $users[] = $user;
         }
@@ -95,19 +119,27 @@ class UserRepository
     function getUserById(string $id): User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE id=?"
+            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date 
+            FROM users WHERE id=?"
         );
         $statement->execute([$id]);
         $row = $statement->fetch();
 
-        $user = new User;
+        $user = new User(
+            $row['id'],
+            $row['username'],
+            $row['email'],
+            $row['password'],
+            $row['role'],
+            $row['french_creation_date']
+        );
 
-        $user->id = $row['id'];
-        $user->username = $row['username'];
-        $user->email = $row['email'];
-        $user->password = $row['password'];
-        $user->role = $row['role'];
-        $user->frenchCreationDate = $row['french_creation_date'];
+        // $user->id = $row['id'];
+        // $user->username = $row['username'];
+        // $user->email = $row['email'];
+        // $user->password = $row['password'];
+        // $user->role = $row['role'];
+        // $user->frenchCreationDate = $row['french_creation_date'];
 
         return $user;
     }
@@ -120,22 +152,28 @@ class UserRepository
         return ($affectedLines > 0);
     }
 
-    function getMostActiveUser(): User
+    function getMostActiveUser(): array
     {
         $statement = $this->connection->getConnection()->query(
-            'SELECT users.id, COUNT(comments.id) AS number, users.username 
+            'SELECT users.id, COUNT(comments.id) AS comments_number, users.username 
             FROM users 
             INNER JOIN comments ON comments.author = users.username 
             GROUP BY users.id 
-            ORDER BY number DESC LIMIT 0,1'
+            ORDER BY comments_number DESC LIMIT 0,1'
         );
         $row = $statement->fetch();
 
-        $mostActiveUser = new User;
+        // $mostActiveUser = new User();
 
-        $mostActiveUser->id = $row['id'];
-        $mostActiveUser->username = $row['username'];
-        $mostActiveUser->comments_number = $row['number'];
+        // $mostActiveUser->id = $row['id'];
+        // $mostActiveUser->username = $row['username'];
+        // $mostActiveUser->comments_number = $row['number'];
+
+        $mostActiveUser = [
+            'id' => $row['id'],
+            'username' => $row['username'],
+            'comments_number' => $row['comments_number']
+        ];
 
         return $mostActiveUser;
     }
@@ -153,15 +191,24 @@ class UserRepository
     function getUserByHashedPasswordAndEmail(string $emailHash, string $passwordHash): User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT email,password FROM users WHERE md5(email)= ? and md5(password)= ?"
+            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date
+            FROM users 
+            WHERE md5(email)= ? and md5(password)= ?"
         );
         $statement->execute([$emailHash, $passwordHash]);
         $row = $statement->fetch();
 
-        $user = new User;
+        $user = new User(
+            $row['id'],
+            $row['username'],
+            $row['email'],
+            $row['password'],
+            $row['role'],
+            $row['french_creation_date']
+        );
 
-        $user->email = $row['email'];
-        $user->password = $row['password'];
+        // $user->email = $row['email'];
+        // $user->password = $row['password'];
 
         return $user;
     }
