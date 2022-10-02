@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Lib\DatabaseConnection;
+use App\Lib\Redirect;
 use App\Repository\ContactRepository;
 
 class ContactController
@@ -50,9 +51,11 @@ class ContactController
 
             mail($to, $subject, $mailContent, $headers);
 
-            header('Location: index.php#contact-form');
-            exit;
+            // header('Location: index.php#contact-form');
+            // exit;
             //}
+            $redirect = new Redirect('index.php#contact-form');
+            $redirect->execute();
         }
     }
 }

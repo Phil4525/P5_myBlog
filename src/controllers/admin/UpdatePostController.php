@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use App\Lib\Redirect;
 use App\Globals\Globals;
 use App\Repository\PostRepository;
 use App\Model\Post;
@@ -42,8 +43,10 @@ class UpdatePostController
                 throw new \Exception("Impossible de modifier l'article' !");
             }
             //} else {
-            header('Location: index.php?action=posts');
-            exit;
+            // header('Location: index.php?action=posts');
+            // exit;
+            $redirect = new Redirect('index.php?action=posts');
+            $redirect->execute();
             //}
         }
 

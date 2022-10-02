@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use App\Lib\Redirect;
 use App\Globals\Globals;
 use App\Repository\ContactRepository;
 
@@ -24,8 +25,10 @@ class DeleteContactController
         if (!$success) {
             throw new \Exception("Le message n'a pu être supprimé.");
         } else {
-            header('Location: index.php?action=contacts');
-            exit;
+            // header('Location: index.php?action=contacts');
+            // exit;
+            $redirect = new Redirect('index.php?action=contacts');
+            $redirect->execute();
         }
         // } else {
         //     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Lib\DatabaseConnection;
+use App\Lib\Redirect;
 use App\Repository\CommentRepository;
 
 class UpdateCommentController
@@ -27,8 +28,10 @@ class UpdateCommentController
                 throw new \Exception('Impossible de modifier le commentaire !');
             } else {
                 $newComment = $commentRepository->getComment($id);
-                header('Location: index.php?action=post&id=' . $newComment->postId . '#' . $id);
-                exit;
+                // header('Location: index.php?action=post&id=' . $newComment->postId . '#' . $id);
+                // exit;
+                $redirect = new Redirect('index.php?action=post&id=' . $newComment->postId . '#' . $id);
+                $redirect->execute();
             }
         }
 

@@ -24,7 +24,7 @@ class ResetPasswordController
                     if (!$success) {
                         throw new \Exception("Le mot de passe n'a pu être modifié.");
                     } else {
-                        print_r("<script>window.close();</script>");
+                        echo ("<script>window.close();</script>");
                     }
                 } else {
                     throw new \Exception("Les données du formulaire sont invalides.");

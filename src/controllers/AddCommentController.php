@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Lib\DatabaseConnection;
+use App\Lib\Redirect;
 use App\Globals\Globals;
 use App\Repository\CommentRepository;
 
@@ -47,8 +48,10 @@ class AddCommentController
             throw new \Exception("Impossible d'ajouter le commentaire !");
         }
         // } else {
-        header('Location: index.php?action=post&id=' . $postId);
-        exit;
+        // header('Location: index.php?action=post&id=' . $postId);
+        // // exit;
         // }
+        $redirect = new Redirect('index.php?action=post&id=' . $postId);
+        $redirect->execute();
     }
 }

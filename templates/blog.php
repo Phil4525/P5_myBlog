@@ -24,8 +24,8 @@ require 'headers/blog.php';
                 <?php
                 foreach ($posts as $post) {
                 ?>
-                    <div class="col-lg-6">
-                        <div class="card mb-4">
+                    <div class="col-lg-6 pb-4">
+                        <div class="card mb-4 h-100">
                             <a href="index.php?action=post&id=<?= urlencode($post->id) ?>"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                             <div class="card-body">
                                 <div class="small text-muted"><?= $post->frenchCreationDate ?></div>

@@ -38,16 +38,9 @@ class LoginController
                 $globals = new Globals();
                 $globals->setSESSION('user', $userData);
 
-                // $_SESSION['user'] = [
-                //     'id' => $user->id,
-                //     'username' => $user->username,
-                //     'email' => $user->email,
-                //     'role' => $user->role,
-                // ];
-
-                // header('Location: ' . $_SERVER['HTTP_REFERER']);
                 $redirect = new Redirect($globals->getSERVER('HTTP_REFERER'));
                 $redirect->execute();
+
                 // header('Location: ' . $globals->getSERVER('HTTP_REFERER'));
                 // exit;
             }

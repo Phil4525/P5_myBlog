@@ -72,7 +72,6 @@ try {
                 $id = $get['id'];
                 // It sets the input only when the HTTP method is POST (ie. the form is submitted).
                 $input = null;
-                // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($globals->getSERVER('REQUEST_METHOD') === 'POST') {
                     $input = $post;
                 }

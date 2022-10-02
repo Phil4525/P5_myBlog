@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
+use App\Lib\Redirect;
 use App\Globals\Globals;
 use App\Repository\UserRepository;
 
@@ -41,8 +42,10 @@ class AdminLoginController
                 $globals = new Globals();
                 $globals->setSESSION('user', $userData);
 
-                header('Location:index.php?action=dashboard');
-                exit;
+                // header('Location: index.php?action=dashboard');
+                // exit;
+                $redirect = new Redirect('index.php?action=dashboard');
+                $redirect->execute();
             }
         }
     }

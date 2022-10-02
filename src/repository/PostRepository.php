@@ -117,9 +117,10 @@ class PostRepository
     function searchPosts(string $keyword): array
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, title, chapo, content, author, 
-            DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
-            DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date 
+            // "SELECT id, title, chapo, content, author, 
+            // DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
+            // DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date 
+            "SELECT id, title, chapo, content, author, creation_date, modification_date
             FROM posts 
             WHERE title LIKE :keyword OR chapo LIKE :keyword OR content LIKE :keyword OR author LIKE :keyword
             ORDER BY creation_date DESC"
@@ -137,8 +138,8 @@ class PostRepository
             $post->chapo = $row['chapo'];
             $post->content = $row['content'];
             $post->author = $row['author'];
-            $post->frenchCreationDate = $row['french_creation_date'];
-            $post->frenchModificationDate = $row['french_modification_date'];
+            $post->frenchCreationDate = $row['creation_date'];
+            $post->frenchModificationDate = $row['modification_date'];
 
             $posts[] = $post;
         }
