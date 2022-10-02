@@ -31,7 +31,7 @@ class CommentsController
         }
 
         $commentsNb = count($comments);
-        $perPage = 5;
+        $perPage = 10;
         $pages = ceil($commentsNb / $perPage);
         $offset = ($currentPage * $perPage) - $perPage;
 

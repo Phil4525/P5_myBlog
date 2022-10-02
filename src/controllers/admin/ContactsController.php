@@ -30,7 +30,7 @@ class ContactsController
         }
 
         $contactsNb = count($contacts);
-        $perPage = 5;
+        $perPage = 10;
         $pages = ceil($contactsNb / $perPage);
         $offset = ($currentPage * $perPage) - $perPage;
 

@@ -7,8 +7,8 @@ ob_start();
         <h1 class="h2">Tableau de bord</h1>
     </div>
     <div class="row">
-        <div class="col-xl-6">
-            <div class="card mb-4">
+        <div class="col-xl-6 pb-4">
+            <div class="card mb-4 h-100">
                 <div class="card-header">
                     <i class="fa-solid fa-newspaper me-1"></i>
                     Articles
@@ -22,8 +22,8 @@ ob_start();
                 </div>
             </div>
         </div>
-        <div class="col-xl-6">
-            <div class="card mb-4">
+        <div class="col-xl-6 pb-4">
+            <div class="card mb-4 h-100">
                 <div class="card-header">
                     <i class="fa-solid fa-comment me-1"></i>
                     Commentaires
@@ -39,8 +39,8 @@ ob_start();
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-6">
-            <div class="card mb-4">
+        <div class="col-xl-6 pb-4">
+            <div class="card mb-4 h-100">
                 <div class="card-header">
                     <i class="fa-solid fa-users me-1"></i>
                     Utilisateurs
@@ -54,8 +54,8 @@ ob_start();
                 </div>
             </div>
         </div>
-        <div class="col-xl-6">
-            <div class="card mb-4">
+        <div class="col-xl-6 pb-4">
+            <div class="card mb-4 h-100">
                 <div class="card-header">
                     <i class="fa-solid fa-envelope me-1"></i>
                     Contacts

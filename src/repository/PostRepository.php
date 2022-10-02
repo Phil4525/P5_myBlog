@@ -166,8 +166,8 @@ class PostRepository
                 $row['chapo'],
                 $row['content'],
                 $row['author'],
-                $row['french_creation_date'],
-                $row['french_modification_date']
+                $row['creation_date'],
+                $row['modification_date']
             );
 
             // $post->id = $row['id'];
