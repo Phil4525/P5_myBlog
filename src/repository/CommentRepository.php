@@ -267,4 +267,35 @@ class CommentRepository
 
         return ($affectedLines > 0);
     }
+
+    function searchComments(string $keyword): array
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            // "SELECT id, post_id, parent_comment_id, author, comment, 
+            // DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date
+            "SELECT id, post_id, parent_comment_id, author, comment, comment_date
+            FROM comments 
+            WHERE author LIKE :keyword OR comment LIKE :keyword 
+            ORDER BY comment_date DESC"
+        );
+        $statement->bindValue(':keyword', '%' . $keyword . '%', \PDO::PARAM_STR);
+        $statement->execute();
+
+        $comments = [];
+
+        while ($row = $statement->fetch()) {
+            $comment = new Comment();
+
+            $comment->id = $row['id'];
+            $comment->postId = $row['post_id'];
+            $comment->parentCommentId = $row['parent_comment_id'];
+            $comment->author = $row['author'];
+            $comment->comment = $row['comment'];
+            $comment->frenchCreationDate = $row['comment_date'];
+
+            $comments[] = $comment;
+        }
+
+        return $comments;
+    }
 }

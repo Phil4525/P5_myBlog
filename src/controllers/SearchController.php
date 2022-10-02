@@ -5,18 +5,19 @@ namespace App\Controllers;
 use App\Lib\DatabaseConnection;
 use App\Globals\Globals;
 use App\Repository\PostRepository;
+use App\Repository\CommentRepository;
 
 class SearchController
 {
-    public function execute(array $input)
+    public function execute(?array $input)
     {
         $globals = new Globals();
         $get = $globals->getGET();
 
-        if (isset($input['keyword']) && !empty($input['keyword'])) {
-            $keyword = trim(strip_tags(strtolower($input['keyword'])));
-        } elseif (isset($get['keyword']) && !empty($get['keyword'])) {
-            $keyword = trim(strip_tags(strtolower($get['keyword'])));
+        if (isset($input['keyword']) && !empty(trim($input['keyword']))) {
+            $keyword = strip_tags(strtolower($input['keyword']));
+        } elseif (isset($get['keyword']) && !empty(trim($get['keyword']))) {
+            $keyword = strip_tags(strtolower($get['keyword']));
         } else {
             throw new \Exception("Aucun terme de recherche n'a été saisi.");
         }
@@ -24,7 +25,18 @@ class SearchController
         $postRepository = new PostRepository();
         $postRepository->connection = new DatabaseConnection();
 
-        $results = $postRepository->searchPosts($keyword);
+        $postsResults = $postRepository->searchPosts($keyword);
+
+        $commentRepository = new CommentRepository();
+        $commentRepository->connection = new DatabaseConnection();
+
+        $commentResults = $commentRepository->searchComments($keyword);
+
+        $results = array_merge($postsResults, $commentResults);
+
+        usort($results, function ($a, $b) {
+            return strtotime($b->frenchCreationDate) - strtotime($a->frenchCreationDate);
+        });
 
         if (isset($get['page']) && !empty($get['page'])) {
             $currentPage = (int) strip_tags($get['page']);
@@ -41,7 +53,7 @@ class SearchController
 
         $session = $globals->getSESSION('user');
 
-        if (isset($session) && $session['role'] == 'admin') {
+        if (isset($session) && $session['role'] == 'admin' && $get['action'] == 'adminSearch') {
             require 'templates/admin/search_results.php';
         } else {
             require 'templates/search_results.php';

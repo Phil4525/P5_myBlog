@@ -13,17 +13,32 @@ ob_start();
                     <p><?= $resultsNb ?> résultat trouvé pour le terme "<?= $keyword ?>"</p>
                 <?php } ?>
                 <?php foreach ($results as $result) { ?>
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h2 class="card-title h4"><?= $result->title ?></h2>
-                            <div class="small text-muted">publié le <?= $result->frenchCreationDate ?></div>
-                            <div class="small text-muted">auteur : <?= $result->author ?></div>
-                            <p class="card-text text-truncate"><?= strip_tags($result->chapo) ?></p>
-                            <div class="d-flex justify-content-end">
-                                <a class="btn btn-primary" href="index.php?action=post&id=<?= $result->id ?>">Read more →</a>
+                    <?php if (get_class($result) == 'App\Model\Post') { ?>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <p><strong>Article</strong></p>
+                                <h2 class="card-title h5"><?= $result->title ?></h2>
+                                <div class="small text-muted">publié le <?= $result->frenchCreationDate ?></div>
+                                <div class="small text-muted">auteur : <?= $result->author ?></div>
+                                <p class="card-text text-truncate"><?= strip_tags($result->chapo) ?></p>
+                                <div class="d-flex justify-content-end">
+                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= $result->id ?>">Read more →</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } else { ?>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <p><strong>Commentaire</strong></p>
+                                <h2 class="card-title h5"><?= $result->author ?> a commenté le <?= $result->frenchCreationDate ?></h2>
+                                <!-- <div class="small text-muted">publié le <?= $result->frenchCreationDate ?></div> -->
+                                <p class="card-text text-truncate"><?= strip_tags($result->comment) ?></p>
+                                <div class="d-flex justify-content-end">
+                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= $result->postId ?>#<?= $result->id ?>">Read more →</a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                 <?php } ?>
                 <!-- Pagination-->
                 <nav aria-label="Pagination">
@@ -46,7 +61,7 @@ ob_start();
                         </li>
                     </ul>
                 </nav>
-            <?php } elseif ($resultsNb == 0) { ?>
+            <?php } else { ?>
                 <p>Aucun résultat trouvé pour le terme "<?= $keyword ?>".</p>
             <?php } ?>
         </div>
