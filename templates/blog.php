@@ -6,7 +6,7 @@ $title = "myBlog";
 ob_start();
 require 'headers/blog.php';
 
-use App\Lib\Helpers;
+// use App\Lib\Helpers;
 ?>
 <!-- Page content-->
 <div class="container">
@@ -19,7 +19,7 @@ use App\Lib\Helpers;
                 <div class="card-body">
                     <div class="small text-muted"><?= Helpers::esc_html($featuredPost->frenchCreationDate) ?></div>
                     <h2 class="card-title"><?= addslashes($featuredPost->title) ?></h2>
-                    <p class="card-text"><?= $featuredPost->chapoaddslashes ?></p>
+                    <p class="card-text"><?= $featuredPost->chapo ?></p>
                     <div class="d-flex justify-content-end">
                         <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>">Read more →</a>
                     </div>
