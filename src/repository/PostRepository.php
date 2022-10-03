@@ -21,15 +21,24 @@ class PostRepository
         $statement->execute([$id]);
         $row = $statement->fetch();
 
-        $post = new Post();
+        // $post = new Post();
+        $post = new Post(
+            $row['id'],
+            $row['title'],
+            $row['chapo'],
+            $row['content'],
+            $row['author'],
+            $row['french_creation_date'],
+            $row['french_modification_date']
+        );
 
-        $post->id = $row['id'];
-        $post->title = $row['title'];
-        $post->chapo = $row['chapo'];
-        $post->content = $row['content'];
-        $post->author = $row['author'];
-        $post->frenchCreationDate = $row['french_creation_date'];
-        $post->frenchModificationDate = $row['french_modification_date'];
+        // $post->id = $row['id'];
+        // $post->title = $row['title'];
+        // $post->chapo = $row['chapo'];
+        // $post->content = $row['content'];
+        // $post->author = $row['author'];
+        // $post->frenchCreationDate = $row['french_creation_date'];
+        // $post->frenchModificationDate = $row['french_modification_date'];
 
         return $post;
     }
@@ -46,16 +55,30 @@ class PostRepository
 
         $posts = [];
 
-        while ($row = $statement->fetch()) {
-            $post = new Post();
+        // while ($row = $statement->fetch()) {
+        //     $post = new Post();
 
-            $post->id = $row['id'];
-            $post->title = $row['title'];
-            $post->chapo = $row['chapo'];
-            $post->content = $row['content'];
-            $post->author = $row['author'];
-            $post->frenchCreationDate = $row['french_creation_date'];
-            $post->frenchModificationDate = $row['french_modification_date'];
+        //     $post->id = $row['id'];
+        //     $post->title = $row['title'];
+        //     $post->chapo = $row['chapo'];
+        //     $post->content = $row['content'];
+        //     $post->author = $row['author'];
+        //     $post->frenchCreationDate = $row['french_creation_date'];
+        //     $post->frenchModificationDate = $row['french_modification_date'];
+
+        //     $posts[] = $post;
+        // }
+
+        while ($row = $statement->fetch()) {
+            $post = new Post(
+                $row['id'],
+                $row['title'],
+                $row['chapo'],
+                $row['content'],
+                $row['author'],
+                $row['french_creation_date'],
+                $row['french_modification_date']
+            );
 
             $posts[] = $post;
         }
@@ -94,22 +117,28 @@ class PostRepository
         return ($affectedLines > 0);
     }
 
-    function getMostCommentedPost(): Post
+    function getMostCommentedPost(): array
     {
         $statement = $this->connection->getConnection()->query(
-            'SELECT posts.id, COUNT(comments.id) AS number, posts.title 
+            'SELECT posts.id, COUNT(comments.id) AS comments_number, posts.title 
             FROM posts 
             INNER JOIN comments ON comments.post_id = posts.id 
             GROUP BY posts.id 
-            ORDER BY number DESC LIMIT 0,1'
+            ORDER BY comments_number DESC LIMIT 0,1'
         );
         $row = $statement->fetch();
 
-        $mostCommentedPost = new Post();
+        // $mostCommentedPost = new Post();
 
-        $mostCommentedPost->id = $row['id'];
-        $mostCommentedPost->post_title = $row['title'];
-        $mostCommentedPost->comments_number = $row['number'];
+        // $mostCommentedPost->id = $row['id'];
+        // $mostCommentedPost->post_title = $row['title'];
+        // $mostCommentedPost->comments_number = $row['number'];
+
+        $mostCommentedPost = [
+            'id' => $row['id'],
+            'title' => $row['title'],
+            'comments_number' => $row['comments_number']
+        ];
 
         return $mostCommentedPost;
     }
@@ -131,15 +160,23 @@ class PostRepository
         $posts = [];
 
         while ($row = $statement->fetch()) {
-            $post = new Post();
+            $post = new Post(
+                $row['id'],
+                $row['title'],
+                $row['chapo'],
+                $row['content'],
+                $row['author'],
+                $row['creation_date'],
+                $row['modification_date']
+            );
 
-            $post->id = $row['id'];
-            $post->title = $row['title'];
-            $post->chapo = $row['chapo'];
-            $post->content = $row['content'];
-            $post->author = $row['author'];
-            $post->frenchCreationDate = $row['creation_date'];
-            $post->frenchModificationDate = $row['modification_date'];
+            // $post->id = $row['id'];
+            // $post->title = $row['title'];
+            // $post->chapo = $row['chapo'];
+            // $post->content = $row['content'];
+            // $post->author = $row['author'];
+            // $post->frenchCreationDate = $row['creation_date'];
+            // $post->frenchModificationDate = $row['modification_date'];
 
             $posts[] = $post;
         }

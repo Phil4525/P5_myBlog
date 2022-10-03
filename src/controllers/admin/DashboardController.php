@@ -5,13 +5,13 @@ namespace App\Controllers\Admin;
 use App\Lib\DatabaseConnection;
 use App\Globals\Globals;
 use App\Repository\PostRepository;
-use App\Model\Post;
+// use App\Model\Post;
 use App\Repository\CommentRepository;
-use App\Model\Comment;
+// use App\Model\Comment;
 use App\Repository\UserRepository;
-use App\Model\User;
+// use App\Model\User;
 use App\Repository\ContactRepository;
-use App\Model\Contact;
+// use App\Model\Contact;
 
 class DashboardController
 {
@@ -42,7 +42,7 @@ class DashboardController
 
         $postsNb = count($posts);
 
-        $lastPost = new Post;
+        // $lastPost = new Post;
         $lastPost = $posts[0];
 
         $mostCommentedPost = $postRepository->getMostCommentedPost();
@@ -53,7 +53,7 @@ class DashboardController
 
         $commentsNb = count($comments);
 
-        $lastComment = new Comment;
+        // $lastComment = new Comment;
         $lastComment = $comments[0];
 
         $waitingComments = count($commentRepository->getCommentsWaitingForValidation());
@@ -64,7 +64,7 @@ class DashboardController
 
         $usersNb = count($users);
 
-        $lastUser = new User;
+        // $lastUser = new User;
         $lastUser = $users[0];
 
         $mostActiveUser = $userRepository->getMostActiveUser();
@@ -75,7 +75,7 @@ class DashboardController
 
         $contactsNb = count($contacts);
 
-        $lastContact = new Contact;
+        // $lastContact = new Contact;
         $lastContact = $contacts[0];
 
         require 'templates/admin/dashboard.php';

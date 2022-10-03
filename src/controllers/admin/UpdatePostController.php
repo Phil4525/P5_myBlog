@@ -6,7 +6,7 @@ use App\Lib\DatabaseConnection;
 use App\Lib\Redirect;
 use App\Globals\Globals;
 use App\Repository\PostRepository;
-use App\Model\Post;
+// use App\Model\Post;
 
 class UpdatePostController
 {
@@ -28,26 +28,22 @@ class UpdatePostController
                 isset($input['title'], $input['chapo'], $input['content'], $input['author']) &&
                 !empty(trim($input['title'])) && !empty(trim($input['chapo'])) && !empty(trim($input['content'])) && !empty(trim($input['author']))
             ) {
-                $post = new Post();
-                $post->title = $input['title'];
-                $post->chapo = $input['chapo'];
-                $post->content = $input['content'];
-                $post->author = $input['author'];
+
+                // $success = $postRepository->updatePost($id, $post->title, $post->chapo, $post->content, $post->author);
+                $success = $postRepository->updatePost($id, $input['title'], $input['chapo'], $input['content'], $input['author']);
+
+                if (!$success) {
+                    throw new \Exception("Impossible de modifier l'article' !");
+                }
+                //} else {
+                // header('Location: index.php?action=posts');
+                // exit;
+                $redirect = new Redirect('index.php?action=posts');
+                $redirect->execute();
+                //}
             } else {
                 throw new \Exception('Les données du formulaire sont invalides.');
             }
-
-            $success = $postRepository->updatePost($id, $post->title, $post->chapo, $post->content, $post->author);
-
-            if (!$success) {
-                throw new \Exception("Impossible de modifier l'article' !");
-            }
-            //} else {
-            // header('Location: index.php?action=posts');
-            // exit;
-            $redirect = new Redirect('index.php?action=posts');
-            $redirect->execute();
-            //}
         }
 
         // Otherwise, it displays the form.

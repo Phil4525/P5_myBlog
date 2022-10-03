@@ -24,12 +24,13 @@ class DeleteContactController
 
         if (!$success) {
             throw new \Exception("Le message n'a pu être supprimé.");
-        } else {
-            // header('Location: index.php?action=contacts');
-            // exit;
-            $redirect = new Redirect('index.php?action=contacts');
-            $redirect->execute();
         }
+        // } else {
+        // header('Location: index.php?action=contacts');
+        // exit;
+        $redirect = new Redirect('index.php?action=contacts');
+        $redirect->execute();
+        // }
         // } else {
         //     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         // }

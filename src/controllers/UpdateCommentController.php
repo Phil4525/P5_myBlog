@@ -15,14 +15,14 @@ class UpdateCommentController
 
         // It handles the form submission when there is an input.
         if ($input !== null) {
-            $comment = null;
+            $commentContent = null;
             if (!empty($input['comment'])) {
-                $comment = nl2br(strip_tags($input['comment']));
+                $commentContent = nl2br(strip_tags($input['comment']));
             } else {
                 throw new \Exception('Les données du formulaire sont invalides.');
             }
 
-            $success = $commentRepository->updateComment($id, $comment);
+            $success = $commentRepository->updateComment($id, $commentContent);
 
             if (!$success) {
                 throw new \Exception('Impossible de modifier le commentaire !');

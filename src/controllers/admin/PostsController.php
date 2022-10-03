@@ -33,7 +33,7 @@ class PostsController
 
         // first post of the page
         $postsNb = count($posts);
-        $perPage = 5;
+        $perPage = 10;
         $pages = ceil($postsNb / $perPage);
         $offset = ($currentPage * $perPage) - $perPage;
 

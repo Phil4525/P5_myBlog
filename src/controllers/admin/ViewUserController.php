@@ -7,7 +7,6 @@ use App\Lib\Redirect;
 use App\Globals\Globals;
 use App\Repository\UserRepository;
 use App\Repository\CommentRepository;
-use LDAP\Result;
 
 class ViewUserController
 {
@@ -32,12 +31,13 @@ class ViewUserController
 
                 if (!$success) {
                     throw new \Exception("Le role de l'utilisateur n'a pu être sauvegarder");
-                } else {
-                    // header('Location: index.php?action=users');
-                    // exit;
-                    $redirect = new Redirect(('index.php?action=users'));
-                    $redirect->execute();
                 }
+                // } else {
+                // header('Location: index.php?action=users');
+                // exit;
+                $redirect = new Redirect(('index.php?action=users'));
+                $redirect->execute();
+                // }
             } else {
                 throw new \Exception('Les données du formulaire sont invalides.');
             }
@@ -51,8 +51,11 @@ class ViewUserController
 
         $commentRepository = new CommentRepository();
         $commentRepository->connection = new DatabaseConnection();
+
         $userComments = $commentRepository->getCommentsByUsername($user->username);
+
         $userCommentsNb = count($userComments);
+
         $lastUserComment = null;
         if ($userComments) $lastUserComment = array_shift($userComments);
 

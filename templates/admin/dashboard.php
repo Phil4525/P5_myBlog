@@ -7,8 +7,8 @@ ob_start();
         <h1 class="h2">Tableau de bord</h1>
     </div>
     <div class="row">
-        <div class="col-xl-6">
-            <div class="card mb-4">
+        <div class="col-xl-6 pb-4">
+            <div class="card mb-4 h-100">
                 <div class="card-header">
                     <i class="fa-solid fa-newspaper me-1"></i>
                     Articles
@@ -17,13 +17,13 @@ ob_start();
                     <ul>
                         <li>Nombre d'articles publiés : <?= strip_tags($postsNb) ?></li>
                         <li>Date du dernier article publié : le <?= strip_tags($lastPost->frenchCreationDate) ?></li>
-                        <li>Article le plus commenté : <?= strip_tags($mostCommentedPost->post_title) ?> (<?= strip_tags($mostCommentedPost->comments_number) ?> comm.)</li>
+                        <li>Article le plus commenté : <?= strip_tags($mostCommentedPost['title']) ?> (<?= strip_tags($mostCommentedPost['comments_number']) ?> comm.)</li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-xl-6">
-            <div class="card mb-4">
+        <div class="col-xl-6 pb-4">
+            <div class="card mb-4 h-100">
                 <div class="card-header">
                     <i class="fa-solid fa-comment me-1"></i>
                     Commentaires
@@ -39,8 +39,8 @@ ob_start();
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-6">
-            <div class="card mb-4">
+        <div class="col-xl-6 pb-4">
+            <div class="card mb-4 h-100">
                 <div class="card-header">
                     <i class="fa-solid fa-users me-1"></i>
                     Utilisateurs
@@ -49,13 +49,13 @@ ob_start();
                     <ul>
                         <li>Nombre d'utilisateurs inscrits : <?= strip_tags($usersNb) ?></li>
                         <li>Dernière inscription : <?= strip_tags($lastUser->username) ?> le <?= strip_tags($lastUser->frenchCreationDate) ?></li>
-                        <li>Utilisateur le plus actif : <?= strip_tags($mostActiveUser->username) ?> (<?= strip_tags($mostActiveUser->comments_number) ?> comm.).</li>
+                        <li>Utilisateur le plus actif : <?= strip_tags($mostActiveUser['username']) ?> (<?= strip_tags($mostActiveUser['comments_number']) ?> comm.).</li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-xl-6">
-            <div class="card mb-4">
+        <div class="col-xl-6 pb-4">
+            <div class="card mb-4 h-100">
                 <div class="card-header">
                     <i class="fa-solid fa-envelope me-1"></i>
                     Contacts

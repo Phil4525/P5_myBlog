@@ -11,8 +11,8 @@ require 'headers/blog.php';
             <div class="card mb-4">
                 <a href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
                 <div class="card-body">
-                    <div class="small text-muted"><?= $featuredPost->frenchCreationDate ?></div>
-                    <h2 class="card-title"><?= $featuredPost->title ?></h2>
+                    <div class="small text-muted"><?= htmlentities($featuredPost->frenchCreationDate) ?></div>
+                    <h2 class="card-title"><?= htmlentities($featuredPost->title) ?></h2>
                     <p class="card-text"><?= $featuredPost->chapo ?></p>
                     <div class="d-flex justify-content-end">
                         <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>">Read more →</a>
@@ -26,13 +26,13 @@ require 'headers/blog.php';
                 ?>
                     <div class="col-lg-6 pb-4">
                         <div class="card mb-4 h-100">
-                            <a href="index.php?action=post&id=<?= urlencode($post->id) ?>"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <a href="index.php?action=post&id=<?= $post->id ?>"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                             <div class="card-body">
                                 <div class="small text-muted"><?= $post->frenchCreationDate ?></div>
                                 <h2 class="card-title h4"><?= $post->title ?></h2>
                                 <p class="card-text text-truncate"><?= strip_tags($post->chapo)  ?></p>
                                 <div class="d-flex justify-content-end">
-                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($post->id) ?>">Read more →</a>
+                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= $post->id ?>">Read more →</a>
                                 </div>
                             </div>
                         </div>
@@ -46,17 +46,17 @@ require 'headers/blog.php';
                 <hr class="my-0" />
                 <ul class="pagination justify-content-center my-4">
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=blog&page=<?= $currentPage - 1 ?>#posts" aria-label="Previous">
+                        <a class="page-link" href="index.php?action=blog&page=<?= urlencode($currentPage) - 1 ?>#posts" aria-label="Previous">
                             <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
                         </a>
                     </li>
                     <?php for ($page = 1; $page <= $pages; $page++) : ?>
                         <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
-                            <a class="page-link" href="index.php?action=blog&page=<?= $page ?>#posts"><?= $page ?></a>
+                            <a class="page-link" href="index.php?action=blog&page=<?= urlencode($page) ?>#posts"><?= urlencode($page) ?></a>
                         </li>
                     <?php endfor ?>
                     <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                        <a class="page-link" href="index.php?action=blog&page=<?= $currentPage + 1 ?>#posts" aria-label="Next">
+                        <a class="page-link" href="index.php?action=blog&page=<?= urlencode($currentPage) + 1 ?>#posts" aria-label="Next">
                             <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
                         </a>
                     </li>
