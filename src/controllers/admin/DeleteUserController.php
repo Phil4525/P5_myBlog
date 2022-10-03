@@ -26,14 +26,8 @@ class DeleteUserController
         if (!$success) {
             throw new \Exception("L'utilisateur n'a pu être supprimé.");
         }
-        // } else {
-        // header('Location: index.php?action=users');
-        // exit;
+
         $redirect = new Redirect('index.php?action=users');
         $redirect->execute();
-        // }
-        // } else {
-        //     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
-        // }
     }
 }

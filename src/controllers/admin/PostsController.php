@@ -31,7 +31,7 @@ class PostsController
             $currentPage = 1;
         }
 
-        // first post of the page
+        // first post of page
         $postsNb = count($posts);
         $perPage = 10;
         $pages = ceil($postsNb / $perPage);
@@ -54,8 +54,5 @@ class PostsController
         }
 
         require 'templates/admin/post.php';
-        // } else {
-        //     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
-        // }
     }
 }

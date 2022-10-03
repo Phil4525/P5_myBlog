@@ -42,8 +42,6 @@ class AdminLoginController
                 $globals = new Globals();
                 $globals->setSESSION('user', $userData);
 
-                // header('Location: index.php?action=dashboard');
-                // exit;
                 $redirect = new Redirect('index.php?action=dashboard');
                 $redirect->execute();
             }

@@ -18,10 +18,10 @@ class DeleteCommentController
         $commentRepository->connection = new DatabaseConnection();
         $comment = $commentRepository->getComment($id);
 
-
         if ($comment->author === $session['username']) {
 
             $postId = $comment->postId;
+            $parentCommentId = $comment->parentCommentId;
 
             $success = $commentRepository->deleteComment($id);
 
@@ -29,7 +29,7 @@ class DeleteCommentController
                 throw new \Exception("le commentaire n'a pu être supprimer");
             }
 
-            $redirect = new Redirect('index.php?action=post&id=' . $postId);
+            $redirect = new Redirect('index.php?action=post&id=' . $postId . '#' . $parentCommentId);
             $redirect->execute();
         } elseif ($session['role'] === 'admin') {
 

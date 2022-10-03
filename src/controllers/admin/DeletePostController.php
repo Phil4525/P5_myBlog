@@ -25,14 +25,8 @@ class DeletePostController
         if (!$success) {
             throw new \Exception("L'article n'a pu être supprimé.");
         }
-        // } else {
-        // header('Location: index.php?action=posts');
-        // exit;
+
         $redirect = new Redirect('index.php?action=posts');
         $redirect->execute();
-        // }
-        // } else {
-        //     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
-        // }
     }
 }

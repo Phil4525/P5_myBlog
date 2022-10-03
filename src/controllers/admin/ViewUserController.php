@@ -32,12 +32,9 @@ class ViewUserController
                 if (!$success) {
                     throw new \Exception("Le role de l'utilisateur n'a pu être sauvegarder");
                 }
-                // } else {
-                // header('Location: index.php?action=users');
-                // exit;
+
                 $redirect = new Redirect(('index.php?action=users'));
                 $redirect->execute();
-                // }
             } else {
                 throw new \Exception('Les données du formulaire sont invalides.');
             }
@@ -61,8 +58,5 @@ class ViewUserController
 
 
         require 'templates/admin/view_user.php';
-        // } else {
-        //     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
-        // }
     }
 }

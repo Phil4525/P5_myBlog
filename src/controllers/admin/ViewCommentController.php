@@ -32,8 +32,6 @@ class ViewCommentController
                 if (!$success) {
                     throw new \Exception("Le commentaire n'a pu être sauvegarder");
                 } else {
-                    // header('Location: index.php?action=comments');
-                    // exit;
                     $redirect = new Redirect('index.php?action=comments');
                     $redirect->execute();
                 }
@@ -58,8 +56,5 @@ class ViewCommentController
         }
 
         require 'templates/admin/view_comment.php';
-        // } else {
-        //     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
-        // }
     }
 }

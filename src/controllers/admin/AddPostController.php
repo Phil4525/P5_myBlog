@@ -24,10 +24,6 @@ class AddPostController
                 empty(trim($input['title'])) && empty(trim($input['chapo'])) && empty(trim($input['content'])) && !empty(trim($input['author']))
             ) {
 
-                // $title = $input['title'];
-                // $chapo = $input['chapo'];
-                // $content = $input['content'];
-                // $author = $input['author'];
                 $postRepository = new PostRepository();
                 $postRepository->connection = new DatabaseConnection();
 
@@ -36,20 +32,14 @@ class AddPostController
                 if (!$success) {
                     throw new \Exception("Impossible d'ajouter l'article' !");
                 }
-                // } else {
-                // header('Location: index.php?action=posts');
-                // exit;
+
                 $redirect = new Redirect('index.php?action=posts');
                 $redirect->execute();
-                // }
             } else {
                 throw new \Exception('Les données du formulaire sont invalides.');
             }
         }
 
         require 'templates/admin/new_post.php';
-        // } else {
-        //     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
-        // }
     }
 }

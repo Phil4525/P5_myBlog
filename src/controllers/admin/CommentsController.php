@@ -52,8 +52,5 @@ class CommentsController
         }
 
         require 'templates/admin/comment.php';
-        // } else {
-        //     throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
-        // }
     }
 }
