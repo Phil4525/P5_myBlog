@@ -28,8 +28,7 @@ class UpdateCommentController
                 throw new \Exception('Impossible de modifier le commentaire !');
             } else {
                 $newComment = $commentRepository->getComment($id);
-                // header('Location: index.php?action=post&id=' . $newComment->postId . '#' . $id);
-                // exit;
+
                 $redirect = new Redirect('index.php?action=post&id=' . $newComment->postId . '#' . $id);
                 $redirect->execute();
             }

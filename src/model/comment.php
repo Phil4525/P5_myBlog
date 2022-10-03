@@ -2,16 +2,6 @@
 
 namespace App\Model;
 
-// class Comment
-// {
-//     public string $id;
-//     public string $postId;
-//     public ?string $parentCommentId;
-//     public string $author;
-//     public string $comment;
-//     public string $frenchCreationDate;
-// }
-
 class Comment
 {
     public string $id;

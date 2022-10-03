@@ -22,7 +22,6 @@ class CommentRepository
         $comments = [];
 
         while ($row = $statement->fetch()) {
-            // $comment = new Comment();
             $comment = new Comment(
                 $row['id'],
                 $row['post_id'],
@@ -32,14 +31,6 @@ class CommentRepository
                 $row['french_creation_date'],
                 $row['status']
             );
-
-            // $comment->id = $row['id'];
-            // $comment->postId = $row['post_id'];
-            // $comment->parentCommentId = $row['parent_comment_id'];
-            // $comment->author = $row['author'];
-            // $comment->comment = $row['comment'];
-            // $comment->frenchCreationDate = $row['french_creation_date'];
-            // $comment->status = $row['status'];
 
             $comments[] = $comment;
         }
@@ -77,7 +68,6 @@ class CommentRepository
         $statement->execute([$id]);
         $row = $statement->fetch();
 
-        // $comment = new Comment();
         $comment = new Comment(
             $row['id'],
             $row['post_id'],
@@ -87,14 +77,6 @@ class CommentRepository
             $row['french_creation_date'],
             $row['status']
         );
-
-        // $comment->id = $row['id'];
-        // $comment->postId = $row['post_id'];
-        // $comment->parentCommentId = $row['parent_comment_id'];
-        // $comment->author = $row['author'];
-        // $comment->comment = $row['comment'];
-        // $comment->frenchCreationDate = $row['french_creation_date'];
-        // $comment->status = $row['status'];
 
         return $comment;
     }
@@ -127,13 +109,6 @@ class CommentRepository
                 $row['status']
             );
 
-            // $comment->id = $row['id'];
-            // $comment->postId = $row['post_id'];
-            // $comment->author = $row['author'];
-            // $comment->comment = $row['comment'];
-            // $comment->frenchCreationDate = $row['french_creation_date'];
-            // $comment->status = $row['status'];
-
             $comments[] = $comment;
         }
 
@@ -163,13 +138,6 @@ class CommentRepository
                 $row['status']
             );
 
-            // $comment->id = $row['id'];
-            // $comment->postId = $row['post_id'];
-            // $comment->author = $row['author'];
-            // $comment->frenchCreationDate = $row['french_creation_date'];
-            // $comment->comment = $row['comment'];
-            // $comment->status = $row['status'];
-
             $comments[] = $comment;
         }
 
@@ -195,13 +163,6 @@ class CommentRepository
                 $row['french_creation_date'],
                 $row['status']
             );
-
-            // $comment->id = $row['id'];
-            // $comment->postId = $row['post_id'];
-            // $comment->author = $row['author'];
-            // $comment->comment = $row['comment'];
-            // $comment->frenchCreationDate = $row['french_creation_date'];
-            // $comment->status = $row['status'];
 
             $comments[] = $comment;
         }
@@ -232,13 +193,6 @@ class CommentRepository
                 $row['status']
             );
 
-            // $comment->id = $row['id'];
-            // $comment->postId = $row['post_id'];
-            // $comment->author = $row['author'];
-            // $comment->comment = $row['comment'];
-            // $comment->frenchCreationDate = $row['french_creation_date'];
-            // $comment->status = $row['status'];
-
             $comments[] = $comment;
         }
 
@@ -258,7 +212,6 @@ class CommentRepository
         $comments = [];
 
         while ($row = $statement->fetch()) {
-            // $comment = new Comment();
             $comment = new Comment(
                 $row['id'],
                 $row['post_id'],
@@ -268,14 +221,6 @@ class CommentRepository
                 $row['french_creation_date'],
                 $row['status']
             );
-
-            // $comment->id = $row['id'];
-            // $comment->postId = $row['post_id'];
-            // $comment->parentCommentId = $row['parent_comment_id'];
-            // $comment->author = $row['author'];
-            // $comment->comment = $row['comment'];
-            // $comment->frenchCreationDate = $row['french_creation_date'];
-            // $comment->status = $row['status'];
 
             $comments[] = $comment;
         }
@@ -310,13 +255,6 @@ class CommentRepository
                 $row['status']
             );
 
-            // $comment->id = $row['id'];
-            // $comment->postId = $row['post_id'];
-            // $comment->parentCommentId = $row['parent_comment_id'];
-            // $comment->author = $row['author'];
-            // $comment->comment = $row['comment'];
-            // $comment->frenchCreationDate = $row['french_creation_date'];
-            // $comment->status = $row['status'];
             $comment->children[] = $this->getChildComments($comment->id);
 
             $comments[] = $comment;
@@ -338,8 +276,6 @@ class CommentRepository
     function searchComments(string $keyword): array
     {
         $statement = $this->connection->getConnection()->prepare(
-            // "SELECT id, post_id, parent_comment_id, author, comment, 
-            // DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date
             "SELECT id, post_id, parent_comment_id, author, comment, comment_date
             FROM comments 
             WHERE author LIKE :keyword OR comment LIKE :keyword 
@@ -360,13 +296,6 @@ class CommentRepository
                 $row['french_creation_date'],
                 $row['status']
             );
-
-            // $comment->id = $row['id'];
-            // $comment->postId = $row['post_id'];
-            // $comment->parentCommentId = $row['parent_comment_id'];
-            // $comment->author = $row['author'];
-            // $comment->comment = $row['comment'];
-            // $comment->frenchCreationDate = $row['comment_date'];
 
             $comments[] = $comment;
         }

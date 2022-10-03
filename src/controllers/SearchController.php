@@ -57,8 +57,7 @@ class SearchController
             require 'templates/admin/search_results.php';
             return;
         }
-        // } else {
+
         require 'templates/search_results.php';
-        // }
     }
 }

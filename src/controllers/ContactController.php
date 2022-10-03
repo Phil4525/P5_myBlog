@@ -20,9 +20,8 @@ class ContactController
 
                 if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
                     throw new \Exception("L'adresse email est incorrecte.");
-                    // } else {
-                    //     $email = $input['email'];
                 }
+
                 $email = $input['email'];
 
                 $phone = strip_tags($input['phone']);
@@ -39,7 +38,7 @@ class ContactController
             if (!$success) {
                 throw new \Exception("Impossible d'envoyer le message !");
             }
-            //} else {
+
             $to = 'admin@myblog.com';
             $subject = 'nouveau message de ' . $fullname;
             $mailContent = wordwrap($messageContent, 70, "\r\n");
@@ -51,9 +50,6 @@ class ContactController
 
             mail($to, $subject, $mailContent, $headers);
 
-            // header('Location: index.php#contact-form');
-            // exit;
-            //}
             $redirect = new Redirect('index.php#contact-form');
             $redirect->execute();
         }

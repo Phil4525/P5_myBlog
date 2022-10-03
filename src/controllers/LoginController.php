@@ -40,9 +40,6 @@ class LoginController
 
                 $redirect = new Redirect($globals->getSERVER('HTTP_REFERER'));
                 $redirect->execute();
-
-                // header('Location: ' . $globals->getSERVER('HTTP_REFERER'));
-                // exit;
             }
         }
     }

@@ -14,7 +14,6 @@ class Globals
         $this->GET = filter_input_array(INPUT_GET) ?? null;
         $this->POST = filter_input_array(INPUT_POST) ?? null;
         $this->SERVER = filter_input_array(INPUT_SERVER) ?? null;
-        // $this->SESSION = isset($_SESSION) ?? null;
         $this->SESSION = &$_SESSION;
     }
 
@@ -44,17 +43,12 @@ class Globals
 
     public function getSESSION(string $key = null)
     {
-        // if ($key != null) {
         return isset($this->SESSION[$key]) ? $this->SESSION[$key] : null;
-        // }
-        // return $this->SESSION;
     }
 
     public function setSESSION(string $key, array $values)
     {
-        // if ($key != null) {
         $this->SESSION[$key] = $values;
-        // }
     }
 
     public function unsetSESSION(string $key)

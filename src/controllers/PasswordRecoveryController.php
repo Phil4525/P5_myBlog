@@ -43,16 +43,10 @@ class PasswordRecoveryController
             if (!$success) {
                 throw new \Exception("L'email n'a pu être envoyé.");
             }
-            //} else {
+
             $globals = new Globals();
-            // header('Location: ' . $globals->getSERVER('HTTP_REFERER'));
-            // exit;
             $redirect = new Redirect($globals->getSERVER('HTTP_REFERER'));
             $redirect->execute();
-            //}
-            // } else {
-            //     throw new \Exception("Il n'y a pas d'utilisateur avec cette adresse mail.");
-            // }
         }
     }
 }

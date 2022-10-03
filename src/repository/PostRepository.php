@@ -21,7 +21,6 @@ class PostRepository
         $statement->execute([$id]);
         $row = $statement->fetch();
 
-        // $post = new Post();
         $post = new Post(
             $row['id'],
             $row['title'],
@@ -31,14 +30,6 @@ class PostRepository
             $row['french_creation_date'],
             $row['french_modification_date']
         );
-
-        // $post->id = $row['id'];
-        // $post->title = $row['title'];
-        // $post->chapo = $row['chapo'];
-        // $post->content = $row['content'];
-        // $post->author = $row['author'];
-        // $post->frenchCreationDate = $row['french_creation_date'];
-        // $post->frenchModificationDate = $row['french_modification_date'];
 
         return $post;
     }
@@ -54,20 +45,6 @@ class PostRepository
         );
 
         $posts = [];
-
-        // while ($row = $statement->fetch()) {
-        //     $post = new Post();
-
-        //     $post->id = $row['id'];
-        //     $post->title = $row['title'];
-        //     $post->chapo = $row['chapo'];
-        //     $post->content = $row['content'];
-        //     $post->author = $row['author'];
-        //     $post->frenchCreationDate = $row['french_creation_date'];
-        //     $post->frenchModificationDate = $row['french_modification_date'];
-
-        //     $posts[] = $post;
-        // }
 
         while ($row = $statement->fetch()) {
             $post = new Post(
@@ -128,12 +105,6 @@ class PostRepository
         );
         $row = $statement->fetch();
 
-        // $mostCommentedPost = new Post();
-
-        // $mostCommentedPost->id = $row['id'];
-        // $mostCommentedPost->post_title = $row['title'];
-        // $mostCommentedPost->comments_number = $row['number'];
-
         $mostCommentedPost = [
             'id' => $row['id'],
             'title' => $row['title'],
@@ -146,9 +117,6 @@ class PostRepository
     function searchPosts(string $keyword): array
     {
         $statement = $this->connection->getConnection()->prepare(
-            // "SELECT id, title, chapo, content, author, 
-            // DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS french_creation_date,
-            // DATE_FORMAT(modification_date, '%d/%m/%Y à %Hh%i') AS french_modification_date 
             "SELECT id, title, chapo, content, author, creation_date, modification_date
             FROM posts 
             WHERE title LIKE :keyword OR chapo LIKE :keyword OR content LIKE :keyword OR author LIKE :keyword
@@ -169,14 +137,6 @@ class PostRepository
                 $row['creation_date'],
                 $row['modification_date']
             );
-
-            // $post->id = $row['id'];
-            // $post->title = $row['title'];
-            // $post->chapo = $row['chapo'];
-            // $post->content = $row['content'];
-            // $post->author = $row['author'];
-            // $post->frenchCreationDate = $row['creation_date'];
-            // $post->frenchModificationDate = $row['modification_date'];
 
             $posts[] = $post;
         }

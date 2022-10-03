@@ -27,13 +27,8 @@ class DeleteCommentController
 
             if (!$success) {
                 throw new \Exception("le commentaire n'a pu être supprimer");
-                // } else {
-                //     header('Location: index.php?action=post&id=' . $postId);
-                //     exit;
             }
 
-            // header('Location: index.php?action=post&id=' . $postId);
-            // exit;
             $redirect = new Redirect('index.php?action=post&id=' . $postId);
             $redirect->execute();
         } elseif ($session['role'] === 'admin') {
@@ -44,12 +39,8 @@ class DeleteCommentController
 
             if (!$success) {
                 throw new \Exception("le commentaire n'a pu être supprimer");
-                // } else {
-                //     header('Location: index.php?action=comments&page=' . $page);
-                //     exit;
             }
-            // header('Location: index.php?action=comments&page=' . $page);
-            // exit;
+
             $redirect = new Redirect('index.php?action=comments&page=' . $page);
             $redirect->execute();
         } else {

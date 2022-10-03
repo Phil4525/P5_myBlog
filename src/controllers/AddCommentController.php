@@ -17,22 +17,11 @@ class AddCommentController
         $globals = new Globals();
         $session = $globals->getSESSION('user');
 
-        // if (!empty($session)) {
-        //     $author = $session['username'];
-        // } else {
-        //     throw new \Exception('Vous devez être connecté pour laisser un commentaire.');
-        // }
         if (empty($session)) {
             throw new \Exception('Vous devez être connecté pour laisser un commentaire.');
         }
 
         $author = $session['username'];
-
-        // if (!empty($input['comment'])) {
-        //     $comment = nl2br(strip_tags($input['comment']));
-        // } else {
-        //     throw new \Exception('Les données du formulaire sont invalides.');
-        // }
 
         if (empty($input['comment'])) {
             throw new \Exception('Les données du formulaire sont invalides.');
@@ -47,10 +36,7 @@ class AddCommentController
         if (!$success) {
             throw new \Exception("Impossible d'ajouter le commentaire !");
         }
-        // } else {
-        // header('Location: index.php?action=post&id=' . $postId);
-        // // exit;
-        // }
+
         $redirect = new Redirect('index.php?action=post&id=' . $postId);
         $redirect->execute();
     }

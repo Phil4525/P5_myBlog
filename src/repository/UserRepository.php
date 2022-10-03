@@ -20,7 +20,6 @@ class UserRepository
         $user = null;
 
         if ($row) {
-            // $user = new User();
             $user = new User(
                 $row['id'],
                 $row['username'],
@@ -29,13 +28,6 @@ class UserRepository
                 $row['role'],
                 $row['french_creation_date']
             );
-
-            // $user->id = $row['id'];
-            // $user->username = $row['username'];
-            // $user->email = $row['email'];
-            // $user->password = $row['password'];
-            // $user->role = $row['role'];
-            // $user->frenchCreationDate = $row['french_creation_date'];
         }
 
         return $user;
@@ -71,13 +63,6 @@ class UserRepository
                 $row['role'],
                 $row['french_creation_date']
             );
-
-            // $user->id = $row['id'];
-            // $user->username = $row['username'];
-            // $user->email = $row['email'];
-            // $user->password = $row['password'];
-            // $user->role = $row['role'];
-            // $user->frenchCreationDate = $row['french_creation_date'];
         }
 
         return $user;
@@ -103,13 +88,6 @@ class UserRepository
                 $row['french_creation_date']
             );
 
-            // $user->id = $row['id'];
-            // $user->username = $row['username'];
-            // $user->email = $row['email'];
-            // $user->password = $row['password'];
-            // $user->role = $row['role'];
-            // $user->frenchCreationDate = $row['french_creation_date'];
-
             $users[] = $user;
         }
 
@@ -134,13 +112,6 @@ class UserRepository
             $row['french_creation_date']
         );
 
-        // $user->id = $row['id'];
-        // $user->username = $row['username'];
-        // $user->email = $row['email'];
-        // $user->password = $row['password'];
-        // $user->role = $row['role'];
-        // $user->frenchCreationDate = $row['french_creation_date'];
-
         return $user;
     }
 
@@ -162,12 +133,6 @@ class UserRepository
             ORDER BY comments_number DESC LIMIT 0,1'
         );
         $row = $statement->fetch();
-
-        // $mostActiveUser = new User();
-
-        // $mostActiveUser->id = $row['id'];
-        // $mostActiveUser->username = $row['username'];
-        // $mostActiveUser->comments_number = $row['number'];
 
         $mostActiveUser = [
             'id' => $row['id'],
@@ -206,9 +171,6 @@ class UserRepository
             $row['role'],
             $row['french_creation_date']
         );
-
-        // $user->email = $row['email'];
-        // $user->password = $row['password'];
 
         return $user;
     }

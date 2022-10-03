@@ -42,7 +42,7 @@ class SignupController
                 if (!$success) {
                     throw new \Exception("Impossible de créer le compte !");
                 }
-                // } else {
+
                 // get last created user id
                 $statement = $userRepository->connection->getConnection()->query(
                     'SELECT id FROM users ORDER BY id DESC LIMIT 1'
@@ -59,18 +59,8 @@ class SignupController
                 $globals = new Globals();
                 $globals->setSESSION('user', $userData);
 
-                // $_SESSION['user'] = [
-                //     'id' => $id,
-                //     'username' => $username,
-                //     'email' => $email,
-                //     'role' => 'user',
-                // ];
-
-                // header('Location: ' . $globals->getSERVER('HTTP_REFERER'));
-                // exit;
                 $redirect = new Redirect($globals->getSERVER('HTTP_REFERER'));
                 $redirect->execute();
-                //}
             } else {
                 throw new \Exception('Les données du formulaire sont invalides.');
             }

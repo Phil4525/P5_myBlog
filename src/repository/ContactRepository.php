@@ -29,7 +29,6 @@ class ContactRepository
         $contacts = [];
 
         while ($row = $statement->fetch()) {
-            // $contact = new Contact();
             $contact = new Contact(
                 $row['id'],
                 $row['fullname'],
@@ -38,13 +37,6 @@ class ContactRepository
                 $row['message_content'],
                 $row['french_creation_date']
             );
-
-            // $contact->id = $row['id'];
-            // $contact->fullname = $row['fullname'];
-            // $contact->email = $row['email'];
-            // $contact->phone = $row['phone'];
-            // $contact->messageContent = $row['message_content'];
-            // $contact->frenchCreationDate = $row['french_creation_date'];
 
             $contacts[] = $contact;
         }
@@ -68,13 +60,6 @@ class ContactRepository
             $row['message_content'],
             $row['french_creation_date']
         );
-
-        // $contact->id = $row['id'];
-        // $contact->fullname = $row['fullname'];
-        // $contact->email = $row['email'];
-        // $contact->phone = $row['phone'];
-        // $contact->messageContent = $row['message_content'];
-        // $contact->frenchCreationDate = $row['french_creation_date'];
 
         return $contact;
     }

@@ -2,17 +2,6 @@
 
 namespace App\Model;
 
-// class Post
-// {
-//     public string $id;
-//     public string $title;
-//     public string $chapo;
-//     public string $content;
-//     public string $author;
-//     public string $frenchCreationDate;
-//     public ?string $frenchModificationDate;
-// }
-
 class Post
 {
     public string $id;
