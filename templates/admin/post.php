@@ -1,6 +1,6 @@
 <?php
-$title = "Articles";
 ob_start();
+$title = "Articles";
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="pt-3 pb-2 mb-3 border-bottom">
@@ -69,17 +69,17 @@ ob_start();
     <nav aria-label="Pagination">
         <ul class="pagination justify-content-center my-4 pagination-sm">
             <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                <a class="page-link" href="index.php?action=posts&page=<?= $currentPage - 1 ?>" aria-label="Previous">
+                <a class="page-link" href="index.php?action=posts&page=<?= urlencode($currentPage) - 1 ?>" aria-label="Previous">
                     <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
                 </a>
             </li>
             <?php for ($page = 1; $page <= $pages; $page++) : ?>
                 <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
-                    <a class="page-link" href="index.php?action=posts&page=<?= $page ?>"><?= $page ?></a>
+                    <a class="page-link" href="index.php?action=posts&page=<?= urlencode($page) ?>"><?= $page ?></a>
                 </li>
             <?php endfor ?>
             <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                <a class="page-link" href="index.php?action=posts&page=<?= $currentPage + 1 ?>" aria-label="Next">
+                <a class="page-link" href="index.php?action=posts&page=<?= urlencode($currentPage) + 1 ?>" aria-label="Next">
                     <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
                 </a>
             </li>

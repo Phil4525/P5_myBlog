@@ -1,12 +1,10 @@
 <?php
 
-use App\Lib\Helpers;
-
-$title = "myBlog";
-ob_start();
-require 'headers/blog.php';
-$frenchCreationDate = Helpers::esc_html($featuredPost->frenchCreationDate);
 // use App\Lib\Helpers;
+
+ob_start();
+$title = "Blog";
+require 'headers/blog.php';
 ?>
 <!-- Page content-->
 <div class="container">
@@ -17,8 +15,8 @@ $frenchCreationDate = Helpers::esc_html($featuredPost->frenchCreationDate);
             <div class="card mb-4">
                 <a href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
                 <div class="card-body">
-                    <div class="small text-muted"><?= $frenchCreationDate ?></div>
-                    <h2 class="card-title"><?= htmlentities($featuredPost->title) ?></h2>
+                    <div class="small text-muted"><?= $featuredPost->frenchCreationDate ?></div>
+                    <h2 class="card-title"><?= $featuredPost->title ?></h2>
                     <p class="card-text"><?= $featuredPost->chapo ?></p>
                     <div class="d-flex justify-content-end">
                         <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>">Read more →</a>
@@ -27,25 +25,21 @@ $frenchCreationDate = Helpers::esc_html($featuredPost->frenchCreationDate);
             </div>
             <!-- Nested row for non-featured blog posts-->
             <div class="row" id="posts">
-                <?php
-                foreach ($posts as $post) {
-                ?>
+                <?php foreach ($posts as $post) { ?>
                     <div class="col-lg-6 pb-4">
                         <div class="card mb-4 h-100">
-                            <a href="index.php?action=post&id=<?= $post->id ?>"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <a href="index.php?action=post&id=<?= urlencode($post->id) ?>"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                             <div class="card-body">
                                 <div class="small text-muted"><?= $post->frenchCreationDate ?></div>
                                 <h2 class="card-title h4"><?= $post->title ?></h2>
                                 <p class="card-text text-truncate"><?= strip_tags($post->chapo)  ?></p>
                                 <div class="d-flex justify-content-end">
-                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= $post->id ?>">Read more →</a>
+                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($post->id) ?>">Read more →</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                <?php
-                }
-                ?>
+                <?php } ?>
             </div>
             <!-- Pagination-->
             <nav aria-label="Pagination">

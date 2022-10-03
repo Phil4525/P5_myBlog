@@ -1,6 +1,6 @@
     <?php
-    $title = "Accueil";
     ob_start();
+    $title = "Accueil";
     require 'templates/headers/homepage.php';
     ?>
     <!-- Portfolio Section-->

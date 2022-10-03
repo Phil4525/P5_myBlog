@@ -1,6 +1,6 @@
 <?php
-$title = "Commentaires";
 ob_start();
+$title = "Commentaires";
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="pt-3 pb-2 mb-3 border-bottom">
@@ -23,17 +23,17 @@ ob_start();
             <tbody>
                 <?php foreach ($commentsWithPostTitle as $comment) { ?>
                     <tr>
-                        <td><?= strip_tags($comment[0]->id) ?></td>
-                        <td><?= strip_tags($comment[0]->author) ?></td>
-                        <td><?= strip_tags($comment[1]) ?></td>
-                        <td><?= strip_tags($comment[0]->postId) ?></td>
-                        <td><?= strip_tags($comment[0]->frenchCreationDate) ?></td>
-                        <td><?= strip_tags($comment[0]->status) ?></td>
-                        <td><a href="index.php?action=viewComment&id=<?= strip_tags($comment[0]->id) ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
-                        <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= strip_tags($comment[0]->id) ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
+                        <td><?= $comment[0]->id ?></td>
+                        <td><?= $comment[0]->author ?></td>
+                        <td><?= $comment[1] ?></td>
+                        <td><?= $comment[0]->postId ?></td>
+                        <td><?= $comment[0]->frenchCreationDate ?></td>
+                        <td><?= $comment[0]->status ?></td>
+                        <td><a href="index.php?action=viewComment&id=<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                        <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                     </tr>
                     <!-- delete post modal -->
-                    <div class="modal fade" id="deleteComment-<?= strip_tags($comment[0]->id) ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="deleteComment-<?= $comment[0]->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -43,7 +43,7 @@ ob_start();
                                 <div class="modal-body">
                                     <p>Etes-vous sûr de vouloir supprimer ?</p>
                                     <div class="d-md-flex justify-content-md-end">
-                                        <a type="button" class="btn btn-danger" href="index.php?action=deleteComment&id=<?= strip_tags($comment[0]->id) ?>&page=<?= $currentPage ?>" role="button">Confirmer</a>
+                                        <a type="button" class="btn btn-danger" href="index.php?action=deleteComment&id=<?= $comment[0]->id ?>&page=<?= $currentPage ?>" role="button">Confirmer</a>
                                     </div>
                                 </div>
                             </div>
@@ -57,17 +57,17 @@ ob_start();
     <nav aria-label="Pagination">
         <ul class="pagination justify-content-center my-4 pagination-sm">
             <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                <a class="page-link" href="index.php?action=comments&page=<?= $currentPage - 1 ?>" aria-label="Previous">
+                <a class="page-link" href="index.php?action=comments&page=<?= urlencode($currentPage) - 1 ?>" aria-label="Previous">
                     <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
                 </a>
             </li>
             <?php for ($page = 1; $page <= $pages; $page++) : ?>
                 <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
-                    <a class="page-link" href="index.php?action=comments&page=<?= $page ?>"><?= $page ?></a>
+                    <a class="page-link" href="index.php?action=comments&page=<?= urlencode($page) ?>"><?= $page ?></a>
                 </li>
             <?php endfor ?>
             <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                <a class="page-link" href="index.php?action=comments&page=<?= $currentPage + 1 ?>" aria-label="Next">
+                <a class="page-link" href="index.php?action=comments&page=<?= urlencode($currentPage) + 1 ?>" aria-label="Next">
                     <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
                 </a>
             </li>
