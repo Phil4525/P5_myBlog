@@ -6,7 +6,7 @@ class Helpers
 {
     public static function esc_html($text)
     {
-        return htmlspecialchars($text, ENT_QUOTES);
+        return htmlentities($text);
     }
 
     public static function wp_check_invalid_utf8($string, $strip = false)
