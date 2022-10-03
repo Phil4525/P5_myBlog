@@ -17,7 +17,7 @@ require 'headers/blog.php';
             <div class="card mb-4">
                 <a href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
                 <div class="card-body">
-                    <div class="small text-muted"><?= Helpers::esc_html($featuredPost->frenchCreationDate) ?></div>
+                    <div class="small text-muted"><?php echo Helpers::esc_html($featuredPost->frenchCreationDate) ?></div>
                     <h2 class="card-title"><?= addslashes($featuredPost->title) ?></h2>
                     <p class="card-text"><?= $featuredPost->chapo ?></p>
                     <div class="d-flex justify-content-end">
