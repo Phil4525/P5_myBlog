@@ -43,7 +43,7 @@ $title = "Utilisateur id: $user->id";
             <div class="modal-body">
                 <p>Etes-vous sûr de vouloir supprimer ?</p>
                 <div class="d-md-flex justify-content-md-end">
-                    <a type="button" class="btn btn-danger" href="index.php?action=deleteUser&id=<?= $user->id ?>" role="button">Confirmer</a>
+                    <a type="button" class="btn btn-danger" href="index.php?action=deleteUser&id=<?= urlencode($user->id) ?>" role="button">Confirmer</a>
                 </div>
             </div>
         </div>

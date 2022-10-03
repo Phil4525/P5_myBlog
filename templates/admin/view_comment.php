@@ -22,7 +22,7 @@ $title = "Commentaire id: $comment->id";
                     <div class="fs-6 mb-2">
                         <p>En reponse au commentaire de <strong><?= $parentComment->author ?></strong> :</p>
                         <p>"<?= $parentComment->comment ?>"</p>
-                        <a href="index.php?action=viewComment&id=<?= $parentComment->id ?>">Voir le commentaire.</a>
+                        <a href="index.php?action=viewComment&id=<?= urlencode($parentComment->id) ?>">Voir le commentaire.</a>
                     </div>
                 </section>
             <?php } else { ?>
@@ -32,7 +32,7 @@ $title = "Commentaire id: $comment->id";
                         <p><strong>Titre : </strong><?= $post->title ?></p>
                         <p><strong>publié le : </strong><?= $post->frenchCreationDate ?></p>
                         <p><strong>auteur : </strong><?= $post->author ?></p>
-                        <a href="index.php?action=viewPost&id=<?= $post->id ?>">Voir l'article.</a>
+                        <a href="index.php?action=viewPost&id=<?= urlencode($post->id) ?>">Voir l'article.</a>
                     </div>
                 </section>
             <?php } ?>
@@ -63,7 +63,7 @@ $title = "Commentaire id: $comment->id";
             <div class="modal-body">
                 <p>Etes-vous sûr de vouloir supprimer ?</p>
                 <div class="d-md-flex justify-content-md-end">
-                    <a type="button" class="btn btn-danger" href="index.php?action=deleteComment&id=<?= $comment->id ?>" role="button">Confirmer</a>
+                    <a type="button" class="btn btn-danger" href="index.php?action=deleteComment&id=<?= urlencode($comment->id) ?>" role="button">Confirmer</a>
                 </div>
             </div>
         </div>

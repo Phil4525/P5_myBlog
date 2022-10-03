@@ -22,7 +22,7 @@ ob_start();
                                 <div class="small text-muted">auteur : <?= $result->author ?></div>
                                 <p class="card-text text-truncate"><?= strip_tags($result->chapo) ?></p>
                                 <div class="d-flex justify-content-end">
-                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= $result->id ?>">Read more →</a>
+                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($result->id) ?>">Read more →</a>
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@ ob_start();
                                 <!-- <div class="small text-muted">publié le <?= $result->frenchCreationDate ?></div> -->
                                 <p class="card-text text-truncate"><?= strip_tags($result->comment) ?></p>
                                 <div class="d-flex justify-content-end">
-                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= $result->postId ?>#<?= $result->id ?>">Read more →</a>
+                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($result->postId) ?>#<?= urlencode($result->id) ?>">Read more →</a>
                                 </div>
                             </div>
                         </div>
@@ -45,17 +45,17 @@ ob_start();
                     <hr class="my-0" />
                     <ul class="pagination justify-content-center my-4">
                         <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                            <a class="page-link" href="index.php?action=search&keyword=<?= $keyword ?>&page=<?= $currentPage - 1 ?>#results" aria-label="Previous">
+                            <a class="page-link" href="index.php?action=search&keyword=<?= urlencode($keyword) ?>&page=<?= urlencode($currentPage) - 1 ?>#results" aria-label="Previous">
                                 <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
                             </a>
                         </li>
                         <?php for ($page = 1; $page <= $pages; $page++) : ?>
                             <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
-                                <a class="page-link" href="index.php?action=search&keyword=<?= $keyword ?>&page=<?= $page ?>#results"><?= $page ?></a>
+                                <a class="page-link" href="index.php?action=search&keyword=<?= urlencode($keyword) ?>&page=<?= urlencode($page) ?>#results"><?= $page ?></a>
                             </li>
                         <?php endfor ?>
                         <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                            <a class="page-link" href="index.php?action=search&keyword=<?= $keyword ?>&page=<?= $currentPage + 1 ?>#results" aria-label="Next">
+                            <a class="page-link" href="index.php?action=search&keyword=<?= urlencode($keyword) ?>&page=<?= urlencode($currentPage) + 1 ?>#results" aria-label="Next">
                                 <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
                             </a>
                         </li>

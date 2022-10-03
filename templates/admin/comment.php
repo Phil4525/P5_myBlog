@@ -29,8 +29,8 @@ $title = "Commentaires";
                         <td><?= $comment[0]->postId ?></td>
                         <td><?= $comment[0]->frenchCreationDate ?></td>
                         <td><?= $comment[0]->status ?></td>
-                        <td><a href="index.php?action=viewComment&id=<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
-                        <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment[0]->id ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
+                        <td><a href="index.php?action=viewComment&id=<?= urlencode($comment[0]->id) ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                        <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= urlencode($comment[0]->id) ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                     </tr>
                     <!-- delete post modal -->
                     <div class="modal fade" id="deleteComment-<?= $comment[0]->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -43,7 +43,7 @@ $title = "Commentaires";
                                 <div class="modal-body">
                                     <p>Etes-vous sûr de vouloir supprimer ?</p>
                                     <div class="d-md-flex justify-content-md-end">
-                                        <a type="button" class="btn btn-danger" href="index.php?action=deleteComment&id=<?= $comment[0]->id ?>&page=<?= $currentPage ?>" role="button">Confirmer</a>
+                                        <a type="button" class="btn btn-danger" href="index.php?action=deleteComment&id=<?= urlencode($comment[0]->id) ?>&page=<?= $currentPage ?>" role="button">Confirmer</a>
                                     </div>
                                 </div>
                             </div>

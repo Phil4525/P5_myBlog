@@ -28,7 +28,7 @@ $title = $post->title;
             </section>
         </article>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
-            <a class="btn btn-primary" href="index.php?action=editPost&id=<?= $post->id ?>" role="button">Editer</a>
+            <a class="btn btn-primary" href="index.php?action=editPost&id=<?= urlencode($post->id) ?>" role="button">Editer</a>
             <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#deletePost-<?= $post->id ?>" role="button">Supprimer</a>
         </div>
     </div>
@@ -44,7 +44,7 @@ $title = $post->title;
             <div class="modal-body">
                 <p>Etes-vous sûr de vouloir supprimer ?</p>
                 <div class="d-md-flex justify-content-md-end">
-                    <a type="button" class="btn btn-danger" href="index.php?action=deletePost&id=<?= $post->id ?>" role="button">Confirmer</a>
+                    <a type="button" class="btn btn-danger" href="index.php?action=deletePost&id=<?= urlencode($post->id) ?>" role="button">Confirmer</a>
                 </div>
             </div>
         </div>

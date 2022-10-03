@@ -37,9 +37,9 @@ $title = "Articles";
                         <td><?= $post[1] ?></td>
                         <td><?= $post[0]->frenchCreationDate ?></td>
                         <td><?= $post[0]->frenchModificationDate ?></td>
-                        <td><a href="index.php?action=viewPost&id=<?= $post[0]->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
-                        <td><a href="index.php?action=editPost&id=<?= $post[0]->id ?>" class="text-decoration-none fa-sharp fa-solid fa-pen"></a></td>
-                        <td><a href="" data-bs-toggle="modal" data-bs-target="#deletePost-<?= $post[0]->id ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
+                        <td><a href="index.php?action=viewPost&id=<?= urlencode($post[0]->id) ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                        <td><a href="index.php?action=editPost&id=<?= urlencode($post[0]->id) ?>" class="text-decoration-none fa-sharp fa-solid fa-pen"></a></td>
+                        <td><a href="" data-bs-toggle="modal" data-bs-target="#deletePost-<?= urlencode($post[0]->id) ?>" class="text-decoration-none fa-solid fa-trash-can"></a></td>
                     </tr>
 
                     <!-- delete post modal -->
@@ -53,7 +53,7 @@ $title = "Articles";
                                 <div class="modal-body">
                                     <p>Etes-vous sûr de vouloir supprimer ?</p>
                                     <div class="d-md-flex justify-content-md-end">
-                                        <a type="button" class="btn btn-danger" href="index.php?action=deletePost&id=<?= $post[0]->id ?>" role="button">Confirmer</a>
+                                        <a type="button" class="btn btn-danger" href="index.php?action=deletePost&id=<?= urlencode($post[0]->id) ?>" role="button">Confirmer</a>
                                     </div>
                                 </div>
                             </div>

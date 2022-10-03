@@ -23,7 +23,7 @@ $title = "Contact id: $contact->id";
             </section>
         </article>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
-            <a class="btn btn-primary" href="mailto:<?= $contact->email ?>" role="button">Repondre</a>
+            <a class="btn btn-primary" href="mailto:<?= urlencode($contact->email) ?>" role="button">Repondre</a>
             <a class="btn btn-secondary" href="" data-bs-toggle="modal" data-bs-target="#deleteContact-<?= $contact->id ?>" role="button">Supprimer</a>
         </div>
     </div>
@@ -39,7 +39,7 @@ $title = "Contact id: $contact->id";
             <div class="modal-body">
                 <p>Etes-vous sûr de vouloir supprimer ?</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a type="button" class="btn btn-danger" href="index.php?action=deleteContact&id=<?= $contact->id ?>" role="button">Confirmer</a>
+                    <a type="button" class="btn btn-danger" href="index.php?action=deleteContact&id=<?= urlencode($contact->id) ?>" role="button">Confirmer</a>
                 </div>
             </div>
         </div>

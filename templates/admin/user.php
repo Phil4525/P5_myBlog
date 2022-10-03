@@ -31,8 +31,8 @@ ob_start();
                         <td><?= $user[1] ?></td>
                         <td><?= $user[0]->role ?></td>
                         <td><?= $user[0]->frenchCreationDate ?></td>
-                        <td><a href="index.php?action=viewUser&id=<?= $user[0]->id ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
-                        <td><a href="" class="text-decoration-none fa-solid fa-trash-can" data-bs-toggle="modal" data-bs-target="#deleteUser-<?= $user[0]->id ?>"></a></td>
+                        <td><a href="index.php?action=viewUser&id=<?= urlencode($user[0]->id) ?>" class="text-decoration-none fa-solid fa-eye"></a></td>
+                        <td><a href="" class="text-decoration-none fa-solid fa-trash-can" data-bs-toggle="modal" data-bs-target="#deleteUser-<?= urlencode($user[0]->id) ?>"></a></td>
                     </tr>
                     <!-- delete user modal -->
                     <div class="modal fade" id="deleteUser-<?= $user[0]->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -45,7 +45,7 @@ ob_start();
                                 <div class="modal-body">
                                     <p>Etes-vous sûr de vouloir supprimer ?</p>
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                        <a class="btn btn-primary" href="index.php?action=deleteUser&id=<?= $user[0]->id ?>" role="button">Confirmer</a>
+                                        <a class="btn btn-primary" href="index.php?action=deleteUser&id=<?= urlencode($user[0]->id) ?>" role="button">Confirmer</a>
                                     </div>
                                 </div>
                             </div>
@@ -61,17 +61,17 @@ ob_start();
     <nav aria-label="Pagination">
         <ul class="pagination justify-content-center my-4 pagination-sm">
             <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                <a class="page-link" href="index.php?action=users&page=<?= $currentPage - 1 ?>" aria-label="Previous">
+                <a class="page-link" href="index.php?action=users&page=<?= urlencode($currentPage) - 1 ?>" aria-label="Previous">
                     <span class="fa-solid fa-arrow-left" aria-hidden="true"></span>
                 </a>
             </li>
             <?php for ($page = 1; $page <= $pages; $page++) : ?>
                 <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
-                    <a class="page-link" href="index.php?action=users&page=<?= $page ?>"><?= $page ?></a>
+                    <a class="page-link" href="index.php?action=users&page=<?= urlencode($page) ?>"><?= $page ?></a>
                 </li>
             <?php endfor ?>
             <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                <a class="page-link" href="index.php?action=users&page=<?= $currentPage + 1 ?>" aria-label="Next">
+                <a class="page-link" href="index.php?action=users&page=<?= urlencode($currentPage) + 1 ?>" aria-label="Next">
                     <span class="fa-solid fa-arrow-right" aria-hidden="true"></span>
                 </a>
             </li>

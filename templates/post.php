@@ -35,7 +35,7 @@ ob_start();
                 <div class="card bg-light">
                     <div class="card-body">
                         <!-- Comment form-->
-                        <form class="mb-4" action="index.php?action=addComment&id=<?= $post->id ?>" method="post">
+                        <form class="mb-4" action="index.php?action=addComment&id=<?= urlencode($post->id) ?>" method="post">
                             <div class="form-group mb-5">
                                 <textarea class="form-control mb-2" rows="3" name="comment" placeholder="leave a comment!"></textarea>
                                 <?php if (isset($session)) { ?>

@@ -47,7 +47,7 @@
             <div class="modal-body">
                 <p>Etes-vous sûr de vouloir supprimer ?</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a class="btn btn-primary" href="index.php?action=deleteComment&id=<?= $comment->id ?>" role="button">Confirmer</a>
+                    <a class="btn btn-primary" href="index.php?action=deleteComment&id=<?= urlencode($comment->id) ?>" role="button">Confirmer</a>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="mb-4" action="index.php?action=addComment&id=<?= $post->id ?>&parentCommentId=<?= $comment->id ?>" method="post">
+                <form class="mb-4" action="index.php?action=addComment&id=<?= urlencode($post->id) ?>&parentCommentId=<?= $comment->id ?>" method="post">
                     <div class="form-group mb-5">
                         <textarea class="form-control mb-2" rows="3" name="comment" placeholder="Leave a reply!"></textarea>
                     </div>

@@ -52,7 +52,7 @@ require 'headers/blog.php';
                     </li>
                     <?php for ($page = 1; $page <= $pages; $page++) : ?>
                         <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>" aria-current="page">
-                            <a class="page-link" href="index.php?action=blog&page=<?= urlencode($page) ?>#posts"><?= urlencode($page) ?></a>
+                            <a class="page-link" href="index.php?action=blog&page=<?= urlencode($page) ?>#posts"><?= $page ?></a>
                         </li>
                     <?php endfor ?>
                     <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">

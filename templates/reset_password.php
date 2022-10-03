@@ -29,7 +29,7 @@
                         </div>
                         <div class="card-body">
                             <div class="small mb-3 text-muted">Enter your new password.</div>
-                            <form action="index.php?action=resetPassword&key=<?= $email ?>&reset=<?= $password ?>" method="post">
+                            <form action="index.php?action=resetPassword&key=<?= urlencode($email) ?>&reset=<?= urlencode($password) ?>" method="post">
                                 <div class="form-floating mb-3">
                                     <input class="form-control" name="email" type="hidden" value="<?= $email ?>" />
                                     <input class="form-control" type="password" name="new_password" placeholder="Create a password" />

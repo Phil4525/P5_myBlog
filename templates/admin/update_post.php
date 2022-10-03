@@ -7,7 +7,7 @@ $title = $post->title;
         <div class="pt-3 pb-2 mb-3 border-bottom">
             <h1 class="fs-4">Article id:<?= $post->id ?></h1>
         </div>
-        <form class="mb-5" action="index.php?action=editPost&id=<?= $post->id ?>" method="post">
+        <form class="mb-5" action="index.php?action=editPost&id=<?= urlencode($post->id) ?>" method="post">
             <div class="mb-3">
                 <label for="title" class="form-label fw-bold">Titre</label>
                 <input type="text" class="form-control" id="title" name="title" value="<?= $post->title ?>">
@@ -42,7 +42,7 @@ $title = $post->title;
             <div class="modal-body">
                 <p>Etes-vous sûr de vouloir supprimer ?</p>
                 <div class="d-md-flex justify-content-md-end">
-                    <a type="button" class="btn btn-danger" href="index.php?action=deletePost&id=<?= $post->id ?>" role="button">Confirmer</a>
+                    <a type="button" class="btn btn-danger" href="index.php?action=deletePost&id=<?= urlencode($post->id) ?>" role="button">Confirmer</a>
                 </div>
             </div>
         </div>
