@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Comment;
 
 use App\Lib\DatabaseConnection;
 use App\Lib\Redirect;
-use App\Globals\Globals;
+use App\Lib\Globals;
 use App\Repository\CommentRepository;
 
 class AddCommentController

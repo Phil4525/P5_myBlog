@@ -6,7 +6,6 @@ $title = "Articles";
     <div class="pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Articles</h1>
     </div>
-
     <!-- <h2>Liste des articles</h2> -->
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
         <a class="btn btn-primary" href="index.php?action=newPost" role="button">Nouvel article</a>

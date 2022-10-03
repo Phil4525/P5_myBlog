@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Auth;
 
 use App\Lib\Redirect;
-use App\Globals\Globals;
+use App\Lib\Globals;
 
 class LogoutController
 {

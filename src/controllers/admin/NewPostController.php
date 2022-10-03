@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Admin;
 
-use App\Globals\Globals;
+use App\Lib\Globals;
 
 class NewPostController
 {

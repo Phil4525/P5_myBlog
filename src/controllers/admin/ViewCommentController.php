@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
 use App\Lib\Redirect;
-use App\Globals\Globals;
+use App\Lib\Globals;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 

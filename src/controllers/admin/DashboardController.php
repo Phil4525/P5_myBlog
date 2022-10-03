@@ -3,7 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
-use App\Globals\Globals;
+use App\Lib\Globals;
 use App\Repository\PostRepository;
 use App\Repository\CommentRepository;
 use App\Repository\UserRepository;

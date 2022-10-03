@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Auth;
 
 use App\Lib\DatabaseConnection;
 use App\Lib\Redirect;
-use App\Globals\Globals;
+use App\Lib\Globals;
 use App\Repository\UserRepository;
 
 class SignupController

@@ -1,6 +1,6 @@
 <?php
 
-use App\Globals\Globals;
+use App\Lib\Globals;
 
 $globals = new Globals();
 $session = $globals->getSESSION('user');

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Auth;
 
 use App\Lib\DatabaseConnection;
 use App\Repository\UserRepository;

@@ -1,7 +1,4 @@
 <?php
-
-// use App\Lib\Helpers;
-
 ob_start();
 $title = "Blog";
 require 'headers/blog.php';

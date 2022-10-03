@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Comment;
 
 use App\Lib\DatabaseConnection;
 use App\Lib\Redirect;

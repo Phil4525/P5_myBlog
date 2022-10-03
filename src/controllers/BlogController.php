@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Lib\DatabaseConnection;
-use App\Globals\Globals;
+use App\Lib\Globals;
 use App\Repository\PostRepository;
 
 class BlogController
