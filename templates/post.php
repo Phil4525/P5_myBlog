@@ -31,16 +31,16 @@ ob_start();
                 </section>
             </article>
             <!-- Comments section-->
-            <section class="mb-5">
+            <section id="comments" class="mb-5">
                 <div class="card bg-light">
                     <div class="card-body">
                         <!-- Comment form-->
                         <form class="mb-4" action="index.php?action=addComment&id=<?= urlencode($post->id) ?>" method="post">
                             <div class="form-group mb-5">
-                                <textarea class="form-control mb-2" rows="3" name="comment" placeholder="leave a comment!"></textarea>
+                                <textarea class="form-control mb-2" rows="3" name="comment" placeholder="Laissez un commentaire !"></textarea>
                                 <?php if (isset($session)) { ?>
                                     <div class="float-end">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary">Valider</button>
                                     </div>
                                 <?php } ?>
                             </div>
@@ -84,10 +84,10 @@ ob_start();
                 </div>
             </div>
             <!-- Side widget-->
-            <div class="card mb-4">
+            <!-- <div class="card mb-4">
                 <div class="card-header">Side Widget</div>
                 <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

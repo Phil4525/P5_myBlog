@@ -5,40 +5,39 @@ use App\Lib\Globals;
 $globals = new Globals();
 $session = $globals->getSESSION('user');
 ?>
-<footer class="footer text-center">
+<footer class="footer p-5 text-center">
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <!-- Footer Location-->
-            <div class="col-lg-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">Location</h4>
+            <!-- <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Adresse</h4>
                 <p class="lead mb-0">
-                    2215 John Daniel Drive
+                    51 rue Sedaine
                     <br />
-                    Clark, MO 65243
+                    75011 Paris
                 </p>
-            </div>
+            </div> -->
             <!-- Footer Social Icons-->
             <div class="col-lg-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">Around the Web</h4>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
+                <!-- <h4 class="text-uppercase mb-4">Sur la toile</h4> -->
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fa-brands fa-github-alt fs-3"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter fs-4"></i></a>
                 <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
             </div>
             <!-- Footer About Text-->
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
                 <h4 class="text-uppercase mb-4">About Freelancer</h4>
                 <p class="lead mb-0">
                     Freelance is a free to use, MIT licensed Bootstrap theme created by
                     <a href="http://startbootstrap.com">Start Bootstrap</a>.
                 </p>
-            </div>
+            </div> -->
         </div>
     </div>
 </footer>
 <!-- Copyright Section-->
 <div class="copyright py-4 text-center text-white" id="copyright">
-    <div class="container"><small>Copyright &copy; Your Website 2022</small></div>
+    <div class="container"><small>Copyright &copy; Philippe Mariou 2022</small></div>
     <?php if (!isset($session)) { ?>
         <a href="" data-bs-toggle="modal" data-bs-target="#adminLogin"><small>Admin Zone</small></a>
     <?php } elseif ($session['role'] == 'admin') { ?>
@@ -53,26 +52,26 @@ $session = $globals->getSESSION('user');
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title " id="exampleModalLabel">Login</h5>
+                <h5 class="modal-title " id="exampleModalLabel">Connexion</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="index.php?action=adminLogin" method="post">
                     <div class="form-floating mb-3">
                         <input class="form-control" type="email" name="email" placeholder="name@example.com" required />
-                        <label>Email address</label>
+                        <label>Email</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input class="form-control" type="password" name="password" placeholder="Password" required />
-                        <label>Password</label>
+                        <label>Mot de passe</label>
                     </div>
-                    <div class="form-check mb-3">
+                    <!-- <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" value="" />
                         <label class="form-check-label">Remember Password</label>
-                    </div>
+                    </div> -->
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                        <a class="small" href="" data-bs-toggle="modal" data-bs-target="#passwordRecovery">Forgot Password?</a>
-                        <button class="btn btn-primary" type="submit">Send</button>
+                        <a class="small" href="" data-bs-toggle="modal" data-bs-target="#passwordRecovery">Mot de passe oublié ?</a>
+                        <button class="btn btn-primary" type="submit">Valider</button>
                     </div>
                 </form>
             </div>

@@ -56,8 +56,9 @@ class SearchController
         if (isset($session) && $session['role'] == 'admin' && $get['action'] == 'adminSearch') {
             require 'templates/admin/search_results.php';
             return;
-        }
+        } else {
 
-        require 'templates/search_results.php';
+            require 'templates/search_results.php';
+        }
     }
 }

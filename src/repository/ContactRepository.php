@@ -10,7 +10,7 @@ class ContactRepository
 
     public DatabaseConnection $connection;
 
-    function createContact(string $fullname, string $email, string $phone, string $messageContent): bool
+    public function createContact(string $fullname, string $email, string $phone, string $messageContent): bool
     {
         $statement = $this->connection->getConnection()->prepare(
             'INSERT INTO contacts(fullname, email, phone, message_content, contact_date) VALUES(?, ?, ?, ?, NOW())'
@@ -20,7 +20,7 @@ class ContactRepository
         return ($affectedLines > 0);
     }
 
-    function getContacts(): array
+    public function getContacts(): array
     {
         $statement = $this->connection->getConnection()->query(
             "SELECT id, fullname, email, phone, message_content, DATE_FORMAT(contact_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM contacts ORDER BY contact_date DESC"
@@ -44,7 +44,7 @@ class ContactRepository
         return $contacts;
     }
 
-    function getContactById(string $id): Contact
+    public function getContactById(string $id): Contact
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT id, fullname, email, phone, message_content, DATE_FORMAT(contact_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM contacts WHERE id = ?"
@@ -64,7 +64,7 @@ class ContactRepository
         return $contact;
     }
 
-    function deleteContact(string $id): bool
+    public function deleteContact(string $id): bool
     {
         $statement = $this->connection->getConnection()->prepare('DELETE FROM contacts WHERE id = ?');
         $affectedLines = $statement->execute([$id]);

@@ -1,5 +1,6 @@
+<?php
 ob_start();
-<?php $title = "Résultat de la recherche : $keyword";
+$title = "Résultat de la recherche : $keyword";
 ?>
 <!-- Page content-->
 <div class="container masthead">

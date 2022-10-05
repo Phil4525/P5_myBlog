@@ -9,7 +9,7 @@ class CommentRepository
 {
     public DatabaseConnection $connection;
 
-    function getCommentsByPostId(string $postId): array
+    public function getCommentsByPostId(string $postId): array
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
@@ -38,7 +38,7 @@ class CommentRepository
         return $comments;
     }
 
-    function createComment(string $postId, ?string $parentCommentId, string $author, string $comment): bool
+    public function createComment(string $postId, ?string $parentCommentId, string $author, string $comment): bool
     {
         $statement = $this->connection->getConnection()->prepare(
             'INSERT INTO comments(post_id, parent_comment_id, author, comment, comment_date) VALUES(?, ?, ?, ?, NOW())'
@@ -48,7 +48,7 @@ class CommentRepository
         return ($affectedLines > 0);
     }
 
-    function updateComment(string $id, string $comment): bool
+    public function updateComment(string $id, string $comment): bool
     {
         $statement = $this->connection->getConnection()->prepare(
             'UPDATE comments SET comment = ? WHERE id = ?'
@@ -58,7 +58,7 @@ class CommentRepository
         return ($affectedLines > 0);
     }
 
-    function getComment(string $id): Comment
+    public function getComment(string $id): Comment
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
@@ -81,7 +81,7 @@ class CommentRepository
         return $comment;
     }
 
-    function deleteComment(string $id): bool
+    public function deleteComment(string $id): bool
     {
         $statement = $this->connection->getConnection()->prepare('DELETE FROM comments WHERE id = ?');
         $affectedLines = $statement->execute([$id]);
@@ -89,7 +89,7 @@ class CommentRepository
         return ($affectedLines > 0);
     }
 
-    function getComments(): array
+    public function getComments(): array
     {
         $statement = $this->connection->getConnection()->query(
             "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
@@ -115,7 +115,7 @@ class CommentRepository
         return $comments;
     }
 
-    function getCommentsByUsername(string $username): array
+    public function getCommentsByUsername(string $username): array
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status 
@@ -144,7 +144,7 @@ class CommentRepository
         return $comments;
     }
 
-    function getCommentsWaitingForValidation(): array
+    public function getCommentsWaitingForValidation(): array
     {
         $statement = $this->connection->getConnection()->query(
             "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status 
@@ -170,7 +170,7 @@ class CommentRepository
         return $comments;
     }
 
-    function getValidatedCommentsByPostId(string $postId): array
+    public function getValidatedCommentsByPostId(string $postId): array
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
@@ -199,7 +199,7 @@ class CommentRepository
         return $comments;
     }
 
-    function getCommentsWithChildrenByPostId(string $postId): array
+    public function getCommentsWithChildrenByPostId(string $postId): array
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
@@ -232,7 +232,7 @@ class CommentRepository
         return $comments;
     }
 
-    function getChildComments(string $commentId): array
+    public function getChildComments(string $commentId): array
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT id, post_id, parent_comment_id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') AS french_creation_date, status
@@ -263,7 +263,7 @@ class CommentRepository
         return $comments;
     }
 
-    function updateCommentStatus(string $id, string $status): bool
+    public function updateCommentStatus(string $id, string $status): bool
     {
         $statement = $this->connection->getConnection()->prepare(
             'UPDATE comments SET status = ? WHERE id = ?'
@@ -273,10 +273,10 @@ class CommentRepository
         return ($affectedLines > 0);
     }
 
-    function searchComments(string $keyword): array
+    public function searchComments(string $keyword): array
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, post_id, parent_comment_id, author, comment, comment_date
+            "SELECT id, post_id, parent_comment_id, author, comment, comment_date, status
             FROM comments 
             WHERE author LIKE :keyword OR comment LIKE :keyword 
             ORDER BY comment_date DESC"
@@ -293,7 +293,7 @@ class CommentRepository
                 $row['parent_comment_id'],
                 $row['author'],
                 $row['comment'],
-                $row['french_creation_date'],
+                $row['comment_date'],
                 $row['status']
             );
 

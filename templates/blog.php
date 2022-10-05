@@ -1,10 +1,10 @@
 <?php
 ob_start();
 $title = "Blog";
-require 'headers/blog.php';
+// require 'headers/blog.php';
 ?>
 <!-- Page content-->
-<div class="container">
+<div class="container masthead">
     <div class="row">
         <!-- Blog entries-->
         <div class="col-lg-8">
@@ -16,7 +16,7 @@ require 'headers/blog.php';
                     <h2 class="card-title"><?= $featuredPost->title ?></h2>
                     <p class="card-text"><?= $featuredPost->chapo ?></p>
                     <div class="d-flex justify-content-end">
-                        <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>">Read more →</a>
+                        <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($featuredPost->id) ?>">Lire la suite →</a>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@ require 'headers/blog.php';
                                 <h2 class="card-title h4"><?= $post->title ?></h2>
                                 <p class="card-text text-truncate"><?= strip_tags($post->chapo)  ?></p>
                                 <div class="d-flex justify-content-end">
-                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($post->id) ?>">Read more →</a>
+                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($post->id) ?>">Lire la suite →</a>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@ require 'headers/blog.php';
             <?php require('templates/search_widget.php') ?>
             <!-- Categories widget-->
             <div class="card mb-4">
-                <div class="card-header">Categories</div>
+                <div class="card-header">Catégories</div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6">
@@ -87,10 +87,10 @@ require 'headers/blog.php';
                 </div>
             </div>
             <!-- Side widget-->
-            <div class="card mb-4">
+            <!-- <div class="card mb-4">
                 <div class="card-header">Side Widget</div>
                 <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

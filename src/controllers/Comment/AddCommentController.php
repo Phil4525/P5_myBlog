@@ -37,7 +37,11 @@ class AddCommentController
             throw new \Exception("Impossible d'ajouter le commentaire !");
         }
 
-        $redirect = new Redirect('index.php?action=post&id=' . $postId . '#' . $parentCommentId);
+        if ($parentCommentId != null) {
+            $redirect = new Redirect('index.php?action=post&id=' . $postId . '#' . $parentCommentId);
+        } else {
+            $redirect = new Redirect('index.php?action=post&id=' . $postId . '#comments');
+        }
         $redirect->execute();
     }
 }

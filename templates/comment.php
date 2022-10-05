@@ -1,16 +1,16 @@
 <div class="d-flex" id="<?= $comment->id ?>">
     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-    <div class="ms-3">
+    <div class="ms-3 mb-3">
         <div class="fw-bold"><?= $comment->author ?></div>
         <div class="text-muted fst-italic"><small>le <?= $comment->frenchCreationDate ?></small></div>
         <p><?= $comment->comment ?></p>
         <!-- modify or reply condition -->
         <?php if (isset($session) && $session['username'] == $comment->author) { ?>
-            <a href="" data-bs-toggle="modal" data-bs-target="#updateComment-<?= $comment->id ?>"><small>(Modify)</small></a>
-            <a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment->id ?>"><small>(Delete)</small></a>
+            <a href="" data-bs-toggle="modal" data-bs-target="#updateComment-<?= $comment->id ?>"><small>(Modifier)</small></a>
+            <a href="" data-bs-toggle="modal" data-bs-target="#deleteComment-<?= $comment->id ?>"><small>(Supprimer)</small></a>
         <?php } ?>
         <?php if (isset($session) && $session['username'] !== $comment->author) { ?>
-            <a href="" data-bs-toggle="modal" data-bs-target="#replyTo-<?= $comment->id ?>"><small>(Reply)</small></a>
+            <a href="" data-bs-toggle="modal" data-bs-target="#replyTo-<?= $comment->id ?>"><small>(Repondre)</small></a>
         <?php } ?>
     </div>
 </div>
@@ -19,7 +19,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modify your comment</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modifier votre commentaire</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -28,8 +28,8 @@
                         <textarea class="form-control mb-2" rows="3" name="comment" placeholder="update your comment!"><?= $comment->comment ?></textarea>
                     </div>
                     <div class="modal-footer form-group">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Sauvegarder</button>
                     </div>
                 </form>
             </div>

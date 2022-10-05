@@ -9,7 +9,7 @@ class PostRepository
 {
     public DatabaseConnection $connection;
 
-    function getPost(string $id): Post
+    public function getPost(string $id): Post
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT id, title, chapo, content, author,
@@ -34,7 +34,7 @@ class PostRepository
         return $post;
     }
 
-    function getPosts(): array
+    public function getPosts(): array
     {
         $statement = $this->connection->getConnection()->query(
             "SELECT id, title, chapo, content, author, 
@@ -63,7 +63,7 @@ class PostRepository
         return $posts;
     }
 
-    function createPost(string $title, string $chapo, string $content, string $author): bool
+    public function createPost(string $title, string $chapo, string $content, string $author): bool
     {
         $statement = $this->connection->getConnection()->prepare(
             'INSERT INTO posts(title, chapo, content, author, creation_date) 
@@ -74,7 +74,7 @@ class PostRepository
         return ($affectedLines > 0);
     }
 
-    function updatePost(string $id, string $title, string $chapo, string $content, string $author): bool
+    public function updatePost(string $id, string $title, string $chapo, string $content, string $author): bool
     {
         $statement = $this->connection->getConnection()->prepare(
             'UPDATE posts 
@@ -86,7 +86,7 @@ class PostRepository
         return ($affectedLines > 0);
     }
 
-    function deletePost(string $id): bool
+    public function deletePost(string $id): bool
     {
         $statement = $this->connection->getConnection()->prepare('DELETE FROM posts WHERE id = ?');
         $affectedLines = $statement->execute([$id]);
@@ -94,7 +94,7 @@ class PostRepository
         return ($affectedLines > 0);
     }
 
-    function getMostCommentedPost(): array
+    public function getMostCommentedPost(): array
     {
         $statement = $this->connection->getConnection()->query(
             'SELECT posts.id, COUNT(comments.id) AS comments_number, posts.title 
@@ -114,7 +114,7 @@ class PostRepository
         return $mostCommentedPost;
     }
 
-    function searchPosts(string $keyword): array
+    public function searchPosts(string $keyword): array
     {
         $statement = $this->connection->getConnection()->prepare(
             "SELECT id, title, chapo, content, author, creation_date, modification_date
