@@ -17,5 +17,5 @@
     </div>
 
 
-    <script src="js/experiment1.js"></script>
+    <script src="js/points_cloud.js"></script>
 </header>
