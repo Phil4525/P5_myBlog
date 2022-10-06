@@ -1,6 +1,6 @@
 <!-- Masthead-->
 <header class="masthead bg-primary text-white text-center">
-    <div class="card border-0" style="height: 400px;">
+    <div class="card border-0" style="height: 375px;">
         <canvas class="card-img"></canvas>
         <div class="card-img-overlay container d-flex align-items-center flex-column">
             <!-- Masthead Avatar Image-->
