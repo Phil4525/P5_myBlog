@@ -12,7 +12,9 @@ class UserRepository
     public function getUserByEmail(string $email): ?User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE email = ?"
+            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date 
+            FROM users 
+            WHERE email = ?"
         );
         $statement->execute([$email]);
         $row = $statement->fetch();
@@ -47,7 +49,9 @@ class UserRepository
     public function getUserByName(string $username): ?User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date FROM users WHERE username=?"
+            "SELECT id, username, email, password, role, DATE_FORMAT(signup_date, '%d/%m/%Y à %Hh%i') AS french_creation_date 
+            FROM users 
+            WHERE username=?"
         );
         $statement->execute([$username]);
         $row = $statement->fetch();
