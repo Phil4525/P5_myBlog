@@ -4,11 +4,11 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <form class="w-100" action="index.php?action=adminSearch" method="post">
-        <input class="form-control form-control-dark rounded-0 border-0" name="keyword" type="text" placeholder="Search" aria-label="Search">
+        <input class="form-control form-control-dark rounded-0 border-0" name="keyword" type="text" placeholder="Rechercher" aria-label="Search">
     </form>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="index.php?action=logout">Sign out</a>
+            <a class="nav-link px-3" href="index.php?action=logout">Déconnexion</a>
         </div>
     </div>
 </header>

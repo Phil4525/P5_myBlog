@@ -1,7 +1,7 @@
     <?php
     ob_start();
     $title = "Accueil";
-    require 'templates/headers/homepage.php';
+    require 'templates/header.php';
     ?>
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
@@ -93,10 +93,10 @@
             <!-- About Section Content-->
             <div class="row">
                 <div class="col-lg-4 ms-auto">
-                    <p class="lead">Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional SASS stylesheets for easy customization.</p>
+                    <p class="lead">Aliquam feugiat a nisl in vestibulum. Donec accumsan eleifend metus, non auctor ante mattis iaculis. Praesent vel ligula ante. Fusce tristique lacus nisl, at malesuada ante faucibus ac. Nulla sed posuere mauris. Praesent sit amet odio odio. Donec ut ligula vel arcu ornare luctus suscipit eget lectus. Proin a elit massa. Aenean vitae est neque. Aenean consectetur nunc vitae ornare suscipit.</p>
                 </div>
                 <div class="col-lg-4 me-auto">
-                    <p class="lead">You can create your own custom avatar for the masthead, change the icon in the dividers, and add your email address to the contact form to make it fully functional!</p>
+                    <p class="lead">Pellentesque nulla erat, pretium vitae nisi condimentum, dapibus sagittis velit. Cras felis justo, iaculis eget nibh quis, porta interdum magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed blandit elementum quam, eu posuere eros dapibus sed. Nunc luctus a tellus sit amet euismod. Cras consectetur sapien vel risus lacinia porta.</p>
                 </div>
             </div>
             <!-- About Section Button-->
