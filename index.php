@@ -5,9 +5,9 @@ require __DIR__ . '/vendor/autoload.php';
 
 use App\Lib\Globals;
 use App\Controllers\HomepageController;
-use App\Controllers\BlogController;
-use App\Controllers\PostController;
-use App\Controllers\ContactController;
+use App\Controllers\ListAllPostsController;
+use App\Controllers\ShowPostController;
+use App\Controllers\SendContactController;
 use App\Controllers\SearchController;
 use App\Controllers\Auth\LoginController;
 use App\Controllers\Auth\LogoutController;
@@ -19,18 +19,18 @@ use App\Controllers\Comment\UpdateCommentController;
 use App\Controllers\Comment\DeleteCommentController;
 use App\Controllers\Admin\AdminLoginController;
 use App\Controllers\Admin\DashboardController;
-use App\Controllers\Admin\PostsController;
+use App\Controllers\Admin\ViewAllPostsController;
+use App\Controllers\Admin\ViewPostController;
 use App\Controllers\Admin\NewPostController;
 use App\Controllers\Admin\AddPostController;
-use App\Controllers\Admin\ViewPostController;
 use App\Controllers\Admin\UpdatePostController;
 use App\Controllers\Admin\DeletePostController;
-use App\Controllers\Admin\CommentsController;
+use App\Controllers\Admin\ViewAllCommentsController;
 use App\Controllers\Admin\ViewCommentController;
-use App\Controllers\Admin\UsersController;
+use App\Controllers\Admin\ViewAllUsersController;
 use App\Controllers\Admin\ViewUserController;
 use App\Controllers\Admin\DeleteUserController;
-use App\Controllers\Admin\ContactsController;
+use App\Controllers\Admin\ViewAllContactsController;
 use App\Controllers\Admin\viewContactController;
 use App\Controllers\Admin\DeleteContactController;
 
@@ -45,12 +45,12 @@ try {
             (new HomepageController())->execute();
         } elseif ($get['action'] === 'blog') {
 
-            (new BlogController())->execute();
+            (new ListAllPostsController())->execute();
         } elseif ($get['action'] === 'post') {
             if (isset($get['id']) && $get['id'] > 0) {
                 $id = $get['id'];
 
-                (new PostController())->execute($id);
+                (new ShowPostController())->execute($id);
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé.');
             }
@@ -101,21 +101,21 @@ try {
             (new PasswordRecoveryController())->execute($post);
         } elseif ($get['action'] === 'resetPassword') {
             if (isset($get['key']) && isset($get['reset'])) {
-                $email = $get['key'];
-                $password = $get['reset'];
+                $hashedEmail = $get['key'];
+                $hashedPassword = $get['reset'];
                 // It sets the input only when the HTTP method is POST (ie. the form is submitted).
                 $input = null;
                 if ($globals->getSERVER('REQUEST_METHOD') === 'POST') {
                     $input = $post;
                 }
 
-                (new ResetPasswordController())->execute($email, $password, $input);
+                (new ResetPasswordController())->execute($hashedEmail, $hashedPassword, $input);
             } else {
                 throw new Exception("Aucune information d'utilisateur envoyé.");
             }
         } elseif ($get['action'] === 'contact') {
 
-            (new ContactController())->execute($post);
+            (new SendContactController())->execute($post);
         } elseif ($get['action'] === 'search') {
 
             (new SearchController())->execute($post);
@@ -127,7 +127,7 @@ try {
             (new DashboardController())->execute();
         } elseif ($get['action'] === 'posts') {
 
-            (new PostsController())->execute();
+            (new ViewAllPostsController())->execute();
         } elseif ($get['action'] === 'newPost') {
 
             (new NewPostController())->execute();
@@ -163,7 +163,7 @@ try {
             }
         } elseif ($get['action'] === 'comments') {
 
-            (new CommentsController())->execute();
+            (new ViewAllCommentsController())->execute();
         } elseif ($get['action'] === 'viewComment') {
             if (isset($get['id']) && $get['id'] > 0) {
                 $id = $get['id'];
@@ -179,7 +179,7 @@ try {
             }
         } elseif ($get['action'] === 'users') {
 
-            (new UsersController())->execute();
+            (new ViewAllUsersController())->execute();
         } elseif ($get['action'] === 'viewUser') {
             if (isset($get['id']) && $get['id'] > 0) {
                 $id = $get['id'];
@@ -203,7 +203,7 @@ try {
             }
         } elseif ($get['action'] === 'contacts') {
 
-            (new ContactsController())->execute();
+            (new ViewAllContactsController())->execute();
         } elseif ($get['action'] === 'viewContact') {
             if (isset($get['id']) && $get['id'] > 0) {
                 $id = $get['id'];

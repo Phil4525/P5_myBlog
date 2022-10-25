@@ -8,30 +8,12 @@ $session = $globals->getSESSION('user');
 <footer class="footer p-5 text-center">
     <div class="container">
         <div class="row justify-content-center">
-            <!-- Footer Location-->
-            <!-- <div class="col-lg-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">Adresse</h4>
-                <p class="lead mb-0">
-                    51 rue Sedaine
-                    <br />
-                    75011 Paris
-                </p>
-            </div> -->
             <!-- Footer Social Icons-->
             <div class="col-lg-4 mb-5 mb-lg-0">
-                <!-- <h4 class="text-uppercase mb-4">Sur la toile</h4> -->
                 <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fa-brands fa-github-alt fs-3"></i></a>
                 <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter fs-4"></i></a>
                 <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
             </div>
-            <!-- Footer About Text-->
-            <!-- <div class="col-lg-4">
-                <h4 class="text-uppercase mb-4">About Freelancer</h4>
-                <p class="lead mb-0">
-                    Freelance is a free to use, MIT licensed Bootstrap theme created by
-                    <a href="http://startbootstrap.com">Start Bootstrap</a>.
-                </p>
-            </div> -->
         </div>
     </div>
 </footer>
@@ -65,12 +47,8 @@ $session = $globals->getSESSION('user');
                         <input class="form-control" type="password" name="password" placeholder="Password" required />
                         <label>Mot de passe</label>
                     </div>
-                    <!-- <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" value="" />
-                        <label class="form-check-label">Remember Password</label>
-                    </div> -->
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                        <a class="small" href="" data-bs-toggle="modal" data-bs-target="#passwordRecovery">Mot de passe oublié ?</a>
+                        <a class="small" href="#" data-bs-toggle="modal" data-bs-target="#passwordRecovery">Mot de passe oublié ?</a>
                         <button class="btn btn-primary" type="submit">Valider</button>
                     </div>
                 </form>

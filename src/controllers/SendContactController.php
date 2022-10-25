@@ -6,7 +6,7 @@ use App\Lib\DatabaseConnection;
 use App\Lib\Redirect;
 use App\Repository\ContactRepository;
 
-class ContactController
+class SendContactController
 {
     public function execute(array $input)
     {

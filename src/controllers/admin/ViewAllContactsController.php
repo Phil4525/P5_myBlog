@@ -6,7 +6,7 @@ use App\Lib\DatabaseConnection;
 use App\Lib\Globals;
 use App\Repository\ContactRepository;
 
-class ContactsController
+class ViewAllContactsController
 {
     public function execute()
     {

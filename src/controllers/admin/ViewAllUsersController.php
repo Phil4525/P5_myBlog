@@ -4,10 +4,10 @@ namespace App\Controllers\Admin;
 
 use App\Lib\DatabaseConnection;
 use App\Lib\Globals;
-use App\Repository\PostRepository;
+use App\Repository\UserRepository;
 use App\Repository\CommentRepository;
 
-class PostsController
+class ViewAllUsersController
 {
     public function execute()
     {
@@ -19,40 +19,38 @@ class PostsController
             throw new \Exception("Vous n'avez pas l'autorisation d'accéder à cette page.");
         }
 
-        $postRepository = new PostRepository();
-        $postRepository->connection = new DatabaseConnection();
+        $userRepository = new UserRepository();
+        $userRepository->connection = new DatabaseConnection();
 
-        $posts = $postRepository->getPosts();
+        $users = $userRepository->getUsers();
 
-        // find current page
         if (isset($get['page']) && !empty($get['page'])) {
             $currentPage = (int) strip_tags($get['page']);
         } else {
             $currentPage = 1;
         }
 
-        // first post of page
-        $postsNb = count($posts);
+        $usersNb = count($users);
         $perPage = 10;
-        $pages = ceil($postsNb / $perPage);
+        $pages = ceil($usersNb / $perPage);
         $offset = ($currentPage * $perPage) - $perPage;
 
-        $posts = array_slice($posts, $offset, $perPage);
+        $users = array_slice($users, $offset, $perPage);
 
         $commentRepository = new CommentRepository();
         $commentRepository->connection = new DatabaseConnection();
         $comments = $commentRepository->getComments();
 
-        foreach ($posts as $post) {
+        foreach ($users as $user) {
             $commentsNb = 0;
             foreach ($comments as $comment) {
-                if ($post->id == $comment->postId) {
+                if ($user->username == $comment->author) {
                     $commentsNb++;
                 }
             }
-            $postsWithCommentsNb[] = [$post, $commentsNb];
+            $usersWithCommentsNb[] = [$user, $commentsNb];
         }
 
-        require 'templates/admin/post.php';
+        require 'templates/admin/user.php';
     }
 }

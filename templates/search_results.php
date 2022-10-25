@@ -23,7 +23,7 @@ $title = "Résultat de la recherche : $keyword";
                                 <div class="small text-muted">auteur : <?= $result->author ?></div>
                                 <p class="card-text text-truncate"><?= strip_tags($result->chapo) ?></p>
                                 <div class="d-flex justify-content-end">
-                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($result->id) ?>">Read more →</a>
+                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($result->id) ?>">Lire la suite →</a>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@ $title = "Résultat de la recherche : $keyword";
                                 <!-- <div class="small text-muted">publié le <?= $result->frenchCreationDate ?></div> -->
                                 <p class="card-text text-truncate"><?= strip_tags($result->comment) ?></p>
                                 <div class="d-flex justify-content-end">
-                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($result->postId) ?>#<?= urlencode($result->id) ?>">Read more →</a>
+                                    <a class="btn btn-primary" href="index.php?action=post&id=<?= urlencode($result->postId) ?>#<?= urlencode($result->id) ?>">Lire la suite →</a>
                                 </div>
                             </div>
                         </div>
@@ -91,11 +91,6 @@ $title = "Résultat de la recherche : $keyword";
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Side widget-->
-            <div class="card mb-4">
-                <div class="card-header">Side Widget</div>
-                <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
             </div>
         </div>
     </div>

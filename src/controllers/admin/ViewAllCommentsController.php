@@ -7,7 +7,7 @@ use App\Lib\Globals;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 
-class CommentsController
+class ViewAllCommentsController
 {
     public function execute()
     {

@@ -18,7 +18,7 @@ class DeleteCommentController
         $commentRepository->connection = new DatabaseConnection();
         $comment = $commentRepository->getComment($id);
 
-        if ($comment->author === $session['username']) {
+        if ($comment->author == $session['username']) {
 
             $postId = $comment->postId;
             $parentCommentId = $comment->parentCommentId;

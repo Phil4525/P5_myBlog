@@ -6,7 +6,7 @@ use App\Lib\DatabaseConnection;
 use App\Lib\Globals;
 use App\Repository\PostRepository;
 
-class BlogController
+class ListAllPostsController
 {
     public function execute()
     {

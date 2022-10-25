@@ -15,7 +15,7 @@ $title = "Commentaires";
                     <th scope="col">Article</th>
                     <th scope="col">Id de l'article</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Statut</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>

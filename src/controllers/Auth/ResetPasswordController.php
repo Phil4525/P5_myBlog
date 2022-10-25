@@ -7,12 +7,12 @@ use App\Repository\UserRepository;
 
 class ResetPasswordController
 {
-    public function execute(string $email, string $password, ?array $input)
+    public function execute(string $hashedEmail, string $hashedPassword, ?array $input)
     {
         $userRepository = new UserRepository();
         $userRepository->connection = new DatabaseConnection();
 
-        $user = $userRepository->getUserByHashedPasswordAndEmail($email, $password);
+        $user = $userRepository->getUserByHashedPasswordAndEmail($hashedEmail, $hashedPassword);
 
         if ($user) {
             if ($input !== null) {
@@ -22,7 +22,7 @@ class ResetPasswordController
                     $success = $userRepository->updatePassword($user->email, $newPassword);
 
                     if (!$success) {
-                        throw new \Exception("Le mot de passe n'a pu être modifié.");
+                        throw new \Exception("Le mot de passe n'a pas pu être modifié.");
                     } else {
                         echo ("<script>window.close();</script>");
                     }

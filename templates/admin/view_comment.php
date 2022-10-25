@@ -39,7 +39,7 @@ $title = "Commentaire id: $comment->id";
         </article>
         <!-- comment status -->
         <form action="index.php?action=viewComment&id=<?= $comment->id ?>" method="post">
-            <label class="fs-6 mb-3"><strong>Status du commentaire :</strong></label>
+            <label class="fs-6 mb-3"><strong>Statut du commentaire :</strong></label>
             <select class="form-select mb-4" name="status" aria-label="Default select example">
                 <option value="1" <?= $comment->status == 'validated' ? 'selected' : '' ?>>Validé</option>
                 <option value="2" <?= $comment->status == 'not_validated' ? 'selected' : '' ?>>Non validé</option>

@@ -21,11 +21,11 @@ $session = $globals->getSESSION('user');
                 <?php if (isset($session)) { ?>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3" href="index.php?action=logout">Déconnexion</a></li>
                 <?php } else { ?>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3" href="" data-bs-toggle="modal" data-bs-target="#login">Connexion</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3" href="#" data-bs-toggle="modal" data-bs-target="#login">Connexion</a></li>
                 <?php } ?>
 
                 <li class="nav-item  mx-0 mx-lg-1 dropstart">
-                    <a class="nav-link py-3 px-0 px-lg-3" href="" id="dropdown05" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <a class="nav-link py-3 px-0 px-lg-3" href="#" id="dropdown05" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-magnifying-glass"></i></a>
                     <div class="dropdown-menu p-0 mt-2" aria-labelledby="dropdown05">
                         <form action="index.php?action=search" method="post">
                             <input type="text" class="form-control border-0" name="keyword" placeholder="Rechercher...">
@@ -54,17 +54,13 @@ $session = $globals->getSESSION('user');
                         <input class="form-control" type="password" name="password" placeholder="Password" required />
                         <label>Mot de passe</label>
                     </div>
-                    <!-- <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" value="" />
-                        <label class="form-check-label">Remember Password</label>
-                    </div> -->
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-4">
                         <a class="small" href="" data-bs-toggle="modal" data-bs-target="#passwordRecovery">Mot de passe oublié ?</a>
                         <button class="btn btn-primary" type="submit">Valider</button>
                     </div>
                 </form>
                 <div class="modal-footer py-3">
-                    <div class="small"><a href="" data-bs-toggle="modal" data-bs-target="#signup">Pas de compte ? Créez en un !</a></div>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#signup">Pas de compte? Créez en un!</a>
                 </div>
             </div>
         </div>
@@ -97,7 +93,7 @@ $session = $globals->getSESSION('user');
                     </div>
                 </form>
                 <div class="modal-footer text-center py-3">
-                    <div class="small"><a href="" data-bs-toggle="modal" data-bs-target="#login">Vous avez un compte ? Connectez vous</a></div>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#login">Vous avez un compte? Connectez vous</a>
                 </div>
             </div>
         </div>
@@ -119,13 +115,13 @@ $session = $globals->getSESSION('user');
                         <label for="inputEmail">Email</label>
                     </div>
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                        <a class="small" href="" data-bs-toggle="modal" data-bs-target="#login">Retour à la page de connexion</a>
+                        <a class="small" href="#" data-bs-toggle="modal" data-bs-target="#login">Retour à la page de connexion</a>
                         <button class="btn btn-primary" type="submit">Réinitialiser</button>
                     </div>
                 </form>
             </div>
             <div class="modal-footer text-center py-3">
-                <div class="small"><a href="" data-bs-toggle="modal" data-bs-target="#signup">Pas de compte ? Créez en un !</a></div>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#signup">Pas de compte? Créez en un!</a>
             </div>
         </div>
     </div>

@@ -28,7 +28,7 @@
                         <textarea class="form-control mb-2" rows="3" name="comment" placeholder="update your comment!"><?= $comment->comment ?></textarea>
                     </div>
                     <div class="modal-footer form-group">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button> -->
                         <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Sauvegarder</button>
                     </div>
                 </form>
@@ -58,17 +58,17 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Reply to comment</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Répondre au commentaire</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form class="mb-4" action="index.php?action=addComment&id=<?= urlencode($post->id) ?>&parentCommentId=<?= $comment->id ?>" method="post">
                     <div class="form-group mb-5">
-                        <textarea class="form-control mb-2" rows="3" name="comment" placeholder="Leave a reply!"></textarea>
+                        <textarea class="form-control mb-2" rows="3" name="comment" placeholder="Laissez un commentaire!"></textarea>
                     </div>
                     <div class="modal-footer form-group">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Send</button>
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
                     </div>
                 </form>
             </div>

@@ -7,7 +7,7 @@ use App\Lib\Globals;
 use App\Repository\PostRepository;
 use App\Repository\CommentRepository;
 
-class PostController
+class ShowPostController
 {
     public function execute(string $id)
     {
