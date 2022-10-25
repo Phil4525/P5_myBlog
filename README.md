@@ -18,11 +18,11 @@ Projet n°5 du parcours OpenClassrooms "Développeur d'application PHP/Symfony" 
     `$this->database = new \PDO('mysql:host=localhost;dbname=p5_myblog;charset=utf8', 'username', 'password');`
 - Ouvrir une fenêtre de terminal et y taper "composer install" pour mettre en place l'autoloader de Composer
 
-## Connexion à l'interface d'administration
+### Connexion à l'interface d'administration
 
 email: "", password:""
 
-## Fabriqué avec
+### Fabriqué avec
 
 - Bootsrap 5.1.3
 - Thème: Freelancer de Start Bootstrap: https://startbootstrap.com/theme/freelancer 
