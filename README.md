@@ -1,5 +1,4 @@
 # Openclassrooms P5 Créez votre premier blog en PHP
-_(juste en dessous des badges sympatiques à placer)_
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/f45354dac9734da290d39756d0296b0a)](https://www.codacy.com/gh/Phil4525/P5_myBlog/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Phil4525/P5_myBlog&amp;utm_campaign=Badge_Grade)
 
