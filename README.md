@@ -12,7 +12,7 @@ Projet n°5 du parcours OpenClassrooms "Développeur d'application PHP/Symfony" 
 
 ### Installation
 
-- Cloner le depôt dans le dossier racine de votre serveur local
+- Cloner le depôt ou télécharger le  dans le dossier racine de votre serveur local
 - Importer le fichier p5_myblog.sql dans votre base de données
 - Ouvrir le fichier P5_myBlog/src/lib/DatabaseConnection.php et y insérer vos identifiants à la ligne 12:
     `$this->database = new \PDO('mysql:host=localhost;dbname=p5_myblog;charset=utf8', 'username', 'password');`
@@ -24,6 +24,6 @@ email: "", password:""
 
 ### Fabriqué avec
 
-- Bootsrap 5.1.3
+- Bootstrap 5.1.3
 - Thème: Freelancer de Start Bootstrap: https://startbootstrap.com/theme/freelancer 
 
