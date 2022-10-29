@@ -14,7 +14,7 @@ Projet n°5 du parcours OpenClassrooms "Développeur d'application PHP/Symfony" 
 
 - Cloner le depôt dans le dossier racine de votre serveur local
 - Importer le fichier mySQL/p5_myblog.sql dans votre base de données
-- Ouvrir le fichier P5_myBlog/src/lib/DatabaseConnection.php et y insérer vos identifiants à la ligne 12:
+- Ouvrir le fichier P5_myBlog/src/lib/DatabaseConnection.php et y insérer vos identifiants de connexion à la BDD à la ligne 12:
     `$this->database = new \PDO('mysql:host=localhost;dbname=p5_myblog;charset=utf8', 'username', 'password');`
 - Ouvrir une fenêtre de terminal et y taper "composer install" pour mettre en place l'autoloader de Composer
 
