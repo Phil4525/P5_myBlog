@@ -24,6 +24,6 @@ email: "admin@myblog.fr", password:"admin"
 
 ## Fabriqué avec
 
-- Bootsrap 5.1.3
+- Bootstrap 5.1.3
 - Thème: Freelancer de Start Bootstrap: https://startbootstrap.com/theme/freelancer 
 
