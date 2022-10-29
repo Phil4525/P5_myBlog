@@ -4,25 +4,25 @@
 
 Projet n°5 du parcours OpenClassrooms "Développeur d'application PHP/Symfony" : création d'un Blog en PHP en utilisant une architecture MVC et Orienté objet.
 
-### Configuration du projet
+## Configuration du projet
 
 - PHP 8.1.9
 - Apache 2.4.47
 - mySQL 5.7.33
 
-### Installation
+## Installation
 
 - Cloner le depôt dans le dossier racine de votre serveur local
-- Importer le fichier p5_myblog.sql dans votre base de données
+- Importer le fichier mySQL/p5_myblog.sql dans votre base de données
 - Ouvrir le fichier P5_myBlog/src/lib/DatabaseConnection.php et y insérer vos identifiants à la ligne 12:
     `$this->database = new \PDO('mysql:host=localhost;dbname=p5_myblog;charset=utf8', 'username', 'password');`
 - Ouvrir une fenêtre de terminal et y taper "composer install" pour mettre en place l'autoloader de Composer
 
-### Connexion à l'interface d'administration
+## Connexion à l'interface d'administration
 
-email: "", password:""
+email: "admin@myblog.fr", password:"admin"
 
-### Fabriqué avec
+## Fabriqué avec
 
 - Bootsrap 5.1.3
 - Thème: Freelancer de Start Bootstrap: https://startbootstrap.com/theme/freelancer 

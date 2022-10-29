@@ -20,8 +20,8 @@ class AddPostController
 
         if ($input !== null) {
             if (
-                !isset($input['title'], $input['chapo'], $input['content'], $input['author']) &&
-                empty(trim($input['title'])) && empty(trim($input['chapo'])) && empty(trim($input['content'])) && !empty(trim($input['author']))
+                isset($input['title'], $input['chapo'], $input['content'], $input['author']) &&
+                !empty(trim($input['title'])) && !empty(trim($input['chapo'])) && !empty(trim($input['content'])) && !empty(trim($input['author']))
             ) {
 
                 $postRepository = new PostRepository();

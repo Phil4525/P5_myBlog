@@ -31,7 +31,7 @@ class ViewAllCommentsController
         }
 
         $commentsNb = count($comments);
-        $perPage = 10;
+        $perPage = 15;
         $pages = ceil($commentsNb / $perPage);
         $offset = ($currentPage * $perPage) - $perPage;
 

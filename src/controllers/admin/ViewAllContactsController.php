@@ -30,7 +30,7 @@ class ViewAllContactsController
         }
 
         $contactsNb = count($contacts);
-        $perPage = 10;
+        $perPage = 15;
         $pages = ceil($contactsNb / $perPage);
         $offset = ($currentPage * $perPage) - $perPage;
 

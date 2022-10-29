@@ -31,7 +31,7 @@ class ViewAllUsersController
         }
 
         $usersNb = count($users);
-        $perPage = 10;
+        $perPage = 15;
         $pages = ceil($usersNb / $perPage);
         $offset = ($currentPage * $perPage) - $perPage;
 

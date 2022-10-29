@@ -33,7 +33,7 @@ class ViewAllPostsController
 
         // first post of page
         $postsNb = count($posts);
-        $perPage = 10;
+        $perPage = 15;
         $pages = ceil($postsNb / $perPage);
         $offset = ($currentPage * $perPage) - $perPage;
 
