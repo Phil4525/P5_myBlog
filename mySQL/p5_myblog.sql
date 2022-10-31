@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : sam. 29 oct. 2022 à 08:50
+-- Généré le : lun. 31 oct. 2022 à 13:50
 -- Version du serveur : 5.7.33
 -- Version de PHP : 8.1.9
 
@@ -34,7 +34,7 @@ CREATE TABLE `comments` (
   `author` varchar(255) NOT NULL,
   `comment` text NOT NULL,
   `comment_date` datetime NOT NULL,
-  `status` enum('validated','not_validated','waiting_for_validation') NOT NULL DEFAULT 'validated'
+  `status` enum('validated','not_validated','waiting_for_validation') NOT NULL DEFAULT 'not_validated'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -62,13 +62,14 @@ INSERT INTO `comments` (`id`, `post_id`, `parent_comment_id`, `author`, `comment
 (56, 16, NULL, 'Mimi', 'Vestibulum sit amet euismod eros, eget tempus purus. ', '2022-10-27 14:39:03', 'validated'),
 (57, 16, 55, 'Linus', 'Nunc vel massa vel arcu semper', '2022-10-27 14:41:05', 'validated'),
 (58, 18, NULL, 'Peter Parker', 'Mauris vehicula nunc non neque convallis aliquam. Duis maximus, odio id finibus porttitor, enim dui ornare quam, id blandit est massa a lacus. In pulvinar convallis dolor at tincidunt.', '2022-10-28 16:38:50', 'validated'),
-(59, 18, 58, 'Bill', 'Sed pretium lectus in nisl feugiat, in tincidunt metus auctor.', '2022-10-28 16:39:35', 'validated'),
 (60, 18, NULL, 'Joe', 'Nulla sed turpis at sem consectetur vulputate tincidunt ac erat.', '2022-10-28 16:40:10', 'validated'),
 (61, 18, 59, 'Peter Parker', 'Fusce maximus sapien elit, sed blandit nunc lacinia ut.', '2022-10-28 16:40:53', 'validated'),
 (62, 6, NULL, 'Pikachu', 'Aenean ullamcorper feugiat urna et rutrum. Etiam pellentesque felis sit amet libero lobortis, vel ultrices dui accumsan. Suspendisse potenti.', '2022-10-28 17:00:43', 'validated'),
 (63, 17, NULL, 'Mimi', 'Mauris at facilisis nibh, eu tempus magna. Curabitur ut ante sed tellus vulputate consectetur eget tristique mi.', '2022-10-28 17:01:35', 'validated'),
 (64, 17, NULL, 'Pikachu', ' Phasellus hendrerit dolor eget molestie finibus. Morbi eu dui vitae est pretium ullamcorper. ', '2022-10-28 17:02:14', 'validated'),
-(65, 17, 64, 'Mimi', 'Aenean ullamcorper feugiat urna et rutrum.', '2022-10-28 17:02:40', 'validated');
+(65, 17, 64, 'Mimi', 'Aenean ullamcorper feugiat urna et rutrum.', '2022-10-28 17:02:40', 'validated'),
+(66, 18, NULL, 'Bill', 'Salut', '2022-10-31 11:30:22', 'validated'),
+(67, 18, NULL, 'Bill', 'test', '2022-10-31 14:34:36', 'not_validated');
 
 -- --------------------------------------------------------
 
@@ -103,7 +104,8 @@ INSERT INTO `contacts` (`id`, `fullname`, `email`, `phone`, `message_content`, `
 (17, 'Toto', 'toto@abc.fr', '', 'bonjour', '2022-10-14 14:52:24'),
 (18, 'Toto', 'toto@abc.fr', '', 'bonjour', '2022-10-14 14:58:55'),
 (19, 'Toto', 'toto@abc.fr', '', 'bonjour', '2022-10-14 15:15:50'),
-(20, 'Toto', 'toto@abc.fr', '', 'bsdbsdg', '2022-10-14 15:16:34');
+(20, 'Toto', 'toto@abc.fr', '', 'bsdbsdg', '2022-10-14 15:16:34'),
+(21, 'toto', 'toto@abc.fr', '', 'bonjour', '2022-10-31 11:27:45');
 
 -- --------------------------------------------------------
 
@@ -161,14 +163,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `signup_date`) VALUES
-(2, 'Bill', 'bill@abc.com', '$argon2id$v=19$m=65536,t=4,p=1$SW9uamtIc2kvWWdwUEdRZQ$ZKaDHIDoCzdbVHQGkUIkMEZzxJRQHLmkeD+koOjRX5c', 'user', '2022-09-13 16:02:40'),
+(2, 'Bill', 'bill@abc.com', '$argon2id$v=19$m=65536,t=4,p=1$SmJtQUJlWFJPYWZFc3VOQw$iIW9km1DYTWmR29EoP55UnKuk5r8BUM7sU61yGR+clQ', 'user', '2022-09-13 16:02:40'),
 (3, 'Bob', 'bob@azerty.com', '$argon2id$v=19$m=65536,t=4,p=1$VkY1SjhsMlpiSWZpMmFDTA$NdZw0LbthMw68njCpNuFnK52WM4wT+SXiQGJxWmbrQo', 'user', '2022-09-13 16:03:07'),
 (4, 'elon', 'elon@abc.com', '$argon2id$v=19$m=65536,t=4,p=1$Qmppb0RRSnh6QktmVi9jUA$J0NzZ3biCuV2+WDw4fcPHT9D0NKayUb3zfzlvd2oOdE', 'user', '2022-09-13 16:03:17'),
 (8, 'Fifi', 'fifi@abc.com', '$argon2id$v=19$m=65536,t=4,p=1$SUJWOUhhU2FKbEF6WFpYVA$evwAn+lNyFk589R6zrsnqYP3j7jLk59UnT2SazUrqmU', 'user', '2022-09-13 16:03:31'),
 (9, 'Titi', 'titi@abc.fr', '$argon2id$v=19$m=65536,t=4,p=1$MmRhdlIzakVjaUhNbVpYMA$YsNVfuIOmZ7AXi9QpEseV8k8ui3JXjMeleIG5aKsm/M', 'user', '2022-09-13 16:03:40'),
 (13, 'Riri', 'riri@abc.com', '$argon2id$v=19$m=65536,t=4,p=1$dzRoMmhwZy9FRWUxTGpqRw$/Lso5MhVYukk0YG1J6sNap4aQ52TYFZXIM0yXiQOtOA', 'user', '2022-09-13 16:03:50'),
 (14, 'Joe', 'joe@abc.fr', '$argon2id$v=19$m=65536,t=4,p=1$VjJIVThXVkxwcVNKNHBBZg$6Vj5O3rtTF2SG7Hjaaiz1Y2fuYMoOv/kBlkD2Ebkwus', 'user', '2022-09-13 16:04:01'),
-(15, 'Mimi', 'mimi@abc.fr', '$argon2id$v=19$m=65536,t=4,p=1$SGhmZ3Y1M3MxWHp1elpndA$IlNAKrg3vihe2993M9dsT6L6Yjf4GwQOd3Uu1nSQv6o', 'user', '2022-09-13 16:04:11'),
+(15, 'Mimi', 'mimi@abc.fr', '$argon2id$v=19$m=65536,t=4,p=1$TjZleENoMzlKbDRRL2MzVg$8psrHOGgbDUY1y8X1xNEhbME2fVhCa4TatIKqKEDvN4', 'user', '2022-09-13 16:04:11'),
 (16, 'Dédé', 'dd@azerty.com', '$argon2id$v=19$m=65536,t=4,p=1$dE00ZFJ3bFlsWXZreUtiTw$E7g8M2A11aOp2h36yo8GgNCWiTqJ3fW8TvTKJ1oZPgs', 'user', '2022-09-13 16:04:18'),
 (17, 'Gégé', 'gege@wxc.com', '$argon2id$v=19$m=65536,t=4,p=1$NUhSVWZVV1ZPNFNQai9PaA$XTdmSD+CGELOA0ktFjquU3sL3xkhtW6CrmPF9pUwjt8', 'user', '2022-09-13 16:04:28'),
 (18, 'Lolo', 'lolo@qsd.fr', '$argon2id$v=19$m=65536,t=4,p=1$eWUwQ1dNeXJXNGdJUGVmTw$xiWnBFJrlZpE6giQ9owz+fSGsYRkPYI4m/ADsYXValU', 'user', '2022-09-13 16:04:35'),
@@ -216,19 +218,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT pour la table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pour la table `users`
