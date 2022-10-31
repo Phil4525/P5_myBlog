@@ -7,12 +7,12 @@ use App\Repository\UserRepository;
 
 class ResetPasswordController
 {
-    public function execute(string $hashedEmail, string $hashedPassword, ?array $input)
+    public function execute(string $email, string $password, ?array $input)
     {
         $userRepository = new UserRepository();
         $userRepository->connection = new DatabaseConnection();
 
-        $user = $userRepository->getUserByHashedPasswordAndEmail($hashedEmail, $hashedPassword);
+        $user = $userRepository->getUserByHashedPasswordAndEmail($email, $password);
 
         if ($user) {
             if ($input !== null) {

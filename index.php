@@ -101,15 +101,15 @@ try {
             (new PasswordRecoveryController())->execute($post);
         } elseif ($get['action'] === 'resetPassword') {
             if (isset($get['key']) && isset($get['reset'])) {
-                $hashedEmail = $get['key'];
-                $hashedPassword = $get['reset'];
+                $email = $get['key'];
+                $password = $get['reset'];
                 // It sets the input only when the HTTP method is POST (ie. the form is submitted).
                 $input = null;
                 if ($globals->getSERVER('REQUEST_METHOD') === 'POST') {
                     $input = $post;
                 }
 
-                (new ResetPasswordController())->execute($hashedEmail, $hashedPassword, $input);
+                (new ResetPasswordController())->execute($email, $password, $input);
             } else {
                 throw new Exception("Aucune information d'utilisateur envoyé.");
             }
